@@ -35,7 +35,7 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-slate-950">
 
-    <!-- Header con Navigation Breadcrumb Doppio -->
+    <!-- Header con Navigation Breadcrumb -->
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             
@@ -80,20 +80,20 @@
             <button onclick="switchTab('tab-studio')" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
                 <i class="fa-solid fa-book-open text-emerald-400"></i> 0. Quadro Teorico
             </button>
-            <button onclick="switchTab('tab-mcq')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-list-check text-sky-400"></i> 1. Dilemmi & Logica (10 Q)
+            <button onclick="switchTab('tab-analisi')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-magnifying-glass text-sky-400"></i> 1. Individua Conclusione e Premesse
             </button>
-            <button onclick="switchTab('tab-tf')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-scale-balanced text-emerald-400"></i> 2. Vero o Falso (8 Q)
+            <button onclick="switchTab('tab-definizioni')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-triangle-exclamation text-rose-400"></i> 2. Diagnosi Errori Definizioni
             </button>
-            <button onclick="switchTab('tab-timeline')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-diagram-next text-purple-400"></i> 3. Analisi Argomento (8 Fasi)
+            <button onclick="switchTab('tab-nascoste')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-ghost text-purple-400"></i> 3. Esplicita la Premessa Nascosta
             </button>
-            <button onclick="switchTab('tab-matching')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-quote-left text-rose-400"></i> 4. Concetti & Definizioni (8 Abbinamenti)
+            <button onclick="switchTab('tab-classificazione')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-layer-group text-amber-400"></i> 4. Tipi di Premessa & Sistemi
             </button>
             <button onclick="switchTab('tab-cloze')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-pen-nib text-amber-400"></i> 5. Testo Guidato (10 Lacune)
+                <i class="fa-solid fa-pen-nib text-teal-400"></i> 5. Testo Guidato
             </button>
             <button onclick="switchTab('tab-report')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
                 <i class="fa-solid fa-certificate text-yellow-400"></i> Certificato
@@ -109,11 +109,11 @@
             <div class="glass-card p-6 sm:p-8 rounded-2xl border-emerald-500/20 relative overflow-hidden">
                 <div class="max-w-3xl space-y-3">
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                        <i class="fa-solid fa-brain mr-1.5"></i> Laboratorio Interattivo Modulo 1
+                        <i class="fa-solid fa-brain mr-1.5"></i> Modulo 1: Analisi del Ragionamento e Definizioni
                     </span>
-                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-emerald-400">Ragionamento, Premesse e Definizioni</h2>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-emerald-400">Strumenti di Interpretazione e Analisi Critica</h2>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                        In questo percorso imparerai a scomporre le argomentazioni in premesse e conclusione, svelare le assunzioni inespresse (premesse nascoste), distinguere tra Sistema 1 e Sistema 2, ed evitare gli errori di definizione.
+                        In questo modulo analizzerai testi argomentativi reali per: smontare la struttura premesse-conclusione, diagnosticare gli errori logici nelle definizioni (circolarità, vaghezza, ampiezza eccessiva o ridotta), svelare le assunzioni nascoste e disattivare i bias del Sistema 1.
                     </p>
                 </div>
             </div>
@@ -121,373 +121,63 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-magnifying-glass"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">1. Indicatori Logici</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Trova la tesi cercando gli indicatori di conclusione (<em>quindi, pertanto, perciò</em>) e le basi cercando gli indicatori di premessa (<em>poiché, infatti, dato che</em>).</p>
+                    <h3 class="font-bold text-lg text-slate-100">1. Anatomia dell'Argomento</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Identificazione della Conclusione ($\therefore$) tramite gli indicatori (<em>quindi, pertanto, ne consegue</em>) e isolamento delle Co-Premesse ($P_1, P_2$).</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-sky-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-layer-group"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">2. Tipologie di Premessa</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>Fattuali</strong> (dati e fatti), <strong>Condizionali</strong> (Se... allora), <strong>Definitorie</strong> (significati) e <strong>Normative</strong> (valori etici o regole).</p>
+                    <h3 class="font-bold text-lg text-slate-100">2. Tipologia delle Premesse</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Classificazione tra premesse <strong>Fattuali</strong> (dati empirici), <strong>Condizionali</strong> (Se... allora), <strong>Definitorie</strong> e <strong>Normative</strong> (valori etici e regole).</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-ghost"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">3. Premesse Nascoste</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Molti ragionamenti omettono premesse ovvie o deboli. Rivelare l'assunzione nascosta è l'arma migliore per criticare un'argomentazione incorretta.</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Tecniche per portare alla luce i presupposti inespressi che collegano le premesse alla tesi finale e valutarne la fondatezza logica.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-bolt font-bold"></i></div>
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-bolt"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">4. Sistema 1 vs Sistema 2</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>Sistema 1</strong> (95% istintivo, veloce, inconsapevole) vs <strong>Sistema 2</strong> (5% razionale, lento, faticoso, concentrato).</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Teoria di Kahneman & Tversky: **Sistema 1** (95% istintivo, automatico, veloce) vs **Sistema 2** (5% lento, razionale, faticoso, attento).</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">5. Errori nelle Definizioni</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Evita le trappole nelle definizioni (<em>Definiendum = Definiens</em>): Ambiguità, Vaghezza, Troppo Ampia, Troppo Stretta e Circolarità.</p>
+                    <h3 class="font-bold text-lg text-slate-100">5. I 5 Errori nelle Definizioni</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Diagnosi dei difetti tra <em>Definiendum</em> e <em>Definiens</em>: Ambiguità, Vaghezza, Troppo Ampia, Troppo Stretta e Circolarità.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-tags"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">6. Tipi di Definizione</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Ostensiva, Estensiva, Intensiva (connotativa), Negativa, Analogica, Operativa, Genetica ed Etimologica.</p>
+                    <h3 class="font-bold text-lg text-slate-100">6. Strategie Definitorie</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Selezione della strategia ideale: Ostensiva, Estensiva, Intensiva/Connotativa, Negativa, Analogica, Operativa, Genetica ed Etimologica.</p>
                 </div>
             </div>
 
             <div class="text-center pt-4">
-                <button onclick="switchTab('tab-mcq')" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-emerald-600 hover:to-teal-700 font-cinzel tracking-wide">Inizia l'Esercitazione ➔</button>
+                <button onclick="switchTab('tab-analisi')" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-emerald-600 hover:to-teal-700 font-cinzel tracking-wide">Inizia l'Esercitazione di Analisi Critica ➔</button>
             </div>
         </section>
 
-        <!-- TAB 1: MCQ -->
-        <section id="tab-mcq" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 1: Dilemmi e Analisi Logico-Argomentativa (10 Quesiti)</h2>
-            <div id="mcq-container" class="space-y-6"></div>
-        </section>
-
-        <!-- TAB 2: V/F -->
-        <section id="tab-tf" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 2: Vero o Falso Motivato (8 Quesiti)</h2>
-            <div id="tf-container" class="space-y-4"></div>
-        </section>
-
-        <!-- TAB 3: TIMELINE / PASSAGGI LOGICI -->
-        <section id="tab-timeline" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Procedura di Analisi Critica di un Ragionamento</h2>
-            <p class="text-xs sm:text-sm text-slate-400">Ordina le 8 fasi per smontare un'argomentazione complessa ed esplicitare la premessa nascosta.</p>
-            <div class="glass-card p-6 rounded-2xl space-y-6">
-                <div id="timeline-list" class="space-y-3"></div>
-                <button onclick="checkTimeline()" class="bg-purple-600 text-white font-bold px-6 py-2.5 rounded-xl"><i class="fa-solid fa-check-double"></i> Verifica Procedura Logica</button>
-                <div id="timeline-feedback" class="text-xs sm:text-sm font-semibold"></div>
+        <!-- TAB 1: ANALISI TESTUALE (PREMESSE E CONCLUSIONE) -->
+        <section id="tab-analisi" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 1: Individuazione di Conclusione e Premesse nei Testi</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi ciascun brano argomentativo tratto dai testi di studio e seleziona l'esatta conclusione o l'organizzazione delle premesse.</p>
             </div>
+            <div id="analisi-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 4: MATCHING -->
-        <section id="tab-matching" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 4: Abbinamento Concetti e Tipologie di Definizioni</h2>
-            <div class="glass-card p-6 rounded-2xl space-y-6">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div id="matching-terms" class="space-y-2.5"></div>
-                    <div id="matching-defs" class="space-y-2.5"></div>
-                </div>
-                <div id="matching-feedback" class="text-xs sm:text-sm font-semibold pt-2"></div>
+        <!-- TAB 2: DIAGNOSI ERRORI NELLE DEFINIZIONI -->
+        <section id="tab-definizioni" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 2: Diagnosi degli Errori Definizionali e Scelta delle Strategie</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Analizza ciascuna definizione (Definiendum = Definiens) e individua l'errore commesso o la strategia più appropriata per correggerla.</p>
             </div>
+            <div id="definizioni-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 5: CLOZE -->
-        <section id="tab-cloze" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 5: Cloze Test sulla Teoria dell'Argomentazione</h2>
-            <div class="glass-card p-6 rounded-2xl space-y-6">
-                <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
-                    Un ragionamento è un insieme di enunciati legati tra loro per sostenere una tesi. Per riconoscerlo cerchiamo gli indicatori di <select id="cloze-1" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="conclusione">conclusione</option><option value="ipotesi">ipotesi</option></select> (come <em>pertanto, quindi</em>) e gli indicatori di <select id="cloze-2" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="premessa">premessa</option><option value="dubbio">dubbio</option></select> (come <em>poiché, infatti</em>). Le premesse che richiamano valori morali o norme sociali sono dette <select id="cloze-3" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="normative">normative</option><option value="fattuali">fattuali</option></select>. Molte argomentazioni quotidiane contengono premesse <select id="cloze-4" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="nascoste">nascoste</option><option value="scientifiche">scientifiche</option></select> che vanno esplicitate. Secondo Kahneman, la mente usa due sistemi: il <select id="cloze-5" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="Sistema 1">Sistema 1</option><option value="Sistema 2">Sistema 2</option></select> per risposte veloci ed istintive (95%), e il <select id="cloze-6" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="Sistema 2">Sistema 2</option><option value="Sistema 1">Sistema 1</option></select> per il pensiero razionale e faticoso. Nel definire i termini, la parola da definire si chiama <select id="cloze-7" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="definiendum">definiendum</option><option value="definiens">definiens</option></select>. Se la definizione include troppi elementi estranei è troppo <select id="cloze-8" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="ampia">ampia</option><option value="stretta">stretta</option></select>; se usa sinonimi o ripete il termine è <select id="cloze-9" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="circolare">circolare</option><option value="vaga">vaga</option></select>. Infine, la definizione <select id="cloze-10" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="operativa">operativa</option><option value="ostensiva">ostensiva</option></select> definisce un termine attraverso una precisa procedura di misurazione.
-                </div>
-                <button onclick="checkCloze()" class="bg-emerald-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl">Verifica Testo</button>
-                <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
+        <!-- TAB 3: ESPLICITAZIONE PREMESSE NASCOSTE -->
+        <section id="tab-nascoste" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Rilevamento delle Premesse Nascoste (Assunzioni Implicite)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Esamina le argomentazioni incomplete e individua la premessa implicita necessaria per rendere logica la conclusione.</p>
             </div>
-        </section>
-
-        <!-- TAB 6: REPORT -->
-        <section id="tab-report" class="tab-content hidden space-y-6">
-            <div class="glass-card p-8 rounded-2xl text-center space-y-6">
-                <h2 class="font-cinzel text-2xl font-bold text-emerald-400">Valutazione Finale di Pensiero Critico</h2>
-                <div class="text-4xl font-black text-emerald-400" id="report-score">0 / 100 XP</div>
-                <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
-                <div class="flex justify-center gap-4">
-                    <button onclick="window.print()" class="bg-emerald-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
-                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700">Ricomincia</button>
-                </div>
-            </div>
-
-            <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-emerald-500/40 text-center space-y-6">
-                <div class="border-2 border-dashed border-emerald-500/30 p-8 rounded-2xl space-y-6">
-                    <div class="font-cinzel text-emerald-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Logica</div>
-                    <p class="text-slate-300 text-sm">Si attesta che lo studente / la studentessa:</p>
-                    <div id="cert-student-name" class="font-cinzel text-2xl font-bold text-white underline decoration-emerald-500 decoration-2">Studente</div>
-                    <p class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
-                        ha completato con successo il laboratorio didattico di:
-                        <br><strong class="text-emerald-400">"Teoria del Ragionamento, Esplicitazione delle Premesse Implicite, Sistema 1 e Sistema 2, Fallacie e Analisi delle Definizioni"</strong>
-                    </p>
-                    <div class="flex justify-around items-center pt-6 border-t border-slate-800 text-xs text-slate-400">
-                        <div><span>Punteggio Conseguito:</span><div id="cert-score" class="font-bold text-emerald-400 text-base">0 / 100 XP</div></div>
-                        <div><span>Livello Raggiunto:</span><div id="cert-title" class="font-bold text-sky-400 text-base">In corso</div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer con Navigation Link Doppio -->
-    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
-        <a href="index.html" class="hover:text-emerald-400 transition-colors">
-            <i class="fa-solid fa-house mr-1"></i> Home Portale
-        </a>
-        <span>•</span>
-        <a href="pensiero-critico.html" class="hover:text-emerald-400 transition-colors">
-            <i class="fa-solid fa-diagram-project mr-1"></i> Pensiero Critico
-        </a>
-    </footer>
-
-    <script>
-        const state = { studentName: "Studente", audioEnabled: true, mcqAnswers: {}, tfAnswers: {}, timelineOrder: [0,1,2,3,4,5,6,7], matchingPairs: {}, clozeScore: 0, selectedTermId: null };
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-        function playSound(type) {
-            if (!state.audioEnabled) return;
-            try {
-                const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
-                osc.connect(gain); gain.connect(audioCtx.destination);
-                if (type === 'click') { osc.frequency.setValueAtTime(400, audioCtx.currentTime); gain.gain.setValueAtTime(0.05, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.05); }
-                else if (type === 'correct') { osc.frequency.setValueAtTime(880, audioCtx.currentTime); gain.gain.setValueAtTime(0.08, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.2); }
-                else if (type === 'error') { osc.frequency.setValueAtTime(220, audioCtx.currentTime); gain.gain.setValueAtTime(0.08, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.2); }
-            } catch(e){}
-        }
-
-        function toggleAudio() { state.audioEnabled = !state.audioEnabled; }
-        function updateStudentName(val) { 
-            state.studentName = val || "Studente"; 
-            const certName = document.getElementById('cert-student-name');
-            if(certName) certName.innerText = state.studentName;
-        }
-
-        const mcqData = [
-            { id: 1, question: "Quale tra le seguenti parole è un indicatore di CONCLUSIONE in un testo argomentativo?", options: ["Poiché", "Infatti", "Pertanto", "Considerato che"], correct: 2, explanation: "'Pertanto' segnala l'introduzione della tesi finale o conclusione dell'argomento." },
-            { id: 2, question: "Che cos'è una 'Premessa Normativa'?", options: ["Una premessa basata su dati statistici e fatti empirici", "Una premessa basata su valori morali, etici o norme sociali condivise", "Una premessa nella forma 'Se... allora'", "Una spiegazione del vocabolario utilizzato"], correct: 1, explanation: "Le premesse normative riflettono ciò che si ritiene giusto, desiderabile o eticamente obbligatorio." },
-            { id: 3, question: "Per quale motivo le persone tendono a lasciare le premesse NASCOSTE (implicite)?", options: ["Perché sono impossibili da scrivere in italiano", "Per comodità o per persuadere l'ascoltatore senza mostrare assunzioni deboli", "Perché le premesse non servono nei ragionamenti", "Perché la conclusione si scrive sempre per prima"], correct: 1, explanation: "Spesso si omettono per brevità o per nascondere passaggi logici discutibili che renderebbero debole l'argomentazione." },
-            { id: 4, question: "Quali sono le caratteristiche del 'Sistema 1' secondo Kahneman e Tversky?", options: ["Lento, faticoso, consapevole, logico (5%)", "Veloce, istintivo, automatico, a basso consumo energetico (95%)", "Basato solo sulla matematica avanzata", "Attivato solo durante gli esami scritti"], correct: 1, explanation: "Il Sistema 1 è la risposta intuitiva immediata guidata da automatismi evolutivi." },
-            { id: 5, question: "Cosa si intende con i termini latini Definiendum e Definiens?", options: ["Definiendum è la parola da definire, Definiens è la frase che fornisce la definizione", "Definiendum è la conclusione, Definiens è la premessa", "Definiendum è l'errore logico, Definiens è la soluzione", "Definiendum è un esempio concreto, Definiens è un'astrazione"], correct: 0, explanation: "In logica, il definiendum è il termine da chiarire e il definiens è la locuzione esplicativa." },
-            { id: 6, question: "Per quale motivo l'aggettivo 'ALTO' presenta il problema della VAGHEZZA?", options: ["Perché ha diversi significati contrari", "Perché non possiede confini netti e precisi di applicabilità (es. 1,78m è alto o no?)", "Perché si riferisce solo agli edifici", "Perché è una parola latina non tradotta"], correct: 1, explanation: "Un termine è vago quando manca un confine preciso che separi chiaramente l'appartenenza dalla non-appartenenza." },
-            { id: 7, question: "Se definisco 'SEDIA' come 'oggetto con 4 gambe e uno schienale', quale errore commetto?", options: ["La definizione è circolare", "La definizione è troppo ampia", "La definizione è troppo stretta (esclude le sedie a 3 gambe o senza schienale)", "La definizione è etimologica"], correct: 2, explanation: "È troppo stretta perché esclude oggetti legittimamente definiti sedie (es. sedie moderne a 3 gambe)." },
-            { id: 8, question: "Se definisco 'CANE' come 'animale nato da genitori canini', quale fallacia sto applicando?", options: ["Vaghezza", "Circolarità (il definiendum è contenuto nel definiens)", "Definizione ostensiva", "Definizione operativa"], correct: 1, explanation: "La definizione è circolare poiché utilizza nel definiens lo stesso concetto che dovrebbe spiegare." },
-            { id: 9, question: "Che cos'è una 'Definizione Operativa'?", options: ["Una definizione che spiega la radice greca della parola", "Una definizione basata su una specifica procedura o operazione di misurazione", "Una definizione che mostra un oggetto indicandolo con il dito", "Una definizione basata sull'elenco completo dei membri"], correct: 1, explanation: "Spiega un termine attraverso l'operazione empirica con cui lo si misura (es. temperatura tramite il termometro)." },
-            { id: 10, question: "Qual è il limite principale della 'Definizione Etimologica' (es. fotografia = scrittura con la luce)?", options: ["Non si applica alla lingua italiana", "Mostra l'origine storica ma spesso non dice nulla sulle caratteristiche attuali del concetto", "È sempre circolare", "È riservata solo alla matematica"], correct: 1, explanation: "I significati cambiano nel tempo; la radice linguistica non fornisce criteri pratici per identificare l'oggetto oggi." }
-        ];
-
-        const tfData = [
-            { id: 1, text: "Un'argomentazione e un ragionamento indicano concetti completamente opposti.", isTrue: false, explanation: "FALSO. Nel linguaggio filosofico e logico i due termini vengono usati come sinonimi." },
-            { id: 2, text: "La distinzione tra premesse e conclusioni è relativa: una stessa frase può essere conclusione in un argomento e premessa in un altro.", isTrue: true, explanation: "VERO. Il ruolo dipende dal contesto specifico dell'argomentazione." },
-            { id: 3, text: "Il Sistema 2 di Kahneman richiede uno sforzo di concentrazione elevato ed è faticoso per il cervello.", isTrue: true, explanation: "VERO. Il Sistema 2 consuma molte energie cognitive ed è per questo 'pigro' nell'attivarsi." },
-            { id: 4, text: "Una definizione è 'troppo ampia' quando esclude elementi che dovrebbero far parte del concetto.", isTrue: false, explanation: "FALSO. Quella è 'troppo stretta'. Quando è troppo ampia include troppi elementi estranei (es. tavolo per sedia)." },
-            { id: 5, text: "La definizione ostensiva consiste nello spiegare un termine indicando un esempio concreto presente fisicamente.", isTrue: true, explanation: "VERO. Si definisce 'rosso' mostrando un oggetto rosso reale." },
-            { id: 6, text: "Per verificare una premessa implicita è utile chiedersi: 'Cosa deve essere vero affinché la premessa porti a questa conclusione?'", isTrue: true, explanation: "VERO. È una delle strategie chiave per far emergere i salti logici." },
-            { id: 7, text: "La parola 'buono' è un classico esempio di parola vaga ma non ambigua.", isTrue: false, explanation: "FALSO. È un esempio di parola AMBIGUA poiché assume significati diversi a seconda del contesto." },
-            { id: 8, text: "La definizione per enumerazione descrive le proprietà essenziali ed astratte del concetto.", isTrue: false, explanation: "FALSO. Quella è la definizione intensiva/connotativa. La definizione per enumerazione si limita a fare una lista di membri." }
-        ];
-
-        const timelineData = [
-            { id: 0, title: "1. Leggere attentamente il testo ed identificare la Tesi o Conclusione tramite gli indicatori." },
-            { id: 1, title: "2. Individuare gli indicatori di premessa (poiché, infatti, dato che) e isolare le Co-Premesse." },
-            { id: 2, title: "3. Distinguere la tipologia delle premesse esplicite (Fattuali, Condizionali, Definitorie, Normative)." },
-            { id: 3, title: "4. Verificare se la conclusione discende in modo stringente dalle sole premesse esplicitate." },
-            { id: 4, title: "5. Porre le domande chiave per scoprire la Premessa Nascosta (implicita)." },
-            { id: 5, title: "6. Disattivare il Sistema 1 (intuitivo) ed attivare il Sistema 2 (pensiero analitico faticoso)." },
-            { id: 6, title: "7. Valutare se la premessa nascosta è vera, ipotetica o una fallacia persuasiva." },
-            { id: 7, title: "8. Formulare un'obiezione o una mappa argomentativa rigorosa a sostegno o confutazione." }
-        ];
-
-        const matchingTerms = [
-            { id: "m1", term: "Definiendum" },
-            { id: "m2", term: "Definiens" },
-            { id: "m3", term: "Sistema 1" },
-            { id: "m4", term: "Sistema 2" },
-            { id: "m5", term: "Definizione Operativa" },
-            { id: "m6", term: "Definizione Circolare" },
-            { id: "m7", term: "Premessa Normativa" },
-            { id: "m8", term: "Vaghezza" }
-        ];
-
-        const matchingDefs = [
-            { id: "d1", matchId: "m1", text: "Il termine o parola specifica che si intende definire." },
-            { id: "d2", matchId: "m2", text: "La locuzione o frase che fornisce la spiegazione del significato." },
-            { id: "d3", matchId: "m3", text: "Pensiero veloce, istintivo, automatico e a basso costo energetico (95%)." },
-            { id: "d4", matchId: "m4", text: "Pensiero lento, logico, consapevole e faticoso (5%)." },
-            { id: "d5", matchId: "m5", text: "Spiegazione basata su una procedura empirica di misurazione (es. il termometro)." },
-            { id: "d6", matchId: "m6", text: "Errore per cui il definiendum è presente nel definiens (o tramite un suo sinonimo)." },
-            { id: "d7", matchId: "m7", text: "Premessa fondata su valori etici, morali o regole di comportamento sociale." },
-            { id: "d8", matchId: "m8", text: "Mancanza di confini netti di applicabilità di un termine (es. alto, calvo)." }
-        ];
-
-        function renderMCQ() {
-            const container = document.getElementById('mcq-container');
-            container.innerHTML = mcqData.map((q, idx) => `
-                <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <div class="font-bold text-slate-100 text-sm">${idx + 1}. ${q.question}</div>
-                    <div class="space-y-2">
-                        ${q.options.map((opt, oIdx) => `
-                            <button onclick="selectMCQ(${q.id}, ${oIdx})" id="mcq-btn-${q.id}-${oIdx}" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all">${opt}</button>
-                        `).join('')}
-                    </div>
-                    <div id="mcq-feedback-${q.id}" class="hidden p-3 rounded-xl text-xs"></div>
-                </div>
-            `).join('');
-        }
-
-        function selectMCQ(qId, oIdx) {
-            playSound('click');
-            const q = mcqData.find(item => item.id === qId);
-            state.mcqAnswers[qId] = oIdx;
-            const fb = document.getElementById(`mcq-feedback-${qId}`);
-            fb.classList.remove('hidden');
-            if(oIdx === q.correct) {
-                playSound('correct');
-                fb.className = "p-3 rounded-xl text-xs bg-emerald-950 text-emerald-300 border border-emerald-700";
-                fb.innerHTML = `<strong>Corretto!</strong> ${q.explanation}`;
-            } else {
-                playSound('error');
-                fb.className = "p-3 rounded-xl text-xs bg-rose-950 text-rose-300 border border-rose-700";
-                fb.innerHTML = `<strong>Errato.</strong> ${q.explanation}`;
-            }
-            updateGlobalScore();
-        }
-
-        function renderTF() {
-            const container = document.getElementById('tf-container');
-            container.innerHTML = tfData.map((item, idx) => `
-                <div class="glass-card p-4 rounded-2xl space-y-2">
-                    <p class="text-xs text-slate-200 font-medium">${idx + 1}. ${item.text}</p>
-                    <div class="flex gap-2">
-                        <button onclick="answerTF(${item.id}, true)" class="bg-emerald-900/50 hover:bg-emerald-800 text-emerald-300 border border-emerald-700 px-3 py-1.5 rounded text-xs font-bold">VERO</button>
-                        <button onclick="answerTF(${item.id}, false)" class="bg-rose-900/50 hover:bg-rose-800 text-rose-300 border border-rose-700 px-3 py-1.5 rounded text-xs font-bold">FALSO</button>
-                    </div>
-                    <div id="tf-feedback-${item.id}" class="hidden text-xs pt-1"></div>
-                </div>
-            `).join('');
-        }
-
-        function answerTF(id, choice) {
-            playSound('click');
-            const item = tfData.find(d => d.id === id);
-            state.tfAnswers[id] = choice;
-            const fb = document.getElementById(`tf-feedback-${id}`);
-            fb.classList.remove('hidden');
-            if(choice === item.isTrue) { playSound('correct'); fb.className = "text-xs text-emerald-300 bg-emerald-950/40 p-2 rounded border border-emerald-800"; fb.innerHTML = `<strong>Esatto!</strong> ${item.explanation}`; }
-            else { playSound('error'); fb.className = "text-xs text-rose-300 bg-rose-950/40 p-2 rounded border border-rose-800"; fb.innerHTML = `<strong>Sbagliato.</strong> ${item.explanation}`; }
-            updateGlobalScore();
-        }
-
-        function renderTimeline() {
-            const list = document.getElementById('timeline-list');
-            list.innerHTML = state.timelineOrder.map((dataIdx, currentPos) => `
-                <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
-                    <span class="text-purple-300 font-bold">${currentPos + 1}. ${timelineData[dataIdx].title}</span>
-                    <div class="flex gap-1">
-                        <button onclick="moveTimeline(${currentPos}, -1)" class="p-1 text-purple-400 hover:bg-slate-800 rounded"><i class="fa-solid fa-chevron-up"></i></button>
-                        <button onclick="moveTimeline(${currentPos}, 1)" class="p-1 text-purple-400 hover:bg-slate-800 rounded"><i class="fa-solid fa-chevron-down"></i></button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function moveTimeline(pos, dir) {
-            playSound('click');
-            const target = pos + dir;
-            if(target < 0 || target >= timelineData.length) return;
-            const temp = state.timelineOrder[pos];
-            state.timelineOrder[pos] = state.timelineOrder[target];
-            state.timelineOrder[target] = temp;
-            renderTimeline();
-        }
-
-        function checkTimeline() {
-            let correct = 0;
-            state.timelineOrder.forEach((v, i) => { if(v === i) correct++; });
-            const fb = document.getElementById('timeline-feedback');
-            if(correct === timelineData.length) { playSound('correct'); fb.className = "text-emerald-400 font-bold"; fb.innerText = "Eccellente! La procedura di analisi critica è ordinata correttamente (8/8)."; }
-            else { playSound('error'); fb.className = "text-amber-400 font-bold"; fb.innerText = `Fasi nella sequenza corretta: ${correct} su ${timelineData.length}.`; }
-            updateGlobalScore();
-        }
-
-        function renderMatching() {
-            const termsContainer = document.getElementById('matching-terms');
-            const defsContainer = document.getElementById('matching-defs');
-            termsContainer.innerHTML = matchingTerms.map(t => `<button onclick="selectTerm('${t.id}')" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800">${t.term}</button>`).join('');
-            defsContainer.innerHTML = matchingDefs.map(d => `<button onclick="selectDef('${d.matchId}')" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800">${d.text}</button>`).join('');
-        }
-
-        function selectTerm(id) { state.selectedTermId = id; playSound('click'); }
-        function selectDef(matchId) {
-            if(!state.selectedTermId) return;
-            const fb = document.getElementById('matching-feedback');
-            if(state.selectedTermId === matchId) { playSound('correct'); fb.className = "text-emerald-400 font-bold"; fb.innerText = "Abbinamento concettuale corretto!"; }
-            else { playSound('error'); fb.className = "text-rose-400 font-bold"; fb.innerText = "Abbinamento errato. Riprova!"; }
-            state.selectedTermId = null;
-            updateGlobalScore();
-        }
-
-        function checkCloze() {
-            playSound('click');
-            const answers = { 1: "conclusione", 2: "premessa", 3: "normative", 4: "nascoste", 5: "Sistema 1", 6: "Sistema 2", 7: "definiendum", 8: "ampia", 9: "circolare", 10: "operativa" };
-            let correct = 0;
-            for(let i=1; i<=10; i++) {
-                const el = document.getElementById(`cloze-${i}`);
-                if(el.value === answers[i]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold"; }
-                else { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold"; }
-            }
-            state.clozeScore = Math.round((correct / 10) * 100);
-            const fb = document.getElementById('cloze-feedback');
-            if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold"; fb.innerText = "Perfetto! Testo di sintesi completato con successo (10/10)."; }
-            else { playSound('error'); fb.className = "text-amber-400 font-bold"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Rivedi le opzioni evidenziate in rosso.`; }
-            updateGlobalScore();
-        }
-
-        function updateGlobalScore() {
-            let mcqCorrect = 0; mcqData.forEach(q => { if(state.mcqAnswers[q.id] === q.correct) mcqCorrect++; });
-            let tfCorrect = 0; tfData.forEach(d => { if(state.tfAnswers[d.id] === d.isTrue) tfCorrect++; });
-            let timelineCorrect = 0; state.timelineOrder.forEach((v, i) => { if(v === i) timelineCorrect++; });
-            const total = Math.round((mcqCorrect/10)*30 + (tfCorrect/8)*20 + (timelineCorrect/8)*15 + (state.clozeScore/100)*20);
-            document.getElementById('global-score-text').innerText = `${total} / 100`;
-            return total;
-        }
-
-        function updateReport() {
-            const score = updateGlobalScore();
-            document.getElementById('report-score').innerText = `${score} / 100 XP`;
-            const badgeEl = document.getElementById('report-badge');
-            const certScore = document.getElementById('cert-score');
-            const certTitle = document.getElementById('cert-title');
-            if(certScore) certScore.innerText = `${score} / 100 XP`;
-
-            let titleText = "Novizio della Logica";
-            if(score >= 90) titleText = "Magister Criticae Rationis et Logicae (Eccellente)";
-            else if(score >= 75) titleText = "Analista Argomentativo (Buono)";
-            else if(score >= 55) titleText = "Praticante di Pensiero Critico (Sufficiente)";
-
-            if(badgeEl) badgeEl.innerText = titleText;
-            if(certTitle) certTitle.innerText = titleText;
-        }
-
-        function switchTab(tabId) {
-            playSound('click');
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(tabId).classList.remove('hidden');
-            if(tabId === 'tab-report') updateReport();
-        }
-
-        function resetAll() {
-            state.mcqAnswers = {}; state.tfAnswers = {}; state.timelineOrder = [0,1,2,3,4,5,6,7]; state.clozeScore = 0;
-            renderMCQ(); renderTF(); renderTimeline(); renderMatching();
-            updateGlobalScore(); switchTab('tab-studio');
-        }
-
-        window.addEventListener('DOMContentLoaded', () => { renderMCQ(); renderTF(); renderTimeline(); renderMatching(); updateGlobalScore(); });
-    </script>
-</body>
-</html>
+            <div id="nascoste-container" class="space-
