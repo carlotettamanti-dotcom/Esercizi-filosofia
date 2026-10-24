@@ -98,3 +98,684 @@
     </nav>
 
     <!-- Main Content -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+        <!-- TAB 0: STUDIO -->
+        <section id="tab-studio" class="tab-content space-y-8">
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border-emerald-500/20 relative overflow-hidden">
+                <div class="max-w-3xl space-y-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                        <i class="fa-solid fa-brain mr-1.5"></i> Modulo 1: Analisi del Ragionamento e Definizioni
+                    </span>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-emerald-400">Strumenti di Interpretazione e Analisi Critica</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        In questo modulo analizzerai testi argomentativi reali per: smontare la struttura premesse-conclusione, diagnosticare gli errori logici nelle definizioni (circolarità, vaghezza, ampiezza eccessiva o ridotta), svelare le assunzioni nascoste e disattivare i bias del Sistema 1.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">1. Anatomia dell'Argomento</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Identificazione della Conclusione tramite gli indicatori (<em>quindi, pertanto, ne consegue</em>) e isolamento delle Co-Premesse.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-sky-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">2. Tipologia delle Premesse</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Classificazione tra premesse <strong>Fattuali</strong> (dati empirici), <strong>Condizionali</strong> (Se... allora), <strong>Definitorie</strong> e <strong>Normative</strong> (valori etici e regole).</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-ghost"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">3. Premesse Nascoste</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Tecniche per portare alla luce i presupposti inespressi che collegano le premesse alla tesi finale e valutarne la fondatezza logica.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-bolt"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">4. Sistema 1 vs Sistema 2</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Teoria di Kahneman & Tversky: <strong>Sistema 1</strong> (95% istintivo, automatico, veloce) vs <strong>Sistema 2</strong> (5% lento, razionale, faticoso, attento).</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">5. I 5 Errori nelle Definizioni</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Diagnosi dei difetti tra <em>Definiendum</em> e <em>Definiens</em>: Ambiguità, Vaghezza, Troppo Ampia, Troppo Stretta e Circolarità.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-tags"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">6. Strategie Definitorie</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Selezione della strategia ideale: Ostensiva, Estensiva, Intensiva/Connotativa, Negativa, Analogica, Operativa, Genetica ed Etimologica.</p>
+                </div>
+            </div>
+
+            <div class="text-center pt-4">
+                <button onclick="switchTab('tab-analisi')" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-emerald-600 hover:to-teal-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione di Analisi Critica ➔</button>
+            </div>
+        </section>
+
+        <!-- TAB 1: ANALISI TESTUALE -->
+        <section id="tab-analisi" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 1: Individuazione di Conclusione e Premesse nei Testi</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi ciascun brano argomentativo tratto dai testi di studio e seleziona l'esatta conclusione o l'organizzazione delle premesse.</p>
+            </div>
+            <div id="analisi-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 2: DIAGNOSI ERRORI DEFINIZIONI -->
+        <section id="tab-definizioni" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 2: Diagnosi degli Errori Definizionali e Scelta delle Strategie</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Analizza ciascuna definizione (Definiendum = Definiens) e individua l'errore commesso o la strategia più appropriata per correggerla.</p>
+            </div>
+            <div id="definizioni-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 3: ESPLICITAZIONE PREMESSE NASCOSTE -->
+        <section id="tab-nascoste" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Rilevamento delle Premesse Nascoste (Assunzioni Implicite)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Esamina le argomentazioni incomplete e individua la premessa implicita necessaria per rendere logica la conclusione.</p>
+            </div>
+            <div id="nascoste-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 4: CLASSIFICAZIONE PREMESSE & SISTEMI COGNITIVI -->
+        <section id="tab-classificazione" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 4: Abbinamento Tipologia Premesse e Sistemi Cognitivi</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div id="matching-terms" class="space-y-2.5"></div>
+                    <div id="matching-defs" class="space-y-2.5"></div>
+                </div>
+                <div id="matching-feedback" class="text-xs sm:text-sm font-semibold pt-2"></div>
+            </div>
+        </section>
+
+        <!-- TAB 5: CLOZE TEST -->
+        <section id="tab-cloze" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 5: Cloze Test sulla Teoria dell'Argomentazione</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
+                    Un ragionamento è un insieme di enunciati legati tra loro per sostenere una tesi. Per riconoscerlo cerchiamo gli indicatori di <select id="cloze-1" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="conclusione">conclusione</option><option value="ipotesi">ipotesi</option></select> (come <em>pertanto, quindi</em>) e gli indicatori di <select id="cloze-2" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="premessa">premessa</option><option value="dubbio">dubbio</option></select> (come <em>poiché, infatti</em>). Le premesse che richiamano valori morali o norme sociali sono dette <select id="cloze-3" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="normative">normative</option><option value="fattuali">fattuali</option></select>. Molte argomentazioni quotidiane contengono premesse <select id="cloze-4" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="nascoste">nascoste</option><option value="scientifiche">scientifiche</option></select> che vanno esplicitate. Secondo Kahneman, la mente usa due sistemi: il <select id="cloze-5" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="Sistema 1">Sistema 1</option><option value="Sistema 2">Sistema 2</option></select> per risposte veloci ed istintive (95%), e il <select id="cloze-6" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="Sistema 2">Sistema 2</option><option value="Sistema 1">Sistema 1</option></select> per il pensiero razionale e faticoso. Nel definire i termini, la parola da definire si chiama <select id="cloze-7" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="definiendum">definiendum</option><option value="definiens">definiens</option></select>. Se la definizione include troppi elementi estranei è troppo <select id="cloze-8" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="ampia">ampia</option><option value="stretta">stretta</option></select>; se usa sinonimi o ripete il termine è <select id="cloze-9" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="circolare">circolare</option><option value="vaga">vaga</option></select>. Infine, la definizione <select id="cloze-10" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="operativa">operativa</option><option value="ostensiva">ostensiva</option></select> definisce un termine attraverso una precisa procedura di misurazione.
+                </div>
+                <button onclick="checkCloze()" class="bg-emerald-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica Testo</button>
+                <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
+            </div>
+        </section>
+
+        <!-- TAB 6: REPORT -->
+        <section id="tab-report" class="tab-content hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl text-center space-y-6">
+                <h2 class="font-cinzel text-2xl font-bold text-emerald-400">Valutazione Finale di Pensiero Critico</h2>
+                <div class="text-4xl font-black text-emerald-400" id="report-score">0 / 100 XP</div>
+                <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
+                <div class="flex justify-center gap-4">
+                    <button onclick="window.print()" class="bg-emerald-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
+                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer">Ricomincia</button>
+                </div>
+            </div>
+
+            <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-emerald-500/40 text-center space-y-6">
+                <div class="border-2 border-dashed border-emerald-500/30 p-8 rounded-2xl space-y-6">
+                    <div class="font-cinzel text-emerald-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Logica</div>
+                    <p class="text-slate-300 text-sm">Si attesta che lo studente / la studentessa:</p>
+                    <div id="cert-student-name" class="font-cinzel text-2xl font-bold text-white underline decoration-emerald-500 decoration-2">Studente</div>
+                    <p class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
+                        ha completato con successo il laboratorio didattico di:
+                        <br><strong class="text-emerald-400">"Teoria del Ragionamento, Esplicitazione delle Premesse Implicite, Sistema 1 e Sistema 2, Fallacie e Analisi delle Definizioni"</strong>
+                    </p>
+                    <div class="flex justify-around items-center pt-6 border-t border-slate-800 text-xs text-slate-400">
+                        <div><span>Punteggio Conseguito:</span><div id="cert-score" class="font-bold text-emerald-400 text-base">0 / 100 XP</div></div>
+                        <div><span>Livello Raggiunto:</span><div id="cert-title" class="font-bold text-sky-400 text-base">In corso</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer con Navigation Link Doppio -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
+        <a href="index.html" class="hover:text-emerald-400 transition-colors">
+            <i class="fa-solid fa-house mr-1"></i> Home Portale
+        </a>
+        <span>•</span>
+        <a href="pensiero-critico.html" class="hover:text-emerald-400 transition-colors">
+            <i class="fa-solid fa-diagram-project mr-1"></i> Pensiero Critico
+        </a>
+    </footer>
+
+    <script>
+        const state = { 
+            studentName: "Studente", 
+            audioEnabled: true, 
+            analisiAnswers: {}, 
+            defAnswers: {}, 
+            nascAnswers: {}, 
+            matchedPairs: {}, 
+            clozeScore: 0, 
+            selectedTermId: null 
+        };
+
+        let audioCtx = null;
+        function playSound(type) {
+            if (!state.audioEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                if (type === 'click') { 
+                    osc.frequency.setValueAtTime(400, audioCtx.currentTime); 
+                    gain.gain.setValueAtTime(0.04, audioCtx.currentTime); 
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.04); 
+                } else if (type === 'correct') { 
+                    osc.frequency.setValueAtTime(880, audioCtx.currentTime); 
+                    gain.gain.setValueAtTime(0.06, audioCtx.currentTime); 
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.15); 
+                } else if (type === 'error') { 
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime); 
+                    gain.gain.setValueAtTime(0.06, audioCtx.currentTime); 
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.15); 
+                }
+            } catch(e){}
+        }
+
+        function toggleAudio() { state.audioEnabled = !state.audioEnabled; }
+        function updateStudentName(val) { 
+            state.studentName = val || "Studente"; 
+            const certName = document.getElementById('cert-student-name');
+            if(certName) certName.innerText = state.studentName;
+        }
+
+        const analisiData = [
+            {
+                id: 1,
+                title: "Testo 1: Il Fumo Passivo",
+                text: "«Il fumo passivo è dannoso per la salute, e molte persone frequentano luoghi pubblici per svagarsi o lavorare. Inoltre, non è giusto che chi non fuma debba subire le conseguenze negative del fumo altrui. Pertanto, dovrebbe essere vietato fumare nei luoghi pubblici.»",
+                question: "Qual è la CONCLUSIONE (tesi principale) sostenuta in questo testo?",
+                options: [
+                    "Il fumo passivo è dannoso per la salute delle persone.",
+                    "Le persone frequentano i luoghi pubblici per svagarsi o lavorare.",
+                    "Dovrebbe essere vietato fumare nei luoghi pubblici.",
+                    "Chi fuma ha il diritto di farlo in qualsiasi luogo."
+                ],
+                correct: 2,
+                explanation: "La parola 'Pertanto' segnala chiaramente l'introduzione della Conclusione: il divieto di fumare nei luoghi pubblici."
+            },
+            {
+                id: 2,
+                title: "Testo 2: Integrazione della Tecnologia",
+                text: "«L'uso della tecnologia dovrebbe essere integrato nei metodi di insegnamento tradizionali. La tecnologia consente agli studenti di accedere a risorse educative da qualsiasi luogo e in qualsiasi momento. In un mondo sempre più digitale, è importante che gli studenti sviluppino competenze tecnologiche per avere successo nelle loro carriere future.»",
+                question: "Dove si trova la CONCLUSIONE in questo brano argomentativo?",
+                options: [
+                    "All'inizio del testo ('L'uso della tecnologia dovrebbe essere integrato...')",
+                    "A metà del testo ('La tecnologia consente di accedere a risorse...')",
+                    "Alla fine del testo ('Per avere successo nelle loro carriere future')",
+                    "Nel testo manca del tutto la conclusione"
+                ],
+                correct: 0,
+                explanation: "Nelle argomentazioni reali la Conclusione non si trova necessariamente alla fine; in questo caso la tesi è espressa nella primissima frase."
+            },
+            {
+                id: 3,
+                title: "Testo 3: Lavoro da Remoto",
+                text: "«Lavorare da remoto riduce il tempo e il denaro spesi per gli spostamenti quotidiani, migliorando il bilanciamento tra vita lavorativa e personale. Inoltre, le aziende possono risparmiare sui costi operativi. Di conseguenza, le aziende dovrebbero incentivare il lavoro da remoto ove possibile.»",
+                question: "Quale indicatore rivela la presenza della Conclusione?",
+                options: [
+                    "Inoltre (Indicatore di congiunzione di premesse)",
+                    "Di conseguenza (Indicatore di conclusione)",
+                    "Riduce il tempo (Premessa fattuale)",
+                    "Ove possibile (Condizionale)"
+                ],
+                correct: 1,
+                explanation: "'Di conseguenza' introduce in modo inequivocabile la tesi finale da accettare."
+            }
+        ];
+
+        const defData = [
+            {
+                id: 1,
+                term: "Definizione di 'SEDIA'",
+                definiens: "«Oggetto su cui ci si siede»",
+                question: "Quale errore logico presenta questa definizione?",
+                options: [
+                    "È troppo stretta (esclude sedie senza schienale)",
+                    "È troppo ampia (include tavoli, divani, massi o il pavimento)",
+                    "È circolare (contiene la parola sedia)",
+                    "È vaga e priva di senso"
+                ],
+                correct: 1,
+                explanation: "È troppo ampia (too wide) perché include molti oggetti su cui ci si può sedere che non sono sedie."
+            },
+            {
+                id: 2,
+                term: "Definizione Corretta di 'SEDIA'",
+                definiens: "«Oggetto su cui ci si siede, con 4 gambe e uno schienale»",
+                question: "Quale difetto opposto genera questa seconda formulazione?",
+                options: [
+                    "Diventa troppo stretta (esclude sedie a 3 gambe o senza schienale)",
+                    "Diventa circolare",
+                    "È un'etichetta etimologica",
+                    "È una definizione ostensiva"
+                ],
+                correct: 0,
+                explanation: "È troppo stretta (too strict) perché esclude modelli legittimi di sedie (es. sedia a tre gambe)."
+            },
+            {
+                id: 3,
+                term: "Definizione di 'CANE'",
+                definiens: "«Un animale che ha genitori canini»",
+                question: "Quale fallacia inficia questa definizione?",
+                options: [
+                    "Vaghezza dei confini",
+                    "Circolarità (il Definiendum 'cane' compare sotto forma di aggettivo nel Definiens)",
+                    "Definizione per analogia",
+                    "Definizione etimologica"
+                ],
+                correct: 1,
+                explanation: "È una definizione circolare poiché presuppone già la conoscenza della nozione di 'cane'."
+            },
+            {
+                id: 4,
+                term: "Definizione di 'TEMPERATURA'",
+                definiens: "«La lettura in gradi Celsius o Fahrenheit ottenuta con un termometro»",
+                question: "A quale tipologia appartiene questa definizione rigorosa?",
+                options: [
+                    "Definizione Operativa (basata su una procedura o operazione di misurazione)",
+                    "Definizione Ostensiva",
+                    "Definizione Etimologica",
+                    "Definizione Negativa"
+                ],
+                correct: 0,
+                explanation: "È una definizione Operativa: spiega il termine mediante l'operazione empirica usata per misurarlo."
+            }
+        ];
+
+        const nascData = [
+            {
+                id: 1,
+                title: "Caso 1: Social Media e Giovani",
+                argument: "«La maggior parte dei giovani oggi trascorre molto tempo sui social media. Quindi, i giovani di oggi sono meno impegnati in attività educative o produttive rispetto alle generazioni passate.»",
+                question: "Qual è la PREMESSA NASCOSTA (implicita) che il ragionamento sta presupponendo senza dirlo?",
+                options: [
+                    "I social media sono stati inventati di recente.",
+                    "Se si trascorre tempo sui social media, non si può essere impegnati in attività educative o produttive.",
+                    "Le generazioni passate non usavano i telefoni.",
+                    "Tutti i giovani amano i social media."
+                ],
+                correct: 1,
+                explanation: "Esplicitando la premessa nascosta ('Chi sta sui social non studia/lavora'), notiamo subito la sua falsità (sui social ci sono anche divulgatori e opportunità di lavoro!), dimostrando la debolezza dell'argomento."
+            },
+            {
+                id: 2,
+                title: "Caso 2: Frutta e Verdura",
+                argument: "«Mangiare frutta e verdura è essenziale per la salute perché ricche di vitamine. Dovresti quindi includere più frutta e verdura nella tua dieta.»",
+                question: "Qual è l'assunzione ovvia ma tecnicamente IMPLICITA in questa esortazione?",
+                options: [
+                    "La frutta si compra al supermercato.",
+                    "È desiderabile e importante per ognuno mantenere una buona salute e prevenire le malattie.",
+                    "Le vitamine sono colorate.",
+                    "I medici mangiano molta verdura."
+                ],
+                correct: 1,
+                explanation: "In una schematizzazione formale va esplicitato anche l'ovvio: che l'ascoltatore desideri rimanere in buona salute."
+            },
+            {
+                id: 3,
+                title: "Caso 3: Concerti dal Vivo vs Streaming",
+                argument: "«Lo streaming è comodo ed economico, ma l'esperienza del vivo è unica. Ecco perché molti preferiscono i concerti dal vivo nonostante i costi.»",
+                question: "Qual è la premessa implicita nascosta dietro questa scelta?",
+                options: [
+                    "I biglietti dei concerti costano sempre troppo.",
+                    "Il valore dell'esperienza unica dal vivo supera il disagio del maggior costo e della scomodità.",
+                    "Lo streaming funziona solo con il wi-fi.",
+                    "La musica si ascolta con le cuffie."
+                ],
+                correct: 1,
+                explanation: "La premessa implicita è che le persone attribuiscono all'esperienza unica un valore superiore rispetto al risparmio economico."
+            }
+        ];
+
+        const matchingTerms = [
+            { id: "m1", term: "Premessa Fattuale" },
+            { id: "m2", term: "Premessa Condizionale" },
+            { id: "m3", term: "Premessa Normativa" },
+            { id: "m4", term: "Sistema 1 (Kahneman)" },
+            { id: "m5", term: "Sistema 2 (Kahneman)" },
+            { id: "m6", term: "Definizione Intensiva" },
+            { id: "m7", term: "Definizione Etimologica" },
+            { id: "m8", term: "Vaghezza" }
+        ];
+
+        const matchingDefs = [
+            { id: "d1", matchId: "m1", text: "Premessa basata su dati di fatto reali, statistiche o rilevazioni empiriche verificabili." },
+            { id: "d2", matchId: "m2", text: "Premessa espressa nella forma 'Se... allora' o 'Ogni X è Y'." },
+            { id: "d3", matchId: "m3", text: "Premessa fondata su valori morali, dover essere o norme di comportamento etico." },
+            { id: "d4", matchId: "m4", text: "Pensiero veloce, automatico, istintivo, emotivo e a basso sforzo (95%)." },
+            { id: "d5", matchId: "m5", text: "Pensiero lento, concentrato, logico, faticoso e consapevole (5%)." },
+            { id: "d6", matchId: "m6", text: "Definizione che descrive le caratteristiche essenziali necessarie (es. triangolo = 3 lati e 3 angoli)." },
+            { id: "d7", matchId: "m7", text: "Spiegazione dell'origine storica e linguistica della parola (es. fotografia = scrittura con la luce)." },
+            { id: "d8", matchId: "m8", text: "Carenza di confini precisi di applicabilità per un termine (es. alto, calvo)." }
+        ];
+
+        function renderAnalisi() {
+            const container = document.getElementById('analisi-container');
+            if(!container) return;
+            container.innerHTML = analisiData.map(item => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded-md border border-sky-800">${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectAnalisi(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="analisi-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectAnalisi(qId, oIdx, btn) {
+            playSound('click');
+            const item = analisiData.find(d => d.id === qId);
+            state.analisiAnswers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach(b => {
+                    b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold transition-all cursor-pointer";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-200 font-bold transition-all cursor-pointer";
+            }
+
+            const fb = document.getElementById(`analisi-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Esatto!</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Scelta errata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderDefinizioni() {
+            const container = document.getElementById('definizioni-container');
+            if(!container) return;
+            container.innerHTML = defData.map(item => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-rose-400 bg-rose-950/60 px-2.5 py-1 rounded-md border border-rose-800">${item.term}</span>
+                    <p class="text-sm font-bold text-emerald-300 bg-slate-900/80 p-3 rounded-xl border border-slate-800">${item.definiens}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectDef(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="def-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectDef(qId, oIdx, btn) {
+            playSound('click');
+            const item = defData.find(d => d.id === qId);
+            state.defAnswers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach(b => {
+                    b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold transition-all cursor-pointer";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-200 font-bold transition-all cursor-pointer";
+            }
+
+            const fb = document.getElementById(`def-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Diagnosi Corretta!</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Diagnosi Errata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderNascoste() {
+            const container = document.getElementById('nascoste-container');
+            if(!container) return;
+            container.innerHTML = nascData.map(item => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic">${item.argument}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectNasc(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="nasc-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectNasc(qId, oIdx, btn) {
+            playSound('click');
+            const item = nascData.find(d => d.id === qId);
+            state.nascAnswers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach(b => {
+                    b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold transition-all cursor-pointer";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-200 font-bold transition-all cursor-pointer";
+            }
+
+            const fb = document.getElementById(`nasc-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Premessa Nascosta Rilevata!</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Rilevamento Errato.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderMatching() {
+            const termsContainer = document.getElementById('matching-terms');
+            const defsContainer = document.getElementById('matching-defs');
+            if(!termsContainer || !defsContainer) return;
+            termsContainer.innerHTML = matchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
+            defsContainer.innerHTML = matchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
+        }
+
+        function selectMatchTerm(termId, btn) {
+            playSound('click');
+            state.selectedTermId = termId;
+
+            document.querySelectorAll('#matching-terms button').forEach(b => {
+                if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+            });
+            btn.className = "w-full text-left p-3 rounded-xl border-2 border-amber-500 bg-amber-950/80 text-xs font-bold text-amber-300 transition-all shadow-lg cursor-pointer";
+
+            const fb = document.getElementById('matching-feedback');
+            if(fb) {
+                fb.className = "text-xs font-semibold text-amber-400 pt-2";
+                fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!";
+            }
+        }
+
+        function selectMatchDef(matchId, btn) {
+            const fb = document.getElementById('matching-feedback');
+            if(!state.selectedTermId) {
+                playSound('error');
+                if(fb) {
+                    fb.className = "text-xs font-semibold text-rose-400 pt-2";
+                    fb.innerText = "Prima seleziona un termine nella colonna di sinistra!";
+                }
+                return;
+            }
+
+            if(state.selectedTermId === matchId) {
+                playSound('correct');
+                state.matchedPairs[matchId] = true;
+
+                const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
+                if(termBtn) {
+                    termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed";
+                    termBtn.disabled = true;
+                }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed";
+                btn.disabled = true;
+
+                if(fb) {
+                    fb.className = "text-xs font-bold text-emerald-400 pt-2";
+                    fb.innerText = "✓ Abbinamento corretto!";
+                }
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => {
+                    if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer";
+                }, 1000);
+
+                if(fb) {
+                    fb.className = "text-xs font-bold text-rose-400 pt-2";
+                    fb.innerText = "✗ Abbinamento errato. Riprova!";
+                }
+            }
+            state.selectedTermId = null;
+            updateGlobalScore();
+        }
+
+        function checkCloze() {
+            playSound('click');
+            const answers = { 1: "conclusione", 2: "premessa", 3: "normative", 4: "nascoste", 5: "Sistema 1", 6: "Sistema 2", 7: "definiendum", 8: "ampia", 9: "circolare", 10: "operativa" };
+            let correct = 0;
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById(`cloze-${i}`);
+                if(el && el.value === answers[i]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold"; }
+                else if(el) { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold"; }
+            }
+            state.clozeScore = Math.round((correct / 10) * 100);
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) {
+                if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = "Perfetto! Testo di sintesi completato con successo (10/10)."; }
+                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Rivedi le opzioni evidenziate in rosso.`; }
+            }
+            updateGlobalScore();
+        }
+
+        function updateGlobalScore() {
+            let analCorrect = 0; analisiData.forEach(d => { if(state.analisiAnswers[d.id] === d.correct) analCorrect++; });
+            let defCorrect = 0; defData.forEach(d => { if(state.defAnswers[d.id] === d.correct) defCorrect++; });
+            let nascCorrect = 0; nascData.forEach(d => { if(state.nascAnswers[d.id] === d.correct) nascCorrect++; });
+            let matchCount = Object.keys(state.matchedPairs || {}).length;
+
+            const total = Math.round((analCorrect/3)*30 + (defCorrect/4)*25 + (nascCorrect/3)*20 + (matchCount/8)*15 + (state.clozeScore/100)*10);
+            const scoreText = document.getElementById('global-score-text');
+            if(scoreText) scoreText.innerText = `${total} / 100`;
+            return total;
+        }
+
+        function updateReport() {
+            const score = updateGlobalScore();
+            const repScore = document.getElementById('report-score');
+            if(repScore) repScore.innerText = `${score} / 100 XP`;
+            const badgeEl = document.getElementById('report-badge');
+            const certScore = document.getElementById('cert-score');
+            const certTitle = document.getElementById('cert-title');
+            if(certScore) certScore.innerText = `${score} / 100 XP`;
+
+            let titleText = "Novizio della Logica";
+            if(score >= 90) titleText = "Magister Criticae Rationis et Logicae (Eccellente)";
+            else if(score >= 75) titleText = "Analista Argomentativo (Buono)";
+            else if(score >= 55) titleText = "Praticante di Pensiero Critico (Sufficiente)";
+
+            if(badgeEl) badgeEl.innerText = titleText;
+            if(certTitle) certTitle.innerText = titleText;
+        }
+
+        function switchTab(tabId, btnElement) {
+            playSound('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+
+            if(btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                const navButtons = document.querySelectorAll('.tab-btn');
+                navButtons.forEach(b => {
+                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
+                        b.classList.add('active');
+                    }
+                });
+            }
+
+            if(tabId === 'tab-report') updateReport();
+        }
+
+        function resetAll() {
+            state.analisiAnswers = {}; 
+            state.defAnswers = {}; 
+            state.nascAnswers = {}; 
+            state.matchedPairs = {}; 
+            state.clozeScore = 0;
+            renderAnalisi(); renderDefinizioni(); renderNascoste(); renderMatching();
+            updateGlobalScore(); switchTab('tab-studio');
+        }
+
+        function initApp() {
+            renderAnalisi();
+            renderDefinizioni();
+            renderNascoste();
+            renderMatching();
+            updateGlobalScore();
+        }
+
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            initApp();
+        } else {
+            document.addEventListener('DOMContentLoaded', initApp);
+        }
+    </script>
+</body>
+</html>
