@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teoria del Ragionamento e Pensiero Critico</title>
+    <title>Pensiero Critico • Laboratori di Ragionamento</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
                     <i class="fa-solid fa-house"></i> Home Portale
                 </a>
                 <span class="text-slate-600">/</span>
-                <span class="text-emerald-400 font-bold">Pensiero Critico</span>
+                <span class="text-emerald-400 font-bold">Teoria del Ragionamento (Pensiero Critico)</span>
             </div>
             <a href="index.html" class="text-xs font-semibold text-slate-400 hover:text-emerald-400 transition-colors">
                 <i class="fa-solid fa-arrow-left mr-1"></i> Torna al Menu
@@ -37,34 +37,56 @@
         <!-- Banner Sezione -->
         <div class="glass-card p-8 rounded-2xl border-emerald-500/20 relative overflow-hidden">
             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-3">
-                <i class="fa-solid fa-diagram-project mr-1.5"></i> Logica & Argomentazione
+                <i class="fa-solid fa-diagram-project mr-1.5"></i> Logica, Argomentazione & Metodo
             </span>
-            <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-emerald-400 mb-2">Teoria del Ragionamento e Pensiero Critico</h2>
+            <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-emerald-400 mb-2">I Moduli di Teoria del Ragionamento</h2>
             <p class="text-slate-300 text-sm leading-relaxed max-w-2xl">
-                I moduli e gli esercizi di questa sezione sono dedicati all'analisi della struttura degli argomenti, al riconoscimento delle fallacie informali e allo sviluppo dell'argomentazione rigorosa.
+                Seleziona uno dei seguenti laboratori per esercitarti sull'analisi degli argomenti, l'individuazione dei presupposti impliciti, i bias cognitivi e la rigorosa definizione dei concetti.
             </p>
         </div>
 
-        <!-- Sezione in Lavorazione / Schede Esercizi -->
-        <div class="glass-card p-10 rounded-2xl text-center space-y-4">
-            <div class="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mx-auto border border-emerald-500/30">
-                <i class="fa-solid fa-brain"></i>
+        <!-- Griglia Esercizi Pensiero Critico -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Modulo 1: Ragionamento, Premesse e Definizioni (ATTIVO) -->
+            <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/50 transition-all flex flex-col justify-between group border-emerald-500/30">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Modulo 1</span>
+                    <h3 class="font-bold text-lg text-slate-100">Ragionamento, Premesse & Definizioni</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Anatomia delle argomentazioni, premesse esplicite e nascoste, Sistema 1 e Sistema 2 (Kahneman), fallacie e tipologie di definizioni.
+                    </p>
+                </div>
+                <a href="ragionamento-definizioni.html" class="mt-4 w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold py-2.5 px-4 rounded-xl border border-emerald-500 text-xs transition-all flex items-center justify-center gap-2">
+                    Accedi al Laboratorio <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
-            <h3 class="text-xl font-bold text-slate-100">Laboratori in Preparazione</h3>
-            <p class="text-xs text-slate-400 leading-relaxed max-w-md mx-auto">
-                In questo spazio verranno inseriti i moduli pratici su: identificazione delle fallacie logiche, analisi dei sillogismi, mappe argomentative e verifica della validità formale.
-            </p>
-            <a href="index.html" class="inline-block bg-slate-900 hover:bg-slate-800 text-emerald-400 font-bold px-6 py-2.5 rounded-xl text-xs border border-slate-800 transition-all">
-                ← Torna al Portale Principale
-            </a>
-        </div>
 
+            <!-- Modulo 2: Segnaposto / In Arrivo -->
+            <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-slate-700 transition-all flex flex-col justify-between opacity-70">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400 bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Modulo 2</span>
+                    <h3 class="font-bold text-lg text-slate-300">Fallacie Logiche & Informali</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Riconoscimento delle fallacie di rilevanza, ad hominem, uomo di paglia, pendenza scivolosa e falsa causa nelle discussioni quotidiane.
+                    </p>
+                </div>
+                <span class="mt-4 w-full bg-slate-900 text-slate-500 font-bold py-2.5 px-4 rounded-xl border border-slate-800 text-xs text-center">
+                    In Arrivo
+                </span>
+            </div>
+
+        </div>
     </main>
 
-    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
-        <a href="index.html" class="hover:text-emerald-400 transition-colors">
-            <i class="fa-solid fa-house mr-1"></i> Home Portale
-        </a>
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <a href="index.html" class="hover:text-emerald-400 underline">← Torna al Menu Principale del Portale</a>
     </footer>
 
 </body>
