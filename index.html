@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portale di Filosofia • Didattica Interattiva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080d16; color: #f1f5f9; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-4">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                    <i class="fa-solid fa-brain text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-cinzel text-lg font-bold text-emerald-400 tracking-wider">PORTALE DI FILOSOFIA</h1>
+                    <p class="text-xs text-slate-400">Laboratori di Ragionamento e Analisi Concettuale</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-10 space-y-8">
+        
+        <!-- Banner Benvenuto -->
+        <div class="glass-card p-8 rounded-2xl border-emerald-500/20 relative overflow-hidden">
+            <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-emerald-400 mb-2">Seleziona l'Epoca Filosofica</h2>
+            <p class="text-slate-300 text-sm leading-relaxed max-w-2xl">
+                Scegli il periodo storico-filosofico che desideri approfondire per accedere alle mappe concettuali e ai laboratori di ragionamento interattivo.
+            </p>
+        </div>
+
+        <!-- Griglia 4 Epoche Filosofiche -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- 1. Filosofia Antica -->
+            <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/50 transition-all flex flex-col justify-between group">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-columns"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">VI sec. a.C. - VI sec. d.C.</span>
+                    <h3 class="font-bold text-xl text-slate-100 font-cinzel">Filosofia Antica</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">I Presocratici, la svolta socratica, le grandi sintesi di Platone e Aristotele, l'Ellenismo e il Neoplatonismo.</p>
+                </div>
+                <a href="filosofia-antica.html" class="mt-4 w-full bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-amber-400 font-bold py-2.5 px-4 rounded-xl border border-slate-800 text-xs transition-all flex items-center justify-center gap-2">
+                    Esplora la Sezione <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- 2. Filosofia Medievale -->
+            <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/50 transition-all flex flex-col justify-between group border-emerald-500/30">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-scroll"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">IV sec. d.C. - XIV sec. d.C.</span>
+                    <h3 class="font-bold text-xl text-slate-100 font-cinzel">Filosofia Medievale</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Patristica e Agostino, la Scolastica, le prove dell'esistenza di Dio (Anselmo, Tommaso) e il Nominalismo di Ockham.</p>
+                </div>
+                <a href="filosofia-medievale.html" class="mt-4 w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold py-2.5 px-4 rounded-xl border border-emerald-500 text-xs transition-all flex items-center justify-center gap-2">
+                    Esplora i Laboratori (Modulo Attivo) <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- 3. Filosofia Moderna -->
+            <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-sky-500/50 transition-all flex flex-col justify-between group">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded-md border border-sky-800">XV sec. - XIX sec.</span>
+                    <h3 class="font-bold text-xl text-slate-100 font-cinzel">Filosofia Moderna</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Rivoluzione scientifica, Razionalismo (Cartesio), Empirismo (Locke, Hume), il Criticismo kantiano e l'Idealismo.</p>
+                </div>
+                <a href="filosofia-moderna.html" class="mt-4 w-full bg-slate-900 hover:bg-sky-500 hover:text-slate-950 text-sky-400 font-bold py-2.5 px-4 rounded-xl border border-slate-800 text-xs transition-all flex items-center justify-center gap-2">
+                    Esplora la Sezione <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- 4. Filosofia Contemporanea -->
+            <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/50 transition-all flex flex-col justify-between group">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Meno di XIX sec. - Oggi</span>
+                    <h3 class="font-bold text-xl text-slate-100 font-cinzel">Filosofia Contemporanea</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Schopenhauer, Kierkegaard, Marx, Nietzsche, la Fenomenologia, l'Esistenzialismo e la Filosofia Analitica.</p>
+                </div>
+                <a href="filosofia-contemporanea.html" class="mt-4 w-full bg-slate-900 hover:bg-purple-500 hover:text-slate-950 text-purple-400 font-bold py-2.5 px-4 rounded-xl border border-slate-800 text-xs transition-all flex items-center justify-center gap-2">
+                    Esplora la Sezione <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        Portale Didattico Interattivo di Filosofia • Materiali Didattici
+    </footer>
+
+</body>
+</html>
