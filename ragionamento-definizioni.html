@@ -156,7 +156,7 @@
         <section id="tab-analisi" class="tab-content hidden space-y-6">
             <div class="space-y-2">
                 <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 1: Individuazione di Conclusione e Premesse nei Testi</h2>
-                <p class="text-xs sm:text-sm text-slate-400">Leggi ciascun brano argomentativo tratto dai testi di studio e seleziona l'esatta conclusione o l'organizzazione delle premesse.</p>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi ciascun brano argomentativo estratto dalla banca dati e seleziona l'esatta conclusione o l'organizzazione delle premesse. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="analisi-container" class="space-y-6"></div>
         </section>
@@ -165,7 +165,7 @@
         <section id="tab-definizioni" class="tab-content hidden space-y-6">
             <div class="space-y-2">
                 <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 2: Diagnosi degli Errori Definizionali e Scelta delle Strategie</h2>
-                <p class="text-xs sm:text-sm text-slate-400">Analizza ciascuna definizione (Definiendum = Definiens) e individua l'errore commesso o la strategia più appropriata per correggerla.</p>
+                <p class="text-xs sm:text-sm text-slate-400">Analizza ciascuna definizione (Definiendum = Definiens) e individua l'errore commesso o la strategia più appropriata. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="definizioni-container" class="space-y-6"></div>
         </section>
@@ -174,7 +174,7 @@
         <section id="tab-nascoste" class="tab-content hidden space-y-6">
             <div class="space-y-2">
                 <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Rilevamento delle Premesse Nascoste (Assunzioni Implicite)</h2>
-                <p class="text-xs sm:text-sm text-slate-400">Esamina le argomentazioni incomplete e individua la premessa implicita necessaria per rendere logica la conclusione.</p>
+                <p class="text-xs sm:text-sm text-slate-400">Esamina le argomentazioni incomplete e individua la premessa implicita necessaria per rendere logica la conclusione. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="nascoste-container" class="space-y-6"></div>
         </section>
@@ -198,7 +198,7 @@
                 <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
                     Un ragionamento è un insieme di enunciati legati tra loro per sostenere una tesi. Per riconoscerlo cerchiamo gli indicatori di <select id="cloze-1" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="conclusione">conclusione</option><option value="ipotesi">ipotesi</option></select> (come <em>pertanto, quindi</em>) e gli indicatori di <select id="cloze-2" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="premessa">premessa</option><option value="dubbio">dubbio</option></select> (come <em>poiché, infatti</em>). Le premesse che richiamano valori morali o norme sociali sono dette <select id="cloze-3" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="normative">normative</option><option value="fattuali">fattuali</option></select>. Molte argomentazioni quotidiane contengono premesse <select id="cloze-4" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="nascoste">nascoste</option><option value="scientifiche">scientifiche</option></select> che vanno esplicitate. Secondo Kahneman, la mente usa due sistemi: il <select id="cloze-5" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="Sistema 1">Sistema 1</option><option value="Sistema 2">Sistema 2</option></select> per risposte veloci ed istintive (95%), e il <select id="cloze-6" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="Sistema 2">Sistema 2</option><option value="Sistema 1">Sistema 1</option></select> per il pensiero razionale e faticoso. Nel definire i termini, la parola da definire si chiama <select id="cloze-7" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="definiendum">definiendum</option><option value="definiens">definiens</option></select>. Se la definizione include troppi elementi estranei è troppo <select id="cloze-8" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="ampia">ampia</option><option value="stretta">stretta</option></select>; se usa sinonimi o ripete il termine è <select id="cloze-9" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="circolare">circolare</option><option value="vaga">vaga</option></select>. Infine, la definizione <select id="cloze-10" class="bg-slate-800 text-emerald-300 rounded px-2 py-1"><option value="">[?]</option><option value="operativa">operativa</option><option value="ostensiva">ostensiva</option></select> definisce un termine attraverso una precisa procedura di misurazione.
                 </div>
-                <button onclick="checkCloze()" class="bg-emerald-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica Testo</button>
+                <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-emerald-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
                 <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
             </div>
         </section>
@@ -211,7 +211,7 @@
                 <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
                 <div class="flex justify-center gap-4">
                     <button onclick="window.print()" class="bg-emerald-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
-                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer">Ricomincia</button>
+                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Nuove Domande)</button>
                 </div>
             </div>
 
@@ -254,7 +254,13 @@
             nascAnswers: {}, 
             matchedPairs: {}, 
             clozeScore: 0, 
-            selectedTermId: null 
+            clozeLocked: false,
+            selectedTermId: null,
+            activeAnalisiData: [],
+            activeDefData: [],
+            activeNascData: [],
+            activeMatchingTerms: [],
+            activeMatchingDefs: []
         };
 
         let audioCtx = null;
@@ -289,10 +295,20 @@
             if(certName) certName.innerText = state.studentName;
         }
 
-        const analisiData = [
+        function shuffle(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // --- BANCA DATI ESTESA PER ESERCIZIO 1: ANALISI TESTUALE ---
+        const analisiPool = [
             {
-                id: 1,
-                title: "Testo 1: Il Fumo Passivo",
+                id: 101,
+                title: "Testo: Fumo Passivo nei Luoghi Pubblici",
                 text: "«Il fumo passivo è dannoso per la salute, e molte persone frequentano luoghi pubblici per svagarsi o lavorare. Inoltre, non è giusto che chi non fuma debba subire le conseguenze negative del fumo altrui. Pertanto, dovrebbe essere vietato fumare nei luoghi pubblici.»",
                 question: "Qual è la CONCLUSIONE (tesi principale) sostenuta in questo testo?",
                 options: [
@@ -305,8 +321,8 @@
                 explanation: "La parola 'Pertanto' segnala chiaramente l'introduzione della Conclusione: il divieto di fumare nei luoghi pubblici."
             },
             {
-                id: 2,
-                title: "Testo 2: Integrazione della Tecnologia",
+                id: 102,
+                title: "Testo: Integrazione della Tecnologia",
                 text: "«L'uso della tecnologia dovrebbe essere integrato nei metodi di insegnamento tradizionali. La tecnologia consente agli studenti di accedere a risorse educative da qualsiasi luogo e in qualsiasi momento. In un mondo sempre più digitale, è importante che gli studenti sviluppino competenze tecnologiche per avere successo nelle loro carriere future.»",
                 question: "Dove si trova la CONCLUSIONE in questo brano argomentativo?",
                 options: [
@@ -319,8 +335,8 @@
                 explanation: "Nelle argomentazioni reali la Conclusione non si trova necessariamente alla fine; in questo caso la tesi è espressa nella primissima frase."
             },
             {
-                id: 3,
-                title: "Testo 3: Lavoro da Remoto",
+                id: 103,
+                title: "Testo: Lavoro da Remoto",
                 text: "«Lavorare da remoto riduce il tempo e il denaro spesi per gli spostamenti quotidiani, migliorando il bilanciamento tra vita lavorativa e personale. Inoltre, le aziende possono risparmiare sui costi operativi. Di conseguenza, le aziende dovrebbero incentivare il lavoro da remoto ove possibile.»",
                 question: "Quale indicatore rivela la presenza della Conclusione?",
                 options: [
@@ -331,12 +347,55 @@
                 ],
                 correct: 1,
                 explanation: "'Di conseguenza' introduce in modo inequivocabile la tesi finale da accettare."
+            },
+            {
+                id: 104,
+                title: "Testo: Protezione dei Dati Personali",
+                text: "«Attualmente, i dati personali degli utenti sono costantemente raccolti e utilizzati da grandi aziende senza un'adeguata trasparenza. Se la sicurezza online non viene garantita, gli utenti possono diventare vittime di frodi. È quindi necessario che i governi implementino regolamenti rigorosi per proteggere i dati personali degli utenti.»",
+                question: "Qual è la Conclusione di questa argomentazione?",
+                options: [
+                    "I dati personali sono raccolti dalle grandi aziende.",
+                    "La sicurezza online non viene mai garantita.",
+                    "I governi devono implementare regolamenti rigorosi a protezione dei dati.",
+                    "Gli utenti sono sempre vittime di frodi online."
+                ],
+                correct: 2,
+                explanation: "La presenza della parola 'quindi' nell'ultima frase segnala la tesi normativa formulata dall'autore."
+            },
+            {
+                id: 105,
+                title: "Testo: Assistenza Sanitaria Globale",
+                text: "«In molti paesi a basso reddito, milioni di persone non hanno accesso a cure mediche di base. Se la popolazione non ha accesso a cure preventive, aumentano le malattie evitabili. È quindi imperativo che le nazioni ricche forniscano assistenza sanitaria e supporto ai paesi a basso reddito.»",
+                question: "Quale ruolo svolge la frase 'In molti paesi a basso reddito, milioni di persone non hanno accesso a cure mediche di base'?",
+                options: [
+                    "È la conclusione principale dell'argomento",
+                    "È una premessa fattuale che descrive dati reali osservabili",
+                    "È una premessa condizionale del tipo 'Se... allora'",
+                    "È una premessa definitoria"
+                ],
+                correct: 1,
+                explanation: "Si tratta di una Premessa Fattuale: esprime fatti concreti, misurabili e verificabili sull'accesso alla sanità."
+            },
+            {
+                id: 106,
+                title: "Testo: Cambiamento Climatico",
+                text: "«Se le emissioni di gas serra non vengono ridotte, le temperature globali continueranno a salire. Attualmente, le emissioni sono a livelli record. È quindi moralmente obbligatorio agire subito per ridurre tali emissioni e proteggere le generazioni future.»",
+                question: "Che tipo di premessa è espresso dalla frase 'È moralmente obbligatorio agire subito'?",
+                options: [
+                    "Premessa Fattuale",
+                    "Premessa Definitoria",
+                    "Premessa Normativa (basata su valori morali o etici)",
+                    "Premessa Condizionale"
+                ],
+                correct: 2,
+                explanation: "È una Premessa Normativa, poiché fa appello a valori morali, doveri etici e a ciò che è considerato giusto."
             }
         ];
 
-        const defData = [
+        // --- BANCA DATI ESTESA PER ESERCIZIO 2: DIAGNOSI DEFINIZIONI ---
+        const defPool = [
             {
-                id: 1,
+                id: 201,
                 term: "Definizione di 'SEDIA'",
                 definiens: "«Oggetto su cui ci si siede»",
                 question: "Quale errore logico presenta questa definizione?",
@@ -350,7 +409,7 @@
                 explanation: "È troppo ampia (too wide) perché include molti oggetti su cui ci si può sedere che non sono sedie."
             },
             {
-                id: 2,
+                id: 202,
                 term: "Definizione Corretta di 'SEDIA'",
                 definiens: "«Oggetto su cui ci si siede, con 4 gambe e uno schienale»",
                 question: "Quale difetto opposto genera questa seconda formulazione?",
@@ -364,7 +423,7 @@
                 explanation: "È troppo stretta (too strict) perché esclude modelli legittimi di sedie (es. sedia a tre gambe)."
             },
             {
-                id: 3,
+                id: 203,
                 term: "Definizione di 'CANE'",
                 definiens: "«Un animale che ha genitori canini»",
                 question: "Quale fallacia inficia questa definizione?",
@@ -378,7 +437,7 @@
                 explanation: "È una definizione circolare poiché presuppone già la conoscenza della nozione di 'cane'."
             },
             {
-                id: 4,
+                id: 204,
                 term: "Definizione di 'TEMPERATURA'",
                 definiens: "«La lettura in gradi Celsius o Fahrenheit ottenuta con un termometro»",
                 question: "A quale tipologia appartiene questa definizione rigorosa?",
@@ -390,12 +449,55 @@
                 ],
                 correct: 0,
                 explanation: "È una definizione Operativa: spiega il termine mediante l'operazione empirica usata per misurarlo."
+            },
+            {
+                id: 205,
+                term: "Definizione di 'CORAGGIO'",
+                definiens: "«La capacità di affrontare il pericolo con audacia»",
+                question: "Perché questa definizione rischia la CIRCOLARITÀ?",
+                options: [
+                    "Perché 'audacia' è un sinonimo di coraggio e richiede a sua volta una spiegazione",
+                    "Perché include cose che non sono coraggiose",
+                    "Perché si riferisce solo all'esercito",
+                    "Perché è una parola greca"
+                ],
+                correct: 0,
+                explanation: "Utilizzare un sinonimo diretto (audacia) per definire il termine crea una circolarità nascosta se non si definisce prima l'audacia senza usare il termine coraggio."
+            },
+            {
+                id: 206,
+                term: "Definizione di 'FOTOGRAFIA'",
+                definiens: "«Dalle parole greche phos (luce) e graphê (scrittura): scrittura con la luce»",
+                question: "Qual è il limite di questa Definizione Etimologica?",
+                options: [
+                    "È una bugia storica",
+                    "Mostra l'origine linguistica ma non fornisce elementi sufficienti per identificare una fotografia reale oggi",
+                    "È troppo stretta",
+                    "È circolare"
+                ],
+                correct: 1,
+                explanation: "Le definizioni etimologiche indicano la radice della parola, ma non ci dicono come riconoscere l'oggetto nel mondo reale, poiché il significato cambia col tempo."
+            },
+            {
+                id: 207,
+                term: "Definizione di 'ALTO'",
+                definiens: "«Si dice di una persona di statura superiore alla media»",
+                question: "Quale problema teorico incontra l'aggettivo 'ALTO'?",
+                options: [
+                    "Circolarità",
+                    "Vaghezza (mancanza di un confine netto, ad es. 1,78m è alto o no?)",
+                    "È una parola ambigua",
+                    "È una definizione operativa"
+                ],
+                correct: 1,
+                explanation: "Presenta il problema della Vaghezza: non c'è una linea di demarcazione matematica univoca accettata da tutti per stabilire dove inizia la statura 'alta'."
             }
         ];
 
-        const nascData = [
+        // --- BANCA DATI ESTESA PER ESERCIZIO 3: PREMESSE NASCOSTE ---
+        const nascPool = [
             {
-                id: 1,
+                id: 301,
                 title: "Caso 1: Social Media e Giovani",
                 argument: "«La maggior parte dei giovani oggi trascorre molto tempo sui social media. Quindi, i giovani di oggi sono meno impegnati in attività educative o produttive rispetto alle generazioni passate.»",
                 question: "Qual è la PREMESSA NASCOSTA (implicita) che il ragionamento sta presupponendo senza dirlo?",
@@ -409,7 +511,7 @@
                 explanation: "Esplicitando la premessa nascosta ('Chi sta sui social non studia/lavora'), notiamo subito la sua falsità (sui social ci sono anche divulgatori e opportunità di lavoro!), dimostrando la debolezza dell'argomento."
             },
             {
-                id: 2,
+                id: 302,
                 title: "Caso 2: Frutta e Verdura",
                 argument: "«Mangiare frutta e verdura è essenziale per la salute perché ricche di vitamine. Dovresti quindi includere più frutta e verdura nella tua dieta.»",
                 question: "Qual è l'assunzione ovvia ma tecnicamente IMPLICITA in questa esortazione?",
@@ -423,7 +525,7 @@
                 explanation: "In una schematizzazione formale va esplicitato anche l'ovvio: che l'ascoltatore desideri rimanere in buona salute."
             },
             {
-                id: 3,
+                id: 303,
                 title: "Caso 3: Concerti dal Vivo vs Streaming",
                 argument: "«Lo streaming è comodo ed economico, ma l'esperienza del vivo è unica. Ecco perché molti preferiscono i concerti dal vivo nonostante i costi.»",
                 question: "Qual è la premessa implicita nascosta dietro questa scelta?",
@@ -435,35 +537,55 @@
                 ],
                 correct: 1,
                 explanation: "La premessa implicita è che le persone attribuiscono all'esperienza unica un valore superiore rispetto al risparmio economico."
+            },
+            {
+                id: 304,
+                title: "Caso 4: Lettura Quotidiana e Capacità Cognitive",
+                argument: "«La lettura amplia la conoscenza e migliora il vocabolario. Perciò, tutti dovrebbero dedicare del tempo alla lettura ogni giorno.»",
+                question: "Quale premessa implicita collega i benefici della lettura all'obbligo di leggere ogni giorno?",
+                options: [
+                    "I libri cartacei sono meglio degli e-book.",
+                    "Migliorare le proprie capacità cognitive e il vocabolario è un obiettivo desiderabile per chiunque.",
+                    "Nessuno legge più libri nel XXI secolo.",
+                    "La lettura si impara a scuola."
+                ],
+                correct: 1,
+                explanation: "L'argomento dà per scontato che sia desiderabile e prioritario per ogni persona voler ampliare la propria conoscenza e il vocabolario."
+            },
+            {
+                id: 305,
+                title: "Caso 5: Acquisto Libri in Biblioteca Comunale",
+                argument: "«La biblioteca ha notato un calo di presenze perché molti usano i testi digitali gratuiti online. Quindi non conviene più investire nell'acquisto di nuovi libri di narrativa.»",
+                question: "Qual è l'assunzione nascosta del responsabile della biblioteca?",
+                options: [
+                    "I libri di narrativa costano troppo.",
+                    "Lo scopo principale della biblioteca è servire utenti in presenza che prendono in prestito libri cartacei di narrativa.",
+                    "Gli e-book sono illegali.",
+                    "I lettori preferiscono le enciclopedie."
+                ],
+                correct: 1,
+                explanation: "Il ragionamento presuppone che la biblioteca non debba acquistare libri se l'affluenza fisica dei prestiti cartacei diminuisce, ignorando altre funzioni culturali o formati."
             }
         ];
 
-        const matchingTerms = [
-            { id: "m1", term: "Premessa Fattuale" },
-            { id: "m2", term: "Premessa Condizionale" },
-            { id: "m3", term: "Premessa Normativa" },
-            { id: "m4", term: "Sistema 1 (Kahneman)" },
-            { id: "m5", term: "Sistema 2 (Kahneman)" },
-            { id: "m6", term: "Definizione Intensiva" },
-            { id: "m7", term: "Definizione Etimologica" },
-            { id: "m8", term: "Vaghezza" }
-        ];
-
-        const matchingDefs = [
-            { id: "d1", matchId: "m1", text: "Premessa basata su dati di fatto reali, statistiche o rilevazioni empiriche verificabili." },
-            { id: "d2", matchId: "m2", text: "Premessa espressa nella forma 'Se... allora' o 'Ogni X è Y'." },
-            { id: "d3", matchId: "m3", text: "Premessa fondata su valori morali, dover essere o norme di comportamento etico." },
-            { id: "d4", matchId: "m4", text: "Pensiero veloce, automatico, istintivo, emotivo e a basso sforzo (95%)." },
-            { id: "d5", matchId: "m5", text: "Pensiero lento, concentrato, logico, faticoso e consapevole (5%)." },
-            { id: "d6", matchId: "m6", text: "Definizione che descrive le caratteristiche essenziali necessarie (es. triangolo = 3 lati e 3 angoli)." },
-            { id: "d7", matchId: "m7", text: "Spiegazione dell'origine storica e linguistica della parola (es. fotografia = scrittura con la luce)." },
-            { id: "d8", matchId: "m8", text: "Carenza di confini precisi di applicabilità per un termine (es. alto, calvo)." }
+        // --- BANCA DATI MATCHING ---
+        const matchingPairsPool = [
+            { id: "m1", term: "Premessa Fattuale", text: "Premessa basata su dati di fatto reali, statistiche o rilevazioni empiriche verificabili." },
+            { id: "m2", term: "Premessa Condizionale", text: "Premessa espressa nella forma 'Se... allora' o 'Ogni X è Y'." },
+            { id: "m3", term: "Premessa Normativa", text: "Premessa fondata su valori morali, dover essere o norme di comportamento etico." },
+            { id: "m4", term: "Sistema 1 (Kahneman)", text: "Pensiero veloce, automatico, istintivo, emotivo e a basso sforzo (95%)." },
+            { id: "m5", term: "Sistema 2 (Kahneman)", text: "Pensiero lento, concentrato, logico, faticoso e consapevole (5%)." },
+            { id: "m6", term: "Definizione Intensiva", text: "Definizione che descrive le caratteristiche essenziali necessarie (es. triangolo = 3 lati e 3 angoli)." },
+            { id: "m7", term: "Definizione Etimologica", text: "Spiegazione dell'origine storica e linguistica della parola (es. fotografia = scrittura con la luce)." },
+            { id: "m8", term: "Vaghezza", text: "Carenza di confini precisi di applicabilità per un termine (es. alto, calvo)." },
+            { id: "m9", term: "Definizione Operativa", text: "Spiegazione basata su una precisa procedura empirica di misurazione (es. gradi con termometro)." },
+            { id: "m10", term: "Definizione Circolare", text: "Errore per cui il definiendum compare all'interno del definiens o mediante un suo sinonimo." }
         ];
 
         function renderAnalisi() {
             const container = document.getElementById('analisi-container');
             if(!container) return;
-            container.innerHTML = analisiData.map(item => `
+            container.innerHTML = state.activeAnalisiData.map(item => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
                     <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded-md border border-sky-800">${item.title}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic">${item.text}</p>
@@ -479,23 +601,28 @@
         }
 
         function selectAnalisi(qId, oIdx, btn) {
+            if (state.analisiAnswers[qId] !== undefined) return; // RISPOSTA BLOCCATA!
             playSound('click');
-            const item = analisiData.find(d => d.id === qId);
+            const item = state.activeAnalisiData.find(d => d.id === qId);
             state.analisiAnswers[qId] = oIdx;
 
             const qContainer = btn.closest('.space-y-2');
             if (qContainer) {
-                qContainer.querySelectorAll('button').forEach(b => {
-                    b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
                 });
             }
 
             if (oIdx === item.correct) {
                 playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold transition-all cursor-pointer";
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
             } else {
                 playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-200 font-bold transition-all cursor-pointer";
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
             }
 
             const fb = document.getElementById(`analisi-fb-${qId}`);
@@ -503,10 +630,10 @@
                 fb.classList.remove('hidden');
                 if (oIdx === item.correct) {
                     fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Esatto!</strong> ${item.explanation}`;
+                    fb.innerHTML = `<strong>Esatto! (Risposta Registrata)</strong> ${item.explanation}`;
                 } else {
                     fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Scelta errata.</strong> ${item.explanation}`;
+                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
                 }
             }
             updateGlobalScore();
@@ -515,7 +642,7 @@
         function renderDefinizioni() {
             const container = document.getElementById('definizioni-container');
             if(!container) return;
-            container.innerHTML = defData.map(item => `
+            container.innerHTML = state.activeDefData.map(item => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
                     <span class="text-xs font-bold text-rose-400 bg-rose-950/60 px-2.5 py-1 rounded-md border border-rose-800">${item.term}</span>
                     <p class="text-sm font-bold text-emerald-300 bg-slate-900/80 p-3 rounded-xl border border-slate-800">${item.definiens}</p>
@@ -531,23 +658,28 @@
         }
 
         function selectDef(qId, oIdx, btn) {
+            if (state.defAnswers[qId] !== undefined) return; // RISPOSTA BLOCCATA!
             playSound('click');
-            const item = defData.find(d => d.id === qId);
+            const item = state.activeDefData.find(d => d.id === qId);
             state.defAnswers[qId] = oIdx;
 
             const qContainer = btn.closest('.space-y-2');
             if (qContainer) {
-                qContainer.querySelectorAll('button').forEach(b => {
-                    b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
                 });
             }
 
             if (oIdx === item.correct) {
                 playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold transition-all cursor-pointer";
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
             } else {
                 playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-200 font-bold transition-all cursor-pointer";
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
             }
 
             const fb = document.getElementById(`def-fb-${qId}`);
@@ -555,10 +687,10 @@
                 fb.classList.remove('hidden');
                 if (oIdx === item.correct) {
                     fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Diagnosi Corretta!</strong> ${item.explanation}`;
+                    fb.innerHTML = `<strong>Diagnosi Corretta! (Risposta Registrata)</strong> ${item.explanation}`;
                 } else {
                     fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Diagnosi Errata.</strong> ${item.explanation}`;
+                    fb.innerHTML = `<strong>Diagnosi Errata e Bloccata.</strong> ${item.explanation}`;
                 }
             }
             updateGlobalScore();
@@ -567,7 +699,7 @@
         function renderNascoste() {
             const container = document.getElementById('nascoste-container');
             if(!container) return;
-            container.innerHTML = nascData.map(item => `
+            container.innerHTML = state.activeNascData.map(item => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
                     <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">${item.title}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic">${item.argument}</p>
@@ -583,23 +715,28 @@
         }
 
         function selectNasc(qId, oIdx, btn) {
+            if (state.nascAnswers[qId] !== undefined) return; // RISPOSTA BLOCCATA!
             playSound('click');
-            const item = nascData.find(d => d.id === qId);
+            const item = state.activeNascData.find(d => d.id === qId);
             state.nascAnswers[qId] = oIdx;
 
             const qContainer = btn.closest('.space-y-2');
             if (qContainer) {
-                qContainer.querySelectorAll('button').forEach(b => {
-                    b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
                 });
             }
 
             if (oIdx === item.correct) {
                 playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold transition-all cursor-pointer";
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
             } else {
                 playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-200 font-bold transition-all cursor-pointer";
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
             }
 
             const fb = document.getElementById(`nasc-fb-${qId}`);
@@ -607,10 +744,10 @@
                 fb.classList.remove('hidden');
                 if (oIdx === item.correct) {
                     fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Premessa Nascosta Rilevata!</strong> ${item.explanation}`;
+                    fb.innerHTML = `<strong>Premessa Nascosta Rilevata! (Risposta Registrata)</strong> ${item.explanation}`;
                 } else {
                     fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Rilevamento Errato.</strong> ${item.explanation}`;
+                    fb.innerHTML = `<strong>Rilevamento Errato e Bloccato.</strong> ${item.explanation}`;
                 }
             }
             updateGlobalScore();
@@ -620,8 +757,8 @@
             const termsContainer = document.getElementById('matching-terms');
             const defsContainer = document.getElementById('matching-defs');
             if(!termsContainer || !defsContainer) return;
-            termsContainer.innerHTML = matchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
-            defsContainer.innerHTML = matchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
+            termsContainer.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
+            defsContainer.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
         }
 
         function selectMatchTerm(termId, btn) {
@@ -665,7 +802,7 @@
 
                 if(fb) {
                     fb.className = "text-xs font-bold text-emerald-400 pt-2";
-                    fb.innerText = "✓ Abbinamento corretto!";
+                    fb.innerText = "✓ Abbinamento corretto e bloccato!";
                 }
             } else {
                 playSound('error');
@@ -684,30 +821,51 @@
         }
 
         function checkCloze() {
+            if (state.clozeLocked) return; // BLOCCATO!
             playSound('click');
             const answers = { 1: "conclusione", 2: "premessa", 3: "normative", 4: "nascoste", 5: "Sistema 1", 6: "Sistema 2", 7: "definiendum", 8: "ampia", 9: "circolare", 10: "operativa" };
             let correct = 0;
             for(let i=1; i<=10; i++) {
                 const el = document.getElementById(`cloze-${i}`);
-                if(el && el.value === answers[i]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold"; }
-                else if(el) { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold"; }
+                if(el) {
+                    el.disabled = true; // Disabilita i menu a tendina
+                    if(el.value === answers[i]) { 
+                        correct++; 
+                        el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
+                    } else { 
+                        el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
+                    }
+                }
             }
             state.clozeScore = Math.round((correct / 10) * 100);
+            state.clozeLocked = true;
+
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed";
+                submitBtn.innerText = "Testo Verificato e Bloccato";
+            }
+
             const fb = document.getElementById('cloze-feedback');
             if(fb) {
                 if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = "Perfetto! Testo di sintesi completato con successo (10/10)."; }
-                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Rivedi le opzioni evidenziate in rosso.`; }
+                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Le risposte sono state bloccate.`; }
             }
             updateGlobalScore();
         }
 
         function updateGlobalScore() {
-            let analCorrect = 0; analisiData.forEach(d => { if(state.analisiAnswers[d.id] === d.correct) analCorrect++; });
-            let defCorrect = 0; defData.forEach(d => { if(state.defAnswers[d.id] === d.correct) defCorrect++; });
-            let nascCorrect = 0; nascData.forEach(d => { if(state.nascAnswers[d.id] === d.correct) nascCorrect++; });
+            let analCorrect = 0; state.activeAnalisiData.forEach(d => { if(state.analisiAnswers[d.id] === d.correct) analCorrect++; });
+            let defCorrect = 0; state.activeDefData.forEach(d => { if(state.defAnswers[d.id] === d.correct) defCorrect++; });
+            let nascCorrect = 0; state.activeNascData.forEach(d => { if(state.nascAnswers[d.id] === d.correct) nascCorrect++; });
             let matchCount = Object.keys(state.matchedPairs || {}).length;
 
-            const total = Math.round((analCorrect/3)*30 + (defCorrect/4)*25 + (nascCorrect/3)*20 + (matchCount/8)*15 + (state.clozeScore/100)*10);
+            const total = Math.round((analCorrect / (state.activeAnalisiData.length || 1))*30 + 
+                                     (defCorrect / (state.activeDefData.length || 1))*25 + 
+                                     (nascCorrect / (state.activeNascData.length || 1))*20 + 
+                                     (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
+                                     (state.clozeScore/100)*10);
             const scoreText = document.getElementById('global-score-text');
             if(scoreText) scoreText.innerText = `${total} / 100`;
             return total;
@@ -753,22 +911,56 @@
             if(tabId === 'tab-report') updateReport();
         }
 
-        function resetAll() {
+        function setupRandomQuestions() {
             state.analisiAnswers = {}; 
             state.defAnswers = {}; 
             state.nascAnswers = {}; 
             state.matchedPairs = {}; 
             state.clozeScore = 0;
-            renderAnalisi(); renderDefinizioni(); renderNascoste(); renderMatching();
-            updateGlobalScore(); switchTab('tab-studio');
+            state.clozeLocked = false;
+            state.selectedTermId = null;
+
+            // Estrazione casuale dal pool
+            state.activeAnalisiData = shuffle(analisiPool).slice(0, 3);
+            state.activeDefData = shuffle(defPool).slice(0, 4);
+            state.activeNascData = shuffle(nascPool).slice(0, 3);
+
+            const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
+            state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
+            state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
+
+            // Reset Cloze UI
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById(`cloze-${i}`);
+                if(el) {
+                    el.disabled = false;
+                    el.value = "";
+                    el.className = "bg-slate-800 text-emerald-300 rounded px-2 py-1";
+                }
+            }
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.className = "bg-emerald-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer";
+                submitBtn.innerText = "Verifica e Blocca Testo";
+            }
+            const clozeFb = document.getElementById('cloze-feedback');
+            if(clozeFb) clozeFb.innerText = "";
+
+            renderAnalisi(); 
+            renderDefinizioni(); 
+            renderNascoste(); 
+            renderMatching();
+            updateGlobalScore();
+        }
+
+        function resetAll() {
+            setupRandomQuestions();
+            switchTab('tab-studio');
         }
 
         function initApp() {
-            renderAnalisi();
-            renderDefinizioni();
-            renderNascoste();
-            renderMatching();
-            updateGlobalScore();
+            setupRandomQuestions();
         }
 
         if (document.readyState === 'interactive' || document.readyState === 'complete') {
