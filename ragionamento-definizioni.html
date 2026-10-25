@@ -155,8 +155,8 @@
         <!-- TAB 1: ANALISI TESTUALE -->
         <section id="tab-analisi" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 1: Individuazione di Conclusione e Premesse nei Testi</h2>
-                <p class="text-xs sm:text-sm text-slate-400">Leggi ciascun brano argomentativo estratto dalla banca dati e seleziona l'esatta conclusione o l'organizzazione delle premesse. <em>(Risposte bloccate al primo click)</em></p>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 1: Individuazione di Conclusione e Premesse nei Testi (5 Quesiti)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi ciascun brano argomentativo ed esamina la struttura logica. <em>(Le risposte selezionate vengono bloccate subito)</em></p>
             </div>
             <div id="analisi-container" class="space-y-6"></div>
         </section>
@@ -164,8 +164,8 @@
         <!-- TAB 2: DIAGNOSI ERRORI DEFINIZIONI -->
         <section id="tab-definizioni" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 2: Diagnosi degli Errori Definizionali e Scelta delle Strategie</h2>
-                <p class="text-xs sm:text-sm text-slate-400">Analizza ciascuna definizione (Definiendum = Definiens) e individua l'errore commesso o la strategia più appropriata. <em>(Risposte bloccate al primo click)</em></p>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 2: Diagnosi degli Errori Definizionali e Strategie (5 Quesiti)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Analizza ciascuna definizione e individua il difetto logico o la tipologia definitoria. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="definizioni-container" class="space-y-6"></div>
         </section>
@@ -173,15 +173,15 @@
         <!-- TAB 3: ESPLICITAZIONE PREMESSE NASCOSTE -->
         <section id="tab-nascoste" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Rilevamento delle Premesse Nascoste (Assunzioni Implicite)</h2>
-                <p class="text-xs sm:text-sm text-slate-400">Esamina le argomentazioni incomplete e individua la premessa implicita necessaria per rendere logica la conclusione. <em>(Risposte bloccate al primo click)</em></p>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Rilevamento delle Premesse Nascoste / Assunzioni Implicite (5 Quesiti)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Esamina l'argomentazione e scopri l'assunzione inespressa necessaria per sorreggere la conclusione. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="nascoste-container" class="space-y-6"></div>
         </section>
 
         <!-- TAB 4: CLASSIFICAZIONE PREMESSE & SISTEMI COGNITIVI -->
         <section id="tab-classificazione" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 4: Abbinamento Tipologia Premesse e Sistemi Cognitivi</h2>
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 4: Abbinamento Tipologia Premesse e Sistemi Cognitivi (8 Coppie)</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div id="matching-terms" class="space-y-2.5"></div>
@@ -211,7 +211,7 @@
                 <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
                 <div class="flex justify-center gap-4">
                     <button onclick="window.print()" class="bg-emerald-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
-                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Nuove Domande)</button>
+                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
                 </div>
             </div>
 
@@ -304,11 +304,15 @@
             return arr;
         }
 
-        // --- BANCA DATI ESTESA PER ESERCIZIO 1: ANALISI TESTUALE ---
+        // ==========================================
+        // BANCA DATI AMPIAMENTE ESTESA (POOL QUESITI)
+        // ==========================================
+
+        // --- POOL 1: ANALISI TESTUALE (12 Quesiti) ---
         const analisiPool = [
             {
                 id: 101,
-                title: "Testo: Fumo Passivo nei Luoghi Pubblici",
+                title: "Testo 1: Il Fumo Passivo",
                 text: "«Il fumo passivo è dannoso per la salute, e molte persone frequentano luoghi pubblici per svagarsi o lavorare. Inoltre, non è giusto che chi non fuma debba subire le conseguenze negative del fumo altrui. Pertanto, dovrebbe essere vietato fumare nei luoghi pubblici.»",
                 question: "Qual è la CONCLUSIONE (tesi principale) sostenuta in questo testo?",
                 options: [
@@ -322,7 +326,7 @@
             },
             {
                 id: 102,
-                title: "Testo: Integrazione della Tecnologia",
+                title: "Testo 2: Integrazione della Tecnologia",
                 text: "«L'uso della tecnologia dovrebbe essere integrato nei metodi di insegnamento tradizionali. La tecnologia consente agli studenti di accedere a risorse educative da qualsiasi luogo e in qualsiasi momento. In un mondo sempre più digitale, è importante che gli studenti sviluppino competenze tecnologiche per avere successo nelle loro carriere future.»",
                 question: "Dove si trova la CONCLUSIONE in questo brano argomentativo?",
                 options: [
@@ -336,7 +340,7 @@
             },
             {
                 id: 103,
-                title: "Testo: Lavoro da Remoto",
+                title: "Testo 3: Lavoro da Remoto",
                 text: "«Lavorare da remoto riduce il tempo e il denaro spesi per gli spostamenti quotidiani, migliorando il bilanciamento tra vita lavorativa e personale. Inoltre, le aziende possono risparmiare sui costi operativi. Di conseguenza, le aziende dovrebbero incentivare il lavoro da remoto ove possibile.»",
                 question: "Quale indicatore rivela la presenza della Conclusione?",
                 options: [
@@ -350,7 +354,7 @@
             },
             {
                 id: 104,
-                title: "Testo: Protezione dei Dati Personali",
+                title: "Testo 4: Protezione dei Dati Personali",
                 text: "«Attualmente, i dati personali degli utenti sono costantemente raccolti e utilizzati da grandi aziende senza un'adeguata trasparenza. Se la sicurezza online non viene garantita, gli utenti possono diventare vittime di frodi. È quindi necessario che i governi implementino regolamenti rigorosi per proteggere i dati personali degli utenti.»",
                 question: "Qual è la Conclusione di questa argomentazione?",
                 options: [
@@ -364,35 +368,119 @@
             },
             {
                 id: 105,
-                title: "Testo: Assistenza Sanitaria Globale",
-                text: "«In molti paesi a basso reddito, milioni di persone non hanno accesso a cure mediche di base. Se la popolazione non ha accesso a cure preventive, aumentano le malattie evitabili. È quindi imperativo che le nazioni ricche forniscano assistenza sanitaria e supporto ai paesi a basso reddito.»",
-                question: "Quale ruolo svolge la frase 'In molti paesi a basso reddito, milioni di persone non hanno accesso a cure mediche di base'?",
+                title: "Testo 5: Trasporto Pubblico e Traffico",
+                text: "«I costi del carburante sono in continuo aumento e il traffico cittadino è ormai insostenibile. L'uso dei mezzi pubblici riduce drasticamente l'impronta ecologica e lo stress quotidiano. Pertanto, la giunta comunale dovrebbe raddoppiare gli investimenti sulle linee di autobus e metropolitane.»",
+                question: "Qual è la Conclusione principale di questo brano?",
                 options: [
-                    "È la conclusione principale dell'argomento",
-                    "È una premessa fattuale che descrive dati reali osservabili",
-                    "È una premessa condizionale del tipo 'Se... allora'",
-                    "È una premessa definitoria"
+                    "I costi del carburante aumentano continuamente.",
+                    "L'uso dei mezzi pubblici riduce l'impronta ecologica.",
+                    "La giunta comunale dovrebbe raddoppiare gli investimenti sui mezzi pubblici.",
+                    "Il traffico cittadino provoca stress quotidiano."
                 ],
-                correct: 1,
-                explanation: "Si tratta di una Premessa Fattuale: esprime fatti concreti, misurabili e verificabili sull'accesso alla sanità."
+                correct: 2,
+                explanation: "L'indicatore 'Pertanto' introduce l'azione conclusiva richiesta dall'autore al comune."
             },
             {
                 id: 106,
-                title: "Testo: Cambiamento Climatico",
-                text: "«Se le emissioni di gas serra non vengono ridotte, le temperature globali continueranno a salire. Attualmente, le emissioni sono a livelli record. È quindi moralmente obbligatorio agire subito per ridurre tali emissioni e proteggere le generazioni future.»",
-                question: "Che tipo di premessa è espresso dalla frase 'È moralmente obbligatorio agire subito'?",
+                title: "Testo 6: Intelligenza Artificiale a Scuola",
+                text: "«L'integrazione dell'IA nel mondo del lavoro automatizzerà molte mansioni ripetitive. Questo permetterà ai lavoratori di concentrarsi su compiti creativi e strategici. Di conseguenza, le scuole dovrebbero insegnare competenze di pensiero critico fin dall'infanzia.»",
+                question: "Quale frase rappresenta la Conclusione dell'argomento?",
                 options: [
-                    "Premessa Fattuale",
-                    "Premessa Definitoria",
-                    "Premessa Normativa (basata su valori morali o etici)",
-                    "Premessa Condizionale"
+                    "L'IA automatizzerà le mansioni ripetitive.",
+                    "I lavoratori si concentreranno su compiti creativi.",
+                    "Le scuole dovrebbero insegnare competenze di pensiero critico fin dall'infanzia.",
+                    "L'IA sostituirà completamente tutti i lavoratori fisici."
                 ],
                 correct: 2,
-                explanation: "È una Premessa Normativa, poiché fa appello a valori morali, doveri etici e a ciò che è considerato giusto."
+                explanation: "'Di conseguenza' collega le premesse sull'IA con la raccomandazione educativa finale."
+            },
+            {
+                id: 107,
+                title: "Testo 7: Alimentazione Biologica",
+                text: "«Benché il cibo biologico costi leggermente di più, esso garantisce la totale assenza di pesticidi di sintesi. Poiché la salute a lungo termine è il bene più prezioso che possediamo, è preferibile acquistare prodotti biologici.»",
+                question: "In questo testo la parola 'Poiché' introduce che tipo di elemento?",
+                options: [
+                    "La Conclusione finale dell'argomento",
+                    "Una Premessa a sostegno della tesi ('La salute è il bene più prezioso')",
+                    "Una smentita della tesi",
+                    "Una definizione etimologica di biologico"
+                ],
+                correct: 1,
+                explanation: "'Poiché' è un classico indicatore di premessa; introduce la premessa di valore riguardante la salute."
+            },
+            {
+                id: 108,
+                title: "Testo 8: Transizione alle Energie Rinnovabili",
+                text: "«L'energia solare ed eolica hanno raggiunto costi di produzione inferiori rispetto ai combustibili fossili. Inoltre, non emettono gas serra durante la generazione di elettricità. Ne consegue che la transizione energetica verso le rinnovabili è sia un vantaggio economico sia un dovere ecologico.»",
+                question: "Quale ruolo gioca la frase 'L'energia solare ed eolica hanno raggiunto costi inferiori'?",
+                options: [
+                    "È la Conclusione dell'autore",
+                    "È una Premessa Fattuale basata su dati di mercato",
+                    "È una Premessa Normativa etica",
+                    "È una definizione imperfetta"
+                ],
+                correct: 1,
+                explanation: "Si tratta di una Premessa Fattuale, ossia una constatazione empirica di carattere economico."
+            },
+            {
+                id: 109,
+                title: "Testo 9: Uniformi Scolastiche",
+                text: "«L'adozione delle uniformi a scuola riduce la competizione basata sull'abbigliamento firmato e crea un maggior senso di appartenenza tra gli studenti. Per questa ragione, gli istituti scolastici dovrebbero valutare l'introduzione della divisa.»",
+                question: "Qual è la funzione dell'espressione 'Per questa ragione'?",
+                options: [
+                    "Segnala l'inizio di una premessa aggiuntiva",
+                    "Segnala il passaggio alle premesse di un secondo argomento",
+                    "Rivela l'introduzione della Conclusione dell'argomento",
+                    "Dimostra che l'argomento è fallace"
+                ],
+                correct: 2,
+                explanation: "'Per questa ragione' è un indicatore di conclusione che lega le ragioni sociali alla proposta di adottare le divise."
+            },
+            {
+                id: 110,
+                title: "Testo 10: Importanza della Storia",
+                text: "«Chi non conosce il passato è condannato a ripetere gli stessi errori. La storia offre un catalogo inestimabile di decisioni umane e delle loro conseguenze. Dunque, lo studio della storia deve rimanere una colonna portante della formazione di ogni cittadino.»",
+                question: "Dove si colloca la tesi (Conclusione) dell'autore?",
+                options: [
+                    "Nell'ultima frase ('Dunque, lo studio della storia deve rimanere...')",
+                    "Nella prima frase ('Chi non conosce il passato...')",
+                    "Nella frase centrale ('La storia offre un catalogo...')",
+                    "Il testo è privo di qualsiasi conclusione"
+                ],
+                correct: 0,
+                explanation: "La parola 'Dunque' segnala in modo netto l'affermazione della conclusione nell'ultimo periodo."
+            },
+            {
+                id: 111,
+                title: "Testo 11: Assistenza Sanitaria nei Paesi in Via di Sviluppo",
+                text: "«In molti paesi a basso reddito, milioni di persone non hanno accesso a cure mediche di base. Se la popolazione non ha accesso a cure preventive, aumentano le malattie evitabili. È quindi imperativo che le nazioni ricche forniscano supporto sanitario ai paesi a basso reddito.»",
+                question: "Quale tipo di premessa è rappresentata dalla frase 'Se la popolazione non ha accesso a cure preventive, aumentano le malattie'?",
+                options: [
+                    "Premessa Fattuale",
+                    "Premessa Condizionale ('Se... allora')",
+                    "Premessa Definitoria",
+                    "Conclusione finale"
+                ],
+                correct: 1,
+                explanation: "È una Premessa Condizionale che stabilisce una relazione di causa-effetto ipotetica."
+            },
+            {
+                id: 112,
+                title: "Testo 12: Conservazione delle Biodiversità",
+                text: "«Le api svolgono un ruolo insostituibile nell'impollinazione delle colture alimentari mondiali. Negli ultimi decenni l'uso massiccio di pesticidi ha decimato le popolazioni di api. Pertanto, occorre vietare immediatamente i pesticidi neurotossici per salvare la catena alimentare.»",
+                question: "Qual è la Conclusione del brano?",
+                options: [
+                    "Le api sono insetti appartenenti all'ordine degli imenotteri.",
+                    "L'uso dei pesticidi è aumentato negli ultimi decenni.",
+                    "Occorre vietare immediatamente i pesticidi neurotossici.",
+                    "Le colture alimentari possono fare a meno delle api."
+                ],
+                correct: 2,
+                explanation: "'Pertanto' introduce la tesi operativa e politica proposta dall'autore."
             }
         ];
 
-        // --- BANCA DATI ESTESA PER ESERCIZIO 2: DIAGNOSI DEFINIZIONI ---
+        // --- POOL 2: DIAGNOSI DEFINIZIONI (12 Quesiti) ---
         const defPool = [
             {
                 id: 201,
@@ -442,13 +530,13 @@
                 definiens: "«La lettura in gradi Celsius o Fahrenheit ottenuta con un termometro»",
                 question: "A quale tipologia appartiene questa definizione rigorosa?",
                 options: [
-                    "Definizione Operativa (basata su una procedura o operazione di misurazione)",
+                    "Definizione Operativa (basata su una procedura empirica di misurazione)",
                     "Definizione Ostensiva",
                     "Definizione Etimologica",
                     "Definizione Negativa"
                 ],
                 correct: 0,
-                explanation: "È una definizione Operativa: spiega il termine mediante l'operazione empirica usata per misurarlo."
+                explanation: "È una definizione Operativa: spiega il termine mediante l'operazione usata per misurarlo."
             },
             {
                 id: 205,
@@ -456,13 +544,13 @@
                 definiens: "«La capacità di affrontare il pericolo con audacia»",
                 question: "Perché questa definizione rischia la CIRCOLARITÀ?",
                 options: [
-                    "Perché 'audacia' è un sinonimo di coraggio e richiede a sua volta una spiegazione",
+                    "Perché 'audacia' è un sinonimo diretto di coraggio che richiede a sua volta una spiegazione",
                     "Perché include cose che non sono coraggiose",
-                    "Perché si riferisce solo all'esercito",
+                    "Perché si riferisce solo all'ambito militare",
                     "Perché è una parola greca"
                 ],
                 correct: 0,
-                explanation: "Utilizzare un sinonimo diretto (audacia) per definire il termine crea una circolarità nascosta se non si definisce prima l'audacia senza usare il termine coraggio."
+                explanation: "Definire con un sinonimo stretto ('audacia') senza spiegare la struttura del concetto genera circolarità."
             },
             {
                 id: 206,
@@ -470,13 +558,13 @@
                 definiens: "«Dalle parole greche phos (luce) e graphê (scrittura): scrittura con la luce»",
                 question: "Qual è il limite di questa Definizione Etimologica?",
                 options: [
-                    "È una bugia storica",
-                    "Mostra l'origine linguistica ma non fornisce elementi sufficienti per identificare una fotografia reale oggi",
+                    "È una falsità storica",
+                    "Mostra l'origine linguistica ma non fornisce elementi per identificare una foto reale oggi",
                     "È troppo stretta",
-                    "È circolare"
+                    "È una fallacia d'autorità"
                 ],
                 correct: 1,
-                explanation: "Le definizioni etimologiche indicano la radice della parola, ma non ci dicono come riconoscere l'oggetto nel mondo reale, poiché il significato cambia col tempo."
+                explanation: "L'etimologia spiega l'origine del nome, ma non fornisce i criteri per distinguere l'oggetto nel mondo moderno."
             },
             {
                 id: 207,
@@ -484,17 +572,87 @@
                 definiens: "«Si dice di una persona di statura superiore alla media»",
                 question: "Quale problema teorico incontra l'aggettivo 'ALTO'?",
                 options: [
-                    "Circolarità",
-                    "Vaghezza (mancanza di un confine netto, ad es. 1,78m è alto o no?)",
-                    "È una parola ambigua",
-                    "È una definizione operativa"
+                    "Circolarità pura",
+                    "Vaghezza (mancanza di un confine netto: ad es. 1,78m è alto o no?)",
+                    "Ambiguità lessicale",
+                    "Tautologia"
                 ],
                 correct: 1,
-                explanation: "Presenta il problema della Vaghezza: non c'è una linea di demarcazione matematica univoca accettata da tutti per stabilire dove inizia la statura 'alta'."
+                explanation: "Presenta Vaghezza: non esiste un limite matematico universale e discreto per definire dove inizia la statura 'alta'."
+            },
+            {
+                id: 208,
+                term: "Definizione di 'TRIANGOLO'",
+                definiens: "«Poligono pianale chiuso delimitato da esattamente tre lati rettilinei e tre angoli interni»",
+                question: "A quale tipo di definizione corrisponde questa formulazione?",
+                options: [
+                    "Definizione Intensiva/Connotativa (elenca le proprietà essenziali e necessarie)",
+                    "Definizione Estensiva",
+                    "Definizione Ostensiva",
+                    "Definizione Negativa"
+                ],
+                correct: 0,
+                explanation: "È una definizione Intensiva (o connotativa): specifica tutte le proprietà necessarie e sufficienti della figura."
+            },
+            {
+                id: 209,
+                term: "Definizione di 'LIBRO'",
+                definiens: "«Oggetto cartaceo di oltre 50 pagine rilegato con copertina rigida»",
+                question: "Quale errore commette questa definizione di libro?",
+                options: [
+                    "È troppo ampia",
+                    "È troppo stretta (esclude e-book, tascabili flessibili o libretti più brevi)",
+                    "È circolare",
+                    "È una definizione etimologica"
+                ],
+                correct: 1,
+                explanation: "È troppo stretta (too strict): esclude moltissimi libri veri e propri (tascabili, e-book, fascicoli)."
+            },
+            {
+                id: 210,
+                term: "Definizione di 'PIANETA'",
+                definiens: "«Qualsiasi corpo celeste situato nello spazio che orbita attorno a una stella»",
+                question: "Quale errore presenta questa definizione astronomica?",
+                options: [
+                    "È troppo ampia (include asteroidi, comete e satelliti naturali)",
+                    "È troppo stretta",
+                    "È circolare",
+                    "È una definizione ostensiva"
+                ],
+                correct: 0,
+                explanation: "È troppo ampia: attorno al Sole orbitano anche asteroidi, comete e pulviscolo, che non sono pianeti."
+            },
+            {
+                id: 211,
+                term: "Definizione di 'PIANTA'",
+                definiens: "«Oggetto naturale che non è un animale e non è un minerale»",
+                question: "Quale caratteristica ha questa Definizione Negativa?",
+                options: [
+                    "Specifica esattamente cosa sia la pianta in positivo",
+                    "Si limita a dire cosa la pianta NON è, senza spiegarne le caratteristiche interne",
+                    "È una definizione operativa basata su strumenti",
+                    "È una fallacia di imprecisione numerica"
+                ],
+                correct: 1,
+                explanation: "Una Definizione Negativa definisce un termine per esclusione, indicando cosa non è anziché le sue proprietà."
+            },
+            {
+                id: 212,
+                term: "Definizione di 'BONTÀ'",
+                definiens: "«Agire nel modo in cui ha agito San Francesco d'Assisi nella sua vita»",
+                question: "Come viene classificata questa strategia definitoria?",
+                options: [
+                    "Definizione Ostensiva / Esemplificativa (definisce mostrando un esempio illustre o indicando il caso)",
+                    "Definizione Operativa",
+                    "Definizione Etimologica",
+                    "Definizione Intensiva"
+                ],
+                correct: 0,
+                explanation: "È una definizione Ostensiva/Esemplificativa: definisce un concetto astratto attraverso l'esibizione di un modello."
             }
         ];
 
-        // --- BANCA DATI ESTESA PER ESERCIZIO 3: PREMESSE NASCOSTE ---
+        // --- POOL 3: PREMESSE NASCOSTE (10 Quesiti) ---
         const nascPool = [
             {
                 id: 301,
@@ -508,7 +666,7 @@
                     "Tutti i giovani amano i social media."
                 ],
                 correct: 1,
-                explanation: "Esplicitando la premessa nascosta ('Chi sta sui social non studia/lavora'), notiamo subito la sua falsità (sui social ci sono anche divulgatori e opportunità di lavoro!), dimostrando la debolezza dell'argomento."
+                explanation: "Esplicitando la premessa nascosta ('Chi sta sui social non studia/lavora'), notiamo subito la sua falsità, dimostrando la debolezza dell'argomento."
             },
             {
                 id: 302,
@@ -522,7 +680,7 @@
                     "I medici mangiano molta verdura."
                 ],
                 correct: 1,
-                explanation: "In una schematizzazione formale va esplicitato anche l'ovvio: che l'ascoltatore desideri rimanere in buona salute."
+                explanation: "In una schematizzazione formale va esplicitato anche l'ovvio: che l'ascoltatore desideri rimanere in salute."
             },
             {
                 id: 303,
@@ -536,39 +694,109 @@
                     "La musica si ascolta con le cuffie."
                 ],
                 correct: 1,
-                explanation: "La premessa implicita è che le persone attribuiscono all'esperienza unica un valore superiore rispetto al risparmio economico."
+                explanation: "La premessa implicita è che le persone attribuiscono all'esperienza unica un valore superiore al risparmio economico."
             },
             {
                 id: 304,
-                title: "Caso 4: Lettura Quotidiana e Capacità Cognitive",
+                title: "Caso 4: Lettura Quotidiana e Vocabolario",
                 argument: "«La lettura amplia la conoscenza e migliora il vocabolario. Perciò, tutti dovrebbero dedicare del tempo alla lettura ogni giorno.»",
                 question: "Quale premessa implicita collega i benefici della lettura all'obbligo di leggere ogni giorno?",
                 options: [
                     "I libri cartacei sono meglio degli e-book.",
                     "Migliorare le proprie capacità cognitive e il vocabolario è un obiettivo desiderabile per chiunque.",
-                    "Nessuno legge più libri nel XXI secolo.",
+                    "Nessuno legge più libri oggi.",
                     "La lettura si impara a scuola."
                 ],
                 correct: 1,
-                explanation: "L'argomento dà per scontato che sia desiderabile e prioritario per ogni persona voler ampliare la propria conoscenza e il vocabolario."
+                explanation: "L'argomento dà per scontato che sia desiderabile per ogni persona voler ampliare la propria conoscenza."
             },
             {
                 id: 305,
                 title: "Caso 5: Acquisto Libri in Biblioteca Comunale",
-                argument: "«La biblioteca ha notato un calo di presenze perché molti usano i testi digitali gratuiti online. Quindi non conviene più investire nell'acquisto di nuovi libri di narrativa.»",
+                argument: "«La biblioteca ha notato un calo di presenze perché molti usano i testi digitali online. Quindi non conviene più investire nell'acquisto di nuovi libri cartacei.»",
                 question: "Qual è l'assunzione nascosta del responsabile della biblioteca?",
                 options: [
-                    "I libri di narrativa costano troppo.",
-                    "Lo scopo principale della biblioteca è servire utenti in presenza che prendono in prestito libri cartacei di narrativa.",
+                    "I libri cartacei costano troppo.",
+                    "Lo scopo principale della biblioteca è servire utenti che prendono in prestito esclusivamente libri cartacei in presenza.",
                     "Gli e-book sono illegali.",
                     "I lettori preferiscono le enciclopedie."
                 ],
                 correct: 1,
-                explanation: "Il ragionamento presuppone che la biblioteca non debba acquistare libri se l'affluenza fisica dei prestiti cartacei diminuisce, ignorando altre funzioni culturali o formati."
+                explanation: "Il ragionamento presuppone che la biblioteca non debba acquistare libri se l'affluenza fisica diminuisce, ignorando altre funzioni."
+            },
+            {
+                id: 306,
+                title: "Caso 6: Auto Elettriche ed Ecologia",
+                argument: "«Le auto elettriche non emettono gas di scarico dai loro tubi in città. Pertanto, l'acquisto di un'auto elettrica è sempre una scelta ecologicamente perfetta.»",
+                question: "Qual è la premessa nascosta fondamentale che viene taciuta?",
+                options: [
+                    "Le auto elettriche sono molto silenziose.",
+                    "L'energia elettrica usata per ricaricare le batterie proviene interamente da fonti pulite e non inquinanti.",
+                    "Tutti i guidatori sanno usare le colonnine di ricarica.",
+                    "Le automobili hanno quattro ruote."
+                ],
+                correct: 1,
+                explanation: "Se l'elettricità venisse prodotta centrale a carbone, l'auto trasferirebbe solo l'inquinamento altrove. La premessa taciuta è la provenienza verde dell'energia."
+            },
+            {
+                id: 307,
+                title: "Caso 7: Esito degli Esami Universitari",
+                argument: "«Marco non ha superato l'esame di Logica. Quindi Marco non ha studiato abbastanza per la prova.»",
+                question: "Qual è l'assunzione implicita in questa affermazione rigida?",
+                options: [
+                    "L'esame di Logica si tiene in aula magna.",
+                    "Avere studiato abbastanza è l'unica variabile determinante che garantisce il superamento dell'esame.",
+                    "Marco non si è presentato all'appello.",
+                    "Il docente di logica è severo."
+                ],
+                correct: 1,
+                explanation: "Si ignora la possibilità che Marco abbia studiato ma sia stato male, abbia avuto ansia da prestazione o una prova insolitamente difficile."
+            },
+            {
+                id: 308,
+                title: "Caso 8: Smartphone a Basso Costo",
+                argument: "«Questo smartphone costa la metà rispetto alle marche blasonate pur avendo la stessa memoria. Di conseguenza, conviene comprare questo modello.»",
+                question: "Quale premessa implicita è necessaria affinché la scelta sia davvero vantaggiosa?",
+                options: [
+                    "Il telefono si vende online.",
+                    "La qualità dei materiali, la durata della batteria e l'assistenza siano equivalenti alle marche blasonate.",
+                    "I telefoni sono costruiti con plastica e vetro.",
+                    "I marchi famosi fanno molta pubblicità."
+                ],
+                correct: 1,
+                explanation: "L'argomento presuppone che il minor prezzo non comporti una drastica riduzione della qualità generale o dell'assistenza."
+            },
+            {
+                id: 309,
+                title: "Caso 9: Lavoro Straordinario e Promozioni",
+                argument: "«Luca fa sempre due ore di straordinario ogni sera in ufficio. Pertanto, Luca è il dipendente più produttivo della ditta.»",
+                question: "Quale premessa implicita sovrappone ore di permanenza e produttività?",
+                options: [
+                    "Gli straordinari vengono pagati a fine mese.",
+                    "Il numero di ore trascorse in ufficio equivale direttamente alla quantità e qualità del lavoro svolto.",
+                    "Gli altri dipendenti escono alle 18:00.",
+                    "Luca lavora al computer."
+                ],
+                correct: 1,
+                explanation: "Si assume implicitamente che trascorrere più tempo in ufficio coincida con il produrre di più, ignorando l'efficienza."
+            },
+            {
+                id: 310,
+                title: "Caso 10: Taglio ai Fondi della Ricerca Spaziale",
+                argument: "«Ci sono ancora molte malattie incurabili sulla Terra. Perciò dovremmo azzerare i fondi per la ricerca spaziale e trasferirli alla medicina.»",
+                question: "Qual è il presupposto implicito sul rapporto tra ricerca spaziale e medicina?",
+                options: [
+                    "I razzi spaziali sono molto costosi.",
+                    "La ricerca spaziale non produce alcuna ricaduta scientifica o tecnologica utile alla medicina terrestre.",
+                    "I medici non si occupano di astronomia.",
+                    "Gli astronauti godono di ottima salute."
+                ],
+                correct: 1,
+                explanation: "Presuppone erroneamente che la ricerca spaziale sia a fondo perduto per la salute (mentre molte tecnologie mediche derivano dallo spazio)."
             }
         ];
 
-        // --- BANCA DATI MATCHING ---
+        // --- POOL 4: MATCHING PAIRS (14 Coppie) ---
         const matchingPairsPool = [
             { id: "m1", term: "Premessa Fattuale", text: "Premessa basata su dati di fatto reali, statistiche o rilevazioni empiriche verificabili." },
             { id: "m2", term: "Premessa Condizionale", text: "Premessa espressa nella forma 'Se... allora' o 'Ogni X è Y'." },
@@ -579,15 +807,23 @@
             { id: "m7", term: "Definizione Etimologica", text: "Spiegazione dell'origine storica e linguistica della parola (es. fotografia = scrittura con la luce)." },
             { id: "m8", term: "Vaghezza", text: "Carenza di confini precisi di applicabilità per un termine (es. alto, calvo)." },
             { id: "m9", term: "Definizione Operativa", text: "Spiegazione basata su una precisa procedura empirica di misurazione (es. gradi con termometro)." },
-            { id: "m10", term: "Definizione Circolare", text: "Errore per cui il definiendum compare all'interno del definiens o mediante un suo sinonimo." }
+            { id: "m10", term: "Definizione Circolare", text: "Errore per cui il definiendum compare nel definiens o attraverso un suo sinonimo stretto." },
+            { id: "m11", term: "Definizione Ostensiva", text: "Definizione formulata indicando fisicamente l'oggetto o mostrando un esempio pratico." },
+            { id: "m12", term: "Definizione Troppo Ampia", text: "Errore per cui il definiens include oggetti o casi che non appartengono al definiendum." },
+            { id: "m13", term: "Definizione Troppo Stretta", text: "Errore per cui il definiens esclude casi o individui che dovrebbero rientrare nel definiendum." },
+            { id: "m14", term: "Indicatore di Conclusione", text: "Parola o locuzione che segnala la tesi da accettare (es. pertanto, quindi, ne consegue)." }
         ];
+
+        // ==========================================
+        // RENDERING & INTERAZIONE
+        // ==========================================
 
         function renderAnalisi() {
             const container = document.getElementById('analisi-container');
             if(!container) return;
-            container.innerHTML = state.activeAnalisiData.map(item => `
+            container.innerHTML = state.activeAnalisiData.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded-md border border-sky-800">${item.title}</span>
+                    <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded-md border border-sky-800">Quesito ${idx + 1}: ${item.title}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
@@ -642,9 +878,9 @@
         function renderDefinizioni() {
             const container = document.getElementById('definizioni-container');
             if(!container) return;
-            container.innerHTML = state.activeDefData.map(item => `
+            container.innerHTML = state.activeDefData.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-rose-400 bg-rose-950/60 px-2.5 py-1 rounded-md border border-rose-800">${item.term}</span>
+                    <span class="text-xs font-bold text-rose-400 bg-rose-950/60 px-2.5 py-1 rounded-md border border-rose-800">Quesito ${idx + 1}: ${item.term}</span>
                     <p class="text-sm font-bold text-emerald-300 bg-slate-900/80 p-3 rounded-xl border border-slate-800">${item.definiens}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
@@ -699,9 +935,9 @@
         function renderNascoste() {
             const container = document.getElementById('nascoste-container');
             if(!container) return;
-            container.innerHTML = state.activeNascData.map(item => `
+            container.innerHTML = state.activeNascData.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">${item.title}</span>
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}: ${item.title}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic">${item.argument}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
@@ -828,7 +1064,7 @@
             for(let i=1; i<=10; i++) {
                 const el = document.getElementById(`cloze-${i}`);
                 if(el) {
-                    el.disabled = true; // Disabilita i menu a tendina
+                    el.disabled = true;
                     if(el.value === answers[i]) { 
                         correct++; 
                         el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
@@ -920,11 +1156,12 @@
             state.clozeLocked = false;
             state.selectedTermId = null;
 
-            // Estrazione casuale dal pool
-            state.activeAnalisiData = shuffle(analisiPool).slice(0, 3);
-            state.activeDefData = shuffle(defPool).slice(0, 4);
-            state.activeNascData = shuffle(nascPool).slice(0, 3);
+            // ESTRAZIONE CASUALE DI 5 QUESITI DA CIASCUN POOL ESTESO
+            state.activeAnalisiData = shuffle(analisiPool).slice(0, 5);
+            state.activeDefData = shuffle(defPool).slice(0, 5);
+            state.activeNascData = shuffle(nascPool).slice(0, 5);
 
+            // ESTRAZIONE CASUALE DI 8 COPPIE MATCHING
             const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
             state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
             state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
