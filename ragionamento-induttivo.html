@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio: Ragionamento Induttivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { amber: { 450: '#f59e0b' } },
+                    fontFamily: { cinzel: ['Cinzel', 'serif'], sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080d16; color: #f1f5f9; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .tab-btn.active { background-color: #d97706 !important; color: #ffffff !important; border-color: #fbbf24 !important; box-shadow: 0 4px 20px -2px rgba(217, 119, 6, 0.5); }
+        .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .badge-glow { box-shadow: 0 0 15px rgba(251, 191, 36, 0.2); }
+        @media print {
+            body * { visibility: hidden; }
+            #printable-certificate, #printable-certificate * { visibility: visible; }
+            #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Header con Navigation Breadcrumb -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2 text-xs sm:text-sm">
+                <a href="index.html" class="text-slate-400 hover:text-amber-400 transition-colors flex items-center gap-1.5 font-semibold">
+                    <i class="fa-solid fa-house"></i> Home Portale
+                </a>
+                <span class="text-slate-600">/</span>
+                <a href="pensiero-critico.html" class="text-slate-400 hover:text-amber-400 transition-colors font-semibold">
+                    Pensiero Critico
+                </a>
+                <span class="text-slate-600">/</span>
+                <span class="text-amber-400 font-bold">Ragionamento Induttivo</span>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-user-graduate absolute left-3 text-slate-400 text-xs"></i>
+                    <input type="text" id="student-name-input" placeholder="Inserisci il tuo nome" value="Studente" oninput="updateStudentName(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 w-40 sm:w-48">
+                </div>
+                <button onclick="toggleAudio()" id="sound-btn" class="p-2 rounded-lg bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-amber-400" title="Audio">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
+                </button>
+                <div class="flex items-center space-x-3 bg-slate-900 border border-amber-500/30 px-3.5 py-1.5 rounded-lg badge-glow">
+                    <div class="text-right">
+                        <span class="text-[10px] uppercase tracking-wider text-amber-400/80 block font-bold">Punti XP</span>
+                        <span id="global-score-text" class="text-sm font-extrabold text-amber-400">0 / 100</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-extrabold text-xs">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
+            <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
+                <i class="fa-solid fa-book-open text-amber-400"></i> 0. Quadro Teorico
+            </button>
+            <button onclick="switchTab('tab-campioni', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-chart-pie text-emerald-400"></i> 1. Campioni & Bias
+            </button>
+            <button onclick="switchTab('tab-probabilita', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-dice text-sky-400"></i> 2. Probabilità & LGN
+            </button>
+            <button onclick="switchTab('tab-problema', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-crow text-purple-400"></i> 3. Cigno Nero & Tacchino
+            </button>
+            <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti Concettuali
+            </button>
+            <button onclick="switchTab('tab-cloze', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Testo Guidato
+            </button>
+            <button onclick="switchTab('tab-report', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-certificate text-yellow-400"></i> Certificato
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+        <!-- TAB 0: STUDIO -->
+        <section id="tab-studio" class="tab-content space-y-8">
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border-amber-500/20 relative overflow-hidden">
+                <div class="max-w-3xl space-y-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+                        <i class="fa-solid fa-chart-line mr-1.5"></i> Modulo 3: Il Ragionamento Induttivo
+                    </span>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-amber-400">Dai Casi Osservati alle Generalizzazioni Probabili</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Il ragionamento induttivo parte da un campione di casi particolari osservati per estendere una conclusione all'intera popolazione o al caso futuro $n+1$. A differenza della deduzione, produce conclusioni <strong>probabili</strong> e non matematicamente certe, arricchendo la nostra conoscenza della realtà empirica.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-expand"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">1. Struttura dell'Induzione</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Variante forte: generalizza su <em>tutti</em> i casi. Variante debole: proietta la proprietà solo sul prossimo caso da osservare ($n+1$). Le parole 'sempre', 'tutti', 'mai' mascherano un'induzione.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-sky-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-dice"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">2. Probabilità $P(E)$</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Misura del grado di certezza da $0$ (impossibile) a $1$ (certo). $P(E) = rac{	ext{casi favorevoli}}{	ext{casi possibili}}$. Es. Dado a 6 facce: uscita del '2' $= 1/6  pprox 16,7\%$.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-chart-pie"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">3. Campioni & Rappresentatività</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Un buon campione deve essere <strong>ampio</strong> e <strong>rappresentativo</strong> (rispecchiare le quote di genere, età, regione, titolo di studio). Pericolo del <em>bias di campionamento</em> e <em>self-selection</em>.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-newspaper"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">4. Errore Storico del 1948</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">I sondaggi per le elezioni USA del 1948 usavano interviste telefoniche (bene di lusso posseduto solo dai benestanti repubblicani), annunciando la vittoria di Dewey prima del voto di Truman.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-infinity"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">5. Legge dei Grandi Numeri (LGN)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Aumentando la dimensione del campione di prove, la frequenza empirica converge verso il valore teorico atteso. Base di assicurazioni, casinò e controllo qualità.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-crow"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">6. Problema dell'Induzione</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Nessun numero $n$ di conferme dà la certezza assoluta: il caso $n+1$ può confutare. Metafore: la scoperta del <strong>Cigno Nero</strong> in Australia e il <strong>Tacchino Induttivista</strong> di Russell.</p>
+                </div>
+            </div>
+
+            <div class="text-center pt-4">
+                <button onclick="switchTab('tab-campioni')" class="bg-gradient-to-r from-amber-500 to-emerald-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-amber-600 hover:to-emerald-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione su Campioni e Sondaggi ➔</button>
+            </div>
+        </section>
+
+        <!-- TAB 1: CAMPIONI & BIAS -->
+        <section id="tab-campioni" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Campionamento, Rappresentatività e Distorsioni (5 Quesiti)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Analizza l'ampiezza dei campioni e individua i bias nei sondaggi reali. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="campioni-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 2: PROBABILITA & LGN -->
+        <section id="tab-probabilita" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 2: Calcolo della Probabilità e Legge dei Grandi Numeri (5 Quesiti)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Calcola i valori di $P(E)$ e applica i principi della convergenza statistica. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="probabilita-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 3: CIGNO NERO E TACCHINO -->
+        <section id="tab-problema" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Il Problema dell'Induzione, Cigno Nero e Tacchino Induttivista (5 Quesiti)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Metti alla prova i limiti dell'induzione empirica attraverso celebri casi filosofici. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="problema-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 4: CLASSIFICAZIONE MATCHING -->
+        <section id="tab-classificazione" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti della Statistica Induttiva (8 Coppie)</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div id="matching-terms" class="space-y-2.5"></div>
+                    <div id="matching-defs" class="space-y-2.5"></div>
+                </div>
+                <div id="matching-feedback" class="text-xs sm:text-sm font-semibold pt-2"></div>
+            </div>
+        </section>
+
+        <!-- TAB 5: CLOZE TEST -->
+        <section id="tab-cloze" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test sulla Teoria dell'Induzione</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
+                    Il ragionamento induttivo permette di ricavare una regola generale a partire dall'osservazione di casi <select id="cloze-1" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="particolari">particolari</option><option value="certi">certi</option></select>. A differenza della deduzione, l'induzione non fornisce una conclusione certa, ma solo <select id="cloze-2" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="probabile">probabile</option><option value="garantita">garantita</option></select>. Per estrapolare dati sull'intera popolazione occorre un <select id="cloze-3" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="campione">campione</option><option value="sillogismo">sillogismo</option></select> che sia ampio e <select id="cloze-4" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="rappresentativo">rappresentativo</option><option value="casuale">casuale</option></select>. Se la selezione del gruppo presenta un difetto di strutturazione, si parla di <select id="cloze-5" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="bias di campionamento">bias di campionamento</option><option value="fallacia formale">fallacia formale</option></select>. La Legge dei <select id="cloze-6" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Grandi Numeri">Grandi Numeri</option><option value="Sillogismi">Sillogismi</option></select> stabilisce che all'aumentare delle prove effettuate la frequenza relativa si avvicina al valore teorico. Il paradosso per cui nessun numero di conferme storiche garantisce la verità dell'osservazione futura è esemplificato dalla scoperta del <select id="cloze-7" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Cigno Nero">Cigno Nero</option><option value="Modus Ponens">Modus Ponens</option></select> e dalla storia del <select id="cloze-8" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Tacchino Induttivista">Tacchino Induttivista</option><option value="Gatto di Schrödinger">Gatto di Schrödinger</option></select> ideata da Bertrand Russell. Nella teoria delle probabilità, un evento impossibile ha valore <select id="cloze-9" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="P = 0">P = 0</option><option value="P = 1">P = 1</option></select>, mentre un evento certo ha valore <select id="cloze-10" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="P = 1">P = 1</option><option value="P = 0.5">P = 0.5</option></select>.
+                </div>
+                <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
+                <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
+            </div>
+        </section>
+
+        <!-- TAB 6: REPORT -->
+        <section id="tab-report" class="tab-content hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl text-center space-y-6">
+                <h2 class="font-cinzel text-2xl font-bold text-amber-400">Valutazione Finale: Ragionamento Induttivo</h2>
+                <div class="text-4xl font-black text-amber-400" id="report-score">0 / 100 XP</div>
+                <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
+                <div class="flex justify-center gap-4">
+                    <button onclick="window.print()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
+                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
+                </div>
+            </div>
+
+            <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-amber-500/40 text-center space-y-6">
+                <div class="border-2 border-dashed border-amber-500/30 p-8 rounded-2xl space-y-6">
+                    <div class="font-cinzel text-amber-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Induttiva</div>
+                    <p class="text-slate-300 text-sm">Si attesta che lo studente / la studentessa:</p>
+                    <div id="cert-student-name" class="font-cinzel text-2xl font-bold text-white underline decoration-amber-500 decoration-2">Studente</div>
+                    <p class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
+                        ha completato con successo il modulo di analisi statistica ed empirica su:
+                        <br><strong class="text-amber-400">"Generalizzazioni Induttive, Campionamento e Bias, Calcolo delle Probabilità, Legge dei Grandi Numeri, Problema dell'Induzione"</strong>
+                    </p>
+                    <div class="flex justify-around items-center pt-6 border-t border-slate-800 text-xs text-slate-400">
+                        <div><span>Punteggio Conseguito:</span><div id="cert-score" class="font-bold text-amber-400 text-base">0 / 100 XP</div></div>
+                        <div><span>Livello Raggiunto:</span><div id="cert-title" class="font-bold text-sky-400 text-base">In corso</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
+        <a href="index.html" class="hover:text-amber-400 transition-colors">
+            <i class="fa-solid fa-house mr-1"></i> Home Portale
+        </a>
+        <span>•</span>
+        <a href="pensiero-critico.html" class="hover:text-amber-400 transition-colors">
+            <i class="fa-solid fa-diagram-project mr-1"></i> Pensiero Critico
+        </a>
+    </footer>
+
+    <script>
+        const state = { 
+            studentName: "Studente", 
+            audioEnabled: true, 
+            campAnswers: {}, 
+            probAnswers: {}, 
+            probElemAnswers: {}, 
+            matchedPairs: {}, 
+            clozeScore: 0, 
+            clozeLocked: false,
+            selectedTermId: null,
+            activeCampData: [],
+            activeProbData: [],
+            activeProbElemData: [],
+            activeMatchingTerms: [],
+            activeMatchingDefs: []
+        };
+
+        let audioCtx = null;
+        function playSound(type) {
+            if (!state.audioEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                if (type === 'click') { osc.frequency.setValueAtTime(400, audioCtx.currentTime); gain.gain.setValueAtTime(0.04, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.04); }
+                else if (type === 'correct') { osc.frequency.setValueAtTime(880, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+                else if (type === 'error') { osc.frequency.setValueAtTime(220, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+            } catch(e){}
+        }
+
+        function toggleAudio() { state.audioEnabled = !state.audioEnabled; }
+        function updateStudentName(val) { 
+            state.studentName = val || "Studente"; 
+            const certName = document.getElementById('cert-student-name');
+            if(certName) certName.innerText = state.studentName;
+        }
+
+        function shuffle(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // ================= POOL QUESITI INDUZIONE =================
+        const campioniPool = [
+            {
+                id: 101, title: "Sondaggio Politico Telefonico 1948 (Truman vs Dewey)",
+                text: "«Nel 1948 le agenzie di sondaggi intervistarono telefonicamente migliaia di cittadini americani decretando la vittoria travolgente di Dewey. Alle urne vinse invece nettamente Truman.»",
+                question: "Quale errore metodologico causò l'incredibile errore del Chicago Tribune?",
+                options: [
+                    "Bias di campionamento: negli anni '40 il telefono era un bene di lusso posseduto solo dalle famiglie benestanti e prevalentemente repubblicane.",
+                    "L'ampiezza del campione era troppo ridotta (intervistate meno di 10 persone).",
+                    "Fallacia del Modus Ponens invalido.",
+                    "La gente cambiò idea all'uscita dal seggio."
+                ],
+                correct: 0, explanation: "Campionare tramite rete telefonica nel 1948 escludeva i ceti operai e rurali (privi di telefono) che votavano in massa per i democratici."
+            },
+            {
+                id: 102, title: "Anziani e Competenze Digitali",
+                text: "«Un ricercatore pubblica un annuncio su Facebook e nei forum online dedicati alla terza età per studiare l'uso del digitale negli anziani italiani. Conclude che 'gli anziani sono altamente digitalizzati'.»",
+                question: "Quale distorsione inficia la validità della ricerca?",
+                options: [
+                    "Bias di self-selection (autoselezione): il canale scelto seleziona solo chi è già attivo sul web, escludendo gli anziani offline.",
+                    "Bias della legge dei grandi numeri.",
+                    "Violazione del principio di non-contraddizione.",
+                    "Il campione contiene troppi ragazzi giovani."
+                ],
+                correct: 0, explanation: "Intervistando sui social gli anziani, il campione seleziona solo chi fa già uso del web, distorcendo il dato sull'intera popolazione."
+            },
+            {
+                id: 103, title: "Qualità delle Mele nel Sacco",
+                text: "«Un fruttivendolo prende le prime 3 mele in cima al sacco e, vedendole rosse e lucide, afferma che 'tutte le 100 mele del sacco sono perfette'.»",
+                question: "Perché questa generalizzazione è debole e rischiosa?",
+                options: [
+                    "Il campione è estremamente ridotto (3 mele) e non rappresentativo del fondo del sacco.",
+                    "Perché le mele non si prestano ad analisi statistiche.",
+                    "Perché la premessa è una fallacia ad hominem.",
+                    "Perché il colore rosso implica un'abduzione."
+                ],
+                correct: 0, explanation: "Un campione di 3 oggetti su 100 è troppo limitato e soggetto a bias di posizionamento (mele migliori messe sopra)."
+            },
+            {
+                id: 104, title: "Sondaggio Universitario in Palestra",
+                text: "«Per capire quali siano gli hobby degli studenti di un'università, un sondaggista intervista 500 studenti incontrati nella palestra del campus.»",
+                question: "Che problema presenta questo campione di 500 studenti?",
+                options: [
+                    "Non è rappresentativo: la palestra sovra-rappresenta gli studenti dediti al fitness rispetto all'intera popolazione universitaria.",
+                    "Il numero di 500 persone è matematicamente insufficiente per qualsiasi analisi.",
+                    "Manca un sillogismo ipotetico.",
+                    "È un test di Modus Tollens."
+                ],
+                correct: 0, explanation: "Sebbene l'ampiezza sia discreta (500), il luogo di reclutamento crea un bias di campionamento a favore dello sport."
+            },
+            {
+                id: 105, title: "Gesticolazione degli Italiani",
+                text: "«Un turista straniero incontra 15 italiani a Napoli e nota che tutti e 15 gesticolano molto mentre parlano. Rientrato a casa dichiara: 'Tutti i 58 milioni di italiani gesticolano continuamente'.»",
+                question: "Quale processo induttivo ha applicato il turista?",
+                options: [
+                    "Una generalizzazione induttiva indebita basata su un campione ristretto e localizzato.",
+                    "Una deduzione truth-preserving indiscutibile.",
+                    "Un'inferenza alla spiegazione migliore (IBE).",
+                    "Un'applicazione del quadrato delle opposizioni."
+                ],
+                correct: 0, explanation: "Ha proiettato le osservazioni fatte su 15 persone di una singola città all'intera nazione di 58 milioni di abitanti."
+            },
+            {
+                id: 106, title: "Sondaggio di Opinione Politica sulle Quote Rosa",
+                text: "«Un istituto vuole sondare l'opinione degli italiani sulle quote rosa. Intervista 1000 persone composte al 90% da uomini sopra i 60 anni.»",
+                question: "Quale requisito fondamentale del campionamento è stato violato?",
+                options: [
+                    "La Rappresentatività dei sottogruppi (quote di genere ed età sbilanciate rispetto alla popolazione reale).",
+                    "L'ampiezza numerica assoluta.",
+                    "La legge del terzo escluso.",
+                    "Il principio di identità."
+                ],
+                correct: 0, explanation: "Un campione per essere rappresentativo deve rispecchiare le percentuali della popolazione (es. 50% donne, quote d'età bilanciate)."
+            },
+            {
+                id: 107, title: "Funghi Prataioli nel Bosco",
+                text: "«Un cercatore di funghi vede che i primi 4 funghi di una specie trovati vicino al pino sono commestibili. Ne deduce che 'tutti i funghi di quella specie sono commestibili'.»",
+                question: "A quale rischio si espone facendo affidamento solo su questa induzione?",
+                options: [
+                    "Rischia che il fungo numero 5 sia una variante velenosa (problema dell'induzione).",
+                    "Nessun rischio: l'induzione garantisce certezza matematica al 100%.",
+                    "Nessun rischio se applica il Modus Ponens.",
+                    "Il rischio deriva solo da un errore di calcolo delle probabilità."
+                ],
+                correct: 0, explanation: "L'induzione non fornisce certezze assolute: un caso non osservato ($n+1$) può rivelarsi letale."
+            },
+            {
+                id: 108, title: "Recensioni di un Ristorante Online",
+                text: "«Un ristorante ha 20 recensioni con 1 stella lasciate da clienti insoddisfatti. Migliaia di clienti soddisfatti non hanno lasciato alcuna recensione.»",
+                question: "Che tipo di distorsione statistica si osserva?",
+                options: [
+                    "Bias di autoselezione (chi ha avuto un'esperienza negativa è più motivato a scrivere rispetto a chi è soddisfatto).",
+                    "Applicazione del Modus Tollens.",
+                    "Errore di campionamento causato dai quotidiani.",
+                    "Sillogismo disgiuntivo errato."
+                ],
+                correct: 0, explanation: "Nelle recensioni online i clienti scontenti sono fortemente auto-selezionati nel lasciare un feedback rispetto alla massa silenziosa."
+            }
+        ];
+
+        const probabilitaPool = [
+            {
+                id: 201, title: "Lancio del Dado a 6 Facce",
+                text: "«Lanciando un dado classico e regolare a 6 facce non truccato, vogliamo calcolare la probabilità P(E) che esca la faccia con il numero 5.»",
+                question: "Qual è il valore matematico esatto di P(E)?",
+                options: ["1/6 (circa 0,167 ovvero 16,7%)", "1/2 (50%)", "5/6 (circa 83%)", "1/5 (20%)"],
+                correct: 0, explanation: "P(E) = casi favorevoli (uscita del 5 = 1) diviso casi possibili (facce totali = 6) -> 1/6."
+            },
+            {
+                id: 202, title: "Esecuzione di 10 Lanci di Moneta",
+                text: "«Lanciando una moneta bilanciata 10 volte, otteniamo 8 volte Testa e 2 volte Croce (80% Testa).»",
+                question: "Come si spiega questo risultato rispetto al valore teorico di 0,5 (50%)?",
+                options: [
+                    "Su pochi lanci l'effetto del caso o della fortuna è forte; la Legge dei Grandi Numeri richiede un campione di lanci molto più ampio.",
+                    "La moneta è sicuramente truccata.",
+                    "Ha prevalso il Modus Ponens.",
+                    "È una fallacia di affermazione del conseguente."
+                ],
+                correct: 0, explanation: "Con soli 10 lanci le fluttuazioni casuali sono normali. Aumentando i lanci a 1000, la frequenza convergerà verso il 50%."
+            },
+            {
+                id: 203, title: "Assicurazioni e Controllo Qualità",
+                text: "«Le compagnie assicurative calcolano le tariffe dei premi sui danni auto basandosi sui dati storici di 100.000 automobilisti.»",
+                question: "Quale principio matematico rende questo calcolo estremamente solido e prevedibile?",
+                options: ["La Legge dei Grandi Numeri (LGN)", "Il principio di non-contraddizione aristotelico", "Il Modus Tollens condizionale", "La fallacia dello Strawman"],
+                correct: 0, explanation: "La LGN rassicura che su un numero elevatissimo di casi (100.000) la percentuale media di incidenti diventa stabile e calcolabile."
+            },
+            {
+                id: 204, title: "Evento Impossibile vs Certo",
+                text: "«In teoria della probabilità P(E) è una scala numerica compresa tra 0 e 1.»",
+                question: "Cosa indicano i valori estremi P(E) = 0 e P(E) = 1?",
+                options: [
+                    "P = 0 indica un evento Impossibile (es. 2+2=5); P = 1 indica un evento Certo (es. 2+2=4).",
+                    "P = 0 indica un evento Certo; P = 1 indica un evento Impossibile.",
+                    "P = 0 indica il 50% di probabilità; P = 1 indica il 100%.",
+                    "Indicano entrambi eventi induttivi probabili."
+                ],
+                correct: 0, explanation: "P=0 corrisponde alla certezza negativa (impossibile), P=1 corrisponde alla certezza assoluta."
+            },
+            {
+                id: 205, title: "Lancio di Moneta a 1000 Tentativi",
+                text: "«Eseguendo 1000 lanci consecutivi di una moneta bilanciata si ottengono 498 Teste e 502 Croci (frequenza 0,498).»",
+                question: "Cosa dimostra questo risultato sperimentale?",
+                options: [
+                    "La convergenza empirica verso il valore atteso teorico (0,5) in linea con la Legge dei Grandi Numeri.",
+                    "La dimostrazione che il caso non esiste.",
+                    "Che la moneta cade sempre sul bordo.",
+                    "La presenza di un bias di campionamento."
+                ],
+                correct: 0, explanation: "All'aumentare delle prove (1000 lanci) la percentuale effettiva (49,8%) si schiaccia sul valore ideale del 50%."
+            },
+            {
+                id: 206, title: "Estrazione di una Carta dal Mazzo",
+                text: "«Da un mazzo di 52 carte da gioco si vuole estrarre un Asso (nel mazzo ci sono 4 Assi).»",
+                question: "Qual è la probabilità P(E) di estrarre un Asso al primo tentativo?",
+                options: ["4/52 ovvero 1/13 (circa 7,7%)", "1/52 (circa 1,9%)", "4/100 (4%)", "1/4 (25%)"],
+                correct: 0, explanation: "P(E) = casi favorevoli (4 assi) / casi totali (52 carte) -> 4/52 = 1/13."
+            },
+            {
+                id: 207, title: "Il Vantaggio del Banco nei Casinò",
+                text: "«Su una singola giocata alla roulette il giocatore può vincere, ma su milioni di giocate all'anno il casinò guadagna sempre una percentuale costante.»",
+                question: "Su cosa si basa il modello economico matematico del casinò?",
+                options: [
+                    "Sulla Legge dei Grandi Numeri applicata a milioni di eventi.",
+                    "Sulla fallacia del cigno nero.",
+                    "Su un ragionamento deduttivo categorico.",
+                    "Sul bias di autoselezione dei clienti."
+                ],
+                correct: 0, explanation: "Su milioni di giocate la percentuale a favore del banco diventa un guadagno matematicamente certo e prevedibile."
+            },
+            {
+                id: 208, title: "Probabilità di Uscita di un Numero Pari al Dado",
+                text: "«In un dado a 6 facce, i numeri pari sono 2, 4 e 6 (3 casi favorevoli).»",
+                question: "Qual è la probabilità P(E) che uscendo il dado si ottenga un numero pari?",
+                options: ["3/6 ovvero 1/2 (50%)", "1/6 (16,7%)", "3/10 (30%)", "2/3 (66,6%)"],
+                correct: 0, explanation: "P(E) = 3 numeri pari / 6 facce totali = 3/6 = 50%."
+            }
+        ];
+
+        const problemaPool = [
+            {
+                id: 301, title: "La Metafora del Cigno Nero",
+                text: "«Per secoli gli europei credettero che tutti i cigni fossero bianchi poiché milioni di cigni osservati in Europa erano bianchi. Nel 1700 gli inglesi giunsero in Australia e videro il primo cigno nero.»",
+                question: "Cosa dimostra questa celebre vicenda storica nella teoria della conoscenza?",
+                options: [
+                    "Dimostra il problema dell'induzione: un milione di conferme non danno certezza assoluta, mentre un singolo controesempio confuta la generalizzazione.",
+                    "Dimostra che gli europei non sapevano usare i sillogismi.",
+                    "Dimostra che i cigni neri sono una fallacia ad hominem.",
+                    "Dimostra la validità del Modus Ponens."
+                ],
+                correct: 0, explanation: "Basta l'osservazione del primo cigno nero in Australia per far crollare la convinzione induttiva plurisecolare."
+            },
+            {
+                id: 302, title: "Il Tacchino Induttivista di Bertrand Russell",
+                text: "«Un tacchino nota che ogni mattina alle 9:00 l'allevatore gli porta il cibo. Osserva la regola per mesi, con il sole, con la pioggia, di mercoledì e di domenica. Ne deduce: 'Mi danno sempre il cibo alle 9'. La mattina della vigilia di Natale viene sgozzato.»",
+                question: "Qual è l'insegnamento epistemologico della favola di Russell?",
+                options: [
+                    "L'accumulo di conferme passate non garantisce che la regolarità si mantenga nel futuro $n+1$.",
+                    "I tacchini dovrebbero studiare la logica deduttiva.",
+                    "L'allevatore ha commesso una fallacia formale.",
+                    "La probabilità di essere nutriti a Natale era P = 1."
+                ],
+                correct: 0, explanation: "La coscienza induttivista del tacchino è stata smentita proprio quando la serie di osservazioni felici sembrava più solida."
+            },
+            {
+                id: 303, title: "Il Sorgere del Sole",
+                text: "«Tutti noi crediamo che domani mattina il Sole sorgerà. Questa convinzione si basa sul fatto che finora è sempre sorto ogni giorno.»",
+                question: "Qual è il grado di certezza di questa conclusione secondo Hume e la logica induttiva?",
+                options: [
+                    "È una conclusione altamente probabile (99,999%), ma non matematicamente certa al 100%.",
+                    "È una certezza assoluta truth-preserving come in matematica.",
+                    "È un'ipotesi del tutto falsa e priva di valore.",
+                    "È un ragionamento abduttivo puro."
+                ],
+                correct: 0, explanation: "Non possiamo dimostrare con certezza deduttiva che il futuro replicherà il passato, benché la probabilità sia altissima."
+            },
+            {
+                id: 304, title: "Falsificazione di una Teoria Generale",
+                text: "«Uno scienziato afferma che 'Tutti i metalli si dilatano se riscaldati'.»",
+                question: "Cosa basterebbe per far crollare definitivamente questa tesi induttiva universale?",
+                options: [
+                    "Trovare anche un solo metallo che se riscaldato non si dilata (controesempio falsificante).",
+                    "Fare altri 10.000 esperimenti di conferma.",
+                    "Chiedere a un premio Nobel.",
+                    "Dimostrare che il calore è una condizione necessaria."
+                ],
+                correct: 0, explanation: "In una generalizzazione universale, un singolo controesempio empirico è sufficiente a demolire l'enunciato 'Tutti gli X...'."
+            },
+            {
+                id: 305, title: "Variante Forte vs Variante Debole dell'Induzione",
+                text: "«Dato un numero n di pazienti trattati con successo dal farmaco X.»",
+                question: "Qual è la differenza tra la variante FORTE e la DEBOLE dell'inferenza?",
+                options: [
+                    "Forte: 'Il farmaco X guarisce TUTTI i pazienti'. Debole: 'Il farmaco X guarirà il PROSSIMO paziente (n+1)'.",
+                    "Forte: 'Il farmaco è un Modus Ponens'. Debole: 'Il farmaco è un Modus Tollens'.",
+                    "Forte: si basa sulla matematica. Debole: si basa sul caso.",
+                    "Non esiste alcuna differenza."
+                ],
+                correct: 0, explanation: "La variante forte generalizza sulla totalità dei casi possibili; la variante debole proietta la stima sul caso successivo."
+            },
+            {
+                id: 306, title: "L'Espressione 'Cigno Nero' nel Linguaggio Comune",
+                text: "«Oggi nel mondo economico e sociale si definisce 'Cigno Nero' un evento di grande impatto.»",
+                question: "Quali caratteristiche definiscono un 'Cigno Nero'?",
+                options: [
+                    "Un evento inaspettato e raro che smentisce le previsioni basate sulle regolarità del passato.",
+                    "Un errore di calcolo nei voti parlamentari.",
+                    "Un sillogismo privo di termine medio.",
+                    "Un sondaggio politico con ampio campione."
+                ],
+                correct: 0, explanation: "L'evento Cigno Nero rompe lo schema induttivo di regolarità sconvolgendo le aspettative tradizionali."
+            },
+            {
+                id: 307, title: "Parole che Nascondono un'Induzione",
+                text: "«Quando in una discussione quotidiana una persona usa parole come 'sempre', 'mai', 'tutti', 'nessuno'.»",
+                question: "Cosa sta presupponendo senza averlo verificato direttamente?",
+                options: [
+                    "Sta applicando un'induzione mascherata proiettando pochi casi osservati sulla totalità esaminata.",
+                    "Sta citando una norma di legge approvata.",
+                    "Sta eseguendo un Modus Tollens.",
+                    "Sta dimostrando il principio del terzo escluso."
+                ],
+                correct: 0, explanation: "Nessuno può osservare 'tutti' gli individui o 'tutti' i momenti del tempo; l'uso di 'sempre/tutti' è un'estrapolazione induttiva."
+            },
+            {
+                id: 308, title: "Assunzione di Uniformità della Natura",
+                text: "«Il ragionamento induttivo presuppone che la Natura sia uniforme e che il futuro assomigli al passato.»",
+                question: "Possiamo dimostrare in modo deduttivo e certo che la Natura rimarrà sempre uniforme?",
+                options: [
+                    "No, perché usare la regolarità del passato per dimostrare il futuro è un ragionamento circolare che presuppone l'induzione stessa.",
+                    "Sì, è un assioma matematico dimostrato da Euclide.",
+                    "Sì, tramite il principio del terzo escluso.",
+                    "Sì, usando un campionamento telefonico."
+                ],
+                correct: 0, explanation: "David Hume dimostrò che la giustificazione dell'uniformità della natura si basa a sua volta sull'esperienza passata (circolarità)."
+            }
+        ];
+
+        const matchingPairsPool = [
+            { id: "m1", term: "Campione Rappresentativo", text: "Sottoinsieme che riproduce fedelmente le quote demografiche della popolazione totale." },
+            { id: "m2", term: "Bias di Campionamento", text: "Errore sistematico nella selezione dei partecipanti che distorce i risultati della ricerca." },
+            { id: "m3", term: "Self-Selection Bias", text: "Distorsione che si verifica quando i soggetti scelgono volontariamente di partecipare al sondaggio." },
+            { id: "m4", term: "Legge dei Grandi Numeri", text: "Principio per cui all'aumentare delle prove la frequenza reale si avvicina alla probabilità teorica." },
+            { id: "m5", term: "Cigno Nero", text: "Evento inatteso e raro che smentisce una generalizzazione basata su osservazioni passate." },
+            { id: "m6", term: "Tacchino Induttivista", text: "Metafora di Russell sulla falsa sicurezza creata dalla ripetizione quotidiana di regolarità apparenti." },
+            { id: "m7", term: "Induzione Variante Forte", text: "Inferenza che estende le proprietà dai casi osservati a TUTTI i casi possibili." },
+            { id: "m8", term: "Induzione Variante Debole", text: "Inferenza che proietta la proprietà dal campione osservato al PROSSIMO singolo caso (n+1)." },
+            { id: "m9", term: "Probabilità P(E) = 0", text: "Valore numerico che definisce un evento matematicamente od oggettivamente impossibile." },
+            { id: "m10", term: "Probabilità P(E) = 1", text: "Valore numerico che indica la certezza assoluta del verificarsi di un evento." },
+            { id: "m11", term: "Caso Dewey vs Truman 1948", text: "Storico fallimento dei sondaggi dovuto a campionamento telefonico sbilanciato sui benestanti." },
+            { id: "m12", term: "Ampiezza del Campione", text: "Numero totale di individui o casi osservati che compongono il gruppo di studio." }
+        ];
+
+        function renderCampioni() {
+            const container = document.getElementById('campioni-container');
+            if(!container) return;
+            container.innerHTML = state.activeCampData.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectCamp(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="camp-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectCamp(qId, oIdx, btn) {
+            if (state.campAnswers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeCampData.find(d => d.id === qId);
+            state.campAnswers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
+            }
+
+            const fb = document.getElementById(`camp-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Analisi Corretta! (Risposta Registrata)</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Analisi Errata e Bloccata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderProbabilita() {
+            const container = document.getElementById('probabilita-container');
+            if(!container) return;
+            container.innerHTML = state.activeProbData.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded-md border border-sky-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectProb(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="prob-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectProb(qId, oIdx, btn) {
+            if (state.probAnswers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeProbData.find(d => d.id === qId);
+            state.probAnswers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
+            }
+
+            const fb = document.getElementById(`prob-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Calcolo Esatto! (Risposta Registrata)</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Calcolo Errato e Bloccato.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderProblema() {
+            const container = document.getElementById('problema-container');
+            if(!container) return;
+            container.innerHTML = state.activeProbElemData.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectProbElem(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="prob-elem-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectProbElem(qId, oIdx, btn) {
+            if (state.probElemAnswers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeProbElemData.find(d => d.id === qId);
+            state.probElemAnswers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
+            }
+
+            const fb = document.getElementById(`prob-elem-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Risposta Corretta! (Risposta Registrata)</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderMatching() {
+            const termsContainer = document.getElementById('matching-terms');
+            const defsContainer = document.getElementById('matching-defs');
+            if(!termsContainer || !defsContainer) return;
+            termsContainer.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
+            defsContainer.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
+        }
+
+        function selectMatchTerm(termId, btn) {
+            playSound('click');
+            state.selectedTermId = termId;
+
+            document.querySelectorAll('#matching-terms button').forEach(b => {
+                if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+            });
+            btn.className = "w-full text-left p-3 rounded-xl border-2 border-amber-500 bg-amber-950/80 text-xs font-bold text-amber-300 transition-all shadow-lg cursor-pointer";
+
+            const fb = document.getElementById('matching-feedback');
+            if(fb) {
+                fb.className = "text-xs font-semibold text-amber-400 pt-2";
+                fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!";
+            }
+        }
+
+        function selectMatchDef(matchId, btn) {
+            const fb = document.getElementById('matching-feedback');
+            if(!state.selectedTermId) {
+                playSound('error');
+                if(fb) {
+                    fb.className = "text-xs font-semibold text-rose-400 pt-2";
+                    fb.innerText = "Prima seleziona un termine nella colonna di sinistra!";
+                }
+                return;
+            }
+
+            if(state.selectedTermId === matchId) {
+                playSound('correct');
+                state.matchedPairs[matchId] = true;
+
+                const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
+                if(termBtn) {
+                    termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed";
+                    termBtn.disabled = true;
+                }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed";
+                btn.disabled = true;
+
+                if(fb) {
+                    fb.className = "text-xs font-bold text-emerald-400 pt-2";
+                    fb.innerText = "✓ Abbinamento corretto e bloccato!";
+                }
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => {
+                    if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer";
+                }, 1000);
+
+                if(fb) {
+                    fb.className = "text-xs font-bold text-rose-400 pt-2";
+                    fb.innerText = "✗ Abbinamento errato. Riprova!";
+                }
+            }
+            state.selectedTermId = null;
+            updateGlobalScore();
+        }
+
+        function checkCloze() {
+            if (state.clozeLocked) return;
+            playSound('click');
+            const answers = { 1: "particolari", 2: "probabile", 3: "campione", 4: "rappresentativo", 5: "bias di campionamento", 6: "Grandi Numeri", 7: "Cigno Nero", 8: "Tacchino Induttivista", 9: "P = 0", 10: "P = 1" };
+            let correct = 0;
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById(`cloze-${i}`);
+                if(el) {
+                    el.disabled = true;
+                    if(el.value === answers[i]) { 
+                        correct++; 
+                        el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
+                    } else { 
+                        el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
+                    }
+                }
+            }
+            state.clozeScore = Math.round((correct / 10) * 100);
+            state.clozeLocked = true;
+
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed";
+                submitBtn.innerText = "Testo Verificato e Bloccato";
+            }
+
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) {
+                if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = "Perfetto! Testo completato senza errori (10/10)."; }
+                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Le risposte sono state bloccate.`; }
+            }
+            updateGlobalScore();
+        }
+
+        function updateGlobalScore() {
+            let campCorrect = 0; state.activeCampData.forEach(d => { if(state.campAnswers[d.id] === d.correct) campCorrect++; });
+            let probCorrect = 0; state.activeProbData.forEach(d => { if(state.probAnswers[d.id] === d.correct) probCorrect++; });
+            let probElemCorrect = 0; state.activeProbElemData.forEach(d => { if(state.probElemAnswers[d.id] === d.correct) probElemCorrect++; });
+            let matchCount = Object.keys(state.matchedPairs || {}).length;
+
+            const total = Math.round((campCorrect / (state.activeCampData.length || 1))*30 + 
+                                     (probCorrect / (state.activeProbData.length || 1))*25 + 
+                                     (probElemCorrect / (state.activeProbElemData.length || 1))*20 + 
+                                     (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
+                                     (state.clozeScore/100)*10);
+            const scoreText = document.getElementById('global-score-text');
+            if(scoreText) scoreText.innerText = `${total} / 100`;
+            return total;
+        }
+
+        function updateReport() {
+            const score = updateGlobalScore();
+            const repScore = document.getElementById('report-score');
+            if(repScore) repScore.innerText = `${score} / 100 XP`;
+            const badgeEl = document.getElementById('report-badge');
+            const certScore = document.getElementById('cert-score');
+            const certTitle = document.getElementById('cert-title');
+            if(certScore) certScore.innerText = `${score} / 100 XP`;
+
+            let titleText = "Novizio dell'Induzione";
+            if(score >= 90) titleText = "Maestro di Statistica e Analisi Empirica";
+            else if(score >= 75) titleText = "Analista di Campionamento e Probabilità";
+            else if(score >= 55) titleText = "Praticante di Ragionamento Induttivo";
+
+            if(badgeEl) badgeEl.innerText = titleText;
+            if(certTitle) certTitle.innerText = titleText;
+        }
+
+        function switchTab(tabId, btnElement) {
+            playSound('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+
+            if(btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                const navButtons = document.querySelectorAll('.tab-btn');
+                navButtons.forEach(b => {
+                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
+                        b.classList.add('active');
+                    }
+                });
+            }
+
+            if(tabId === 'tab-report') updateReport();
+        }
+
+        function setupRandomQuestions() {
+            state.campAnswers = {}; 
+            state.probAnswers = {}; 
+            state.probElemAnswers = {}; 
+            state.matchedPairs = {}; 
+            state.clozeScore = 0;
+            state.clozeLocked = false;
+            state.selectedTermId = null;
+
+            state.activeCampData = shuffle(campioniPool).slice(0, 5);
+            state.activeProbData = shuffle(probabilitaPool).slice(0, 5);
+            state.activeProbElemData = shuffle(problemaPool).slice(0, 5);
+
+            const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
+            state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
+            state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
+
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById(`cloze-${i}`);
+                if(el) {
+                    el.disabled = false;
+                    el.value = "";
+                    el.className = "bg-slate-800 text-amber-300 rounded px-2 py-1";
+                }
+            }
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.className = "bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer";
+                submitBtn.innerText = "Verifica e Blocca Testo";
+            }
+            const clozeFb = document.getElementById('cloze-feedback');
+            if(clozeFb) clozeFb.innerText = "";
+
+            renderCampioni(); 
+            renderProbabilita(); 
+            renderProblema(); 
+            renderMatching();
+            updateGlobalScore();
+        }
+
+        function resetAll() {
+            setupRandomQuestions();
+            switchTab('tab-studio');
+        }
+
+        function initApp() {
+            setupRandomQuestions();
+        }
+
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            initApp();
+        } else {
+            document.addEventListener('DOMContentLoaded', initApp);
+        }
+    </script>
+</body>
+</html>

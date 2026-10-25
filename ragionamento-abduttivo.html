@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio: Ragionamento Abduttivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { purple: { 450: '#a855f7' } },
+                    fontFamily: { cinzel: ['Cinzel', 'serif'], sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080d16; color: #f1f5f9; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .tab-btn.active { background-color: #9333ea !important; color: #ffffff !important; border-color: #c084fc !important; box-shadow: 0 4px 20px -2px rgba(147, 51, 234, 0.5); }
+        .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .badge-glow { box-shadow: 0 0 15px rgba(192, 132, 252, 0.2); }
+        @media print {
+            body * { visibility: hidden; }
+            #printable-certificate, #printable-certificate * { visibility: visible; }
+            #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-purple-500 selection:text-slate-950">
+
+    <!-- Header con Navigation Breadcrumb -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2 text-xs sm:text-sm">
+                <a href="index.html" class="text-slate-400 hover:text-purple-400 transition-colors flex items-center gap-1.5 font-semibold">
+                    <i class="fa-solid fa-house"></i> Home Portale
+                </a>
+                <span class="text-slate-600">/</span>
+                <a href="pensiero-critico.html" class="text-slate-400 hover:text-purple-400 transition-colors font-semibold">
+                    Pensiero Critico
+                </a>
+                <span class="text-slate-600">/</span>
+                <span class="text-purple-400 font-bold">Ragionamento Abduttivo</span>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-user-graduate absolute left-3 text-slate-400 text-xs"></i>
+                    <input type="text" id="student-name-input" placeholder="Inserisci il tuo nome" value="Studente" oninput="updateStudentName(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-purple-500 w-40 sm:w-48">
+                </div>
+                <button onclick="toggleAudio()" id="sound-btn" class="p-2 rounded-lg bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-purple-400" title="Audio">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
+                </button>
+                <div class="flex items-center space-x-3 bg-slate-900 border border-purple-500/30 px-3.5 py-1.5 rounded-lg badge-glow">
+                    <div class="text-right">
+                        <span class="text-[10px] uppercase tracking-wider text-purple-400/80 block font-bold">Punti XP</span>
+                        <span id="global-score-text" class="text-sm font-extrabold text-purple-400">0 / 100</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-extrabold text-xs">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
+            <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
+                <i class="fa-solid fa-book-open text-purple-400"></i> 0. Quadro Teorico
+            </button>
+            <button onclick="switchTab('tab-ibe', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-lightbulb text-amber-400"></i> 1. IBE & Criteri
+            </button>
+            <button onclick="switchTab('tab-causalita', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-link text-emerald-400"></i> 2. Causalità vs Correlazione
+            </button>
+            <button onclick="switchTab('tab-metodo', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-flask text-sky-400"></i> 3. Metodo Scientifico & Semmelweis
+            </button>
+
+            <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti Concettuali
+            </button>
+            <button onclick="switchTab('tab-cloze', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Testo Guidato
+            </button>
+            <button onclick="switchTab('tab-report', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-certificate text-yellow-400"></i> Certificato
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+        <!-- TAB 0: STUDIO -->
+        <section id="tab-studio" class="tab-content space-y-8">
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border-purple-500/20 relative overflow-hidden">
+                <div class="max-w-3xl space-y-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-400 border border-purple-500/30">
+                        <i class="fa-solid fa-magnifying-glass-chart mr-1.5"></i> Modulo 4: Il Ragionamento Abduttivo
+                    </span>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-purple-400">L'Inferenza alla Spiegazione Migliore (IBE)</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Il ragionamento abduttivo parte da un dato o fatto sorprendente $S$ e risale all'ipotesi $H$ che ne costituisce la <strong>spiegazione più plausibile</strong>. È la logica degli investigatori, della diagnosi medica e della scoperta scientifica.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-user-ninja"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">1. Struttura dell'IBE</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Dati sorprendenti $S 
+ightarrow$ Formulazione di ipotesi $H_1, H_2, H_3 
+ightarrow$ Valutazione e selezione della spiegazione migliore $
+ightarrow$ Accettazione probabile dell'ipotesi.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-sliders"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">2. I 5 Criteri di Scelta</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">1. <strong>Testabilità</strong>. 2. <strong>Fertilità</strong> (nuove previsioni). 3. <strong>Ampiezza</strong> (fenomeni diversi). 4. <strong>Semplicità</strong> (Rasoio di Ockham). 5. <strong>Conservatorismo</strong>.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-link font-bold"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">3. Causalità vs Correlazione</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>Correlazione:</strong> co-variazione o compresenza temporale (es. vendita gelati e scottature solari d'estate). <strong>Causalità:</strong> nesso diretto di causa-effetto.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-sky-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-recycle"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">4. L'Integrazione Scientifico-Triadica</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Il metodo scientifico fonde i 3 ragionamenti: <strong>Abduzione</strong> (invenzione ipotesi) $
+ightarrow$ <strong>Deduzione</strong> (derivazione previsioni) $
+ightarrow$ <strong>Induzione</strong> (test ed esperimenti).</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-hospital-user"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">5. Caso Semmelweis (1847)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Mortalità da febbre puerperale a Vienna. Abduzione: 'particelle cadaveriche' sui medici $
+ightarrow$ Deduzione: cloro $
+ightarrow$ Induzione: crollo mortalità dall'10% all'1%.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-scissors"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">6. Rasoio di Ockham</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><em>"Frustra fit per plura quod fieri potest per pauciora"</em>: a parità di fattori, la spiegazione che richiede il minor numero di assunzioni non provate è da preferire.</p>
+                </div>
+            </div>
+
+            <div class="text-center pt-4">
+                <button onclick="switchTab('tab-ibe')" class="bg-gradient-to-r from-purple-500 to-amber-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-purple-600 hover:to-amber-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione sull'IBE ➔</button>
+            </div>
+        </section>
+
+        <!-- TAB 1: IBE E CRITERI -->
+        <section id="tab-ibe" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 1: Inferenza alla Spiegazione Migliore e Criteri di Selezione (5 Quesiti)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Valuta le ipotesi concorrenti in base a testabilità, semplicità, fertilità e ampiezza. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ibe-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 2: CAUSALITÀ VS CORRELAZIONE -->
+        <section id="tab-causalita" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 2: Distinzione tra Causalità e Correlazione (5 Quesiti)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Individua le cause comuni sottostanti e previeni la confusione tra compresenza e causa-effetto. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="causalita-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 3: METODO SCIENTIFICO & SEMMELWEIS -->
+        <section id="tab-metodo" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 3: Il Metodo Scientifico e il Caso Storico di Semmelweis (5 Quesiti)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Analizza la concatenazione di Abduzione, Deduzione e Induzione nella scoperta scientifica. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="metodo-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 4: CLASSIFICAZIONE MATCHING -->
+        <section id="tab-classificazione" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti della Logica Abduttiva (8 Coppie)</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div id="matching-terms" class="space-y-2.5"></div>
+                    <div id="matching-defs" class="space-y-2.5"></div>
+                </div>
+                <div id="matching-feedback" class="text-xs sm:text-sm font-semibold pt-2"></div>
+            </div>
+        </section>
+
+        <!-- TAB 5: CLOZE TEST -->
+        <section id="tab-cloze" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test sul Ragionamento Abduttivo</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
+                    Il ragionamento abduttivo consiste nel cercare la <select id="cloze-1" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="spiegazione migliore">spiegazione migliore</option><option value="deduzione certa">deduzione certa</option></select> per un dato osservato o sorprendente. In lingua inglese questo processo è noto come <select id="cloze-2" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="IBE">IBE</option><option value="Modus Ponens">Modus Ponens</option></select>. Per scegliere tra più ipotesi si usano criteri come la <select id="cloze-3" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="testabilità">testabilità</option><option value="mancanza di dati">mancanza di dati</option></select> empirica e la <select id="cloze-4" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="semplicità">semplicità</option><option value="complessità">complessità</option></select>, nota anche come Rasoio di Ockham. Occorre prestare attenzione a non scambiare la semplice <select id="cloze-5" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="correlazione">correlazione</option><option value="identità">identità</option></select> (presenza contemporanea di due eventi) con la reale <select id="cloze-6" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="causalità">causalità</option><option value="probabilità">probabilità</option></select>. Nel metodo scientifico, l'abduzione genera l'ipotesi, la <select id="cloze-7" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="deduzione">deduzione</option><option value="fallacia">fallacia</option></select> ne ricava le previsioni verificabili, e infine l'<select id="cloze-8" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="induzione">induzione</option><option value="abduzione">abduzione</option></select> testa empiricamente le previsioni con gli esperimenti. Un esempio storico celebre è la scoperta del medico <select id="cloze-9" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="Ignác Semmelweis">Ignác Semmelweis</option><option value="Bertrand Russell">Bertrand Russell</option></select> sulla prevenzione della febbre puerperale mediante lavaggio delle mani con <select id="cloze-10" class="bg-slate-800 text-purple-300 rounded px-2 py-1"><option value="">[?]</option><option value="soluzione di cloro">soluzione di cloro</option><option value="alcol puro">alcol puro</option></select>.
+                </div>
+                <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-purple-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
+                <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
+            </div>
+        </section>
+
+        <!-- TAB 6: REPORT -->
+        <section id="tab-report" class="tab-content hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl text-center space-y-6">
+                <h2 class="font-cinzel text-2xl font-bold text-purple-400">Valutazione Finale: Ragionamento Abduttivo</h2>
+                <div class="text-4xl font-black text-purple-400" id="report-score">0 / 100 XP</div>
+                <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
+                <div class="flex justify-center gap-4">
+                    <button onclick="window.print()" class="bg-purple-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
+                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
+                </div>
+            </div>
+
+            <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-purple-500/40 text-center space-y-6">
+                <div class="border-2 border-dashed border-purple-500/30 p-8 rounded-2xl space-y-6">
+                    <div class="font-cinzel text-purple-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Abduttiva</div>
+                    <p class="text-slate-300 text-sm">Si attesta che lo studente / la studentessa:</p>
+                    <div id="cert-student-name" class="font-cinzel text-2xl font-bold text-white underline decoration-purple-500 decoration-2">Studente</div>
+                    <p class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
+                        ha superato con successo la valutazione di analisi investigativa e scientifica su:
+                        <br><strong class="text-purple-400">"Inferenza alla Spiegazione Migliore (IBE), Criteri di Selezione, Causalità vs Correlazione, Integrazione nel Metodo Scientifico"</strong>
+                    </p>
+                    <div class="flex justify-around items-center pt-6 border-t border-slate-800 text-xs text-slate-400">
+                        <div><span>Punteggio Conseguito:</span><div id="cert-score" class="font-bold text-purple-400 text-base">0 / 100 XP</div></div>
+                        <div><span>Livello Raggiunto:</span><div id="cert-title" class="font-bold text-amber-400 text-base">In corso</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
+        <a href="index.html" class="hover:text-purple-400 transition-colors">
+            <i class="fa-solid fa-house mr-1"></i> Home Portale
+        </a>
+        <span>•</span>
+        <a href="pensiero-critico.html" class="hover:text-purple-400 transition-colors">
+            <i class="fa-solid fa-diagram-project mr-1"></i> Pensiero Critico
+        </a>
+    </footer>
+
+    <script>
+        const state = { 
+            studentName: "Studente", 
+            audioEnabled: true, 
+            ibeAnswers: {}, 
+            causAnswers: {}, 
+            metAnswers: {}, 
+            matchedPairs: {}, 
+            clozeScore: 0, 
+            clozeLocked: false,
+            selectedTermId: null,
+            activeIbeData: [],
+            activeCausData: [],
+            activeMetData: [],
+            activeMatchingTerms: [],
+            activeMatchingDefs: []
+        };
+
+        let audioCtx = null;
+        function playSound(type) {
+            if (!state.audioEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                if (type === 'click') { osc.frequency.setValueAtTime(400, audioCtx.currentTime); gain.gain.setValueAtTime(0.04, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.04); }
+                else if (type === 'correct') { osc.frequency.setValueAtTime(880, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+                else if (type === 'error') { osc.frequency.setValueAtTime(220, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+            } catch(e){}
+        }
+
+        function toggleAudio() { state.audioEnabled = !state.audioEnabled; }
+        function updateStudentName(val) { 
+            state.studentName = val || "Studente"; 
+            const certName = document.getElementById('cert-student-name');
+            if(certName) certName.innerText = state.studentName;
+        }
+
+        function shuffle(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // ================= POOL QUESITI ABDUZIONE =================
+        const ibePool = [
+            {
+                id: 101, title: "Caso della Pianta che Ingiallisce",
+                text: "«La pianta sul davanzale ha le foglie ingiallite. Spiegazione 1: soffre per una malattia rara e sconosciuta dell'aria. Spiegazione 2: non riceve abbastanza luce solare.»",
+                question: "Perché la Spiegazione 2 è nettamente superiore secondo i criteri dell'IBE?",
+                options: [
+                    "Perché è testabile (spostandola al sole), semplice, fertile e conforme alla biologia (conservatorismo).",
+                    "Perché la malattia rara è una spiegazione più affascinante.",
+                    "Perché la luce solare è una fallacia formale.",
+                    "Perché la Spiegazione 1 richiede un Modus Tollens."
+                ],
+                correct: 0, explanation: "La Spiegazione 2 soddisfa i criteri di testabilità diretta, semplicità (Rasoio di Ockham) e coerenza con le conoscenze biologiche."
+            },
+            {
+                id: 102, title: "Impronte sulla Spiaggia Deserta",
+                text: "«Ti trovi su una spiaggia isolata e vedi delle fresche impronte di scarpe umane sulla sabbia.»",
+                question: "Quale ipotesi rappresenta la Spiegazione Migliore (IBE)?",
+                options: [
+                    "Una persona è camminata sulla spiaggia prima di te lasciando le impronte.",
+                    "Gli alieni sono atterrati per riprodurre forme di scarpe.",
+                    "Un'anatra ha indossato delle scarpe per passeggiare.",
+                    "Le formiche hanno scavato la sabbia simulando impronte."
+                ],
+                correct: 0, explanation: "L'ipotesi dell'uomo è la spiegazione più semplice, plausibile e conservativa rispetto al mondo reale."
+            },
+            {
+                id: 103, title: "L'Indagine di Sherlock Holmes a Carnaby Street",
+                text: "«Sherlock Holmes trova un uomo ricco ucciso. Ha tre ipotesi: Maggiordomo (H1), Moglie (H2), Collega (H3). Il maggiordomo ha un alibi verificato da scontrini e biglietti aerei.»",
+                question: "Che valore ha l'alibi del maggiordomo nel processo abduttivo?",
+                options: [
+                    "Elimina l'ipotesi H1 in quanto incompatibile con le prove empiriche raccolte.",
+                    "Dimostra la colpevolezza automatica della moglie.",
+                    "È una fallacia dello Strawman.",
+                    "È una generalizzazione induttiva forte."
+                ],
+                correct: 0, explanation: "L'eliminazione di un'ipotesi smentita dai fatti (alibi) restringe il campo delle spiegazioni plausibili rimaste."
+            },
+            {
+                id: 104, title: "Criterio del Rasoio di Ockham (Semplicità)",
+                text: "«Due teorie spiegano lo stesso fenomeno con la stessa efficacia, ma la Teoria A richiede 2 assunzioni mentre la Teoria B ne richiede 10 non verificate.»",
+                question: "Cosa prescrive il Rasoio di Ockham?",
+                options: [
+                    "Scegliere la Teoria A perché non moltiplica le entità o le assunzioni oltre la necessità.",
+                    "Scegliere la Teoria B perché più complessa e dettagliata.",
+                    "Scartarle entrambe perché l'abduzione è inaffidabile.",
+                    "Scegliere la teoria formulata per prima nel tempo."
+                ],
+                correct: 0, explanation: "Il principio di semplicità (Rasoio di Ockham) impone di preferire l'ipotesi con il minor numero di elementi ipotetici non necessari."
+            },
+            {
+                id: 105, title: "Rumore sul Tetto di Notte",
+                text: "«Senti un forte tonfo sul tetto di casa durante una tempesta di vento.»",
+                question: "Quale spiegazione rispetta il principio di CONSERVATORISMO (coerenza con le conoscenze noti)?",
+                options: [
+                    "Un ramo spezzato dal vento è caduto sul tetto.",
+                    "Un drago mitologico si è posato sulle tegole.",
+                    "Un meteorite di diamante si è posato senza fare danni.",
+                    "La gravità terrestre è momentaneamente cessata."
+                ],
+                correct: 0, explanation: "L'ipotesi del ramo è conservativa (in linea con la fisica ed il meteo) e semplice rispetto ad assunzioni stravaganti."
+            },
+            {
+                id: 106, title: "Batteria del Computer Scarica",
+                text: "«Premendo il tasto di accensione il portatile rimane completamente spento.»",
+                question: "Qual è la prima ipotesi abduttiva da sottoporre a test rapido?",
+                options: [
+                    "La batteria è totalmente scarica o il cavo è scollegato (facilmente testabile inserendo la presa).",
+                    "Un impulso elettromagnetico solare ha distrutto solo il tuo pc.",
+                    "Il processore si è liquefatto per fusione fredda.",
+                    "È stato commesso un errore di Modus Tollens."
+                ],
+                correct: 0, explanation: "La carica della batteria è la spiegazione più semplice e immediatamente testabile."
+            },
+            {
+                id: 107, title: "Criterio della Fertilità",
+                text: "«Una buona spiegazione scientifica non si limita a giustificare il fatto passato, ma permette di PREVEDERE nuovi fenomeni mai osservati prima.»",
+                question: "Quale criterio dell'IBE definisce questa capacità generativa?",
+                options: ["Fertilità dell'ipotesi", "Conservatorismo", "Vaghezza del definiens", "Campione rappresentativo"],
+                correct: 0, explanation: "La fertilità indica la capacità di un'ipotesi di spalancare nuove previsioni e scoperte scientifiche."
+            },
+            {
+                id: 108, title: "Automobile che Sbanda sulla Strada",
+                text: "«Vedi un'auto che sbanda su un rettilineo asciutto in pieno giorno.»",
+                question: "Quale tra queste è la Spiegazione Migliore (IBE)?",
+                options: [
+                    "Il conducente ha avuto un colpo di sonno o un malore, oppure un pneumatico è esploso.",
+                    "L'asfalto si è trasformato temporaneamente in olio magico.",
+                    "La forza magnetica della Luna ha attratto l'auto.",
+                    "Il conducente è un fantasma."
+                ],
+                correct: 0, explanation: "Colpo di sonno o guasto meccanico sono spiegazioni conformi alle leggi fisiche e biologiche note."
+            }
+        ];
+
+        const causPool = [
+            {
+                id: 201, title: "Vendita di Gelati e Scottature Solari",
+                text: "«In estate aumenta la vendita di gelati e contemporaneamente aumenta la percentuale di scottature solari.»",
+                question: "Consumare gelati CAUSA le scottature solari?",
+                options: [
+                    "No, si tratta di una semplice CORRELAZIONE causata da un terzo fattore comune: il caldo estivo e il sole.",
+                    "Sì, gli ingredienti del gelato rendono la pelle sensibile ai raggi UV.",
+                    "Sì, è un Modus Ponens causale.",
+                    "È una fallacia dello Strawman."
+                ],
+                correct: 0, explanation: "La co-variazione è dovuta alla stagione estiva (causa comune): il caldo fa mangiare gelati e il sole causa scottature."
+            },
+            {
+                id: 202, title: "Mal di Testa a Scuola e Qualità dell'Aria",
+                text: "«Molti studenti soffrono di mal di testa la mattina. Il preside verifica le ipotesi: aria viziata, lucernari, mancata colazione. Nota che l'aria nella stanza è priva di ricambio.»",
+                question: "Come viene stabilito il nesso di CAUSALITÀ tra qualità dell'aria e mal di testa?",
+                options: [
+                    "Verificando che aerando le aule i mal di testa scompaiono negli studenti (senza causa l'effetto cessa).",
+                    "Intervistando un cantante famoso.",
+                    "Supponendo che i lucernari siano la causa a prescindere dalle prove.",
+                    "Con un sondaggio telefonico sui diplomati."
+                ],
+                correct: 0, explanation: "La causalità si dimostra quando l'eliminazione diretta della presunta causa (aria viziata) fa cessare l'effetto (mal di testa)."
+            },
+            {
+                id: 203, title: "Numero di Cicogne e Nascite nei Villaggi",
+                text: "«Nei villaggi rurali in cui si trovano più nidi di cicogne si registra un numero più alto di nascite di bambini.»",
+                question: "Che relazione sussiste tra cicogne e neonati?",
+                options: [
+                    "Mera Correlazione: i villaggi più grandi o con case più ampie attraggono più cicogne e hanno più famiglie giovani.",
+                    "Causalità diretta: le cicogne portano i bambini come nelle favole.",
+                    "Fallacia dell'argomento fantoccio.",
+                    "Sillogismo categorico perfetto."
+                ],
+                correct: 0, explanation: "Le dimensioni del villaggio e il numero di case ampie sono la variabile nascosta che correla i due fenomeni."
+            },
+            {
+                id: 204, title: "Uso dello Smartphone e Insonnia",
+                text: "«Chi usa lo smartphone a letto prima di dormire impiega in media 45 minuti in più per addormentarsi.»",
+                question: "Come si dimostra la Causalità rispetto alla semplice correlazione?",
+                options: [
+                    "Studiando l'effetto biologico della luce blu sulle retine e vedendo che eliminando lo schermo la melatonina risale.",
+                    "Affermando che tutti gli schermi sono cattivi.",
+                    "Facendo un appello alla tradizione.",
+                    "Applicando il principio del terzo escluso."
+                ],
+                correct: 0, explanation: "Il meccanismo biologico (luce blu -> soppressione melatonina) dimostra il nesso di causa-effetto reale."
+            },
+            {
+                id: 205, title: "Scarpe da Ginnastica e Prestazioni Corsa",
+                text: "«Atleti che indossano scarpe di alta gamma corrono più veloci di atleti con scarpe usurate.»",
+                question: "Quale altro fattore causa potrebbe influenzare questa correlazione?",
+                options: [
+                    "Gli atleti con scarpe di alta gamma si allenano con professionisti e hanno diete migliori (variabili di confusione).",
+                    "Le scarpe costose contengono un Modus Ponens.",
+                    "È un errore di calcolo delle probabilità P(E).",
+                    "Le scarpe sono un cigno nero."
+                ],
+                correct: 0, explanation: "Gli atleti ricchi o professionisti hanno scarpe migliori ma anche allenatori e nutrizionisti migliori (cause multiple)."
+            },
+            {
+                id: 206, title: "Ombrelli Aperti e Pioggia",
+                text: "«Ogni volta che le persone aprono gli ombrelli per strada, l'asfalto diviene bagnato.»",
+                question: "Aprire gli ombrelli è la CAUSA dell'asfalto bagnato?",
+                options: [
+                    "No, la pioggia è la causa comune di entrambi i fenomeni.",
+                    "Sì, l'ombrello rilascia acqua sull'asfalto.",
+                    "Sì, è un principio di identità.",
+                    "È una fallacia di falsa dicotomia."
+                ],
+                correct: 0, explanation: "La pioggia fa aprire gli ombrelli e bagna l'asfalto; gli ombrelli non causano la bagnatura dell'asfalto."
+            },
+            {
+                id: 207, title: "Definizione Rigorosa di Causalità",
+                text: "«Perché vi sia una relazione di causalità autentica tra Evento A (causa) ed Evento B (effetto).»",
+                question: "Quale condizione è indispensabile?",
+                options: [
+                    "È necessario che A preceda B e che senza il verificarsi di A l'effetto B non si verifichi a parità di condizioni.",
+                    "Basta che A e B avvengano nello stesso mese.",
+                    "Basta che A e B siano entrambi graditi alle persone.",
+                    "È sufficiente un campione di 2 persone."
+                ],
+                correct: 0, explanation: "La causalità richiede una relazione controfattuale: se non si fosse verificato A, B non si sarebbe verificato."
+            },
+            {
+                id: 208, title: "Consumo di Caffè e Rischio Cardiovascolare",
+                text: "«In uno studio iniziale, i forti bevitori di caffè mostravano maggiori problemi cardiaci. Si scoprì che la maggior parte dei forti bevitori di caffè era anche forte fumatrice.»",
+                question: "Cosa rappresentava il fumo in questo studio?",
+                options: [
+                    "Una variabile di confusione (confounding factor) che creava una falsa correlazione tra caffè e problemi cardiaci.",
+                    "Un Modus Tollens valido.",
+                    "Un'ipotesi di Rasoio di Ockham.",
+                    "Una premessa nascosta normativa."
+                ],
+                correct: 0, explanation: "Isolando il fumo, si è scoperto che il caffè da solo non causava i danni cardiaci; il vero responsabile era il tabacco."
+            }
+        ];
+
+        const metodoPool = [
+            {
+                id: 301, title: "Caso Semmelweis: Il Mistero della Febbre Puerperale (1847)",
+                text: "«Nel reparto maternità guidato dai medici la mortalità delle neomamme era del 10%, mentre in quello delle levatrici era dell'1%.»",
+                question: "Quale ipotesi ABDUTTIVA rivoluzionaria formulò Semmelweis?",
+                options: [
+                    "I medici, arrivando dalla sala settoria, trasportavano sulle mani 'particelle cadaveriche' invisibili che infettavano le partorienti.",
+                    "Le madri avevano paura della divisa dei medici.",
+                    "L'aria del reparto era affetta da demoni.",
+                    "Le levatrici usavano il Modus Ponens."
+                ],
+                correct: 0, explanation: "Semmelweis intuì abduttivamente la presenza di particelle infettive trasportate dalle mani non lavate dei medici."
+            },
+            {
+                id: 302, title: "Passaggio Deduttivo di Semmelweis",
+                text: "«Formulata l'ipotesi delle particelle cadaveriche, Semmelweis doveva ricavare una previsione verificabile.»",
+                question: "Quale PREVISIONE DEDUTTIVA ne derivò?",
+                options: [
+                    "Se l'ipotesi è vera, ALLORA obbligando i medici a lavarsi le mani con cloro prima delle visite la mortalità deve crollare.",
+                    "Tutte le neomamme devono smettere di partorire.",
+                    "Le levatrici devono andare in sala autoptica.",
+                    "La mortalità rimarrà sempre al 10%."
+                ],
+                correct: 0, explanation: "Dall'ipotesi generale deduce la conseguenza condizionale: lavaggio con cloro -> crollo drastico della mortalità."
+            },
+            {
+                id: 303, title: "Fase Induttiva della Scoperta di Semmelweis",
+                text: "«Imposto l'obbligo del lavaggio delle mani con cloro, la mortalità nel reparto medici crollò dall'10% a meno dell'1% per mesi.»",
+                question: "Quale ruolo ha giocato l'INDUZIONE in questo momento finale?",
+                options: [
+                    "I dati ripetuti e costanti degli esperimenti hanno confermato induttivamente la legge generale della disinfezione.",
+                    "Ha dimostrato che il cloro è una fallacia.",
+                    "Ha eliminato l'uso della matematica.",
+                    "Ha creato un bias di autoselezione."
+                ],
+                correct: 0, explanation: "La ripetizione costante del successo sperimentale consolida induttivamente la scoperta come principio scientifico."
+            },
+            {
+                id: 304, title: "Ciclo Triadico del Metodo Scientifico",
+                text: "«Il metodo scientifico integra in una sequenza circolare i tre tipi di ragionamento.»",
+                question: "Qual è la sequenza logica corretta nella ricerca?",
+                options: [
+                    "1. Abduzione (scoperta/ipotesi) -> 2. Deduzione (previsione) -> 3. Induzione (test ed esperimenti).",
+                    "1. Deduzione -> 2. Abduzione -> 3. Fallacia.",
+                    "1. Induzione -> 2. Sillogismo -> 3. Abduzione.",
+                    "1. Bias -> 2. Cigno Nero -> 3. Deduzione."
+                ],
+                correct: 0, explanation: "L'abduzione genera l'ipotesi creativa, la deduzione ne trae le conseguenze testabili, l'induzione la verifica sul campo."
+            },
+            {
+                id: 305, title: "Ipotesi Fantasioses Scartate da Semmelweis",
+                text: "«Semmelweis valutò anche se la causa fosse la posizione supina o la presenza del sacerdote con la campanella.»",
+                question: "Perché queste ipotesi vennero SCARTATE?",
+                options: [
+                    "Perché modificando la posizione o il tragitto del sacerdote il tasso di mortalità non cambiava minimamente.",
+                    "Perché il sacerdote usava il Modus Tollens.",
+                    "Perché il sacerdote era un cigno nero.",
+                    "Perché mancava il campione rappresentativo."
+                ],
+                correct: 0, explanation: "L'evidenza sperimentale smentiva le conseguenze dedotte da tali spiegazioni alternative."
+            },
+            {
+                id: 306, title: "Dato Sorprendente (Puzzlement)",
+                text: "«In ogni indagine scientifica il punto di partenza è un 'fatto sorprendente' che smentisce le teorie attuali.»",
+                question: "Quale tipo di ragionamento si attiva per primo di fronte alla sorpresa?",
+                options: [
+                    "Il ragionamento ABDUTTIVO per generare nuove idee di spiegazione.",
+                    "Il ragionamento deduttivo categorico.",
+                    "Un calcolo delle probabilità su dadi.",
+                    "Un sondaggio di opinione."
+                ],
+                correct: 0, explanation: "La sorpresa e l'enigma attivano il salto creativo dell'abduzione per trovare una spiegazione plausibile."
+            },
+            {
+                id: 307, title: "Scetticismo dei Colleghi di Semmelweis",
+                text: "«All'epoca i primari rifiutarono la teoria di Semmelweis perché contraria alla medicina tradizionale delle umori.»",
+                question: "Quale criterio di selezione delle ipotesi ostacolò la teoria di Semmelweis?",
+                options: [
+                    "Mancanza di Conservatorismo (la teoria entrava in conflitto con i pregiudizi della medicina del 1800).",
+                    "Mancanza di testabilità.",
+                    "Mancanza di campioni.",
+                    "Rasoio di Ockham invalido."
+                ],
+                correct: 0, explanation: "Il conservatorismo eccessivo dei colleghi rifiutò l'idea rivoluzionaria poiché smentiva la tradizione dell'epoca."
+            },
+            {
+                id: 308, title: "Valore delle Particelle Cadaveriche nella Storia della Scienza",
+                text: "«L'ipotesi delle 'particelle cadaveriche' anticipò di decenni la teoria dei germi di Pasteur e Koch.»",
+                question: "Perché questa ipotesi è definita FERTILI in senso scientifico?",
+                options: [
+                    "Perché ha spianato la strada all'antisepsi moderna e alla microbiologia.",
+                    "Perché era una poesia medica.",
+                    "Perché usava solo il latino.",
+                    "Perché ha eliminato la statistica."
+                ],
+                correct: 0, explanation: "La fertilità risiede nella capacità di un'ipotesi di far progredire l'intera scienza medica futura."
+            }
+        ];
+
+        const matchingPairsPool = [
+            { id: "m1", term: "Inferenza IBE", text: "Processo abduttivo che seleziona la spiegazione più plausibile per un fatto." },
+            { id: "m2", term: "Rasoio di Ockham", term_alt: "Semplicità", text: "Principio che impone di scegliere l'ipotesi col minor numero di assunzioni." },
+            { id: "m3", term: "Testabilità", text: "Proprietà di un'ipotesi di poter essere sottoposta a verifica empirica." },
+            { id: "m4", term: "Fertilità dell'Ipotesi", text: "Capacità di una spiegazione di generare nuove previsioni e scoperte." },
+            { id: "m5", term: "Causalità Autentica", text: "Relazione diretta per cui senza la causa l'effetto non si verifica." },
+            { id: "m6", term: "Correlazione Semplice", text: "Semplice compresenza o co-variazione di due fenomeni senza legame diretto." },
+            { id: "m7", term: "Ignác Semmelweis", text: "Medico che intuì abduttivamente la causa della febbre puerperale nel 1847." },
+            { id: "m8", term: "Conservatorismo", text: "Criterio che valuta la coerenza dell'ipotesi con le teorie scientifiche note." },
+            { id: "m9", term: "Fatto Sorprendente", text: "Evento imprevisto che attiva la ricerca abduttiva di una nuova spiegazione." },
+            { id: "m10", term: "Ciclo Scientifico Triadico", text: "Sequenza coordinata di Abduzione (ipotesi), Deduzione (previsione), Induzione (test)." },
+            { id: "m11", term: "Variabile di Confusione", text: "Fattore nascosto che crea una falsa correlazione tra due eventi distinti." },
+            { id: "m12", term: "Disinfezione con Cloro", text: "Previsione deduttiva verificata da Semmelweis per azzerare la mortalità." }
+        ];
+
+        function renderIbe() {
+            const container = document.getElementById('ibe-container');
+            if(!container) return;
+            container.innerHTML = state.activeIbeData.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectIbe(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="ibe-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectIbe(qId, oIdx, btn) {
+            if (state.ibeAnswers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeIbeData.find(d => d.id === qId);
+            state.ibeAnswers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
+            }
+
+            const fb = document.getElementById(`ibe-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Valutazione IBE Esatta! (Risposta Registrata)</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Valutazione Errata e Bloccata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderCausalita() {
+            const container = document.getElementById('causalita-container');
+            if(!container) return;
+            container.innerHTML = state.activeCausData.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectCaus(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="caus-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectCaus(qId, oIdx, btn) {
+            if (state.causAnswers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeCausData.find(d => d.id === qId);
+            state.causAnswers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
+            }
+
+            const fb = document.getElementById(`caus-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Diagnosi Corretta! (Risposta Registrata)</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Diagnosi Errata e Bloccata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderMetodo() {
+            const container = document.getElementById('metodo-container');
+            if(!container) return;
+            container.innerHTML = state.activeMetData.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded-md border border-sky-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectMet(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="met-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectMet(qId, oIdx, btn) {
+            if (state.metAnswers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeMetData.find(d => d.id === qId);
+            state.metAnswers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
+            }
+
+            const fb = document.getElementById(`met-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Analisi Epistemologica Esatta! (Risposta Registrata)</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Analisi Errata e Bloccata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderMatching() {
+            const termsContainer = document.getElementById('matching-terms');
+            const defsContainer = document.getElementById('matching-defs');
+            if(!termsContainer || !defsContainer) return;
+            termsContainer.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
+            defsContainer.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
+        }
+
+        function selectMatchTerm(termId, btn) {
+            playSound('click');
+            state.selectedTermId = termId;
+
+            document.querySelectorAll('#matching-terms button').forEach(b => {
+                if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+            });
+            btn.className = "w-full text-left p-3 rounded-xl border-2 border-purple-500 bg-purple-950/80 text-xs font-bold text-purple-300 transition-all shadow-lg cursor-pointer";
+
+            const fb = document.getElementById('matching-feedback');
+            if(fb) {
+                fb.className = "text-xs font-semibold text-purple-400 pt-2";
+                fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!";
+            }
+        }
+
+        function selectMatchDef(matchId, btn) {
+            const fb = document.getElementById('matching-feedback');
+            if(!state.selectedTermId) {
+                playSound('error');
+                if(fb) {
+                    fb.className = "text-xs font-semibold text-rose-400 pt-2";
+                    fb.innerText = "Prima seleziona un termine nella colonna di sinistra!";
+                }
+                return;
+            }
+
+            if(state.selectedTermId === matchId) {
+                playSound('correct');
+                state.matchedPairs[matchId] = true;
+
+                const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
+                if(termBtn) {
+                    termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed";
+                    termBtn.disabled = true;
+                }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed";
+                btn.disabled = true;
+
+                if(fb) {
+                    fb.className = "text-xs font-bold text-emerald-400 pt-2";
+                    fb.innerText = "✓ Abbinamento corretto e bloccato!";
+                }
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => {
+                    if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer";
+                }, 1000);
+
+                if(fb) {
+                    fb.className = "text-xs font-bold text-rose-400 pt-2";
+                    fb.innerText = "✗ Abbinamento errato. Riprova!";
+                }
+            }
+            state.selectedTermId = null;
+            updateGlobalScore();
+        }
+
+        function checkCloze() {
+            if (state.clozeLocked) return;
+            playSound('click');
+            const answers = { 1: "spiegazione migliore", 2: "IBE", 3: "testabilità", 4: "semplicità", 5: "correlazione", 6: "causalità", 7: "deduzione", 8: "induzione", 9: "Ignác Semmelweis", 10: "soluzione di cloro" };
+            let correct = 0;
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById(`cloze-${i}`);
+                if(el) {
+                    el.disabled = true;
+                    if(el.value === answers[i]) { 
+                        correct++; 
+                        el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
+                    } else { 
+                        el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
+                    }
+                }
+            }
+            state.clozeScore = Math.round((correct / 10) * 100);
+            state.clozeLocked = true;
+
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed";
+                submitBtn.innerText = "Testo Verificato e Bloccato";
+            }
+
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) {
+                if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = "Perfetto! Testo completato senza errori (10/10)."; }
+                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Le risposte sono state bloccate.`; }
+            }
+            updateGlobalScore();
+        }
+
+        function updateGlobalScore() {
+            let ibeCorrect = 0; state.activeIbeData.forEach(d => { if(state.ibeAnswers[d.id] === d.correct) ibeCorrect++; });
+            let causCorrect = 0; state.activeCausData.forEach(d => { if(state.causAnswers[d.id] === d.correct) causCorrect++; });
+            let metCorrect = 0; state.activeMetData.forEach(d => { if(state.metAnswers[d.id] === d.correct) metCorrect++; });
+            let matchCount = Object.keys(state.matchedPairs || {}).length;
+
+            const total = Math.round((ibeCorrect / (state.activeIbeData.length || 1))*30 + 
+                                     (causCorrect / (state.activeCausData.length || 1))*25 + 
+                                     (metCorrect / (state.activeMetData.length || 1))*20 + 
+                                     (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
+                                     (state.clozeScore/100)*10);
+            const scoreText = document.getElementById('global-score-text');
+            if(scoreText) scoreText.innerText = `${total} / 100`;
+            return total;
+        }
+
+        function updateReport() {
+            const score = updateGlobalScore();
+            const repScore = document.getElementById('report-score');
+            if(repScore) repScore.innerText = `${score} / 100 XP`;
+            const badgeEl = document.getElementById('report-badge');
+            const certScore = document.getElementById('cert-score');
+            const certTitle = document.getElementById('cert-title');
+            if(certScore) certScore.innerText = `${score} / 100 XP`;
+
+            let titleText = "Novizio dell'Abduzione";
+            if(score >= 90) titleText = "Maestro dell'IBE e dell'Indagine Scientifico-Investigativa";
+            else if(score >= 75) titleText = "Analista di Epistemologia e Metodologia";
+            else if(score >= 55) titleText = "Praticante di Ragionamento Abduttivo";
+
+            if(badgeEl) badgeEl.innerText = titleText;
+            if(certTitle) certTitle.innerText = titleText;
+        }
+
+        function switchTab(tabId, btnElement) {
+            playSound('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+
+            if(btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                const navButtons = document.querySelectorAll('.tab-btn');
+                navButtons.forEach(b => {
+                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
+                        b.classList.add('active');
+                    }
+                });
+            }
+
+            if(tabId === 'tab-report') updateReport();
+        }
+
+        function setupRandomQuestions() {
+            state.ibeAnswers = {}; 
+            state.causAnswers = {}; 
+            state.metAnswers = {}; 
+            state.matchedPairs = {}; 
+            state.clozeScore = 0;
+            state.clozeLocked = false;
+            state.selectedTermId = null;
+
+            state.activeIbeData = shuffle(ibePool).slice(0, 5);
+            state.activeCausData = shuffle(causPool).slice(0, 5);
+            state.activeMetData = shuffle(metodoPool).slice(0, 5);
+
+            const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
+            state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
+            state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
+
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById(`cloze-${i}`);
+                if(el) {
+                    el.disabled = false;
+                    el.value = "";
+                    el.className = "bg-slate-800 text-purple-300 rounded px-2 py-1";
+                }
+            }
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.className = "bg-purple-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer";
+                submitBtn.innerText = "Verifica e Blocca Testo";
+            }
+            const clozeFb = document.getElementById('cloze-feedback');
+            if(clozeFb) clozeFb.innerText = "";
+
+            renderIbe(); 
+            renderCausalita(); 
+            renderMetodo(); 
+            renderMatching();
+            updateGlobalScore();
+        }
+
+        function resetAll() {
+            setupRandomQuestions();
+            switchTab('tab-studio');
+        }
+
+        function initApp() {
+            setupRandomQuestions();
+        }
+
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            initApp();
+        } else {
+            document.addEventListener('DOMContentLoaded', initApp);
+        }
+    </script>
+</body>
+</html>
