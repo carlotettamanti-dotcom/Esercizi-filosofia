@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio: Dimostrazioni dell'Esistenza di Dio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { emerald: { 450: '#10b981' } },
+                    fontFamily: { cinzel: ['Cinzel', 'serif'], sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <!-- Configurazione e Caricamento MathJax per LaTeX -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080d16; color: #f1f5f9; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .tab-btn.active { background-color: #0284c7 !important; color: #ffffff !important; border-color: #38bdf8 !important; box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.5); }
+        .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .badge-glow { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+        @media print {
+            body * { visibility: hidden; }
+            #printable-certificate, #printable-certificate * { visibility: visible; }
+            #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Header con Navigation Breadcrumb -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2 text-xs sm:text-sm">
+                <a href="index.html" class="text-slate-400 hover:text-amber-400 transition-colors flex items-center gap-1.5 font-semibold">
+                    <i class="fa-solid fa-house"></i> Home Portale
+                </a>
+                <span class="text-slate-600">/</span>
+                <a href="filosofia-medievale.html" class="text-slate-400 hover:text-amber-400 transition-colors font-semibold">
+                    Filosofia Medievale
+                </a>
+                <span class="text-slate-600">/</span>
+                <span class="text-amber-400 font-bold">Dimostrazioni dell'Esistenza di Dio</span>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-user-graduate absolute left-3 text-slate-400 text-xs"></i>
+                    <input type="text" id="student-name-input" placeholder="Inserisci il tuo nome" value="Studente" oninput="updateStudentName(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 w-40 sm:w-48">
+                </div>
+                <button onclick="toggleAudio()" id="sound-btn" class="p-2 rounded-lg bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-amber-400" title="Audio">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
+                </button>
+                <div class="flex items-center space-x-3 bg-slate-900 border border-amber-500/30 px-3.5 py-1.5 rounded-lg badge-glow">
+                    <div class="text-right">
+                        <span class="text-[10px] uppercase tracking-wider text-amber-400/80 block font-bold">Punti XP</span>
+                        <span id="global-score-text" class="text-sm font-extrabold text-amber-400">0 / 100</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-extrabold text-xs">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
+            <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
+                <i class="fa-solid fa-book-open text-amber-400"></i> 0. Quadro Teorico
+            </button>
+            <button onclick="switchTab('tab-ex1', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-brain text-emerald-400"></i> 1. L'Argomento Ontologico di Anselmo e le sue Obiezioni
+            </button>
+            <button onclick="switchTab('tab-ex2', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-scale-balanced text-amber-400"></i> 2. Le Cinque Vie A Posteriori di Tommaso d'Aquino
+            </button>
+            <button onclick="switchTab('tab-ex3', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-puzzle-piece text-purple-400"></i> 3. Obiezioni Filosofiche, Scientifiche ed Evoluzionismo
+            </button>
+            <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti Concettuali
+            </button>
+            <button onclick="switchTab('tab-cloze', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Testo Guidato
+            </button>
+            <button onclick="switchTab('tab-report', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-certificate text-yellow-400"></i> Certificato
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+        <!-- TAB 0: STUDIO -->
+        <section id="tab-studio" class="tab-content space-y-8">
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border-amber-500/20 relative overflow-hidden">
+                <div class="max-w-3xl space-y-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+                        <i class="fa-solid fa-graduation-cap mr-1.5"></i> Modulo 3: Teologia Razionale & Metafisica
+                    </span>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-amber-400">Dimostrazioni dell'Esistenza di Dio</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Analisi epistemologica comparata dell'Argomento Ontologico di Anselmo d'Aosta e delle Cinque Vie A Posteriori di Tommaso d'Aquino, con le relative obiezioni storiche (Gaunilone, Kant, Darwin).
+                    </p>
+                </div>
+            </div>
+
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-sitemap"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">1. Argomenti A Priori vs A Posteriori</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Gli argomenti <strong>A Priori</strong> (Ontologico di Anselmo) prescindono dall'esperienza sensibile e deducono l'esistenza di Dio dal puro concetto. Gli argomenti <strong>A Posteriori</strong> (Cosmologico e Teleologico) partono dall'osservazione empirica del cosmo.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-gem"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">2. L'Argomento Ontologico (Anselmo)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Nel <em>Proslogion</em> (1078), Anselmo definisce Dio: <em>"ciò di cui nulla può pensarsi più grande"</em>. Se Dio esistesse solo nella mente (<em>in intellectu</em>), si potrebbe pensarlo anche nella realtà (<em>in re</em>), che è maggiore: cadendo in una palese contraddizione logica.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-[#k] fa-coins"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">3. Obiezioni all'Argomento Ontologico</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>Gaunilone:</strong> paradosso dell'Isola Perfetta. <strong>Tommaso:</strong> l'essenza divina è inconoscibile all'uomo. <strong>Kant:</strong> l'argomento dei 100 Talleri — l'esistenza non è un predicato reale, non aggiunge nulla alla definizione del concetto.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-[#t] fa-arrows-spin"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">4. Le Prima 3 Vie di Tommaso (Cosmologiche)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>1. Motore Immobile:</strong> dal moto sensibile (potenza/atto). <strong>2. Causa Incausa:</strong> dall'ordine delle cause efficienti. <strong>3. Ente Necessario:</strong> dal contingente (mondi possibili). Tutte e tre evitano il <em>regresso all'infinito</em>.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">5. Quarta e Quinta Via (Gradi e Fine)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>4. Gradi di Bontà:</strong> la scala delle perfezioni riscontrate esige uno standard sommo assoluto. <strong>5. Disegno Intelligente (Teleologica):</strong> gli enti naturali privi di ragione agiscono ordinatamente per un fine, diretti da un'Intelligenza (come la freccia dall'arciere).</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-dna"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">6. Obiezioni Filosofiche e Scientifiche</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Mancata dimostrazione dell'unicità monoteistica; regresso applicabile a Dio stesso; il problema del male naturale (teodicea); l'evoluzione per <strong>selezione naturale di Darwin</strong> che spiega l'ordine biologico senza ricorrere a un Progettista Divino.</p>
+                </div>
+            </div>
+
+
+            <div class="text-center pt-4">
+                <button onclick="switchTab('tab-ex1')" class="bg-gradient-to-r from-amber-500 to-emerald-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-amber-600 hover:to-emerald-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione Guidata ➔</button>
+            </div>
+        </section>
+
+        <!-- TAB 1: ESERCIZIO 1 -->
+        <section id="tab-ex1" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: L'Argomento Ontologico di Anselmo e le sue Obiezioni (5 Quesiti estratti da Pool)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Esamina la dimostrazione del Proslogion, la prova per riduzione all'assurdo, l'Isola Perfetta di Gaunilone e i Cento Talleri di Kant. <em>(Le risposte selezionate vengono bloccate subito)</em></p>
+            </div>
+            <div id="ex1-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 2: ESERCIZIO 2 -->
+        <section id="tab-ex2" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Le Cinque Vie A Posteriori di Tommaso d'Aquino (5 Quesiti estratti da Pool)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Analizza le 5 vie (Motore Immobile, Causa Incausata, Ente Necessario, Gradi di Perfezione, Disegno Intelligente) e il regresso all'infinito. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex2-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 3: ESERCIZIO 3 -->
+        <section id="tab-ex3" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Obiezioni Filosofiche, Scientifiche ed Evoluzionismo (5 Quesiti estratti da Pool)</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Valuta le critiche sull'unicità divina, il problema del male naturale, il paradosso della pietra e la Selezione Naturale di Darwin. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex3-container" class="space-y-6"></div>
+        </section>
+
+        <!-- TAB 4: CLASSIFICAZIONE MATCHING -->
+        <section id="tab-classificazione" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Concettuali sull'Esistenza di Dio (8 Coppie Estratte)</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div id="matching-terms" class="space-y-2.5"></div>
+                    <div id="matching-defs" class="space-y-2.5"></div>
+                </div>
+                <div id="matching-feedback" class="text-xs sm:text-sm font-semibold pt-2"></div>
+            </div>
+        </section>
+
+        <!-- TAB 5: CLOZE TEST -->
+        <section id="tab-cloze" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test sulle Prove dell'Esistenza di Dio</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
+                    Il dibattito filosofico sull'esistenza di Dio distingue tra prove <select id="cloze-1" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="a priori">a priori</option><option value="scientifiche">scientifiche</option></select>, indipendenti dall'esperienza, e prove <select id="cloze-2" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="a posteriori">a posteriori</option><option value="astratte">astratte</option></select>, basate sui dati del cosmo. L'argomento ontologico di <select id="cloze-3" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Anselmo d'Aosta">Anselmo d'Aosta</option><option value="Tommaso d'Aquino">Tommaso d'Aquino</option></select> definisce Dio come ciò di cui nulla può pensarsi di <select id="cloze-4" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="più grande">più grande</option><option value="più piccolo">più piccolo</option></select>. Se Dio esistesse solo nell'intelletto e non <select id="cloze-5" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="in re">in re</option><option value="in somno">in somno</option></select>, si cadrebbe in contraddizione. L'abate Gaunilone criticò questa prova con l'esempio dell' <select id="cloze-6" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="isola perfetta">isola perfetta</option><option value="città ideale">città ideale</option></select>, mentre Immanuel Kant dimostrò con i cento talleri che l'esistenza non è un <select id="cloze-7" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="predicato reale">predicato reale</option><option value="soggetto">soggetto</option></select>. Di contro, Tommaso d'Aquino elaborò nella Somma Teologica le <select id="cloze-8" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="cinque vie">cinque vie</option><option value="quattro cause">quattro cause</option></select> a posteriori. Tra queste, la prima conduce al Primo <select id="cloze-9" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Motore Immobile">Motore Immobile</option><option value="Pianeta">Pianeta</option></select> per evitare il regresso all'infinito, mentre la quinta via teleologica è stata sfidata nell'Ottocento dalla teoria dell'evoluzione per selezione naturale di <select id="cloze-10" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Charles Darwin">Charles Darwin</option><option value="Isaac Newton">Isaac Newton</option></select>.
+                </div>
+                <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
+                <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
+            </div>
+        </section>
+
+        <!-- TAB 6: REPORT -->
+        <section id="tab-report" class="tab-content hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl text-center space-y-6">
+                <h2 class="font-cinzel text-2xl font-bold text-amber-400">Valutazione Finale: Dimostrazioni dell'Esistenza di Dio</h2>
+                <div class="text-4xl font-black text-amber-400" id="report-score">0 / 100 XP</div>
+                <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
+                <div class="flex justify-center gap-4">
+                    <button onclick="window.print()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
+                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
+                </div>
+            </div>
+
+            <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-amber-500/40 text-center space-y-6">
+                <div class="border-2 border-dashed border-amber-500/30 p-8 rounded-2xl space-y-6">
+                    <div class="font-cinzel text-amber-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Filosofica</div>
+                    <p class="text-slate-300 text-sm">Si attesta che lo studente / la studentessa:</p>
+                    <div id="cert-student-name" class="font-cinzel text-2xl font-bold text-white underline decoration-amber-500 decoration-2">Studente</div>
+                    <p class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
+                        ha superato con successo la verifica approfondita su:
+                        <br><strong class="text-amber-400">"Dimostrazioni dell'Esistenza di Dio: L'Argomento Ontologico di Anselmo, Le Cinque Vie di Tommaso d'Aquino e le Critiche di Kant e Darwin"</strong>
+                    </p>
+                    <div class="flex justify-around items-center pt-6 border-t border-slate-800 text-xs text-slate-400">
+                        <div><span>Punteggio Conseguito:</span><div id="cert-score" class="font-bold text-amber-400 text-base">0 / 100 XP</div></div>
+                        <div><span>Livello Raggiunto:</span><div id="cert-title" class="font-bold text-emerald-400 text-base">In corso</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
+        <a href="index.html" class="hover:text-amber-400 transition-colors">
+            <i class="fa-solid fa-house mr-1"></i> Home Portale
+        </a>
+        <span>•</span>
+        <a href="pensiero-critico.html" class="hover:text-amber-400 transition-colors">
+            <i class="fa-solid fa-diagram-project mr-1"></i> Pensiero Critico & Filosofia
+        </a>
+    </footer>
+
+    <script>
+        const state = { 
+            studentName: "Studente", 
+            audioEnabled: true, 
+            ex1Answers: {}, 
+            ex2Answers: {}, 
+            ex3Answers: {}, 
+            matchedPairs: {}, 
+            clozeScore: 0, 
+            clozeLocked: false,
+            selectedTermId: null,
+            activeEx1Data: [],
+            activeEx2Data: [],
+            activeEx3Data: [],
+            activeMatchingTerms: [],
+            activeMatchingDefs: []
+        };
+
+        let audioCtx = null;
+        function playSound(type) {
+            if (!state.audioEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                if (type === 'click') { osc.frequency.setValueAtTime(400, audioCtx.currentTime); gain.gain.setValueAtTime(0.04, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.04); }
+                else if (type === 'correct') { osc.frequency.setValueAtTime(880, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+                else if (type === 'error') { osc.frequency.setValueAtTime(220, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+            } catch(e){}
+        }
+
+        function toggleAudio() { state.audioEnabled = !state.audioEnabled; }
+        function updateStudentName(val) { 
+            state.studentName = val || "Studente"; 
+            const certName = document.getElementById('cert-student-name');
+            if(certName) certName.innerText = state.studentName;
+        }
+
+        function shuffle(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // ================= POOL QUESITI DATA =================
+        const ex1Pool = [
+    {
+        "id": 101,
+        "title": "Classificazione degli Argomenti",
+        "text": "La filosofia medievale ha diviso le prove dell'esistenza di Dio in due grandi famiglie epistemologiche: a priori e a posteriori.",
+        "question": "Cosa caratterizza un argomento a priori per l'esistenza di Dio?",
+        "options": [
+            "È indipendente dalle percezioni sensibili e dimostra Dio a partire dal puro ragionamento sul concetto.",
+            "Richiede necessariamente l'osservazione scientifica dei fossili ed esperimenti empirici.",
+            "Dipende dal fatto che l'uomo possiede cinque sensi ben sviluppati.",
+            "È un argomento basato esclusivamente sull'autorità politica del sovrano."
+        ],
+        "correct": 0,
+        "explanation": "Un argomento a priori prescinde dall'esperienza sensibile del mondo corporeo: con il solo ragionamento astratto sulla definizione si pretende di dimostrare Dio."
+    },
+    {
+        "id": 102,
+        "title": "La Formula del Proslogion di Anselmo",
+        "text": "Nel Proslogion (1078), Anselmo d'Aosta fornisce una definizione celeberrima del concetto di Dio in lingua latina.",
+        "question": "Qual è la celebre definizione anselmiana di Dio?",
+        "options": [
+            "Aliquid quo nihil maius cogitari possit (ciò di cui nulla può pensarsi più grande).",
+            "Ens causa sui (ente causa di se stesso).",
+            "Prima materia cosmica (la materia prima dell'universo).",
+            "Rex regum et dominus dominantium (Re dei re e signore dei signori)."
+        ],
+        "correct": 0,
+        "explanation": "Anselmo definisce Dio come l'essere massimo e perfetto: ciò di cui non è possibile pensare nulla di più grande."
+    },
+    {
+        "id": 103,
+        "title": "La Figura dello 'Stolto' del Salmo",
+        "text": "Anselmo si confronta con l'ateo, indicato con il termine biblico di 'stolto' ('Lo stolto disse in cuor suo: Dio non esiste').",
+        "question": "Cosa ammette lo stolto quando ascolta la definizione di Dio secondo Anselmo?",
+        "options": [
+            "Comprende il concetto nella sua mente (in intellectu), anche se sostiene che non esista nella realtà (in re).",
+            "Nega di aver compreso le parole della lingua latina.",
+            "Ammette subito che Dio esiste nella realtà senza fare obiezioni.",
+            "Afferma che il concetto di Dio è matematicamente impossibile."
+        ],
+        "correct": 0,
+        "explanation": "Lo stolto intende ciò che ode; ciò che egli intende si forma nel suo intelletto, anche se nega che quell'ente esista in re."
+    },
+    {
+        "id": 104,
+        "title": "Dimostrazione per Riduzione all'Assurdo",
+        "text": "Anselmo costruisce la prova dimostrando che la posizione dell'ateo conduce a una palese contraddizione logica.",
+        "question": "In che modo l'affermazione dell'ateo ('Dio esiste solo nella mente') cade in contraddizione?",
+        "options": [
+            "Se Dio esistesse solo nella mente, si potrebbe pensarlo anche esistente nella realtà (che è maggiore), rendendo Dio non più ciò di cui nulla è più grande.",
+            "Perché l'ateo viene incarcerato prima di finire il ragionamento.",
+            "Perché la mente dell'ateo non può contenere alcun concetto.",
+            "Perché la realtà empirica è inferiore ai concetti mentali."
+        ],
+        "correct": 0,
+        "explanation": "Se il massimo ente esistesse solo nella mente, si potrebbe pensare un ente uguale ma esistente anche nella realtà (che sarebbe più grande). Ma allora ciò di cui nulla è più grande sarebbe ciò di cui si può pensare qualcosa di più grande: contraddizione!"
+    },
+    {
+        "id": 105,
+        "title": "Obiezione dell'Isola Perfetta (Gaunilone)",
+        "text": "Il monaco Gaunilone rispose ad Anselmo nel Liber pro insipiente formulando una nota contro-analogia.",
+        "question": "In cosa consiste la critica dell'isola perfetta avanzata da Gaunilone?",
+        "options": [
+            "Possiamo concepire l'isola più perfetta immaginabile, ma questo non obbliga l'isola ad esistere realmente nel mare.",
+            "Che le isole non possono avere spiagge trasparenti.",
+            "Che Anselmo non aveva mai navigato in oceano.",
+            "Che le isole sono state create dal demiurgo platonico."
+        ],
+        "correct": 0,
+        "explanation": "Gaunilone mostra che se il metodo di Anselmo fosse valido, potremmo applicarlo all'idea dell'isola più perfetta e pretendere che esista nel mare reale, il che è assurdo."
+    },
+    {
+        "id": 106,
+        "title": "Replica di Anselmo a Gaunilone",
+        "text": "Anselmo rispose al Liber pro insipiente spiegando perché l'analogia dell'isola non è calzante.",
+        "question": "Qual è la differenza tra l'idea di un'isola e il concetto di Dio secondo Anselmo?",
+        "options": [
+            "L'isola è una realtà contingente sempre migliorabile; Dio è l'unico Ente Necessario e Massimo la cui negazione genera contraddizione.",
+            "L'isola è fatta di terra mentre Dio è fatto di fuoco.",
+            "L'isola esiste solo nei sogni dei marinai.",
+            "Gaunilone era un ateo dichiaratosi contro il papato."
+        ],
+        "correct": 0,
+        "explanation": "Un'isola è un ente contingente e finito a cui si può sempre aggiungere qualcosa; Dio è l'Ente Supremo Necessario, la cui definizione implica l'esistenza necessaria."
+    },
+    {
+        "id": 107,
+        "title": "L'Obiezione di Immanuel Kant (1781)",
+        "text": "Nella Critica della ragion pura, Immanuel Kant formula la più celebre demolizione dell'argomento ontologico.",
+        "question": "Qual è la tesi centrale di Kant contro l'argomento ontologico di Anselmo?",
+        "options": [
+            "L'esistenza non è un predicato reale o logico che si possa aggiungere al concetto di una cosa.",
+            "Che Dio è un concetto matematico falso.",
+            "Che Anselmo aveva copiato il Proslogion da Aristotele.",
+            "Che i concetti mentali non sono percepibili dal cervello."
+        ],
+        "correct": 0,
+        "explanation": "Kant spiega che 'esistere' non è un attributo come 'buono' o 'onnipotente'; il predicato di esistenza non aggiunge nulla al contenuto concettuale dell'oggetto."
+    },
+    {
+        "id": 108,
+        "title": "L'Esempio dei Cento Talleri di Kant",
+        "text": "Per rendere chiarissima la sua obiezione sul predicato di esistenza, Kant ricorre all'esempio di una somma di denaro.",
+        "question": "Cosa dimostra l'esempio dei 100 talleri pensati rispetto ai 100 talleri reali in tasca?",
+        "options": [
+            "Il concetto dei 100 talleri ha esattamente le stesse proprietà ed estensione sia che siano pensati sia che siano reali; ciò che li distingue è la posizione nell'esperienza empirica.",
+            "Che cento talleri pensati valgono il doppio di quelli reali.",
+            "Che non si possono contare le monete d'argento.",
+            "Che il valore del denaro cambia ogni giorno."
+        ],
+        "correct": 0,
+        "explanation": "Cento talleri reali non contengono un tallero in più rispetto a cento talleri concettuali. L'esistenza non è una proprietà interna del concetto, ma la sua attestazione empirica nel mondo."
+    }
+];
+        const ex2Pool = [
+    {
+        "id": 201,
+        "title": "La Strategia delle Cinque Vie di Tommaso",
+        "text": "Nella Somma Teologica (I, q. 2, a. 3), Tommaso d'Aquino rifiuta la prova a priori di Anselmo e propone cinque dimostrazioni.",
+        "question": "Qual è il punto di partenza comune a tutte e cinque le vie tomiste?",
+        "options": [
+            "Un fatto o fenomeno evidente riscontrabile nell'esperienza sensibile del mondo corporeo (A Posteriori).",
+            "Una definizione del concetto di Dio letta nel Proslogion.",
+            "Un'ispirazione mistica ricevuta in preghiera.",
+            "Un principio matematico puro indipendentemente dalla natura."
+        ],
+        "correct": 0,
+        "explanation": "Le cinque vie sono argomenti a posteriori: muovono tutte da un dato empirico certo e osservabile coi sensi nel mondo fisico."
+    },
+    {
+        "id": 202,
+        "title": "La Prima Via: Il Motore Immobile",
+        "text": "La prima via tomista riprende la Fisica e la Metafisica di Aristotele partendo dalla constatazione del movimento nel cosmo.",
+        "question": "Come procede il passaggio dal moto sensibile al Primo Motore Immobile?",
+        "options": [
+            "Ciò che si muove è mosso da altro (potenza in atto); la catena non può andare all'infinito, dunque occorre un Primo Motore che non sia mosso da altro.",
+            "Gli oggetti si muovono da soli per forza di volontà intrinseca.",
+            "Il movimento è un'illusione sensoriale che non richiede motori.",
+            "Tutti i motori si muovono in cerchio senza alcuna causa."
+        ],
+        "correct": 0,
+        "explanation": "Muovere significa trarre qualcosa dalla potenza all'atto. Per evitare il regresso all'infinito nelle cause motrici, si giunge al Primo Motore Immobile: Dio."
+    },
+    {
+        "id": 203,
+        "title": "La Seconda Via: La Causa Incausata",
+        "text": "La seconda via si basa sull'ordine delle cause efficienti presente nel mondo sensibile.",
+        "question": "Perché non è possibile procedere all'infinito nella catena delle cause efficienti?",
+        "options": [
+            "Se si eliminasse la prima causa, non vi sarebbero le cause intermedie né l'effetto ultimo; occorre quindi una Prima Causa Efficiente incausata.",
+            "Perché la catena delle cause si interrompe dopo quattro passaggi.",
+            "Perché l'uomo non ha abbastanza tempo per contarle.",
+            "Perché le cause efficienti sono tutte simultanee e identiche."
+        ],
+        "correct": 0,
+        "explanation": "Nelle cause concatenate, togliere la causa prima significa togliere l'effetto. Per spiegare gli effetti attuali serve una Prima Causa Incausata."
+    },
+    {
+        "id": 204,
+        "title": "La Terza Via: Il Contingente e il Necessario",
+        "text": "La terza via parte dalla distinzione tra cose contingenti (che possono essere e non essere) e cose necessarie.",
+        "question": "Qual è l'argomentazione logica che conduce all'Ente Necessario di per sé?",
+        "options": [
+            "Se tutte le cose fossero contingenti, in un dato momento nulla ci fu nella realtà e nulla esisterebbe ora; serve un Ente che sia di per sé Necessario.",
+            "Le cose contingenti esistono da sempre senza bisogno di alcuna causa.",
+            "Tutto ciò che esiste è necessario e non vi è nulla di contingente.",
+            "Le cose necessarie sono create dalle cose contingenti."
+        ],
+        "correct": 0,
+        "explanation": "Ciò che può non essere, un tempo non era. Se tutto fosse solo contingente, il mondo sarebbe scivolato nel nulla e nulla sarebbe nato. Occorre un Ente Necessario per sé: Dio."
+    },
+    {
+        "id": 205,
+        "title": "La Quarta Via: I Gradi di Perfezione",
+        "text": "La quarta via riscontra nelle cose del mondo gradi diversi di bontà, verità, nobiltà e perfezione.",
+        "question": "Come si ricava l'esistenza di Dio dai gradi di bontà e perfezione?",
+        "options": [
+            "Il più o meno si attribuiscono secondo l'avvicinamento a un Sommo ed Assoluto, che è causa di ogni perfezione in quel genere.",
+            "I gradi sono stabiliti per votazione dalla comunità uamana.",
+            "Ciascun oggetto possiede la perfezione massima in modo autonomo.",
+            "I gradi dimostrano che non esiste alcuna bontà nel mondo."
+        ],
+        "correct": 0,
+        "explanation": "Come il fuoco (sommamente caldo) è causa di ogni calore, così ciò che è supremo in verità e bontà (Dio) è causa di ogni bontà e perfezione parziale."
+    },
+    {
+        "id": 206,
+        "title": "La Quinta Via: Il Disegno Intelligente (Teleologica)",
+        "text": "La quinta via osserva che i corpi naturali privi di intelligenza operano quasi sempre allo stesso modo per conseguire un fine e un vantaggio.",
+        "question": "Qual è la celebre analogia utilizzata da Tommaso nella quinta via?",
+        "options": [
+            "Ciò che è privo di intelligenza non tende al fine se non perché è diretto da un essere intelligente, come la freccia dall'arciere.",
+            "Come una nave guidata dal vento senza marinaio.",
+            "Come una pietra che rotola giù da una montagna senza scopo.",
+            "Come un albero che cresce verso il basso."
+        ],
+        "correct": 0,
+        "explanation": "Gli enti naturali non coscienti (ali degli uccelli, ciclo dell'acqua) agiscono per un fine: questo richiede un'Intelligenza ordinatrice che orienti la freccia al bersaglio."
+    },
+    {
+        "id": 207,
+        "title": "Il Concetto di Regresso all'Infinito",
+        "text": "Nelle prime tre vie tomiste viene ripetutamente rigettato il 'regresso all'infinito' (progressio in infinitum).",
+        "question": "Cos'è il regresso all'infinito e perché Tommaso lo considera un errore logico?",
+        "options": [
+            "È la pretesa di spiegare un fenomeno rinviando indefinitamente a una causa precedente senza mai trovare il fondamento che spiega l'intera serie.",
+            "È una formula matematica per calcolare l'area del cerchio.",
+            "È l'atto di camminare all'indietro senza fermarsi mai.",
+            "È la teoria per cui l'universo dura un secondo."
+        ],
+        "correct": 0,
+        "explanation": "Se una serie di cause non ha un primo anello (come le tessere di un domino), l'intera catena rimane priva di una causa esplicativa fondante."
+    },
+    {
+        "id": 208,
+        "title": "Il Concetto di Mondi Possibili nella Terza Via",
+        "text": "La distinzione tra necessario e contingente è stata riletta nel Novecento con la semantica dei mondi possibili.",
+        "question": "Come viene definito un evento o ente 'necessario' nella filosofia contemporanea dei mondi possibili?",
+        "options": [
+            "Un ente o verità che sussiste e si verifica in tutti i mondi possibili immaginabili.",
+            "Un evento che accade soltanto nel nostro mondo reale.",
+            "Un fatto che non può verificarsi in alcun mondo.",
+            "Una legge stabilita dal parlamento di uno stato."
+        ],
+        "correct": 0,
+        "explanation": "Un evento contingente si verifica in alcuni mondi possibili ma non in altri; un Ente o verità Necessaria sussiste in tutti i mondi possibili."
+    }
+];
+        const ex3Pool = [
+    {
+        "id": 301,
+        "title": "Obiezione sulla Mancata Dimostrazione dell'Unicità",
+        "text": "Critici filosofici notano che le prime vie tomiste dimostrano l'esistenza di un 'primo motore' o di una 'prima causa'.",
+        "question": "Quale lacuna monoteistica viene evidenziata in questa critica alle prime vie?",
+        "options": [
+            "Le vie cosmologiche non dimostrano che il primo motore o causa sia UNICO, lasciando aperta la possibilità di motori o cause multiple e parallele.",
+            "Dimostrano che i motori sono esattamente dodici come gli apostoli.",
+            "Dimostrano che Dio è un dio pagano con il fulmine in mano.",
+            "Dimostrano che l'universo non contiene alcuna causa."
+        ],
+        "correct": 0,
+        "explanation": "Le prime tre vie mostrano la necessità di arrestare il regresso con una prima causa o motore, ma non dimostrano formalmente che tale causa sia unica e corrisponda al Dio monoteista."
+    },
+    {
+        "id": 302,
+        "title": "Obiezione del Regresso applicato a Dio",
+        "text": "Un'obiezione classica rivolta alla seconda via (causa incausata) chiede: 'Se ogni cosa deve avere una causa, chi ha causato Dio?'",
+        "question": "In che modo questa obiezione mette in difficoltà la premessa della seconda via?",
+        "options": [
+            "Se si ammette che Dio possa esistere senza una causa precedente, ci si chiede perché non possa esistere senza causa anche l'universo o la materia stessa.",
+            "Dimostra che Dio è stato creato da un angelo superiore.",
+            "Dimostra che la materia è stata creata ieri mattina.",
+            "Dimostra che il principio di causalità non si applica alla fisica."
+        ],
+        "correct": 0,
+        "explanation": "Se si spezza la regola per cui 'tutto richiede una causa' facendo un'eccezione per Dio, il critico chiede perché non fare l'eccezione direttamente per il cosmo."
+    },
+    {
+        "id": 303,
+        "title": "La Sfida dell'Evoluzionismo Darwiniano (1859)",
+        "text": "La quinta via (disegno intelligente e teleologia) ha subito un duro attacco con la pubblicazione de L'origine delle specie di Charles Darwin.",
+        "question": "In che modo la teoria dell'evoluzione per selezione naturale spiega l'ordine biologico senza Dio?",
+        "options": [
+            "L'adattamento e l'ordine degli organismi derivano da variazioni genetiche casuali e dalla sopravvivenza differenziale del più adatto nel tempo.",
+            "Dimostra che le ali degli uccelli sono state disegnate da un architetto umano.",
+            "Afferma che le specie viventi non sono mai cambiate fin dalla creazione.",
+            "Dimostra che tutti gli animali sono privi di codice genetico."
+        ],
+        "correct": 0,
+        "explanation": "Darwin dimostra che l'apparente 'progetto' delle strutture biologiche (es. ali, impollinazione) si sviluppa spontaneamente tramite mutazioni e selezione naturale, senza richiedere una mente ordinatrice divina."
+    },
+    {
+        "id": 304,
+        "title": "Il Problema delle Estinzioni di Massa",
+        "text": "La paleontologia moderna stima che oltre il 99% di tutte le specie viventi apparse sulla Terra si sia estinto nel corso di 4 miliardi di anni.",
+        "question": "Come viene utilizzata questa evidenza scientifica contro la quinta via teleologica?",
+        "options": [
+            "Metta in dubbio che il mondo biologico sia il frutto di un disegno provvidenziale perfetto e privo di tentativi ed estinzioni di massa immani.",
+            "Dimostra che gli animali si sono estinti per scelta spontanea.",
+            "Dimostra che le specie estinte non sono mai esistite realmente.",
+            "Dimostra che la Terra ha solo seimila anni di vita."
+        ],
+        "correct": 0,
+        "explanation": "L'immenso numero di specie scomparse ed estinte mostra un percorso biologico travagliato ed imperfetto, mal conciliabile con un piano teleologico lineare ed istantaneo."
+    },
+    {
+        "id": 305,
+        "title": "Il Problema del Male Naturale e le 5 Vie",
+        "text": "Mentre la quarta via sostiene che Dio è il Sommo Bene e la causa di ogni perfezione, la presenza di catastrofi naturali solleva obiezioni.",
+        "question": "Perché terremoti, tsunami e malattie costituiscono un problema per la Quarta e Quinta via?",
+        "options": [
+            "Perché sono sofferenze non causate dal libero arbitrio umano che smentiscono l'idea di un cosmo perfettamente buono e ordinato a fin di bene per l'uomo.",
+            "Perché i terremoti sono causati dal peccato originale di Adamo sui crateri.",
+            "Perché la quarta via si applica solo agli oggetti di legno.",
+            "Perché il male naturale non ha alcun effetto sugli esseri viventi."
+        ],
+        "correct": 0,
+        "explanation": "I mali naturali (catastrofi, sofferenze di innocenti) non derivano dalle scelte morali dell'uomo e mettono in crisi l'idea che il mondo sia governato da un bene assoluto e provvidenziale."
+    },
+    {
+        "id": 306,
+        "title": "La Risposta Fideista e Tomista contemporanea",
+        "text": "I teologi tomisti moderni hanno risposto alle critiche scientifiche e filosofiche aggiornando le vie d'Aquino.",
+        "question": "Come integrano i teologi contemporanei la teoria dell'evoluzione con la Quinta Via?",
+        "options": [
+            "Sostenendo che l'evoluzione e le leggi naturali sono il metodo stesso attraverso cui l'Intelligenza Divina crea e guida il cosmo.",
+            "Negando che i fossili esistano realmente nei terreni.",
+            "Affermando che Charles Darwin era un monaco domenicano.",
+            "Dichiarando che la scienza fisica e la teologia sono la stessa cosa."
+        ],
+        "correct": 0,
+        "explanation": "La teologia evolutiva sostiene che Dio non è un 'orologiaio' che interviene dall'esterno, ma la Causa Prima che sostiene l'intero processo evolutivo e le sue leggi."
+    },
+    {
+        "id": 307,
+        "title": "Il Paradosso della Pietra e l'Onnipotenza",
+        "text": "Un noto paradosso di logica interna analizza la coerenza della nozione di onnipotenza divina (utilizzata nelle prove per evidenziare la perfezione).",
+        "question": "Cosa dimostra il dilemma: 'Dio può creare una pietra così pesante da non poterla sollevare?'",
+        "options": [
+            "Se può crearla non può sollevarla (limite di potere); se non può crearla non può farla (limite di potere): in entrambi i casi la nozione pura di onnipotenza appare aporetica.",
+            "Dimostra che le pietre sono più forti di Dio.",
+            "Dimostra che la gravità non esiste nell'universo.",
+            "Dimostra che Dio è un muratore del medioevo."
+        ],
+        "correct": 0,
+        "explanation": "Il paradosso mostra un problema interno al concetto di onnipotenza: definire 'potere assoluto' in termini logici rischia di generare contraddizioni autoreferenziali."
+    },
+    {
+        "id": 308,
+        "title": "Valore Filosofico Attuale del Dibattito su Dio",
+        "text": "Nonostante i secoli trascorsi dalle formulazioni di Anselmo e Tommaso, le prove dell'esistenza di Dio rimangono centrali.",
+        "question": "Qual è il valore educativo ed epistemologico dell'analisi di questi argomenti oggi?",
+        "options": [
+            "Sviluppare il pensiero critico, l'analisi formale dei concetti, la struttura dei sillogismi e la valutazione di validità, correttezza e fallacie.",
+            "Costringere tutti gli studenti a diventare teologi domenicani.",
+            "Dimostrare che la filosofia ha sostituito la fisica moderna.",
+            "Imparare a memoria le preghiere latine del Proslogion."
+        ],
+        "correct": 0,
+        "explanation": "Lo studio delle prove sull'esistenza di Dio offre una palestra straordinaria di logica formale, analisi filosofica del linguaggio e pensiero critico rigoroso."
+    }
+];
+        const matchingPairsPool = [
+    {
+        "id": "m1",
+        "term": "Argomento A Priori",
+        "text": "Dimostrazione indipendente dall'esperienza sensibile che ricava Dio dal solo concetto."
+    },
+    {
+        "id": "m2",
+        "term": "Argomento A Posteriori",
+        "text": "Dimostrazione che muove da fatti empirici riscontrabili con i sensi nel cosmo."
+    },
+    {
+        "id": "m3",
+        "term": "Proslogion (1078)",
+        "text": "Opera di Anselmo d'Aosta contenente la celebre prova ontologica."
+    },
+    {
+        "id": "m4",
+        "term": "Aliquid quo nihil maius",
+        "text": "Ciò di cui nulla può pensarsi più grande: la definizione anselmiana di Dio."
+    },
+    {
+        "id": "m5",
+        "term": "In Intellectu vs In Re",
+        "text": "Distinzione tra l'esistenza nel solo pensiero/concetto e l'esistenza nella realtà oggettiva."
+    },
+    {
+        "id": "m6",
+        "term": "Isola Perfetta (Gaunilone)",
+        "text": "Contro-esempio che mostra l'assurdità di dedurre l'esistenza reale dalla perfezione concettuale."
+    },
+    {
+        "id": "m7",
+        "term": "Cento Talleri (Kant)",
+        "text": "Argomento kantiano che dimostra che l'esistenza non è un predicato logico reale."
+    },
+    {
+        "id": "m8",
+        "term": "Prima Via (Motore Immobile)",
+        "text": "Dimostrazione tomista dal moto sensibile che conduce al Primo Motore incorruttibile."
+    },
+    {
+        "id": "m9",
+        "term": "Seconda Via (Causa Incausata)",
+        "text": "Dimostrazione tomista dalla catena delle cause efficienti verso la Prima Causa."
+    },
+    {
+        "id": "m10",
+        "term": "Terza Via (Ente Necessario)",
+        "text": "Dimostrazione dalla contingenza del cosmo all'Ente Necessario in tutti i mondi possibili."
+    },
+    {
+        "id": "m11",
+        "term": "Quinta Via (Teleologica)",
+        "text": "Dimostrazione dall'ordine e fine delle cose naturali guidate dall'Arciere Divino."
+    },
+    {
+        "id": "m12",
+        "term": "Selezione Naturale (Darwin)",
+        "text": "Spiegazione scientifica dell'ordine biologico che smentisce la necessità del Progettista."
+    }
+];
+        const clozeAnswers = {
+    "1": "a priori",
+    "2": "a posteriori",
+    "3": "Anselmo d'Aosta",
+    "4": "più grande",
+    "5": "in re",
+    "6": "isola perfetta",
+    "7": "predicato reale",
+    "8": "cinque vie",
+    "9": "Motore Immobile",
+    "10": "Charles Darwin"
+};
+
+        function renderEx1() {
+            const container = document.getElementById('ex1-container');
+            if(!container) return;
+            container.innerHTML = state.activeEx1Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="ex1-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectEx1(qId, oIdx, btn) {
+            if (state.ex1Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx1Data.find(d => d.id === qId);
+            state.ex1Answers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
+            }
+
+            const fb = document.getElementById(`ex1-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderEx2() {
+            const container = document.getElementById('ex2-container');
+            if(!container) return;
+            container.innerHTML = state.activeEx2Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="ex2-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectEx2(qId, oIdx, btn) {
+            if (state.ex2Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx2Data.find(d => d.id === qId);
+            state.ex2Answers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
+            }
+
+            const fb = document.getElementById(`ex2-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderEx3() {
+            const container = document.getElementById('ex3-container');
+            if(!container) return;
+            container.innerHTML = state.activeEx3Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `
+                            <button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="ex3-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectEx3(qId, oIdx, btn) {
+            if (state.ex3Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx3Data.find(d => d.id === qId);
+            state.ex3Answers[qId] = oIdx;
+
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) {
+                qContainer.querySelectorAll('button').forEach((b, idx) => {
+                    b.disabled = true;
+                    b.classList.add('cursor-not-allowed', 'opacity-60');
+                    if (idx === item.correct) {
+                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
+                    }
+                });
+            }
+
+            if (oIdx === item.correct) {
+                playSound('correct');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
+            }
+
+            const fb = document.getElementById(`ex3-fb-${qId}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                if (oIdx === item.correct) {
+                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
+                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
+                } else {
+                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
+                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
+                }
+            }
+            updateGlobalScore();
+        }
+
+        function renderMatching() {
+            const termsContainer = document.getElementById('matching-terms');
+            const defsContainer = document.getElementById('matching-defs');
+            if(!termsContainer || !defsContainer) return;
+            termsContainer.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
+            defsContainer.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
+        }
+
+        function selectMatchTerm(termId, btn) {
+            playSound('click');
+            state.selectedTermId = termId;
+
+            document.querySelectorAll('#matching-terms button').forEach(b => {
+                if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
+            });
+            btn.className = "w-full text-left p-3 rounded-xl border-2 border-amber-500 bg-amber-950/80 text-xs font-bold text-amber-300 transition-all shadow-lg cursor-pointer";
+
+            const fb = document.getElementById('matching-feedback');
+            if(fb) {
+                fb.className = "text-xs font-semibold text-amber-400 pt-2";
+                fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!";
+            }
+        }
+
+        function selectMatchDef(matchId, btn) {
+            const fb = document.getElementById('matching-feedback');
+            if(!state.selectedTermId) {
+                playSound('error');
+                if(fb) {
+                    fb.className = "text-xs font-semibold text-rose-400 pt-2";
+                    fb.innerText = "Prima seleziona un termine nella colonna di sinistra!";
+                }
+                return;
+            }
+
+            if(state.selectedTermId === matchId) {
+                playSound('correct');
+                state.matchedPairs[matchId] = true;
+
+                const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
+                if(termBtn) {
+                    termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed";
+                    termBtn.disabled = true;
+                }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed";
+                btn.disabled = true;
+
+                if(fb) {
+                    fb.className = "text-xs font-bold text-emerald-400 pt-2";
+                    fb.innerText = "✓ Abbinamento corretto e bloccato!";
+                }
+            } else {
+                playSound('error');
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => {
+                    if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer";
+                }, 1000);
+
+                if(fb) {
+                    fb.className = "text-xs font-bold text-rose-400 pt-2";
+                    fb.innerText = "✗ Abbinamento errato. Riprova!";
+                }
+            }
+            state.selectedTermId = null;
+            updateGlobalScore();
+        }
+
+        function checkCloze() {
+            if (state.clozeLocked) return;
+            playSound('click');
+            let correct = 0;
+            const keys = Object.keys(clozeAnswers);
+            keys.forEach(k => {
+                const el = document.getElementById(`cloze-${k}`);
+                if(el) {
+                    el.disabled = true;
+                    if(el.value === clozeAnswers[k]) { 
+                        correct++; 
+                        el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
+                    } else { 
+                        el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
+                    }
+                }
+            });
+            state.clozeScore = Math.round((correct / keys.length) * 100);
+            state.clozeLocked = true;
+
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed";
+                submitBtn.innerText = "Testo Verificato e Bloccato";
+            }
+
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) {
+                if(correct === keys.length) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (${correct}/${keys.length}).`; }
+                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/${keys.length}. Le risposte sono state bloccate.`; }
+            }
+            updateGlobalScore();
+        }
+
+        function updateGlobalScore() {
+            let ex1Correct = 0; state.activeEx1Data.forEach(d => { if(state.ex1Answers[d.id] === d.correct) ex1Correct++; });
+            let ex2Correct = 0; state.activeEx2Data.forEach(d => { if(state.ex2Answers[d.id] === d.correct) ex2Correct++; });
+            let ex3Correct = 0; state.activeEx3Data.forEach(d => { if(state.ex3Answers[d.id] === d.correct) ex3Correct++; });
+            let matchCount = Object.keys(state.matchedPairs || {}).length;
+
+            const total = Math.round((ex1Correct / (state.activeEx1Data.length || 1))*30 + 
+                                     (ex2Correct / (state.activeEx2Data.length || 1))*25 + 
+                                     (ex3Correct / (state.activeEx3Data.length || 1))*20 + 
+                                     (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
+                                     (state.clozeScore/100)*10);
+            const scoreText = document.getElementById('global-score-text');
+            if(scoreText) scoreText.innerText = `${total} / 100`;
+            return total;
+        }
+
+        function updateReport() {
+            const score = updateGlobalScore();
+            const repScore = document.getElementById('report-score');
+            if(repScore) repScore.innerText = `${score} / 100 XP`;
+            const badgeEl = document.getElementById('report-badge');
+            const certScore = document.getElementById('cert-score');
+            const certTitle = document.getElementById('cert-title');
+            if(certScore) certScore.innerText = `${score} / 100 XP`;
+
+            let titleText = "Novizio di Teologia Razionale";
+            if(score >= 90) titleText = "Maestro di Logica Ontologica e Cosmologia Tomista";
+            else if(score >= 75) titleText = "Analista delle Prove dell'Esistenza di Dio";
+            else if(score >= 55) titleText = "Praticante di Logica e Metafisica";
+
+            if(badgeEl) badgeEl.innerText = titleText;
+            if(certTitle) certTitle.innerText = titleText;
+        }
+
+        function switchTab(tabId, btnElement) {
+            playSound('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+
+            if(btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                const navButtons = document.querySelectorAll('.tab-btn');
+                navButtons.forEach(b => {
+                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
+                        b.classList.add('active');
+                    }
+                });
+            }
+
+            if(tabId === 'tab-report') updateReport();
+        }
+
+        function setupRandomQuestions() {
+            state.ex1Answers = {}; 
+            state.ex2Answers = {}; 
+            state.ex3Answers = {}; 
+            state.matchedPairs = {}; 
+            state.clozeScore = 0;
+            state.clozeLocked = false;
+            state.selectedTermId = null;
+
+            state.activeEx1Data = shuffle(ex1Pool).slice(0, 5);
+            state.activeEx2Data = shuffle(ex2Pool).slice(0, 5);
+            state.activeEx3Data = shuffle(ex3Pool).slice(0, 5);
+
+            const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
+            state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
+            state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
+
+            const keys = Object.keys(clozeAnswers);
+            keys.forEach(k => {
+                const el = document.getElementById(`cloze-${k}`);
+                if(el) {
+                    el.disabled = false;
+                    el.value = "";
+                    el.className = "bg-slate-800 text-amber-300 rounded px-2 py-1";
+                }
+            });
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.className = "bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer";
+                submitBtn.innerText = "Verifica e Blocca Testo";
+            }
+            const clozeFb = document.getElementById('cloze-feedback');
+            if(clozeFb) clozeFb.innerText = "";
+
+            renderEx1(); 
+            renderEx2(); 
+            renderEx3(); 
+            renderMatching();
+            updateGlobalScore();
+        }
+
+        function resetAll() {
+            setupRandomQuestions();
+            switchTab('tab-studio');
+        }
+
+        function initApp() {
+            setupRandomQuestions();
+        }
+
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            initApp();
+        } else {
+            document.addEventListener('DOMContentLoaded', initApp);
+        }
+    </script>
+</body>
+</html>

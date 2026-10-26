@@ -16,6 +16,15 @@
             }
         }
     </script>
+<!-- Configurazione e Caricamento MathJax per LaTeX -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -107,7 +116,7 @@
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-sky-500/10 text-sky-400 border border-sky-500/30">
                         <i class="fa-solid fa-shield-halved mr-1.5"></i> Modulo 2: Il Ragionamento Deduttivo
                     </span>
-                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-sky-400">Infezenza Certa e Trasmissione della Verità (Truth-Preserving)</h2>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-sky-400">Inferenza Certa e Trasmissione della Verità (Truth-Preserving)</h2>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
                         Il ragionamento deduttivo fa discendere la propria conclusione dalle premesse in modo necessario e autosufficiente. Se le premesse sono vere e la forma è valida, la conclusione è <strong>necessariamente vera</strong> (proprietà <em>truth-preserving</em>).
                     </p>
@@ -118,30 +127,30 @@
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-sky-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-landmark"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">1. I 3 Principi della Logica</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>Identità</strong> ($A=A$), <strong>Non-Contraddizione</strong> (non si può dire $A$ e $
-eg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è o vero o falso, senza terze opzioni).</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>Identità</strong> ($A=A$), <strong>Non-Contraddizione</strong> (non si può dire $A$ e 
+$\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è o vero o falso, senza terze opzioni).</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-shapes"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">2. Enunciati Categorici</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Proposizioni $S 	ext{ è } P$. Quantità: <em>Universali / Particolari</em>. Qualità: <em>Affermative / Negative</em>. Quadrato aristotelico: A (Tutti), E/B (Nessuno), I (Qualche), O (Qualche non).</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Proposizioni $S 	\text{ è } P$. Quantità: <em>Universali / Particolari</em>. Qualità: <em>Affermative / Negative</em>. Quadrato aristotelico: A (Tutti), E/B (Nessuno), I (Qualche), O (Qualche non).</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-diagram-project"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">3. Struttura dei Sillogismi</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Premessa Maggiore, Premessa Minore e Conclusione. Eliminazione del <em>Termine Medio</em>. Sillogismi categorici, disgiuntivi ($A \lor B$) e ipotetici puri ($A 
-ightarrow B, B 
-ightarrow C  dash A 
-ightarrow C$).</p>
+\rightarrow B, B 
+\rightarrow C  \Rightarrow A 
+\rightarrow C$).</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-code-branch"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">4. Modus Ponens & Tollens</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>MP:</strong> $A 
-ightarrow B, A  dash B$. <strong>MT:</strong> $A 
-ightarrow B, 
-eg B  dash 
-eg A$. Attenzione alle fallacie: <em>Affermazione del Conseguente</em> e <em>Negazione dell'Antecedente</em>.</p>
+\rightarrow B, A  \Rightarrow B$. <strong>MT:</strong> $A 
+\rightarrow B, 
+\neg B  \Rightarrow
+\neg A$. Attenzione alle fallacie: <em>Affermazione del Conseguente</em> e <em>Negazione dell'Antecedente</em>.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-check-double"></i></div>

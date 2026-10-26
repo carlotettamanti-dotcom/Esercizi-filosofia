@@ -16,6 +16,15 @@
             }
         }
     </script>
+<!-- Configurazione e Caricamento MathJax per LaTeX -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -82,7 +91,7 @@
                 <i class="fa-solid fa-dice text-sky-400"></i> 2. Probabilità & LGN
             </button>
             <button onclick="switchTab('tab-problema', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-crow text-purple-400"></i> 3. Cigno Nero & Tacchino
+                <i class="fa-solid fa-crow text-purple-400"></i> 3. Cigno Nero
             </button>
             <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
                 <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti Concettuali
@@ -122,26 +131,21 @@
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-sky-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-dice"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">2. Probabilità $P(E)$</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Misura del grado di certezza da $0$ (impossibile) a $1$ (certo). $P(E) = rac{	ext{casi favorevoli}}{	ext{casi possibili}}$. Es. Dado a 6 facce: uscita del '2' $= 1/6  pprox 16,7\%$.</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Misura del grado di certezza da $0$ (impossibile) a $1$ (certo). $P(E)=\frac{\text{casi favorevoli}}{\text{casi possibili}}$. Es. Dado a 6 facce: uscita del '2' $= 1/6  \approx 16,7\%$.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-chart-pie"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">3. Campioni & Rappresentatività</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Un buon campione deve essere <strong>ampio</strong> e <strong>rappresentativo</strong> (rispecchiare le quote di genere, età, regione, titolo di studio). Pericolo del <em>bias di campionamento</em> e <em>self-selection</em>.</p>
                 </div>
-                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-newspaper"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">4. Errore Storico del 1948</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">I sondaggi per le elezioni USA del 1948 usavano interviste telefoniche (bene di lusso posseduto solo dai benestanti repubblicani), annunciando la vittoria di Dewey prima del voto di Truman.</p>
-                </div>
-                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
+                                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-infinity"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">5. Legge dei Grandi Numeri (LGN)</h3>
+                    <h3 class="font-bold text-lg text-slate-100">4. Legge dei Grandi Numeri (LGN)</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Aumentando la dimensione del campione di prove, la frequenza empirica converge verso il valore teorico atteso. Base di assicurazioni, casinò e controllo qualità.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-crow"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">6. Problema dell'Induzione</h3>
+                    <h3 class="font-bold text-lg text-slate-100">5. Problema dell'Induzione</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Nessun numero $n$ di conferme dà la certezza assoluta: il caso $n+1$ può confutare. Metafore: la scoperta del <strong>Cigno Nero</strong> in Australia e il <strong>Tacchino Induttivista</strong> di Russell.</p>
                 </div>
             </div>
@@ -169,7 +173,7 @@
             <div id="probabilita-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 3: CIGNO NERO E TACCHINO -->
+        <!-- TAB 3: CIGNO NERO -->
         <section id="tab-problema" class="tab-content hidden space-y-6">
             <div class="space-y-2">
                 <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Il Problema dell'Induzione, Cigno Nero e Tacchino Induttivista (5 Quesiti)</h2>

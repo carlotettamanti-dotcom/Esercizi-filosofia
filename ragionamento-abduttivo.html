@@ -16,6 +16,14 @@
             }
         }
     </script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -82,7 +90,7 @@
                 <i class="fa-solid fa-link text-emerald-400"></i> 2. Causalità vs Correlazione
             </button>
             <button onclick="switchTab('tab-metodo', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-flask text-sky-400"></i> 3. Metodo Scientifico & Semmelweis
+                <i class="fa-solid fa-flask text-sky-400"></i> 3. Metodo Scientifico
             </button>
 
             <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
@@ -107,7 +115,7 @@
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-400 border border-purple-500/30">
                         <i class="fa-solid fa-magnifying-glass-chart mr-1.5"></i> Modulo 4: Il Ragionamento Abduttivo
                     </span>
-                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-purple-400">L'Inferenza alla Spiegazione Migliore (IBE)</h2>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-purple-400">L'Inferenza alla Spiegazione Migliore </h2>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
                         Il ragionamento abduttivo parte da un dato o fatto sorprendente $S$ e risale all'ipotesi $H$ che ne costituisce la <strong>spiegazione più plausibile</strong>. È la logica degli investigatori, della diagnosi medica e della scoperta scientifica.
                     </p>
@@ -117,11 +125,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-user-ninja"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">1. Struttura dell'IBE</h3>
+                    <h3 class="font-bold text-lg text-slate-100">1. Struttura dell'Inference to the Best Explanation (IBE)</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Dati sorprendenti $S 
-ightarrow$ Formulazione di ipotesi $H_1, H_2, H_3 
-ightarrow$ Valutazione e selezione della spiegazione migliore $
-ightarrow$ Accettazione probabile dell'ipotesi.</p>
+\rightarrow$ Formulazione di ipotesi $H_1, H_2, H_3 
+\rightarrow$ Valutazione e selezione della spiegazione migliore $
+\rightarrow$ Accettazione probabile dell'ipotesi.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-sliders"></i></div>
@@ -135,24 +143,12 @@ ightarrow$ Accettazione probabile dell'ipotesi.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-sky-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-recycle"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">4. L'Integrazione Scientifico-Triadica</h3>
+                    <h3 class="font-bold text-lg text-slate-100">4. L'Integrazione nel metodo scientifico</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Il metodo scientifico fonde i 3 ragionamenti: <strong>Abduzione</strong> (invenzione ipotesi) $
-ightarrow$ <strong>Deduzione</strong> (derivazione previsioni) $
-ightarrow$ <strong>Induzione</strong> (test ed esperimenti).</p>
+\rightarrow$ <strong>Deduzione</strong> (derivazione previsioni) $
+\rightarrow$ <strong>Induzione</strong> (test ed esperimenti).</p>
                 </div>
-                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-hospital-user"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">5. Caso Semmelweis (1847)</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Mortalità da febbre puerperale a Vienna. Abduzione: 'particelle cadaveriche' sui medici $
-ightarrow$ Deduzione: cloro $
-ightarrow$ Induzione: crollo mortalità dall'10% all'1%.</p>
-                </div>
-                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-scissors"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">6. Rasoio di Ockham</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><em>"Frustra fit per plura quod fieri potest per pauciora"</em>: a parità di fattori, la spiegazione che richiede il minor numero di assunzioni non provate è da preferire.</p>
-                </div>
-            </div>
+                           </div>
 
             <div class="text-center pt-4">
                 <button onclick="switchTab('tab-ibe')" class="bg-gradient-to-r from-purple-500 to-amber-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-purple-600 hover:to-amber-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione sull'IBE ➔</button>
