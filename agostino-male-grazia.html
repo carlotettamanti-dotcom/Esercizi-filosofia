@@ -16,13 +16,8 @@
             }
         }
     </script>
-    <!-- Configurazione e Caricamento MathJax per LaTeX -->
     <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        }
-      };
+      window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -33,6 +28,7 @@
         .tab-btn.active { background-color: #0284c7 !important; color: #ffffff !important; border-color: #38bdf8 !important; box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.5); }
         .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .badge-glow { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+        .passage { border-left: 4px solid #f59e0b; background: rgba(15, 23, 42, 0.85); border-radius: 0 0.75rem 0.75rem 0; }
         @media print {
             body * { visibility: hidden; }
             #printable-certificate, #printable-certificate * { visibility: visible; }
@@ -42,7 +38,6 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- Header con Navigation Breadcrumb -->
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-2 text-xs sm:text-sm">
@@ -56,7 +51,6 @@
                 <span class="text-slate-600">/</span>
                 <span class="text-amber-400 font-bold">Agostino e il Problema del Male</span>
             </div>
-
             <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
                 <div class="relative flex items-center">
                     <i class="fa-solid fa-user-graduate absolute left-3 text-slate-400 text-xs"></i>
@@ -78,26 +72,34 @@
         </div>
     </header>
 
-    <!-- Navigation Bar -->
     <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
             <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
                 <i class="fa-solid fa-book-open text-amber-400"></i> 0. Quadro Teorico
             </button>
             <button onclick="switchTab('tab-ex1', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-brain text-emerald-400"></i> 1. Polemica Antimanichea e Privatio Boni
+                <i class="fa-solid fa-brain text-emerald-400"></i> 1. Antimanichea
             </button>
             <button onclick="switchTab('tab-ex2', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-scale-balanced text-amber-400"></i> 2. Teodicea e Libero Arbitrio nel De Libero Arbitrio
+                <i class="fa-solid fa-scale-balanced text-amber-400"></i> 2. Libero Arbitrio
             </button>
             <button onclick="switchTab('tab-ex3', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-puzzle-piece text-purple-400"></i> 3. Polemica Antipelagiana, Grazia e Predestinazione
+                <i class="fa-solid fa-puzzle-piece text-purple-400"></i> 3. Grazia
             </button>
             <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti Concettuali
+                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti
             </button>
             <button onclick="switchTab('tab-cloze', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Testo Guidato
+                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Cloze
+            </button>
+            <button onclick="switchTab('tab-commento', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-quote-right text-orange-400"></i> 6. Commento Testuale
+            </button>
+            <button onclick="switchTab('tab-argomentazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-arrow-down-1-9 text-cyan-400"></i> 7. Ricostruzione
+            </button>
+            <button onclick="switchTab('tab-verofalso', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-check-double text-lime-400"></i> 8. Vero/Falso
             </button>
             <button onclick="switchTab('tab-report', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
                 <i class="fa-solid fa-certificate text-yellow-400"></i> Certificato
@@ -105,7 +107,6 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
 
         <!-- TAB 0: STUDIO -->
@@ -122,10 +123,9 @@
                 </div>
             </div>
 
-            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-[#y] fa-yin-yang"></i></div>
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-yin-yang"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">1. Il Dualismo Manicheo</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Mani (216-274 d.C.) sosteneva l'esistenza di due principi cosmici autonomi e coeterni: il <strong>Regno della Luce</strong> (bene, spirituale) e il <strong>Regno delle Tenebre</strong> (male, materiale). Agostino vi aderì in gioventù poiché liberava Dio dalla responsabilità del male.</p>
                 </div>
@@ -156,7 +156,6 @@
                 </div>
             </div>
 
-
             <div class="text-center pt-4">
                 <button onclick="switchTab('tab-ex1')" class="bg-gradient-to-r from-amber-500 to-emerald-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-amber-600 hover:to-emerald-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione Guidata ➔</button>
             </div>
@@ -165,7 +164,7 @@
         <!-- TAB 1: ESERCIZIO 1 -->
         <section id="tab-ex1" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Polemica Antimanichea e Privatio Boni (5 Quesiti estratti da Pool)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Polemica Antimanichea e Privatio Boni</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Valuta le tesi ontologiche sul bene e sul male, analizzando la natura di Modus, Species, Ordo e l'assenza di sostanza malvagia. <em>(Le risposte selezionate vengono bloccate subito)</em></p>
             </div>
             <div id="ex1-container" class="space-y-6"></div>
@@ -174,7 +173,7 @@
         <!-- TAB 2: ESERCIZIO 2 -->
         <section id="tab-ex2" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Teodicea e Libero Arbitrio nel De Libero Arbitrio (5 Quesiti estratti da Pool)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Teodicea e Libero Arbitrio nel De Libero Arbitrio</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Analizza l'origine del male morale, la classificazione dei beni e la difesa della bontà divina nel dialogo con Evodio. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="ex2-container" class="space-y-6"></div>
@@ -183,7 +182,7 @@
         <!-- TAB 3: ESERCIZIO 3 -->
         <section id="tab-ex3" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Polemica Antipelagiana, Grazia e Predestinazione (5 Quesiti estratti da Pool)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Polemica Antipelagiana, Grazia e Predestinazione</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Esamina le posizioni di Pelagio, il peccato originale di Adamo, la necessità della Grazia e la predestinazione divina. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="ex3-container" class="space-y-6"></div>
@@ -191,7 +190,7 @@
 
         <!-- TAB 4: CLASSIFICAZIONE MATCHING -->
         <section id="tab-classificazione" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Concettuali sul Male e sulla Grazia (8 Coppie Estratte)</h2>
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Concettuali sul Male e sulla Grazia</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div id="matching-terms" class="space-y-2.5"></div>
@@ -213,18 +212,61 @@
             </div>
         </section>
 
-        <!-- TAB 6: REPORT -->
+        <!-- TAB 6: COMMENTO TESTUALE -->
+        <section id="tab-commento" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-orange-400">Esercizio 6: Commento Testuale di Passi Agostiniani</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi con attenzione i passi tratti dalle opere di Agostino e rispondi alle domande di interpretazione. Non si tratta di ricordare, ma di <strong>comprendere l'argomentazione</strong>. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex6-container" class="space-y-8"></div>
+        </section>
+
+        <!-- TAB 7: RICOSTRUZIONE ARGOMENTATIVA -->
+        <section id="tab-argomentazione" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-cyan-400">Esercizio 7: Ricostruzione dell'Argomentazione</h2>
+                <p class="text-xs sm:text-sm text-slate-400">I passi dell'argomentazione agostiniana sono stati mescolati. Clicca i passi nell'ordine logico corretto per ricostruire il ragionamento. Clicca un passo già inserito per rimuoverlo.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl space-y-5">
+                <div id="arg-title" class="font-cinzel text-lg font-bold text-cyan-300"></div>
+                <div id="arg-description" class="text-xs sm:text-sm text-slate-300 italic"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400"><i class="fa-solid fa-shuffle mr-1"></i> Passi da ordinare</h4>
+                        <div id="arg-pool" class="space-y-2.5"></div>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400"><i class="fa-solid fa-list-ol mr-1"></i> La tua sequenza</h4>
+                        <div id="arg-sequence" class="space-y-2.5 min-h-[80px] p-3 rounded-xl border-2 border-dashed border-slate-700/60"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 pt-2">
+                    <button id="arg-submit" onclick="checkArgument()" class="bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">Verifica Sequenza</button>
+                    <div id="arg-feedback" class="text-xs sm:text-sm font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 8: VERO/FALSO -->
+        <section id="tab-verofalso" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-lime-400">Esercizio 8: Vero o Falso Ragionato</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Valuta ciascuna affermazione. Dopo la scelta, la risposta viene bloccata e compare la spiegazione. Attenzione: alcune affermazioni sono formulate in modo sottile!</p>
+            </div>
+            <div id="ex8-container" class="space-y-4"></div>
+        </section>
+
+        <!-- TAB 9: REPORT -->
         <section id="tab-report" class="tab-content hidden space-y-6">
             <div class="glass-card p-8 rounded-2xl text-center space-y-6">
                 <h2 class="font-cinzel text-2xl font-bold text-amber-400">Valutazione Finale: Agostino e il Problema del Male</h2>
                 <div class="text-4xl font-black text-amber-400" id="report-score">0 / 100 XP</div>
                 <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
-                <div class="flex justify-center gap-4">
+                <div class="flex flex-wrap justify-center gap-4">
                     <button onclick="window.print()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
                     <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
                 </div>
             </div>
-
             <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-amber-500/40 text-center space-y-6">
                 <div class="border-2 border-dashed border-amber-500/30 p-8 rounded-2xl space-y-6">
                     <div class="font-cinzel text-amber-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Filosofica</div>
@@ -244,33 +286,24 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
-        <a href="index.html" class="hover:text-amber-400 transition-colors">
-            <i class="fa-solid fa-house mr-1"></i> Home Portale
-        </a>
+        <a href="index.html" class="hover:text-amber-400 transition-colors"><i class="fa-solid fa-house mr-1"></i> Home Portale</a>
         <span>•</span>
-        <a href="pensiero-critico.html" class="hover:text-amber-400 transition-colors">
-            <i class="fa-solid fa-diagram-project mr-1"></i> Pensiero Critico & Filosofia
-        </a>
+        <a href="pensiero-critico.html" class="hover:text-amber-400 transition-colors"><i class="fa-solid fa-diagram-project mr-1"></i> Pensiero Critico & Filosofia</a>
     </footer>
 
     <script>
         const state = { 
-            studentName: "Studente", 
-            audioEnabled: true, 
-            ex1Answers: {}, 
-            ex2Answers: {}, 
-            ex3Answers: {}, 
-            matchedPairs: {}, 
-            clozeScore: 0, 
-            clozeLocked: false,
+            studentName: "Studente", audioEnabled: true, 
+            ex1Answers: {}, ex2Answers: {}, ex3Answers: {}, 
+            ex6Answers: {}, tfAnswers: {},
+            matchedPairs: {}, clozeScore: 0, clozeLocked: false,
             selectedTermId: null,
-            activeEx1Data: [],
-            activeEx2Data: [],
-            activeEx3Data: [],
-            activeMatchingTerms: [],
-            activeMatchingDefs: []
+            activeEx1Data: [], activeEx2Data: [], activeEx3Data: [],
+            activeMatchingTerms: [], activeMatchingDefs: [],
+            activeTextual: [], activeArgument: null,
+            argPool: [], argOrder: [], argSubmitted: false,
+            activeTF: []
         };
 
         let audioCtx = null;
@@ -305,422 +338,126 @@
 
         // ================= POOL QUESITI DATA =================
         const ex1Pool = [
-    {
-        "id": 101,
-        "title": "Principi del Manicheismo",
-        "text": "Il manicheismo fu fondato dal profeta persiano Mani nel III secolo d.C. proponendo una dottrina sincretica basata su due regni antagonistici.",
-        "question": "Come concepisce il male la dottrina manichea affrontata dal giovane Agostino?",
-        "options": [
-            "Come un principio sostanziale ed entità autonoma (Regno delle Tenebre) in perenne lotta contro il Bene.",
-            "Come una semplice illusione dei sensi umani.",
-            "Come un'assenza momentanea di conoscenza razionale.",
-            "Come una creazione diretta del Dio buono per mettere alla prova i fedeli."
-        ],
-        "correct": 0,
-        "explanation": "Per i manichei il male è una sostanza autonoma (Regno delle Tenebre) che invade il Regno della Luce, creando la mescolanza del mondo materiale."
-    },
-    {
-        "id": 102,
-        "title": "Triade Agostiniana della Natura",
-        "text": "Nel De natura boni, Agostino afferma che la bontà di qualsiasi creazione si riconosce dalla presenza di tre elementi divini.",
-        "question": "Quali sono i tre fattori da cui dipende la bontà di ogni natura?",
-        "options": [
-            "Misura, Forma e Ordine (Modus, Species, Ordo).",
-            "Materia, Spirito ed Etere.",
-            "Potenza, Atto e Sostanza.",
-            "Verità, Bellezza e Giustizia."
-        ],
-        "correct": 0,
-        "explanation": "Agostino dimostra che quanto più le cose hanno misura, forma e ordine, tanto più sono buone; dove mancano del tutto, non c'è natura."
-    },
-    {
-        "id": 103,
-        "title": "Definizione Ontologica di Privatio Boni",
-        "text": "Agostino sostiene che il male non ha una sostanza o una natura autonoma creata da un principio malvagio.",
-        "question": "Qual è la definizione esatta del male secondo il De natura boni?",
-        "options": [
-            "La corruzione o privazione della misura, della forma o dell'ordine naturale (Privatio Boni).",
-            "Una sostanza creata da Satana opposta a Dio.",
-            "Un'allucinazione della mente umana priva di effetti morali.",
-            "Una caratteristica intrinseca della materia fisica non curabile."
-        ],
-        "correct": 0,
-        "explanation": "Il male non esiste di per sé, ma è solo non-essere, corruzione e mancanza del bene dovuto a una natura."
-    },
-    {
-        "id": 104,
-        "title": "Metafora del Buio e del Silenzio",
-        "text": "Per spiegare in che senso il male esiste solo come privazione, Agostino ricorre a due analogie sensoriali tratte dalla vita quotidiana.",
-        "question": "Come vengono definiti il buio e il silenzio nella spiegazione agostiniana?",
-        "options": [
-            "Il buio è l'assenza di luce e il silenzio è l'assenza di suono, privi di sussistenza autonoma.",
-            "Sono due sostanze malvagie che lottano contro il suono e la luce.",
-            "Sono concetti matematici creati dall'intelletto umano.",
-            "Sono elementi materiali corruttibili creati dal Demiurgo."
-        ],
-        "correct": 0,
-        "explanation": "Come il silenzio non è una voce ma l'assenza di suono, e il buio è l'assenza di luce, così il male è solo assenza di bene."
-    },
-    {
-        "id": 105,
-        "title": "Riabilitazione della Materia",
-        "text": "A differenza dei Manichei e dei Platoniciche consideravano la materia come fonte di male e corruttibilità, Agostino sostiene una tesi cristiana rivoluzionaria.",
-        "question": "Qual è la posizione di Agostino nei confronti della materia fisica?",
-        "options": [
-            "Anche la materia è creata da Dio ed è quindi naturalmente buona, in quanto dotata di misura e forma.",
-            "La materia è l'incarnazione del male assoluto.",
-            "La materia è stata creata dal demonio mentre lo spirito da Dio.",
-            "La materia non esiste ed è solo un'illusione percettiva."
-        ],
-        "correct": 0,
-        "explanation": "Agostino riabilita il mondo fisico: anche i corpi materiali sono creature di Dio e in quanto tali posseggono un grado di bontà."
-    },
-    {
-        "id": 106,
-        "title": "Limite del Manicheismo secondo Agostino",
-        "text": "Agostino critica la pericolosità teologica del dualismo manicheo riguardo al potere di Dio.",
-        "question": "Perché il dualismo manicheo limita in modo inaccettabile la divinità?",
-        "options": [
-            "Perché ammettendo un principio del male autonomo, si sottrae a Dio il potere su una parte della realtà, negandone l'onnipotenza.",
-            "Perché afferma che Dio ha tre persone distinte.",
-            "Perché sostiene che la materia è eterna ed increato da Platone.",
-            "Perché nega l'esistenza dell'anima umana."
-        ],
-        "correct": 0,
-        "explanation": "Se esiste un Regno delle Tenebre indipendente da Dio, la sovranità e l'onnipotenza di Dio vengono irrimediabilmente compromesse."
-    },
-    {
-        "id": 107,
-        "title": "Origine delle idee di Misura e Forma",
-        "text": "Nell'argomentare l'ordine del cosmo creato, Agostino riprende spunti da un celebre dialogo platonico.",
-        "question": "Quale dialogo platonico influenzo la visione agostiniana dell'ordine cosmico purificato dal dualismo?",
-        "options": [
-            "Il Timeo, in cui il cosmo viene ordinato secondo modelli matematici di misura e forma.",
-            "Il Simposio sull'amore romantico.",
-            "La Repubblica sulla città ideale.",
-            "Il Fedone sull'immortalità dell'anima."
-        ],
-        "correct": 0,
-        "explanation": "Agostino riprende dal Timeo platonico l'idea del cosmo strutturato secondo forma, misura e armonia matematica dal sommo Bene."
-    },
-    {
-        "id": 108,
-        "title": "Condizione della natura corrotta",
-        "text": "Agostino analizza il modo in cui una cosa o persona diventa cattiva nel testo De natura boni.",
-        "question": "Cosa accade a una natura quando viene definita 'cattiva'?",
-        "options": [
-            "È una natura buona che ha subito una corruzione della sua misura o del suo ordine originale.",
-            "È una natura nata direttamente dal principio delle Tenebre.",
-            "È una sostanza il cui essere è stato completamente distrutto.",
-            "È un oggetto creato senza alcuna misura divina."
-        ],
-        "correct": 0,
-        "explanation": "La natura corrotta, in quanto natura, rimane buona; è detta cattiva solo per la corruzione che ha intaccato il suo bene."
-    }
+    { id:101, title:"Principi del Manicheismo", text:"Il manicheismo fu fondato dal profeta persiano Mani nel III secolo d.C. proponendo una dottrina sincretica basata su due regni antagonistici.", question:"Come concepisce il male la dottrina manichea affrontata dal giovane Agostino?", options:["Come un principio sostanziale ed entità autonoma (Regno delle Tenebre) in perenne lotta contro il Bene.","Come una semplice illusione dei sensi umani.","Come un'assenza momentanea di conoscenza razionale.","Come una creazione diretta del Dio buono per mettere alla prova i fedeli."], correct:0, explanation:"Per i manichei il male è una sostanza autonoma (Regno delle Tenebre) che invade il Regno della Luce, creando la mescolanza del mondo materiale." },
+    { id:102, title:"Triade Agostiniana della Natura", text:"Nel De natura boni, Agostino afferma che la bontà di qualsiasi creazione si riconosce dalla presenza di tre elementi divini.", question:"Quali sono i tre fattori da cui dipende la bontà di ogni natura?", options:["Misura, Forma e Ordine (Modus, Species, Ordo).","Materia, Spirito ed Etere.","Potenza, Atto e Sostanza.","Verità, Bellezza e Giustizia."], correct:0, explanation:"Agostino dimostra che quanto più le cose hanno misura, forma e ordine, tanto più sono buone; dove mancano del tutto, non c'è natura." },
+    { id:103, title:"Definizione Ontologica di Privatio Boni", text:"Agostino sostiene che il male non ha una sostanza o una natura autonoma creata da un principio malvagio.", question:"Qual è la definizione esatta del male secondo il De natura boni?", options:["La corruzione o privazione della misura, della forma o dell'ordine naturale (Privatio Boni).","Una sostanza creata da Satana opposta a Dio.","Un'allucinazione della mente umana priva di effetti morali.","Una caratteristica intrinseca della materia fisica non curabile."], correct:0, explanation:"Il male non esiste di per sé, ma è solo non-essere, corruzione e mancanza del bene dovuto a una natura." },
+    { id:104, title:"Metafora del Buio e del Silenzio", text:"Per spiegare in che senso il male esiste solo come privazione, Agostino ricorre a due analogie sensoriali tratte dalla vita quotidiana.", question:"Come vengono definiti il buio e il silenzio nella spiegazione agostiniana?", options:["Il buio è l'assenza di luce e il silenzio è l'assenza di suono, privi di sussistenza autonoma.","Sono due sostanze malvagie che lottano contro il suono e la luce.","Sono concetti matematici creati dall'intelletto umano.","Sono elementi materiali corruttibili creati dal Demiurgo."], correct:0, explanation:"Come il silenzio non è una voce ma l'assenza di suono, e il buio è l'assenza di luce, così il male è solo assenza di bene." },
+    { id:105, title:"Riabilitazione della Materia", text:"A differenza dei Manichei e dei Platonici che consideravano la materia come fonte di male e corruttibilità, Agostino sostiene una tesi cristiana rivoluzionaria.", question:"Qual è la posizione di Agostino nei confronti della materia fisica?", options:["Anche la materia è creata da Dio ed è quindi naturalmente buona, in quanto dotata di misura e forma.","La materia è l'incarnazione del male assoluto.","La materia è stata creata dal demonio mentre lo spirito da Dio.","La materia non esiste ed è solo un'illusione percettiva."], correct:0, explanation:"Agostino riabilita il mondo fisico: anche i corpi materiali sono creature di Dio e in quanto tali posseggono un grado di bontà." },
+    { id:106, title:"Limite del Manicheismo secondo Agostino", text:"Agostino critica la pericolosità teologica del dualismo manicheo riguardo al potere di Dio.", question:"Perché il dualismo manicheo limita in modo inaccettabile la divinità?", options:["Perché ammettendo un principio del male autonomo, si sottrae a Dio il potere su una parte della realtà, negandone l'onnipotenza.","Perché afferma che Dio ha tre persone distinte.","Perché sostiene che la materia è eterna ed increata da Platone.","Perché nega l'esistenza dell'anima umana."], correct:0, explanation:"Se esiste un Regno delle Tenebre indipendente da Dio, la sovranità e l'onnipotenza di Dio vengono irrimediabilmente compromesse." },
+    { id:107, title:"Origine delle idee di Misura e Forma", text:"Nell'argomentare l'ordine del cosmo creato, Agostino riprende spunti da un celebre dialogo platonico.", question:"Quale dialogo platonico influenzò la visione agostiniana dell'ordine cosmico purificato dal dualismo?", options:["Il Timeo, in cui il cosmo viene ordinato secondo modelli matematici di misura e forma.","Il Simposio sull'amore romantico.","La Repubblica sulla città ideale.","Il Fedone sull'immortalità dell'anima."], correct:0, explanation:"Agostino riprende dal Timeo platonico l'idea del cosmo strutturato secondo forma, misura e armonia matematica dal sommo Bene." },
+    { id:108, title:"Condizione della natura corrotta", text:"Agostino analizza il modo in cui una cosa o persona diventa cattiva nel testo De natura boni.", question:"Cosa accade a una natura quando viene definita 'cattiva'?", options:["È una natura buona che ha subito una corruzione della sua misura o del suo ordine originale.","È una natura nata direttamente dal principio delle Tenebre.","È una sostanza il cui essere è stato completamente distrutto.","È un oggetto creato senza alcuna misura divina."], correct:0, explanation:"La natura corrotta, in quanto natura, rimane buona; è detta cattiva solo per la corruzione che ha intaccato il suo bene." }
 ];
         const ex2Pool = [
-    {
-        "id": 201,
-        "title": "Definizione di Teodicea",
-        "text": "Il problema affrontato nel De libero arbitrio riguarda la giustificazione della bontà di Dio di fronte all'esistenza della sofferenza nel mondo.",
-        "question": "Quale termine filosofico, coniato successivamente da Leibniz, indica questa branca della riflessione?",
-        "options": [
-            "Teodicea",
-            "Epistemologia",
-            "Ontologia",
-            "Eschatologia"
-        ],
-        "correct": 0,
-        "explanation": "La teodicea (da Theos + dike, giustizia di Dio) cerca di conciliare la bontà e onnipotenza divina con la presenza del male."
-    },
-    {
-        "id": 202,
-        "title": "Interlocutore di Agostino nel De Libero Arbitrio",
-        "text": "Il De libero arbitrio è strutturato come un dialogo filosofico in cui Agostino risponde ai dubbi di un suo caro amico.",
-        "question": "Chi è l'interlocutore che pone le domande cruciali ad Agostino nel testo?",
-        "options": [
-            "Evodio",
-            "Simpliciano",
-            "Aurelio",
-            "Alipio"
-        ],
-        "correct": 0,
-        "explanation": "Il dialogo sul libero arbitrio si svolge tra Agostino e il suo amico ed interlocutore Evodio."
-    },
-    {
-        "id": 203,
-        "title": "Origine del Male Morale",
-        "text": "Se Dio è assolutamente buono e non è l'autore del male, da dove proviene il male che gli uomini compiono?",
-        "question": "Qual è la causa diretta del male morale commesso nel mondo secondo Agostino?",
-        "options": [
-            "La libera volontà (libero arbitrio) della mente umana.",
-            "La materia corporea che sfigura la mente.",
-            "Il potere irresistibile di Satana sulla Terra.",
-            "L'ignoranza dei principi della fisica e della matematica."
-        ],
-        "correct": 0,
-        "explanation": "Nulla di inferiore né di superiore alla mente risponde del male: è la volontà libera dell'uomo che sceglie liberamente di allontanarsi dal bene supremo."
-    },
-    {
-        "id": 204,
-        "title": "Il Libero Arbitrio come Bene Medio",
-        "text": "Nel De libero arbitrio (Libro II), Agostino classifica i beni umani in tre categorie: grandi beni, beni infimi e beni medi.",
-        "question": "Perché il libero arbitrio è definito un 'bene medio'?",
-        "options": [
-            "Perché è un bene in sé, ma dell'arbitrio si può fare sia un uso buono sia un uso cattivo.",
-            "Perché sta a metà strada tra l'anima e il corpo.",
-            "Perché vale la metà rispetto alle virtù cardinali.",
-            "Perché appartiene solo agli uomini di mezza età."
-        ],
-        "correct": 0,
-        "explanation": "Le virtù (giustizia, prudenza) sono grandi beni di cui non si può usar male; la bellezza dei corpi sono beni infimi; il libero arbitrio è un bene medio che può orientarsi al male."
-    },
-    {
-        "id": 205,
-        "title": "Comparazione tra Cavallo Brado e Pietra",
-        "text": "Agostino risponde all'obiezione: non sarebbe stato meglio creare gli uomini senza libero arbitrio ma incapaci di peccare?",
-        "question": "Quale celebre analogia usa Agostino nel Libro III del De libero arbitrio per spiegare la superiorità della libertà?",
-        "options": [
-            "Un cavallo brado è migliore di una pietra inerme, perché la pietra non pecca solo perché è priva di sensazione e movimento.",
-            "Un'aquila reale è superiore a un albero secolare.",
-            "Un angelo caduto è più bello di un demone vincolato.",
-            "Un cane fedele è migliore di un lupo solitario."
-        ],
-        "correct": 0,
-        "explanation": "È più nobile una creatura capace di scegliere liberamente, anche se rischia di peccare, rispetto a un ente inerte incapace di peccare solo perché privo di volontà."
-    },
-    {
-        "id": 206,
-        "title": "Il Male come Aversio a Deo",
-        "text": "Agostino definisce il peccato e la scelta del male in termini di orientamento della volontà umana.",
-        "question": "In cosa consiste l'atto del peccare da parte della volontà libera?",
-        "options": [
-            "Nell'allontanarsi dal Bene sommo (aversio a Deo) per volgersi a beni inferiori e mutevoli (conversio ad creaturam).",
-            "Nel creare una nuova sostanza malvagia con il pensiero.",
-            "Nel distruggere un bene fisico esistente nel mondo.",
-            "Nel disobbedire alle leggi matematiche della natura."
-        ],
-        "correct": 0,
-        "explanation": "Il peccato non è il desiderio di una natura malvagia, ma la cattiva scelta di prediligere beni inferiori o creature rispetto al Creatore."
-    },
-    {
-        "id": 207,
-        "title": "Grandi Beni nel De Libero Arbitrio",
-        "text": "Agostino individua le virtù morali come i beni più alti presenti nell'essere umano.",
-        "question": "Quale caratteristica distingue i 'grandi beni' (come la giustizia e la prudenza) dal libero arbitrio?",
-        "options": [
-            "Di essi non si può mai usare male, poiché sono costituiti dall'ordinata razionalità.",
-            "Possono essere posseduti anche dagli animali privi di ragione.",
-            "Sono beni che si perdono automaticamente dopo il battesimo.",
-            "Sono beni materiali legati alla salute del corpo."
-        ],
-        "correct": 0,
-        "explanation": "Delle virtù (giustizia, fortezza, temperanza, prudenza) non è possibile fare un cattivo uso, a differenza del bene medio dell'arbitrio."
-    },
-    {
-        "id": 208,
-        "title": "Responsabilità di Dio nella Creazione della Volontà",
-        "text": "Evodio chiede ad Agostino se Dio, avendo donato la volontà con cui si pecca, non sia in fondo responsabile dei peccati umani.",
-        "question": "Come risponde Agostino a questa fondamentale perplessità teodicea?",
-        "options": [
-            "Dio ha donato la volontà affinché l'uomo agisse rettamente; il fatto che l'uomo la usi per peccare non rende colpevole il Donatore.",
-            "Dio non sapeva che l'uomo avrebbe usato male la volontà.",
-            "Dio ha creato il peccato per mostrare la sua potenza punitiva.",
-            "La volontà non è stata creata da Dio ma è nata spontaneamente."
-        ],
-        "correct": 0,
-        "explanation": "Il dono della libertà è un bene necessario per vivere rettamente e compiere il bene autonomamente; l'abuso appartiene solo all'uomo."
-    }
+    { id:201, title:"Definizione di Teodicea", text:"Il problema affrontato nel De libero arbitrio riguarda la giustificazione della bontà di Dio di fronte all'esistenza della sofferenza nel mondo.", question:"Quale termine filosofico, coniato successivamente da Leibniz, indica questa branca della riflessione?", options:["Teodicea","Epistemologia","Ontologia","Eschatologia"], correct:0, explanation:"La teodicea (da Theos + dike, giustizia di Dio) cerca di conciliare la bontà e onnipotenza divina con la presenza del male." },
+    { id:202, title:"Interlocutore di Agostino nel De Libero Arbitrio", text:"Il De libero arbitrio è strutturato come un dialogo filosofico in cui Agostino risponde ai dubbi di un suo caro amico.", question:"Chi è l'interlocutore che pone le domande cruciali ad Agostino nel testo?", options:["Evodio","Simpliciano","Aurelio","Alipio"], correct:0, explanation:"Il dialogo sul libero arbitrio si svolge tra Agostino e il suo amico ed interlocutore Evodio." },
+    { id:203, title:"Origine del Male Morale", text:"Se Dio è assolutamente buono e non è l'autore del male, da dove proviene il male che gli uomini compiono?", question:"Qual è la causa diretta del male morale commesso nel mondo secondo Agostino?", options:["La libera volontà (libero arbitrio) della mente umana.","La materia corporea che sfigura la mente.","Il potere irresistibile di Satana sulla Terra.","L'ignoranza dei principi della fisica e della matematica."], correct:0, explanation:"Nulla di inferiore né di superiore alla mente risponde del male: è la volontà libera dell'uomo che sceglie liberamente di allontanarsi dal bene supremo." },
+    { id:204, title:"Il Libero Arbitrio come Bene Medio", text:"Nel De libero arbitrio (Libro II), Agostino classifica i beni umani in tre categorie: grandi beni, beni infimi e beni medi.", question:"Perché il libero arbitrio è definito un 'bene medio'?", options:["Perché è un bene in sé, ma dell'arbitrio si può fare sia un uso buono sia un uso cattivo.","Perché sta a metà strada tra l'anima e il corpo.","Perché vale la metà rispetto alle virtù cardinali.","Perché appartiene solo agli uomini di mezza età."], correct:0, explanation:"Le virtù (giustizia, prudenza) sono grandi beni di cui non si può usar male; la bellezza dei corpi sono beni infimi; il libero arbitrio è un bene medio che può orientarsi al male." },
+    { id:205, title:"Comparazione tra Cavallo Brado e Pietra", text:"Agostino risponde all'obiezione: non sarebbe stato meglio creare gli uomini senza libero arbitrio ma incapaci di peccare?", question:"Quale celebre analogia usa Agostino nel Libro III del De libero arbitrio per spiegare la superiorità della libertà?", options:["Un cavallo brado è migliore di una pietra inerme, perché la pietra non pecca solo perché è priva di sensazione e movimento.","Un'aquila reale è superiore a un albero secolare.","Un angelo caduto è più bello di un demone vincolato.","Un cane fedele è migliore di un lupo solitario."], correct:0, explanation:"È più nobile una creatura capace di scegliere liberamente, anche se rischia di peccare, rispetto a un ente inerte incapace di peccare solo perché privo di volontà." },
+    { id:206, title:"Il Male come Aversio a Deo", text:"Agostino definisce il peccato e la scelta del male in termini di orientamento della volontà umana.", question:"In cosa consiste l'atto del peccare da parte della volontà libera?", options:["Nell'allontanarsi dal Bene sommo (aversio a Deo) per volgersi a beni inferiori e mutevoli (conversio ad creaturam).","Nel creare una nuova sostanza malvagia con il pensiero.","Nel distruggere un bene fisico esistente nel mondo.","Nel disobbedire alle leggi matematiche della natura."], correct:0, explanation:"Il peccato non è il desiderio di una natura malvagia, ma la cattiva scelta di prediligere beni inferiori o creature rispetto al Creatore." },
+    { id:207, title:"Grandi Beni nel De Libero Arbitrio", text:"Agostino individua le virtù morali come i beni più alti presenti nell'essere umano.", question:"Quale caratteristica distingue i 'grandi beni' (come la giustizia e la prudenza) dal libero arbitrio?", options:["Di essi non si può mai usare male, poiché sono costituiti dall'ordinata razionalità.","Possono essere posseduti anche dagli animali privi di ragione.","Sono beni che si perdono automaticamente dopo il battesimo.","Sono beni materiali legati alla salute del corpo."], correct:0, explanation:"Delle virtù (giustizia, fortezza, temperanza, prudenza) non è possibile fare un cattivo uso, a differenza del bene medio dell'arbitrio." },
+    { id:208, title:"Responsabilità di Dio nella Creazione della Volontà", text:"Evodio chiede ad Agostino se Dio, avendo donato la volontà con cui si pecca, non sia in fondo responsabile dei peccati umani.", question:"Come risponde Agostino a questa fondamentale perplessità teodicea?", options:["Dio ha donato la volontà affinché l'uomo agisse rettamente; il fatto che l'uomo la usi per peccare non rende colpevole il Donatore.","Dio non sapeva che l'uomo avrebbe usato male la volontà.","Dio ha creato il peccato per mostrare la sua potenza punitiva.","La volontà non è stata creata da Dio ma è nata spontaneamente."], correct:0, explanation:"Il dono della libertà è un bene necessario per vivere rettamente e compiere il bene autonomamente; l'abuso appartiene solo all'uomo." }
 ];
         const ex3Pool = [
-    {
-        "id": 301,
-        "title": "La Tesi di Pelagio",
-        "text": "Il monaco britannico Pelagio (360-420 d.C.) sosteneva una dottrina etica e soteriologica radicale sul libero arbitrio.",
-        "question": "Cosa affermava Pelagio riguardo alla salvezza e alle forze morali dell'uomo?",
-        "options": [
-            "Che l'uomo con le sole sue forze e opere buone può rispettare i comandamenti e conquistare la salvezza senza la grazia.",
-            "Che l'uomo è assolutamente predestinato all'inferno fin dalla nascita.",
-            "Che il battesimo è l'unico mezzo per diventare re di Roma.",
-            "Che il libero arbitrio non esiste ed è una finzione dei filosofi."
-        ],
-        "correct": 0,
-        "explanation": "Pelagio considerava il libero arbitrio umano del tutto integro e in grado di evitare il peccato attraverso lo sforzo morale, rendendo la Grazia di fatto superflua."
-    },
-    {
-        "id": 302,
-        "title": "Il Peccato Originale in Agostino",
-        "text": "Per confutare Pelagio, Agostino pone al centro della sua teologia il concetto di peccato originale tratto dai testi agostiniani (La correzione e la grazia).",
-        "question": "Qual è la conseguenza della colpa di Adamo sull'intera umanità secondo Agostino?",
-        "options": [
-            "Adamo peccò con tutta la sua stirpe racchiusa in lui, trasformando l'umanità in una massa dannata (massa damnata).",
-            "Adamo danneggiò solo se stesso e non i suoi discendenti.",
-            "Il peccato di Adamo è stato una semplice svista cancellata subito.",
-            "L'umanità è diventata immune da qualsiasi tentazione corporea."
-        ],
-        "correct": 0,
-        "explanation": "Con la caduta di Adamo, la natura umana è stata ferita a morte; la stirpe che consisteva in lui peccò tutta con lui ed è condannata senza la grazia."
-    },
-    {
-        "id": 303,
-        "title": "Distinzione tra Battesimo e Grazia Divina",
-        "text": "Ci si potrebbe chiedere se il sacramento del battesimo non ripristini da solo la completa integrità originaria dell'uomo.",
-        "question": "Come definisce Agostino la differenza tra il ruolo del battesimo e quello della Grazia continua?",
-        "options": [
-            "Il battesimo cancella la colpa/reato del peccato originale, ma non elimina la concupiscenza, per vincere la quale serve la Grazia.",
-            "Il battesimo dona l'immortalità fisica immediata sul corpo.",
-            "La Grazia cancella i debiti finanziari mentre il battesimo cura le malattie.",
-            "Battesimo e Grazia sono due termini identici che indicano la stessa azione."
-        ],
-        "correct": 0,
-        "explanation": "Il battesimo perdona la colpa ereditata, ma la tendenza alla concupiscenza (debolezza della volontà) rimane; la Grazia deve soccorrere l'uomo quotidianamente."
-    },
-    {
-        "id": 304,
-        "title": "Metafora dell'Occhio e della Luce",
-        "text": "Nel trattato La natura e la grazia (26.29), Agostino utilizza un'efficace similitudine visiva per spiegare il rapporto tra uomo e Grazia.",
-        "question": "A cosa paragona Agostino l'uomo giustificato e il soccorso della Grazia divina?",
-        "options": [
-            "Come l'occhio corporeo sano non può vedere senza il chiarore della luce solare, così l'uomo non vive rettamente senza la luce di Dio.",
-            "Come una nave senza timone in mezzo a una tempesta marina.",
-            "Come un albero privo di radici che secca sotto il sole.",
-            "Come un cavallo cieco guidato da un auriga privo di vista."
-        ],
-        "correct": 0,
-        "explanation": "Anche se l'occhio fosse sanissimo (volontà risanata), non vede alcunché se non è illuminato dalla luce esterna: la Grazia dona il soccorso per operare il bene."
-    },
-    {
-        "id": 305,
-        "title": "La Dottrina della Predestinazione",
-        "text": "Ne La correzione e la grazia, Agostino affronta la questione degli eletti al Regno di Dio.",
-        "question": "Cosa sostiene Agostino riguardo al numero degli eletti predestinati da Dio?",
-        "options": [
-            "Il numero dei predestinati è stabilito da Dio dall'eternità in modo certo e non può essere né accresciuto né diminuito.",
-            "Tutti gli esseri umani indistintamente andranno in paradiso.",
-            "Il numero degli eletti cambia ogni giorno in base ai voti della Chiesa.",
-            "Dio non conosce chi si salverà finché l'uomo non muore."
-        ],
-        "correct": 0,
-        "explanation": "I salvati sono stati scelti da Dio prima della creazione secondo il suo decreto imperscrutabile e il loro numero è fisso."
-    },
-    {
-        "id": 306,
-        "title": "Formula Agostiniana della Libertà Decaduta",
-        "text": "Agostino riassume la condizione dell'arbitrio umano dopo il peccato originale con una celebre sentenza lapidaria (La correzione e la grazia 11.31).",
-        "question": "Quale espressione descrive l'insufficienza dell'arbitrio senza l'aiuto divino?",
-        "options": [
-            "'Il libero arbitrio è sufficiente per il male, ma inadeguato per il bene che non venga aiutato dal Bene onnipotente.'",
-            "'L'uomo è padrone assoluto del proprio destino e non deve chiedere nulla a Dio.'",
-            "'Il libero arbitrio è un'illusione creata dai filosofi pagani.'",
-            "'La volontà uamana può compiere qualsiasi bene senza alcun aiuto estrinseco.'"
-        ],
-        "correct": 0,
-        "explanation": "La natura umana caduta possiede la forza autonoma di fare il male e di errare, ma necessita dell'aiuto supremo del Bene per compiere il bene vero."
-    },
-    {
-        "id": 307,
-        "title": "Impatto Storico: Lo Scontro tra Lutero e il Cattolicesimo",
-        "text": "Le tesi agostiniane sulla Grazia e sul peccato originale hanno segnato la storia della teologia europea nel XVI secolo.",
-        "question": "Come si posizionò Martin Lutero (monaco agostiniano) rispetto al dibattito sul libero arbitrio?",
-        "options": [
-            "Lutero radicalizzò Agostino sostenendo la salvezza per Sola Fide e Sola Gratia (De servo arbitrio), contro il valore di merito delle opere.",
-            "Lutero difese la tesi pelagiana secondo cui bastano le buone opere morali.",
-            "Lutero sostenne che il peccato originale non è mai avvenuto.",
-            "Lutero affermò che la grazia divina non esiste e conta solo la ragione."
-        ],
-        "correct": 0,
-        "explanation": "Lutero (agostiniano) affermò che l'uomo si salva unicamente per la Grazia di Dio mediante la Fede (Sola Gratia, Sola Fide), negando il valore di merito autonomo delle opere."
-    },
-    {
-        "id": 308,
-        "title": "La Doppia Predestinazione in Giovanni Calvino",
-        "text": "Un altro grande riformatore protestante spinse la logica agostiniana della predestinazione alle sue estreme conseguenze.",
-        "question": "Quale sviluppo diede Giovanni Calvino alla dottrina dell'elezione divina?",
-        "options": [
-            "Formulò la teoria della 'doppia predestinazione': Dio ha già destinato fin dall'inizio alcuni alla salvezza e altri alla dannazione.",
-            "Abolì completamente il concetto di peccato originale.",
-            "Insegnò che il battesimo è inutile per qualsiasi cristiano.",
-            "Sostenne che gli eletti sono scelti a sorte dagli angeli."
-        ],
-        "correct": 0,
-        "explanation": "Calvino insegnò che Dio, in base al suo eterno e immutabile consiglio, ha predestinato gli uni alla vita eterna e gli altri alla dannazione eterna."
-    }
+    { id:301, title:"La Tesi di Pelagio", text:"Il monaco britannico Pelagio (360-420 d.C.) sosteneva una dottrina etica e soteriologica radicale sul libero arbitrio.", question:"Cosa affermava Pelagio riguardo alla salvezza e alle forze morali dell'uomo?", options:["Che l'uomo con le sole sue forze e opere buone può rispettare i comandamenti e conquistare la salvezza senza la grazia.","Che l'uomo è assolutamente predestinato all'inferno fin dalla nascita.","Che il battesimo è l'unico mezzo per diventare re di Roma.","Che il libero arbitrio non esiste ed è una finzione dei filosofi."], correct:0, explanation:"Pelagio considerava il libero arbitrio umano del tutto integro e in grado di evitare il peccato attraverso lo sforzo morale, rendendo la Grazia di fatto superflua." },
+    { id:302, title:"Il Peccato Originale in Agostino", text:"Per confutare Pelagio, Agostino pone al centro della sua teologia il concetto di peccato originale tratto dai testi agostiniani (La correzione e la grazia).", question:"Qual è la conseguenza della colpa di Adamo sull'intera umanità secondo Agostino?", options:["Adamo peccò con tutta la sua stirpe racchiusa in lui, trasformando l'umanità in una massa damnata.","Adamo danneggiò solo se stesso e non i suoi discendenti.","Il peccato di Adamo è stato una semplice svista cancellata subito.","L'umanità è diventata immune da qualsiasi tentazione corporea."], correct:0, explanation:"Con la caduta di Adamo, la natura umana è stata ferita a morte; la stirpe che consisteva in lui peccò tutta con lui ed è condannata senza la grazia." },
+    { id:303, title:"Distinzione tra Battesimo e Grazia Divina", text:"Ci si potrebbe chiedere se il sacramento del battesimo non ripristini da solo la completa integrità originaria dell'uomo.", question:"Come definisce Agostino la differenza tra il ruolo del battesimo e quello della Grazia continua?", options:["Il battesimo cancella la colpa/reato del peccato originale, ma non elimina la concupiscenza, per vincere la quale serve la Grazia.","Il battesimo dona l'immortalità fisica immediata sul corpo.","La Grazia cancella i debiti finanziari mentre il battesimo cura le malattie.","Battesimo e Grazia sono due termini identici che indicano la stessa azione."], correct:0, explanation:"Il battesimo perdona la colpa ereditata, ma la tendenza alla concupiscenza (debolezza della volontà) rimane; la Grazia deve soccorrere l'uomo quotidianamente." },
+    { id:304, title:"Metafora dell'Occhio e della Luce", text:"Nel trattato La natura e la grazia (26.29), Agostino utilizza un'efficace similitudine visiva per spiegare il rapporto tra uomo e Grazia.", question:"A cosa paragona Agostino l'uomo giustificato e il soccorso della Grazia divina?", options:["Come l'occhio corporeo sano non può vedere senza il chiarore della luce solare, così l'uomo non vive rettamente senza la luce di Dio.","Come una nave senza timone in mezzo a una tempesta marina.","Come un albero privo di radici che secca sotto il sole.","Come un cavallo cieco guidato da un auriga privo di vista."], correct:0, explanation:"Anche se l'occhio fosse sanissimo (volontà risanata), non vede alcunché se non è illuminato dalla luce esterna: la Grazia dona il soccorso per operare il bene." },
+    { id:305, title:"La Dottrina della Predestinazione", text:"Ne La correzione e la grazia, Agostino affronta la questione degli eletti al Regno di Dio.", question:"Cosa sostiene Agostino riguardo al numero degli eletti predestinati da Dio?", options:["Il numero dei predestinati è stabilito da Dio dall'eternità in modo certo e non può essere né accresciuto né diminuito.","Tutti gli esseri umani indistintamente andranno in paradiso.","Il numero degli eletti cambia ogni giorno in base ai voti della Chiesa.","Dio non conosce chi si salverà finché l'uomo non muore."], correct:0, explanation:"I salvati sono stati scelti da Dio prima della creazione secondo il suo decreto imperscrutabile e il loro numero è fisso." },
+    { id:306, title:"Formula Agostiniana della Libertà Decaduta", text:"Agostino riassume la condizione dell'arbitrio umano dopo il peccato originale con una celebre sentenza lapidaria (La correzione e la grazia 11.31).", question:"Quale espressione descrive l'insufficienza dell'arbitrio senza l'aiuto divino?", options:["'Il libero arbitrio è sufficiente per il male, ma inadeguato per il bene che non venga aiutato dal Bene onnipotente.'","'L'uomo è padrone assoluto del proprio destino e non deve chiedere nulla a Dio.'","'Il libero arbitrio è un'illusione creata dai filosofi pagani.'","'La volontà umana può compiere qualsiasi bene senza alcun aiuto estrinseco.'"], correct:0, explanation:"La natura umana caduta possiede la forza autonoma di fare il male e di errare, ma necessita dell'aiuto supremo del Bene per compiere il bene vero." },
+    { id:307, title:"Impatto Storico: Lo Scontro tra Lutero e il Cattolicesimo", text:"Le tesi agostiniane sulla Grazia e sul peccato originale hanno segnato la storia della teologia europea nel XVI secolo.", question:"Come si posizionò Martin Lutero (monaco agostiniano) rispetto al dibattito sul libero arbitrio?", options:["Lutero radicalizzò Agostino sostenendo la salvezza per Sola Fide e Sola Gratia (De servo arbitrio), contro il valore di merito delle opere.","Lutero difese la tesi pelagiana secondo cui bastano le buone opere morali.","Lutero sostenne che il peccato originale non è mai avvenuto.","Lutero affermò che la grazia divina non esiste e conta solo la ragione."], correct:0, explanation:"Lutero (agostiniano) affermò che l'uomo si salva unicamente per la Grazia di Dio mediante la Fede (Sola Gratia, Sola Fide), negando il valore di merito autonomo delle opere." },
+    { id:308, title:"La Doppia Predestinazione in Giovanni Calvino", text:"Un altro grande riformatore protestante spinse la logica agostiniana della predestinazione alle sue estreme conseguenze.", question:"Quale sviluppo diede Giovanni Calvino alla dottrina dell'elezione divina?", options:["Formulò la teoria della 'doppia predestinazione': Dio ha già destinato fin dall'inizio alcuni alla salvezza e altri alla dannazione.","Abolì completamente il concetto di peccato originale.","Insegnò che il battesimo è inutile per qualsiasi cristiano.","Sostenne che gli eletti sono scelti a sorte dagli angeli."], correct:0, explanation:"Calvino insegnò che Dio, in base al suo eterno e immutabile consiglio, ha predestinato gli uni alla vita eterna e gli altri alla dannazione eterna." }
 ];
         const matchingPairsPool = [
+    { id:"m1", term:"Manicheismo", text:"Religione dualista fondata da Mani: due principi coeterni in lotta, Regno della Luce e delle Tenebre." },
+    { id:"m2", term:"Privatio Boni", text:"Concezione ontologica per cui il male non è sostanza, ma corruzione o mancanza di bene." },
+    { id:"m3", term:"Modus, Species, Ordo", text:"Misura, Forma e Ordine: i tre fattori divini presenti in ogni natura creata da Dio." },
+    { id:"m4", term:"Bene Medio", text:"Classificazione del libero arbitrio: bene in sé che però la volontà umana può volgere al male." },
+    { id:"m5", term:"Teodicea", text:"Riflessione filosofico-teologica volta a giustificare la bontà di Dio di fronte all'esistenza del male." },
+    { id:"m6", term:"Pelagianesimo", text:"Eresia sostenuta da Pelagio secondo cui l'uomo può salvarsi da solo con le proprie opere buone." },
+    { id:"m7", term:"Massa Damnata", text:"Condizione dell'umanità intera caduta nel peccato originale in Adamo e bisognosa di soccorso." },
+    { id:"m8", term:"Grazia Divina", text:"Dono gratuito e immanente di Dio necessario per risanare la volontà malata e farle compiere il bene." },
+    { id:"m9", term:"Concupiscenza", text:"Inclinazione al peccato che permane nell'uomo anche dopo il lavacro del battesimo." },
+    { id:"m10", term:"Predestinazione", text:"Decreto eterno di Dio con cui viene fissato il numero imperscrutabile degli eletti alla salvezza." },
+    { id:"m11", term:"Aversio a Deo", text:"L'atto del peccare consistente nel volgere le spalle al Sommo Bene per volgersi ai beni inferiori." },
+    { id:"m12", term:"Sola Gratia / Sola Fide", text:"Principi teologici della Riforma luterana derivati dal pensiero agostiniano sulla Grazia." }
+];
+        const clozeAnswers = { "1":"manicheismo","2":"ordine","3":"privatio boni","4":"Evodio","5":"teodicea","6":"medio","7":"Pelagio","8":"massa damnata","9":"grazia divina","10":"eternità" };
+
+        // ====== NUOVO: POOL COMMENTO TESTUALE ======
+        const textualPool = [
     {
-        "id": "m1",
-        "term": "Manicheismo",
-        "text": "Religione dualista fondata da Mani: due principi coeterni in lotta, Regno della Luce e delle Tenebre."
+        id:"t1", title:"De natura boni, 3 — Misura, forma e ordine", source:"Agostino d'Ippona, De natura boni, 3",
+        text:"Noi, cristiani cattolici, adoriamo Dio, dal quale dipendono tutti i beni, sia grandi che piccoli; da lui dipende ogni misura, sia grande che piccola; ogni forma, sia grande che piccola; ogni ordine, sia grande che piccolo. Quanto più tutte le cose sono secondo misura, forma ed ordine, tanto più sono certamente buone; invece quanto meno sono secondo misura, forma ed ordine, tanto meno sono buone. […] Dove questi tre aspetti sono grandi, sono grandi i beni; dove sono piccoli, sono piccoli i beni; dove non ci sono, non c'è alcun bene.",
+        questions:[
+            { id:"t1q1", question:"Nel passo, Agostino afferma che la bontà delle cose dipende da misura, forma e ordine. Quale concezione filosofica sottende questa affermazione?", options:["Che il bene coincide con la struttura razionale e ordinata dell'essere.","Che il bene è una sostanza materiale misurabile in chili.","Che il bene è soggettivo e dipende dall'opinione di ciascuno.","Che il bene è prodotto dal caso e dall'arbitrarietà."], correct:0, explanation:"La tesi è di matrice neoplatonica: il bene è l'ordine razionale impresso dal Creatore; più una cosa partecipa di misura, forma e ordine, più è buona." },
+            { id:"t1q2", question:"Dal passo si deduce che il male:", options:["È l'assenza o la corruzione di misura, forma e ordine in una natura.","È una sostanza creata da Dio per punire i malvagi.","È più potente del bene perché lo corrompe.","È necessario per l'equilibrio del cosmo."], correct:0, explanation:"Se la bontà consiste in misura, forma e ordine, il male non può essere una sostanza: è precisamente la loro mancanza/corruzione (privatio boni)." }
+        ]
     },
     {
-        "id": "m2",
-        "term": "Privatio Boni",
-        "text": "Concezione ontologica per cui il male non è sostanza, ma corruzione o mancanza di bene."
+        id:"t2", title:"De natura boni, 15 — Il silenzio e il buio", source:"Agostino d'Ippona, De natura boni, 15",
+        text:"Così diciamo che un suono grave è contrario ad uno acuto, o anche uno stridente ad uno melodico: ma se cancelli del tutto ogni forma sonora, c'è il silenzio come assoluta assenza di suono; esso però, in quanto assenza di suono, è normalmente contrapposto alla voce come suo contrario. Così si parla di luminoso ed oscuro come di due contrari: eppure anche ciò che è oscuro ha una qualche luce; se ne è del tutto sprovvisto, allora ci sono le tenebre in quanto assenza di luce, come il silenzio è assenza di suono.",
+        questions:[
+            { id:"t2q1", question:"Quale strategia argomentativa usa Agostino con le analogie del silenzio e del buio?", options:["Mostra che il male non è una sostanza, ma l'assenza di bene, come il buio è assenza di luce.","Dimostra che il male è più forte del bene.","Confuta l'esistenza del mondo materiale.","Spiega la natura fisica della luce divina."], correct:0, explanation:"Le analogie servono a chiarire che alcune 'realtà' (silenzio, buio, male) non sono sostanze positive ma privazioni di qualcos'altro." },
+            { id:"t2q2", question:"Se applichiamo l'analogia del buio al problema del male, possiamo concludere che:", options:["Il male esiste solo come privazione del bene, non come realtà autonoma.","Il male è un principio coeterno a Dio.","Il male è creato da Dio per punire gli uomini.","Il male è un'illusione della mente umana."], correct:0, explanation:"Come il buio non è una sostanza ma semplice assenza di luce, il male non ha esistenza autonoma: è mancanza di bene." }
+        ]
     },
     {
-        "id": "m3",
-        "term": "Modus, Species, Ordo",
-        "text": "Misura, Forma e Ordine: i tre fattori divini presenti in ogni natura creata da Dio."
+        id:"t3", title:"De libero arbitrio, III, 5.15 — Il cavallo brado e la pietra", source:"Agostino d'Ippona, De libero arbitrio, Libro III, 5.15",
+        text:"Come infatti è migliore un cavallo, sia pure brado, di una pietra che non è brada appunto perché è priva di movimento proprio e di sensazione, così è più nobile la creatura che pecca per libera volontà di quella che non pecca appunto perché non ha la libera volontà.",
+        questions:[
+            { id:"t3q1", question:"Qual è la tesi che Agostino vuole dimostrare con il paragone tra il cavallo brado e la pietra?", options:["Che la libertà è un bene superiore all'impeccabilità automatica.","Che gli animali sono superiori agli uomini.","Che la pietra è malvagia perché immobile.","Che solo gli esseri liberi esistono."], correct:0, explanation:"Il paragone serve a mostrare che la capacità di agire liberamente rende una creatura più nobile, anche se può sbagliare, rispetto a un essere inerte che non pecca perché non può scegliere." },
+            { id:"t3q2", question:"Perché, secondo il passo, una creatura che pecca liberamente è più nobile di una che non può peccare?", options:["Perché la capacità di scegliere liberamente è un bene superiore all'assenza di scelta, anche se comporta il rischio di peccare.","Perché il peccato è un bene in sé.","Perché Dio premia sempre chi pecca.","Perché la creatura senza volontà non esiste."], correct:0, explanation:"La libertà è un 'bene medio': è un bene in sé (meglio scegliere che non scegliere), ma può essere usata male. La sua presenza rende la creatura più nobile." }
+        ]
     },
     {
-        "id": "m4",
-        "term": "Bene Medio",
-        "text": "Classificazione del libero arbitrio: bene in sé che però la volontà umana può volgere al male."
-    },
-    {
-        "id": "m5",
-        "term": "Teodicea",
-        "text": "Riflessione filosofico-teologica volta a giustificare la bontà di Dio di fronte all'esistenza del male."
-    },
-    {
-        "id": "m6",
-        "term": "Pelagianesimo",
-        "text": "Eresia sostenuta da Pelagio secondo cui l'uomo può salvarsi da solo con le proprie opere buone."
-    },
-    {
-        "id": "m7",
-        "term": "Massa Damnata",
-        "text": "Condizione dell'umanità intera caduta nel peccato originale in Adamo e bisognosa di soccorso."
-    },
-    {
-        "id": "m8",
-        "term": "Grazia Divina",
-        "text": "Dono gratuito e immanente di Dio necessario per risanare la volontà malata e farle compiere il bene."
-    },
-    {
-        "id": "m9",
-        "term": "Concupiscenza",
-        "text": "Inclinazione al peccato che permane nell'uomo anche dopo il lavacro del battesimo."
-    },
-    {
-        "id": "m10",
-        "term": "Predestinazione",
-        "text": "Decreto eterno di Dio con cui viene fissato il numero imperscrutabile degli eletti alla salvezza."
-    },
-    {
-        "id": "m11",
-        "term": "Aversio a Deo",
-        "text": "L'atto del peccare consistente nel volgere le spalle al Sommo Bene per volgersi ai beni inferiori."
-    },
-    {
-        "id": "m12",
-        "term": "Sola Gratia / Sola Fide",
-        "text": "Principi teologici della Riforma luterana derivati dal pensiero agostiniano sulla Grazia."
+        id:"t4", title:"La correzione e la grazia, 11.31 — Libero arbitrio e Bene onnipotente", source:"Agostino d'Ippona, La correzione e la grazia, 11.31",
+        text:"Effettivamente il libero arbitrio è sufficiente per il male, ma inadeguato per il bene che non venga aiutato dal Bene onnipotente.",
+        questions:[
+            { id:"t4q1", question:"Cosa significa che il libero arbitrio è 'sufficiente per il male'?", options:["Che l'uomo, con le sue sole forze, può scegliere il male, ma non può compiere il bene autentico senza la grazia.","Che il male è più potente del bene.","Che Dio è la causa del male.","Che il libero arbitrio è una sostanza malvagia."], correct:0, explanation:"La volontà umana, ferita dal peccato originale, è incline al male e sufficiente a compierlo; per il bene necessita dell'aiuto della grazia." },
+            { id:"t4q2", question:"Perché il libero arbitrio è 'inadeguato per il bene' senza la grazia?", options:["Perché la volontà umana, ferita dal peccato, tende al male e necessita della grazia per compiere il bene.","Perché il bene è impossibile per natura.","Perché Dio non vuole che l'uomo faccia il bene.","Perché il libero arbitrio è stato distrutto dal peccato."], correct:0, explanation:"Dopo la caduta, la libertà umana è 'schiava del peccato': può volere il male ma non il bene vero senza il soccorso della grazia divina." }
+        ]
     }
 ];
-        const clozeAnswers = {
-    "1": "manicheismo",
-    "2": "ordine",
-    "3": "privatio boni",
-    "4": "Evodio",
-    "5": "teodicea",
-    "6": "medio",
-    "7": "Pelagio",
-    "8": "massa damnata",
-    "9": "grazia divina",
-    "10": "eternità"
-};
+        // ====== NUOVO: POOL RICOSTRUZIONE ARGOMENTATIVA ======
+        const argumentPool = [
+    {
+        id:"a1", title:"L'argomentazione del De libero arbitrio: donde viene il male?",
+        description:"Agostino cerca la causa del male morale senza attribuirla a Dio né a realtà inferiori all'uomo.",
+        steps:[
+            { id:"s1", text:"Dio è sommamente buono e non può essere causa del male." },
+            { id:"s2", text:"Nulla di inferiore alla mente umana (come il corpo) può costringerla a peccare." },
+            { id:"s3", text:"Nulla di superiore alla mente umana (cioè Dio) può essere causa del male." },
+            { id:"s4", text:"Dunque la causa del male deve risiedere nella stessa mente umana, ossia nel libero arbitrio." },
+            { id:"s5", text:"Pertanto il male morale ha origine nella libera volontà dell'uomo." }
+        ]
+    },
+    {
+        id:"a2", title:"L'argomentazione del De natura boni: il male come privazione",
+        description:"Agostino confuta il dualismo manicheo mostrando che il male non è una sostanza ma privazione del bene.",
+        steps:[
+            { id:"s1", text:"Ogni natura creata da Dio possiede misura, forma e ordine, ed è quindi buona." },
+            { id:"s2", text:"Se il male fosse una sostanza autonoma, sarebbe una natura." },
+            { id:"s3", text:"Ma ogni natura è buona, quindi il male non può essere una natura." },
+            { id:"s4", text:"Il male è allora la corruzione o privazione della misura, forma e ordine." },
+            { id:"s5", text:"Dunque il male non esiste di per sé, ma è assenza di bene (privatio boni)." }
+        ]
+    }
+];
+        // ====== NUOVO: POOL VERO/FALSO ======
+        const tfPool = [
+    { id:"tf1", statement:"Per Agostino il male è una sostanza autonoma creata da un principio malvagio.", correct:false, explanation:"Falso. Per Agostino il male è privatio boni: non è una sostanza, ma corruzione o mancanza di bene. La tesi della sostanza malvagia è quella manichea." },
+    { id:"tf2", statement:"Il manicheismo sostiene che il male non è creato da Dio, ma è un principio autonomo a lui contrapposto.", correct:true, explanation:"Vero. Il dualismo manicheo pone due principi coeterni: il Regno della Luce e il Regno delle Tenebre. Il male non è creato da Dio, ma è autonomo." },
+    { id:"tf3", statement:"Il libero arbitrio è classificato da Agostino come un bene infimo.", correct:false, explanation:"Falso. Il libero arbitrio è un 'bene medio': è un bene in sé, ma può essere usato male. I beni infimi sono, ad esempio, la bellezza dei corpi." },
+    { id:"tf4", statement:"Pelagio riteneva che la grazia divina fosse indispensabile per la salvezza.", correct:false, explanation:"Falso. Pelagio riteneva che l'uomo potesse salvarsi con le sole proprie opere buone, rendendo la grazia di fatto superflua. Agostino lo combatté duramente." },
+    { id:"tf5", statement:"Agostino sostiene che il battesimo cancella la concupiscenza trasmessa dal peccato originale.", correct:false, explanation:"Falso. Il battesimo cancella il reato (la colpa) del peccato originale, ma non la concupiscenza, che permane e richiede la grazia continua." },
+    { id:"tf6", statement:"Per Agostino il numero degli eletti è stabilito da Dio dall'eternità e non può essere né accresciuto né diminuito.", correct:true, explanation:"Vero. Nella 'La correzione e la grazia' Agostino afferma che il numero dei predestinati è determinato dall'eternità." },
+    { id:"tf7", statement:"La materia, per Agostino, è intrinsecamente malvagia in quanto corruttibile.", correct:false, explanation:"Falso. Agostino riabilita la materia: anch'essa è creata da Dio ed è buona, in quanto dotata di misura, forma e ordine. I manichei la consideravano malvagia." },
+    { id:"tf8", statement:"Il peccato originale ha reso l'umanità una 'massa damnata' bisognosa della grazia.", correct:true, explanation:"Vero. Con la caduta di Adamo, l'umanità intera è divenuta massa damnata; solo la grazia divina può sottrarne alcuni alla condanna." },
+    { id:"tf9", statement:"Lutero e Calvino svilupparono posizioni radicali sulla grazia e la predestinazione a partire dal pensiero agostiniano.", correct:true, explanation:"Vero. Lutero (monaco agostiniano) insistette su Sola Gratia/Sola Fide; Calvino sviluppò la doppia predestinazione, radicalizzando temi agostiniani." },
+    { id:"tf10", statement:"Secondo Agostino, il libero arbitrio da solo è sufficiente per compiere il bene autentico.", correct:false, explanation:"Falso. 'Il libero arbitrio è sufficiente per il male, ma inadeguato per il bene che non venga aiutato dal Bene onnipotente' (La correzione e la grazia, 11.31)." }
+];
 
+        // ================= RENDER FUNCTIONS =================
         function renderEx1() {
             const container = document.getElementById('ex1-container');
             if(!container) return;
@@ -730,51 +467,23 @@
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="ex1-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
             `).join('');
         }
-
         function selectEx1(qId, oIdx, btn) {
             if (state.ex1Answers[qId] !== undefined) return;
             playSound('click');
             const item = state.activeEx1Data.find(d => d.id === qId);
             state.ex1Answers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`ex1-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -787,51 +496,23 @@
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="ex2-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
             `).join('');
         }
-
         function selectEx2(qId, oIdx, btn) {
             if (state.ex2Answers[qId] !== undefined) return;
             playSound('click');
             const item = state.activeEx2Data.find(d => d.id === qId);
             state.ex2Answers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`ex2-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -844,51 +525,23 @@
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="ex3-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
             `).join('');
         }
-
         function selectEx3(qId, oIdx, btn) {
             if (state.ex3Answers[qId] !== undefined) return;
             playSound('click');
             const item = state.activeEx3Data.find(d => d.id === qId);
             state.ex3Answers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`ex3-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -899,112 +552,246 @@
             termsContainer.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
             defsContainer.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
         }
-
         function selectMatchTerm(termId, btn) {
-            playSound('click');
-            state.selectedTermId = termId;
-
-            document.querySelectorAll('#matching-terms button').forEach(b => {
-                if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
-            });
+            playSound('click'); state.selectedTermId = termId;
+            document.querySelectorAll('#matching-terms button').forEach(b => { if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer"; });
             btn.className = "w-full text-left p-3 rounded-xl border-2 border-amber-500 bg-amber-950/80 text-xs font-bold text-amber-300 transition-all shadow-lg cursor-pointer";
-
             const fb = document.getElementById('matching-feedback');
-            if(fb) {
-                fb.className = "text-xs font-semibold text-amber-400 pt-2";
-                fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!";
-            }
+            if(fb) { fb.className = "text-xs font-semibold text-amber-400 pt-2"; fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!"; }
         }
-
         function selectMatchDef(matchId, btn) {
             const fb = document.getElementById('matching-feedback');
-            if(!state.selectedTermId) {
-                playSound('error');
-                if(fb) {
-                    fb.className = "text-xs font-semibold text-rose-400 pt-2";
-                    fb.innerText = "Prima seleziona un termine nella colonna di sinistra!";
-                }
-                return;
-            }
-
+            if(!state.selectedTermId) { playSound('error'); if(fb){ fb.className = "text-xs font-semibold text-rose-400 pt-2"; fb.innerText = "Prima seleziona un termine nella colonna di sinistra!"; } return; }
             if(state.selectedTermId === matchId) {
-                playSound('correct');
-                state.matchedPairs[matchId] = true;
-
+                playSound('correct'); state.matchedPairs[matchId] = true;
                 const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
-                if(termBtn) {
-                    termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed";
-                    termBtn.disabled = true;
-                }
-                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed";
-                btn.disabled = true;
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-emerald-400 pt-2";
-                    fb.innerText = "✓ Abbinamento corretto e bloccato!";
-                }
+                if(termBtn) { termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed"; termBtn.disabled = true; }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed"; btn.disabled = true;
+                if(fb) { fb.className = "text-xs font-bold text-emerald-400 pt-2"; fb.innerText = "✓ Abbinamento corretto e bloccato!"; }
             } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
-                setTimeout(() => {
-                    if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer";
-                }, 1000);
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-rose-400 pt-2";
-                    fb.innerText = "✗ Abbinamento errato. Riprova!";
-                }
+                playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => { if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer"; }, 1000);
+                if(fb) { fb.className = "text-xs font-bold text-rose-400 pt-2"; fb.innerText = "✗ Abbinamento errato. Riprova!"; }
             }
-            state.selectedTermId = null;
-            updateGlobalScore();
+            state.selectedTermId = null; updateGlobalScore();
         }
 
         function checkCloze() {
             if (state.clozeLocked) return;
             playSound('click');
             let correct = 0;
-            const keys = Object.keys(clozeAnswers);
-            keys.forEach(k => {
+            Object.keys(clozeAnswers).forEach(k => {
                 const el = document.getElementById(`cloze-${k}`);
-                if(el) {
-                    el.disabled = true;
-                    if(el.value === clozeAnswers[k]) { 
-                        correct++; 
-                        el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    } else { 
-                        el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    }
-                }
+                if(el) { el.disabled = true; if(el.value === clozeAnswers[k]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } else { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } }
             });
-            state.clozeScore = Math.round((correct / keys.length) * 100);
+            state.clozeScore = Math.round((correct / Object.keys(clozeAnswers).length) * 100);
             state.clozeLocked = true;
-
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed";
-                submitBtn.innerText = "Testo Verificato e Bloccato";
+            if(submitBtn) { submitBtn.disabled = true; submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed"; submitBtn.innerText = "Testo Verificato e Bloccato"; }
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) { if(correct === Object.keys(clozeAnswers).length) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (${correct}/${Object.keys(clozeAnswers).length}).`; } else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/${Object.keys(clozeAnswers).length}. Le risposte sono state bloccate.`; } }
+            updateGlobalScore();
+        }
+
+        // ====== RENDER COMMENTO TESTUALE ======
+        function renderTextual() {
+            const container = document.getElementById('ex6-container');
+            if(!container) return;
+            container.innerHTML = state.activeTextual.map((passage, pIdx) => `
+                <div class="glass-card p-5 sm:p-6 rounded-2xl space-y-5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-orange-400 bg-orange-950/60 px-2.5 py-1 rounded-md border border-orange-800"><i class="fa-solid fa-quote-right mr-1"></i> Passo ${pIdx+1}: ${passage.title}</span>
+                    </div>
+                    <div class="passage p-4 sm:p-5">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-amber-400/80 mb-2">${passage.source}</p>
+                        <p class="text-sm sm:text-base text-slate-200 leading-relaxed italic">«${passage.text}»</p>
+                    </div>
+                    <div class="space-y-5">
+                        ${passage.questions.map((q, qIdx) => `
+                            <div class="space-y-2">
+                                <div class="font-bold text-slate-100 text-xs sm:text-sm">${pIdx+1}.${qIdx+1} — ${q.question}</div>
+                                <div class="space-y-2" id="tq-${q.id}">
+                                    ${q.options.map((opt, oIdx) => `<button onclick="selectTextual('${q.id}', ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
+                                </div>
+                                <div id="tfb-${q.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+        function selectTextual(qId, oIdx, btn) {
+            if (state.ex6Answers[qId] !== undefined) return;
+            playSound('click');
+            let question = null;
+            state.activeTextual.forEach(p => p.questions.forEach(q => { if(q.id === qId) question = q; }));
+            if (!question) return;
+            state.ex6Answers[qId] = oIdx;
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === question.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === question.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === question.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700"; fb.innerHTML = `<strong>${oIdx === question.correct ? 'Interpretazione Corretta!' : 'Interpretazione Errata e Bloccata.'}</strong> ${question.explanation}`; }
+            updateGlobalScore();
+        }
+
+        // ====== RENDER RICOSTRUZIONE ARGOMENTATIVA ======
+        function renderArgument() {
+            const titleEl = document.getElementById('arg-title');
+            const descEl = document.getElementById('arg-description');
+            const poolEl = document.getElementById('arg-pool');
+            const seqEl = document.getElementById('arg-sequence');
+            const submitBtn = document.getElementById('arg-submit');
+            const fbEl = document.getElementById('arg-feedback');
+            if(!poolEl || !seqEl || !state.activeArgument) return;
+
+            titleEl.innerText = state.activeArgument.title;
+            descEl.innerText = state.activeArgument.description;
+
+            poolEl.innerHTML = state.argPool.map(s => `
+                <button onclick="addToSequence('${s.id}')" class="w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 hover:border-cyan-600 transition-all cursor-pointer">
+                    <i class="fa-solid fa-grip-lines text-slate-500 mr-1.5"></i> ${s.text}
+                </button>
+            `).join('');
+
+            if (state.argOrder.length === 0) {
+                seqEl.innerHTML = `<div class="text-xs text-slate-500 text-center py-4 italic">Clicca i passi a sinistra per inserirli qui nell'ordine corretto.</div>`;
+            } else {
+                seqEl.innerHTML = state.argOrder.map((id, idx) => {
+                    const step = state.activeArgument.steps.find(s => s.id === id);
+                    let cls = "w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer flex items-start gap-2.5";
+                    if (state.argSubmitted) {
+                        const correctIds = state.activeArgument.steps.map(s => s.id);
+                        cls += (id === correctIds[idx]) ? " border-emerald-600 bg-emerald-950/60 text-emerald-300" : " border-rose-600 bg-rose-950/60 text-rose-300";
+                    } else {
+                        cls += " border-cyan-700/60 bg-cyan-950/40 text-cyan-100 hover:bg-cyan-900/40";
+                    }
+                    return `<button onclick="removeFromSequence('${id}')" class="${cls}" ${state.argSubmitted ? 'disabled' : ''}>
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-[10px]">${idx+1}</span>
+                        <span>${step.text}</span>
+                    </button>`;
+                }).join('');
             }
 
-            const fb = document.getElementById('cloze-feedback');
-            if(fb) {
-                if(correct === keys.length) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (${correct}/${keys.length}).`; }
-                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/${keys.length}. Le risposte sono state bloccate.`; }
+            if (submitBtn) {
+                const allPlaced = state.argOrder.length === state.activeArgument.steps.length;
+                submitBtn.disabled = !allPlaced || state.argSubmitted;
+                submitBtn.className = allPlaced && !state.argSubmitted ? "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer hover:bg-cyan-400 transition-all" : "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed";
+            }
+            if (fbEl && !state.argSubmitted) fbEl.innerText = "";
+        }
+        function addToSequence(id) {
+            if (state.argSubmitted) return;
+            playSound('click');
+            const idx = state.argPool.findIndex(s => s.id === id);
+            if (idx < 0) return;
+            state.argPool.splice(idx, 1);
+            state.argOrder.push(id);
+            renderArgument();
+        }
+        function removeFromSequence(id) {
+            if (state.argSubmitted) return;
+            playSound('click');
+            const idx = state.argOrder.indexOf(id);
+            if (idx < 0) return;
+            state.argOrder.splice(idx, 1);
+            const step = state.activeArgument.steps.find(s => s.id === id);
+            state.argPool.push(step);
+            renderArgument();
+        }
+        function checkArgument() {
+            if (state.argSubmitted || state.argOrder.length !== state.activeArgument.steps.length) return;
+            playSound('click');
+            const correctIds = state.activeArgument.steps.map(s => s.id);
+            let correct = 0;
+            for (let i = 0; i < state.argOrder.length; i++) {
+                if (state.argOrder[i] === correctIds[i]) correct++;
+            }
+            state.argSubmitted = true;
+            state.argCorrectPositions = correct;
+            renderArgument();
+            const fbEl = document.getElementById('arg-feedback');
+            if (fbEl) {
+                if (correct === correctIds.length) { playSound('correct'); fbEl.className = "text-emerald-400 font-bold"; fbEl.innerText = `✓ Sequenza perfetta! Hai ricostruito correttamente l'argomentazione (${correct}/${correctIds.length}).`; }
+                else { playSound('error'); fbEl.className = "text-amber-400 font-bold"; fbEl.innerText = `Posizioni corrette: ${correct}/${correctIds.length}. La sequenza non è ancora del tutto corretta.`; }
             }
             updateGlobalScore();
         }
 
+        // ====== RENDER VERO/FALSO ======
+        function renderTF() {
+            const container = document.getElementById('ex8-container');
+            if(!container) return;
+            container.innerHTML = state.activeTF.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-lime-500/20 text-lime-400 flex items-center justify-center font-bold text-xs">${idx+1}</span>
+                        <p class="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed">${item.statement}</p>
+                    </div>
+                    <div class="flex gap-3 pl-9">
+                        <button onclick="selectTF('${item.id}', true, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-emerald-300 hover:bg-emerald-950/50 hover:border-emerald-600 transition-all cursor-pointer" data-tf="true"><i class="fa-solid fa-check mr-1"></i> Vero</button>
+                        <button onclick="selectTF('${item.id}', false, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-rose-300 hover:bg-rose-950/50 hover:border-rose-600 transition-all cursor-pointer" data-tf="false"><i class="fa-solid fa-xmark mr-1"></i> Falso</button>
+                    </div>
+                    <div id="tfb2-${item.id}" class="hidden p-3 rounded-xl text-xs ml-9"></div>
+                </div>
+            `).join('');
+        }
+        function selectTF(id, value, btn) {
+            if (state.tfAnswers[id] !== undefined) return;
+            playSound('click');
+            const item = state.activeTF.find(d => d.id === id);
+            if (!item) return;
+            state.tfAnswers[id] = value;
+            const container = btn.closest('.glass-card');
+            container.querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); });
+            if (value === item.correct) { playSound('correct'); btn.className = "px-5 py-2 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs font-bold text-emerald-200 cursor-not-allowed"; }
+            else { playSound('error'); btn.className = "px-5 py-2 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs font-bold text-rose-200 cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb2-${id}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                fb.className = value === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 ml-9" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 ml-9";
+                fb.innerHTML = `<strong>${value === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`;
+            }
+            updateGlobalScore();
+        }
+
+        // ====== SCORE ======
         function updateGlobalScore() {
             let ex1Correct = 0; state.activeEx1Data.forEach(d => { if(state.ex1Answers[d.id] === d.correct) ex1Correct++; });
             let ex2Correct = 0; state.activeEx2Data.forEach(d => { if(state.ex2Answers[d.id] === d.correct) ex2Correct++; });
             let ex3Correct = 0; state.activeEx3Data.forEach(d => { if(state.ex3Answers[d.id] === d.correct) ex3Correct++; });
             let matchCount = Object.keys(state.matchedPairs || {}).length;
 
-            const total = Math.round((ex1Correct / (state.activeEx1Data.length || 1))*30 + 
-                                     (ex2Correct / (state.activeEx2Data.length || 1))*25 + 
-                                     (ex3Correct / (state.activeEx3Data.length || 1))*20 + 
-                                     (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
-                                     (state.clozeScore/100)*10);
+            // Commento testuale
+            let ex6Total = 0, ex6Correct = 0;
+            state.activeTextual.forEach(p => p.questions.forEach(q => {
+                ex6Total++;
+                if(state.ex6Answers[q.id] === q.correct) ex6Correct++;
+            }));
+
+            // Ricostruzione
+            let argScore = 0;
+            if (state.argSubmitted) {
+                const totalSteps = state.activeArgument ? state.activeArgument.steps.length : 1;
+                argScore = (state.argCorrectPositions || 0) / totalSteps;
+            }
+
+            // Vero/Falso
+            let tfCorrect = 0;
+            state.activeTF.forEach(d => { if(state.tfAnswers[d.id] === d.correct) tfCorrect++; });
+
+            const total = Math.round(
+                (ex1Correct / (state.activeEx1Data.length || 1)) * 12 +
+                (ex2Correct / (state.activeEx2Data.length || 1)) * 12 +
+                (ex3Correct / (state.activeEx3Data.length || 1)) * 10 +
+                (matchCount / (state.activeMatchingTerms.length || 1)) * 8 +
+                (state.clozeScore / 100) * 6 +
+                (ex6Total > 0 ? (ex6Correct / ex6Total) * 20 : 0) +
+                argScore * 16 +
+                (tfCorrect / (state.activeTF.length || 1)) * 16
+            );
+
             const scoreText = document.getElementById('global-score-text');
             if(scoreText) scoreText.innerText = `${total} / 100`;
             return total;
@@ -1018,12 +805,10 @@
             const certScore = document.getElementById('cert-score');
             const certTitle = document.getElementById('cert-title');
             if(certScore) certScore.innerText = `${score} / 100 XP`;
-
             let titleText = "Novizio della Teodicea Agostiniana";
             if(score >= 90) titleText = "Maestro di Teodicea e Teologia Agostiniana";
             else if(score >= 75) titleText = "Analista del Libero Arbitrio e della Grazia";
             else if(score >= 55) titleText = "Praticante di Filosofia Patristica";
-
             if(badgeEl) badgeEl.innerText = titleText;
             if(certTitle) certTitle.innerText = titleText;
         }
@@ -1032,32 +817,18 @@
             playSound('click');
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
             const targetTab = document.getElementById(tabId);
             if(targetTab) targetTab.classList.remove('hidden');
-
-            if(btnElement) {
-                btnElement.classList.add('active');
-            } else {
-                const navButtons = document.querySelectorAll('.tab-btn');
-                navButtons.forEach(b => {
-                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
-                        b.classList.add('active');
-                    }
-                });
-            }
-
+            if(btnElement) { btnElement.classList.add('active'); }
+            else { document.querySelectorAll('.tab-btn').forEach(b => { if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) b.classList.add('active'); }); }
             if(tabId === 'tab-report') updateReport();
         }
 
         function setupRandomQuestions() {
-            state.ex1Answers = {}; 
-            state.ex2Answers = {}; 
-            state.ex3Answers = {}; 
-            state.matchedPairs = {}; 
-            state.clozeScore = 0;
-            state.clozeLocked = false;
-            state.selectedTermId = null;
+            state.ex1Answers = {}; state.ex2Answers = {}; state.ex3Answers = {};
+            state.ex6Answers = {}; state.tfAnswers = {};
+            state.matchedPairs = {}; state.clozeScore = 0; state.clozeLocked = false;
+            state.selectedTermId = null; state.argSubmitted = false; state.argCorrectPositions = 0;
 
             state.activeEx1Data = shuffle(ex1Pool).slice(0, 5);
             state.activeEx2Data = shuffle(ex2Pool).slice(0, 5);
@@ -1067,45 +838,35 @@
             state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
             state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
 
-            const keys = Object.keys(clozeAnswers);
-            keys.forEach(k => {
+            state.activeTextual = shuffle(textualPool).slice(0, 3);
+
+            const arg = shuffle(argumentPool)[0];
+            state.activeArgument = { ...arg, steps: arg.steps };
+            state.argPool = shuffle(arg.steps);
+            state.argOrder = [];
+
+            state.activeTF = shuffle(tfPool).slice(0, 5);
+
+            // reset cloze
+            Object.keys(clozeAnswers).forEach(k => {
                 const el = document.getElementById(`cloze-${k}`);
-                if(el) {
-                    el.disabled = false;
-                    el.value = "";
-                    el.className = "bg-slate-800 text-amber-300 rounded px-2 py-1";
-                }
+                if(el) { el.disabled = false; el.value = ""; el.className = "bg-slate-800 text-amber-300 rounded px-2 py-1"; }
             });
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.className = "bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer";
-                submitBtn.innerText = "Verifica e Blocca Testo";
-            }
+            if(submitBtn) { submitBtn.disabled = false; submitBtn.className = "bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"; submitBtn.innerText = "Verifica e Blocca Testo"; }
             const clozeFb = document.getElementById('cloze-feedback');
             if(clozeFb) clozeFb.innerText = "";
 
-            renderEx1(); 
-            renderEx2(); 
-            renderEx3(); 
-            renderMatching();
+            renderEx1(); renderEx2(); renderEx3(); renderMatching();
+            renderTextual(); renderArgument(); renderTF();
             updateGlobalScore();
         }
 
-        function resetAll() {
-            setupRandomQuestions();
-            switchTab('tab-studio');
-        }
+        function resetAll() { setupRandomQuestions(); switchTab('tab-studio'); }
+        function initApp() { setupRandomQuestions(); }
 
-        function initApp() {
-            setupRandomQuestions();
-        }
-
-        if (document.readyState === 'interactive' || document.readyState === 'complete') {
-            initApp();
-        } else {
-            document.addEventListener('DOMContentLoaded', initApp);
-        }
+        if (document.readyState === 'interactive' || document.readyState === 'complete') { initApp(); }
+        else { document.addEventListener('DOMContentLoaded', initApp); }
     </script>
 </body>
 </html>
