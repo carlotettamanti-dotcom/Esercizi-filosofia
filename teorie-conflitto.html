@@ -16,13 +16,8 @@
             }
         }
     </script>
-    <!-- Configurazione e Caricamento MathJax per LaTeX -->
     <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        }
-      };
+      window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -33,6 +28,7 @@
         .tab-btn.active { background-color: #0284c7 !important; color: #ffffff !important; border-color: #38bdf8 !important; box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.5); }
         .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .badge-glow { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+        .passage { border-left: 4px solid #f59e0b; background: rgba(15, 23, 42, 0.85); border-radius: 0 0.75rem 0.75rem 0; }
         @media print {
             body * { visibility: hidden; }
             #printable-certificate, #printable-certificate * { visibility: visible; }
@@ -42,7 +38,6 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- Header con Navigation Breadcrumb -->
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-2 text-xs sm:text-sm">
@@ -78,26 +73,34 @@
         </div>
     </header>
 
-    <!-- Navigation Bar -->
     <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
             <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
                 <i class="fa-solid fa-book-open text-amber-400"></i> 0. Quadro Teorico
             </button>
             <button onclick="switchTab('tab-ex1', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-brain text-emerald-400"></i> 1. La Dottrina della Guerra Giusta in Agostino e Tommaso
+                <i class="fa-solid fa-brain text-emerald-400"></i> 1. Guerra Giusta
             </button>
             <button onclick="switchTab('tab-ex2', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-scale-balanced text-amber-400"></i> 2. Il Pacifismo Radicale Cristiano di John Wyclif
+                <i class="fa-solid fa-scale-balanced text-amber-400"></i> 2. Pacifismo (Wyclif)
             </button>
             <button onclick="switchTab('tab-ex3', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-puzzle-piece text-purple-400"></i> 3. Il Realismo Politico e Militarista di Machiavelli
+                <i class="fa-solid fa-puzzle-piece text-purple-400"></i> 3. Realismo (Machiavelli)
             </button>
             <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti Concettuali
+                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti
             </button>
             <button onclick="switchTab('tab-cloze', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Testo Guidato
+                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Cloze
+            </button>
+            <button onclick="switchTab('tab-commento', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-quote-right text-orange-400"></i> 6. Commento Testuale
+            </button>
+            <button onclick="switchTab('tab-argomentazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-arrow-down-1-9 text-cyan-400"></i> 7. Ricostruzione
+            </button>
+            <button onclick="switchTab('tab-verofalso', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-check-double text-lime-400"></i> 8. Vero/Falso
             </button>
             <button onclick="switchTab('tab-report', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
                 <i class="fa-solid fa-certificate text-yellow-400"></i> Certificato
@@ -105,10 +108,8 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
 
-        <!-- TAB 0: STUDIO -->
         <section id="tab-studio" class="tab-content space-y-8">
             <div class="glass-card p-6 sm:p-8 rounded-2xl border-amber-500/20 relative overflow-hidden">
                 <div class="max-w-3xl space-y-3">
@@ -122,7 +123,6 @@
                 </div>
             </div>
 
-            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-shapes"></i></div>
@@ -145,53 +145,48 @@
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Nel contesto della Guerra dei 100 Anni, Wyclif demolisce i 3 criteri tomisti: l'unica autorità è Cristo (che proibisce la guerra), l'autodifesa dei beni materiali è peccaminosa e l'atto di uccidere è inconciliabile con l'amore fraterno.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-[#m] fa-chess-knight"></i></div>
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-chess-knight"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">5. Il Realismo Politico di Machiavelli</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Ne <em>Il Principe</em>, Machiavelli separa la politica dall'etica: per mantenere lo Stato occorre <em>"imparare a potere essere non buono"</em>. La natura umana è volubile e cupida; la forza militare è il fondamento primario di ogni potere.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-[#a] fa-shield-cat"></i></div>
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-shield-cat"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">6. Consigli Bellici & Armi Proprie</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Machiavelli prescrive: l'arte della guerra è la sola arte di chi comanda; studiare e imitare i condottieri antichi; rifiuto assoluto della neutralità; condanna ferma delle <strong>truppe mercenarie</strong> ("inutile e periculose") a favore delle armi proprie.</p>
                 </div>
             </div>
-
 
             <div class="text-center pt-4">
                 <button onclick="switchTab('tab-ex1')" class="bg-gradient-to-r from-amber-500 to-emerald-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-amber-600 hover:to-emerald-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione Guidata ➔</button>
             </div>
         </section>
 
-        <!-- TAB 1: ESERCIZIO 1 -->
         <section id="tab-ex1" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: La Dottrina della Guerra Giusta in Agostino e Tommaso (5 Quesiti estratti da Pool)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: La Dottrina della Guerra Giusta in Agostino e Tommaso</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Esamina lo Ius ad bellum, le tre condizioni di Agostino, i tre pilastri tomisti e la distinzione tra pace buona e cattiva. <em>(Le risposte selezionate vengono bloccate subito)</em></p>
             </div>
             <div id="ex1-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 2: ESERCIZIO 2 -->
         <section id="tab-ex2" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Il Pacifismo Radicale Cristiano di John Wyclif (5 Quesiti estratti da Pool)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Il Pacifismo Radicale Cristiano di John Wyclif</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Analizza la demolizione dei 3 criteri della guerra giusta, la non-resistenza al male e l'incompatibilità tra violenza e carità. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="ex2-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 3: ESERCIZIO 3 -->
         <section id="tab-ex3" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Il Realismo Politico e Militarista di Machiavelli (5 Quesiti estratti da Pool)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Il Realismo Politico e Militarista di Machiavelli</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Valuta l'autonomia della politica, l'antropologia pessimistica, la condanna delle truppe mercenarie e la necessità delle armi proprie. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="ex3-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 4: CLASSIFICAZIONE MATCHING -->
         <section id="tab-classificazione" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Concettuali sulle Teorie della Guerra (8 Coppie Estratte)</h2>
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Concettuali sulle Teorie della Guerra</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div id="matching-terms" class="space-y-2.5"></div>
@@ -201,7 +196,6 @@
             </div>
         </section>
 
-        <!-- TAB 5: CLOZE TEST -->
         <section id="tab-cloze" class="tab-content hidden space-y-6">
             <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test su Guerra Giusta, Pacifismo e Realismo</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
@@ -213,13 +207,53 @@
             </div>
         </section>
 
-        <!-- TAB 6: REPORT -->
+        <section id="tab-commento" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-orange-400">Esercizio 6: Commento Testuale di Passi Filosofici</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi con attenzione i passi tratti dalle opere originali e rispondi alle domande di interpretazione. Non si tratta di ricordare, ma di <strong>comprendere l'argomentazione</strong>. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex6-container" class="space-y-8"></div>
+        </section>
+
+        <section id="tab-argomentazione" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-cyan-400">Esercizio 7: Ricostruzione dell'Argomentazione</h2>
+                <p class="text-xs sm:text-sm text-slate-400">I passi dell'argomentazione filosofica sono stati mescolati. Clicca i passi nell'ordine logico corretto per ricostruire il ragionamento. Clicca un passo già inserito per rimuoverlo.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl space-y-5">
+                <div id="arg-title" class="font-cinzel text-lg font-bold text-cyan-300"></div>
+                <div id="arg-description" class="text-xs sm:text-sm text-slate-300 italic"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400"><i class="fa-solid fa-shuffle mr-1"></i> Passi da ordinare</h4>
+                        <div id="arg-pool" class="space-y-2.5"></div>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400"><i class="fa-solid fa-list-ol mr-1"></i> La tua sequenza</h4>
+                        <div id="arg-sequence" class="space-y-2.5 min-h-[80px] p-3 rounded-xl border-2 border-dashed border-slate-700/60"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 pt-2">
+                    <button id="arg-submit" onclick="checkArgument()" class="bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">Verifica Sequenza</button>
+                    <div id="arg-feedback" class="text-xs sm:text-sm font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-verofalso" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-lime-400">Esercizio 8: Vero o Falso Ragionato</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Valuta ciascuna affermazione. Dopo la scelta, la risposta viene bloccata e compare la spiegazione. Attenzione: alcune affermazioni sono formulate in modo sottile!</p>
+            </div>
+            <div id="ex8-container" class="space-y-4"></div>
+        </section>
+
         <section id="tab-report" class="tab-content hidden space-y-6">
             <div class="glass-card p-8 rounded-2xl text-center space-y-6">
                 <h2 class="font-cinzel text-2xl font-bold text-amber-400">Valutazione Finale: Le Teorie della Guerra nel Medioevo e Rinascimento</h2>
                 <div class="text-4xl font-black text-amber-400" id="report-score">0 / 100 XP</div>
                 <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
-                <div class="flex justify-center gap-4">
+                <div class="flex flex-wrap justify-center gap-4">
                     <button onclick="window.print()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
                     <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
                 </div>
@@ -244,7 +278,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
         <a href="index.html" class="hover:text-amber-400 transition-colors">
             <i class="fa-solid fa-house mr-1"></i> Home Portale
@@ -257,20 +290,16 @@
 
     <script>
         const state = { 
-            studentName: "Studente", 
-            audioEnabled: true, 
-            ex1Answers: {}, 
-            ex2Answers: {}, 
-            ex3Answers: {}, 
-            matchedPairs: {}, 
-            clozeScore: 0, 
-            clozeLocked: false,
+            studentName: "Studente", audioEnabled: true, 
+            ex1Answers: {}, ex2Answers: {}, ex3Answers: {}, 
+            ex6Answers: {}, tfAnswers: {},
+            matchedPairs: {}, clozeScore: 0, clozeLocked: false,
             selectedTermId: null,
-            activeEx1Data: [],
-            activeEx2Data: [],
-            activeEx3Data: [],
-            activeMatchingTerms: [],
-            activeMatchingDefs: []
+            activeEx1Data: [], activeEx2Data: [], activeEx3Data: [],
+            activeMatchingTerms: [], activeMatchingDefs: [],
+            activeTextual: [], activeArgument: null,
+            argPool: [], argOrder: [], argSubmitted: false, argCorrectPositions: 0,
+            activeTF: []
         };
 
         let audioCtx = null;
@@ -303,478 +332,292 @@
             return arr;
         }
 
-        // ================= POOL QUESITI DATA =================
+        // ================= POOL QUESITI DATA (opzioni a lunghezza bilanciata) =================
         const ex1Pool = [
-    {
-        "id": 101,
-        "title": "Tripartizione del Triangolo Etico della Guerra",
-        "text": "Nel dibattito etico-filosofico sulla guerra sviluppatosi dal Medioevo all'età moderna si delineano tre posture fondamentali.",
-        "question": "Come si posiziona la dottrina della Guerra Giusta rispetto a Realismo e Pacifismo?",
-        "options": [
-            "Ritiene che la guerra sia valutabile eticamente e che alcune guerre possano essere moralmente lecite e giuste.",
-            "Sostiene che tutte le guerre sono eticamente lodevoli e desiderabili.",
-            "Afferma che la guerra non può mai essere sottoposta a giudizi morali.",
-            "Sostiene che la guerra è consentita soltanto se combattuta con armi di legno."
-        ],
-        "correct": 0,
-        "explanation": "La dottrina della guerra giusta ammette la valutabilità morale dei conflitti e sostiene che, a determinate condizioni, difendersi o intervenire sia moralmente doveroso."
-    },
-    {
-        "id": 102,
-        "title": "Ius ad Bellum, In Bello e Post Bellum",
-        "text": "La riflessione contemporanea ed etico-giuridica scompone la teoria della guerra in tre ambiti di applicazione temporale.",
-        "question": "Cosa disciplina lo 'Ius ad bellum'?",
-        "options": [
-            "I criteri etici e giuridici da rispettare per la legittima dichiarazione d'ingresso in guerra.",
-            "Le regole di condotta tattica dei soldati durante i combattimenti sul campo.",
-            "I trattati di pace e la ricostruzione economica nel dopoguerra.",
-            "La retribuzione stipendiaria dei generali d'armata."
-        ],
-        "correct": 0,
-        "explanation": "Lo Ius ad bellum riguarda i criteri d'ingresso in guerra (autorità, giusta causa, intenzione retta), distinguendosi dallo Ius in bello e dallo Ius post bellum."
-    },
-    {
-        "id": 103,
-        "title": "Definizione di Guerra in Agostino",
-        "text": "Agostino d'Ippona (354-430 d.C.) affronta la svolta del IV secolo in cui il cristianesimo diventa religione ufficiale dell'Impero romano.",
-        "question": "Qual è la definizione generale di guerra fornita da Agostino nei suoi scritti?",
-        "options": [
-            "C'è una guerra quando vi è un'inimicizia in certo qual modo armata tra entità politiche.",
-            "La guerra è soltanto lo scontro cavalleresco con lance e spade in un prato aperto.",
-            "La guerra è un'epidemia biologica diffusa dai nemici della fede.",
-            "La guerra è la punizione divina inflitta a tutti i cittadini senza distinzione."
-        ],
-        "correct": 0,
-        "explanation": "Agostino dà una definizione ampia: non serve il duello sanguinoso immediato, basta uno stato di ostilità ed inimicizia armata tra entità politiche."
-    },
-    {
-        "id": 104,
-        "title": "I Tre Criteri Agostiniani per lo Ius ad Bellum",
-        "text": "Nei suoi trattati (Contra Faustum, De civitate Dei, Domande sull'Ettateuco), Agostino individua tre condizioni indispensabili per dichiarare guerra.",
-        "question": "Quali sono i tre criteri fondamentali individuati da Agostino?",
-        "options": [
-            "Autorità legittima (il principe), Giusta causa (difesa/riparazione torti/ordine divino) e Intenzione retta (mirare alla pace).",
-            "Vittoria rapida, saccheggio dei beni nemici e conquista di nuovi territori.",
-            "Potenza economica, Esercito mercenario e Supremazia navale.",
-            "Benedizione papale, Alleanza con gli stranieri e Sorpresa tattica."
-        ],
-        "correct": 0,
-        "explanation": "Una guerra è giusta se proclamata dall'autorità legittima, sostenuta da una causa vera (autodifesa/riparazione) e mossa dall'intenzione di ristabilire la pace."
-    },
-    {
-        "id": 105,
-        "title": "La Disposizione del Cuore nello Ius in Bello",
-        "text": "Un'obiezione classica ai cristiani citava il Vangelo: 'Se uno ti percuote la guancia destra, porgigli anche la sinistra'.",
-        "question": "Come concilia Agostino il precetto evangelico del perdono con l'uso della spada da parte del soldato cristiano?",
-        "options": [
-            "Il precetto del perdono riguarda la disposizione interna del cuore; il soldato compie l'azione col corpo per difendere l'ordine senza odio nel cuore.",
-            "Afferma che il Vangelo era stato tradotto male dai Manichei.",
-            "Sostiene che i cristiani possono uccidere solo di notte quando nessuno vede.",
-            "Afferma che il re è esentato dal rispetto dei Vangeli."
-        ],
-        "correct": 0,
-        "explanation": "Agostino spiega che la disposizione alla pazienza deve stare nel cuore; il corpo può esercitare la forza per difendere gli innocenti senza nutrire risentimento o brama di vendetta."
-    },
-    {
-        "id": 106,
-        "title": "La Sintesi di Tommaso d'Aquino (Somma Teologica)",
-        "text": "Nella Somma Teologica (II-II, q. 40), Tommaso d'Aquino realizza un'opera di pulizia concettuale riducendo i criteri della guerra a tre.",
-        "question": "Quali sono i tre requisiti tomisti dell'Auctoritas, Causa e Intentio?",
-        "options": [
-            "Auctoritas principis (autorità del principe), Causa iusta (colpa/ingiustizia nemica) e Intentio recta (promuovere il bene/pace buona).",
-            "Auctoritas papalis, Causa finanziaria e Intentio imperiale.",
-            "Dichiarazione scritta, Pagamento dei soldati e Vantaggio commerciale.",
-            "Presenza del re in battaglia, Cavalleria pesante e Assedio rapido."
-        ],
-        "correct": 0,
-        "explanation": "Tommaso codifica rigorosamente i 3 pilastri della guerra giusta: Autorità del principe, Causa giusta (colpa avversaria) e Intenzione retta mirata alla vera pace."
-    },
-    {
-        "id": 107,
-        "title": "Giustificazione dell'Auctoritas Principis in Tommaso",
-        "text": "Tommaso spiega perché una persona privata o un gruppo di cittadini non possa legittimamente dichiarare guerra.",
-        "question": "Quali due motivazioni fornisce Tommaso a favore dell'esclusiva Autorità del Principe?",
-        "options": [
-            "Tra i privati vi è un giudice superiore (la magistratura), tra stati no; il principe è l'unico capace di radunare la moltitudine in modo unitario.",
-            "Il principe possiede cavalli più veloci dei singoli cittadini.",
-            "I privati non conoscono la lingua latina delle dichiarazioni di guerra.",
-            "Il papa proibisce ai privati di acquistare maiali ed armi."
-        ],
-        "correct": 0,
-        "explanation": "I privati possono ricorrere al giudice supremo per risolvere contese; tra sovrani non esiste un tribunale superiore e solo il principe garantisce la catena di comando unitaria."
-    },
-    {
-        "id": 108,
-        "title": "Pace Buona vs Pace Cattiva in Tommaso",
-        "text": "Nell'analizzare la terza condizione (intenzione retta), Tommaso precisa a quale tipologia di pace debbano mirare i guerrieri giusti.",
-        "question": "Qual è la differenza tra 'pace buona' e 'pace cattiva' secondo Tommaso?",
-        "options": [
-            "La pace buona mira alla stabilità e alla concordia comune; la pace cattiva è una pace vendicativa o sottomessa al male.",
-            "La pace buona è quella firmata di domenica, quella cattiva di lunedì.",
-            "La pace buona riguarda solo i commercianti, quella cattiva i soldati.",
-            "Non vi è alcuna differenza tra le due tipologie di pace."
-        ],
-        "correct": 0,
-        "explanation": "Tommaso chiarisce che chi fa la guerra giusta è contrario solo alla 'pace cattiva' (sottomissione all'ingiustizia o pace oppressiva), per promuovere la stabilità ed il bene."
-    }
+    { id:101, title:"Tripartizione del Triangolo Etico della Guerra", text:"Nel dibattito etico-filosofico sulla guerra sviluppatosi dal Medioevo all'età moderna si delineano tre posture fondamentali.", question:"Come si posiziona la dottrina della Guerra Giusta rispetto a Realismo e Pacifismo?", options:[
+        "Ritiene che la guerra sia valutabile eticamente e che alcune guerre possano essere moralmente lecite e giuste.",
+        "Sostiene che tutte le guerre siano eticamente lodevoli e moralmente desiderabili in ogni circostanza storica.",
+        "Afferma che la guerra non possa mai essere sottoposta a giudizi morali, essendo un fatto puramente tecnico.",
+        "Sostiene che la guerra sia consentita soltanto se combattuta con armi di legno e senza spargimento di sangue."
+    ], correct:0, explanation:"La dottrina della guerra giusta ammette la valutabilità morale dei conflitti e sostiene che, a determinate condizioni, difendersi o intervenire sia moralmente doveroso." },
+    { id:102, title:"Ius ad Bellum, In Bello e Post Bellum", text:"La riflessione contemporanea ed etico-giuridica scompone la teoria della guerra in tre ambiti di applicazione temporale.", question:"Cosa disciplina lo 'Ius ad bellum'?", options:[
+        "I criteri etici e giuridici da rispettare per la legittima dichiarazione d'ingresso in guerra.",
+        "Le regole di condotta tattica dei soldati durante i combattimenti sul campo di battaglia.",
+        "I trattati di pace e la ricostruzione economica nel dopoguerra, dopo la fine del conflitto.",
+        "La retribuzione stipendiaria dei generali d'armata e dei capitani di ventura mercenari."
+    ], correct:0, explanation:"Lo Ius ad bellum riguarda i criteri d'ingresso in guerra (autorità, giusta causa, intenzione retta), distinguendosi dallo Ius in bello e dallo Ius post bellum." },
+    { id:103, title:"Definizione di Guerra in Agostino", text:"Agostino d'Ippona (354-430 d.C.) affronta la svolta del IV secolo in cui il cristianesimo diventa religione ufficiale dell'Impero romano.", question:"Qual è la definizione generale di guerra fornita da Agostino nei suoi scritti?", options:[
+        "C'è una guerra quando vi è un'inimicizia in certo qual modo armata tra entità politiche.",
+        "La guerra è soltanto lo scontro cavalleresco con lance e spade in un prato aperto.",
+        "La guerra è un'epidemia biologica diffusa dai nemici della fede e dai popoli barbarici.",
+        "La guerra è la punizione divina inflitta a tutti i cittadini senza alcuna distinzione."
+    ], correct:0, explanation:"Agostino dà una definizione ampia: non serve il duello sanguinoso immediato, basta uno stato di ostilità ed inimicizia armata tra entità politiche." },
+    { id:104, title:"I Tre Criteri Agostiniani per lo Ius ad Bellum", text:"Nei suoi trattati (Contra Faustum, De civitate Dei, Domande sull'Ettateuco), Agostino individua tre condizioni indispensabili per dichiarare guerra.", question:"Quali sono i tre criteri fondamentali individuati da Agostino?", options:[
+        "Autorità legittima (il principe), Giusta causa (difesa/riparazione torti) e Intenzione retta (mirare alla pace).",
+        "Vittoria rapida, saccheggio dei beni nemici e conquista di nuovi territori e province sottomesse.",
+        "Potenza economica, esercito mercenario e supremazia navale sui mari del Mediterraneo e dell'Atlantico.",
+        "Benedizione papale, alleanza con gli stranieri e attacco a sorpresa con la cavalleria pesante."
+    ], correct:0, explanation:"Una guerra è giusta se proclamata dall'autorità legittima, sostenuta da una causa vera (autodifesa/riparazione) e mossa dall'intenzione di ristabilire la pace." },
+    { id:105, title:"La Disposizione del Cuore nello Ius in Bello", text:"Un'obiezione classica ai cristiani citava il Vangelo: 'Se uno ti percuote la guancia destra, porgigli anche la sinistra'.", question:"Come concilia Agostino il precetto evangelico del perdono con l'uso della spada da parte del soldato cristiano?", options:[
+        "Il precetto del perdono riguarda il cuore; il soldato compie l'azione col corpo per difendere l'ordine senza odio.",
+        "Afferma che il Vangelo era stato tradotto male dai Manichei e quindi non va preso alla lettera.",
+        "Sostiene che i cristiani possono uccidere solo di notte quando nessuno li vede commettere l'atto.",
+        "Afferma che il re e i suoi soldati sono esentati dal rispetto dei Vangeli e dei precetti evangelici."
+    ], correct:0, explanation:"Agostino spiega che la disposizione alla pazienza deve stare nel cuore; il corpo può esercitare la forza per difendere gli innocenti senza nutrire risentimento o brama di vendetta." },
+    { id:106, title:"La Sintesi di Tommaso d'Aquino (Somma Teologica)", text:"Nella Somma Teologica (II-II, q. 40), Tommaso d'Aquino realizza un'opera di pulizia concettuale riducendo i criteri della guerra a tre.", question:"Quali sono i tre requisiti tomisti dell'Auctoritas, Causa e Intentio?", options:[
+        "Auctoritas principis (autorità del principe), Causa iusta (colpa nemica) e Intentio recta (promuovere il bene).",
+        "Auctoritas papalis (autorità del papa), Causa finanziaria (interesse economico) e Intentio imperiale.",
+        "Dichiarazione scritta, pagamento anticipato dei soldati e vantaggio commerciale per lo Stato.",
+        "Presenza fisica del re in battaglia, cavalleria pesante e tecnica rapida di assedio alle mura."
+    ], correct:0, explanation:"Tommaso codifica rigorosamente i 3 pilastri della guerra giusta: Autorità del principe, Causa giusta (colpa avversaria) e Intenzione retta mirata alla vera pace." },
+    { id:107, title:"Giustificazione dell'Auctoritas Principis in Tommaso", text:"Tommaso spiega perché una persona privata o un gruppo di cittadini non possa legittimamente dichiarare guerra.", question:"Quali due motivazioni fornisce Tommaso a favore dell'esclusiva Autorità del Principe?", options:[
+        "Tra i privati vi è un giudice superiore, tra Stati no; il principe è l'unico capace di radunare la moltitudine.",
+        "Il principe possiede cavalli più veloci dei singoli cittadini e armature più resistenti e pregiate.",
+        "I privati non conoscono la lingua latina necessaria per redigere le dichiarazioni formali di guerra.",
+        "Il papa proibisce ai privati di acquistare maiali ed armi, riservando tali beni ai nobili e ai vescovi."
+    ], correct:0, explanation:"I privati possono ricorrere al giudice supremo per risolvere contese; tra sovrani non esiste un tribunale superiore e solo il principe garantisce la catena di comando unitaria." },
+    { id:108, title:"Pace Buona vs Pace Cattiva in Tommaso", text:"Nell'analizzare la terza condizione (intenzione retta), Tommaso precisa a quale tipologia di pace debbano mirare i guerrieri giusti.", question:"Qual è la differenza tra 'pace buona' e 'pace cattiva' secondo Tommaso?", options:[
+        "La pace buona mira alla stabilità e alla concordia comune; la cattiva è una pace vendicativa o sottomessa al male.",
+        "La pace buona è quella firmata di domenica, mentre la pace cattiva si firma nei giorni feriali e di lavoro.",
+        "La pace buona riguarda solo i commercianti e gli artigiani, mentre la cattiva riguarda i soldati e i capitani.",
+        "Non vi è alcuna differenza sostanziale tra le due tipologie di pace, essendo entrambe forme di tregua armata."
+    ], correct:0, explanation:"Tommaso chiarisce che chi fa la guerra giusta è contrario solo alla 'pace cattiva' (sottomissione all'ingiustizia o pace oppressiva), per promuovere la stabilità ed il bene." }
 ];
         const ex2Pool = [
-    {
-        "id": 201,
-        "title": "Il Contesto Storico di John Wyclif",
-        "text": "Il teologo e filosofo inglese John Wyclif (1328-1384) visse e scrisse durante uno dei conflitti più estenuanti dell'Europa medievale.",
-        "question": "Quale devastante conflitto fece esplodere la critica radicale di Wyclif contro la dottrina della guerra giusta?",
-        "options": [
-            "La Guerra dei Cent'anni tra Francia e Inghilterra.",
-            "Le Crociate in Terra Santa.",
-            "La Guerra delle Due Rose.",
-            "Le Guerre Puniche contro Cartagine."
-        ],
-        "correct": 0,
-        "explanation": "Wyclif visse la maggior parte della vita durante la Guerra dei Cent'anni, vedendo la sofferenza delle popolazioni e l'incoerenza dei principi cristiani che la giustificavano."
-    },
-    {
-        "id": 202,
-        "title": "Demolizione del Criterio dell'Autorità Legittima",
-        "text": "Agostino e Tommaso affermavano che la guerra fosse legittima se dichiarata dal principe supremo insediato da Dio.",
-        "question": "Come confuta Wyclif il criterio dell'Autorità del Principe nei suoi scritti (De civili dominio)?",
-        "options": [
-            "L'unica vera autorità appartiene a Cristo; poiché Cristo nella sua legge non autorizza la guerra ma la pace, nessun principe terrena ha vera autorità.",
-            "I principi non sanno leggere i testi sacri in greco.",
-            "L'autorità di fare la guerra spetta unicamente ai contadini.",
-            "I principi devono chiedere il permesso al sultano di Persia."
-        ],
-        "correct": 0,
-        "explanation": "Wyclif sostiene che l'autorità dei re deriva da Cristo; ma Cristo predica la pace e l'amore per i nemici, negando di fatto ai re il potere morale di dichiarare guerra."
-    },
-    {
-        "id": 203,
-        "title": "Critica alla Giusta Causa dell'Autodifesa",
-        "text": "I teorici della guerra giusta consideravano l'autodifesa di fronte all'invasore straniero come la causa giusta per eccellenza.",
-        "question": "Qual è la posizione di Wyclif di fronte all'aggressione o all'invasione di un nemico?",
-        "options": [
-            "Il vero cristiano deve praticare la non-resistenza al male e 'respingere la forza del corpo con la forza dello spirito'.",
-            "Il cristiano deve usare armi da fuoco più potenti dell'invasore.",
-            "Il cristiano deve fuggire su un'isola deserta nel mare.",
-            "Il cristiano deve offrire denaro all'invasore per diventare suo mercenario."
-        ],
-        "correct": 0,
-        "explanation": "Wyclif sostiene radicalmente l'insegnamento evangelico della non-violenza: la sofferenza ingiusta viene ricompensata da Dio nel Regno dei Cieli."
-    },
-    {
-        "id": 204,
-        "title": "Critica alla Difesa della Proprietà Privata",
-        "text": "Moltissime guerre vengono combattute per difendere i propri beni materiali, le terre e le proprietà dall'usurpazione del nemico.",
-        "question": "Perché la difesa dei beni materiali e della proprietà privata non è per Wyclif una giusta causa?",
-        "options": [
-            "Perché per un cristiano i beni materiali non valgono la vita spirituale e fare la guerra per la proprietà è peccaminoso.",
-            "Perché la proprietà privata appartiene al re di Francia.",
-            "Perché i beni materiali si distruggono da soli sotto la pioggia.",
-            "Perché solo i mercenari possono possedere terre e case."
-        ],
-        "correct": 0,
-        "explanation": "Wyclif afferma che la carità cristiana esige il distacco dalle proprietà terrene; imbracciare le armi e uccidere un fratello per difendere beni materiali è un grave peccato."
-    },
-    {
-        "id": 205,
-        "title": "Incompatibilità tra Violenza e Carità Fraterna",
-        "text": "Agostino sosteneva che si potesse combattere ed uccidere in guerra mantenendo un 'cuore puro' pieno di carità verso il nemico.",
-        "question": "Come contesta Wyclif l'idea agostiniana di uccidere con intenzione retta e carità?",
-        "options": [
-            "Un atto di violenza o uccisione e l'amore fraterno sono radicalmente inconciliabili: è impossibile fare del male a qualcuno per suo amore.",
-            "Uccidere è lecito soltanto se si chiede scusa subito dopo.",
-            "La carità si applica soltanto ai propri familiari e non ai soldati nemici.",
-            "L'intenzione retta vale soltanto per i cavalieri che possiedono uno scudo."
-        ],
-        "correct": 0,
-        "explanation": "Wyclif sottolinea l'incoerenza psicologica ed etica: se ami davvero un fratello non gli fai violenza né lo uccidi; la guerra distrugge inevitabilmente la carità."
-    },
-    {
-        "id": 206,
-        "title": "La Sofferenza come Merito Spiritual-Eterno",
-        "text": "Wyclif risponde all'obiezione: 'Se non ci difendiamo con le armi, gli innocenti soffriranno e perderanno la vita'.",
-        "question": "Come interpreta Wyclif la sofferenza subita dagli innocenti privi di armi?",
-        "options": [
-            "Gli innocenti che sopportano la violenza con pazienza beneficente guadagnano meriti eterni davanti alla giustizia di Dio.",
-            "Gli innocenti vengono puniti da Dio per le loro colpe personali.",
-            "Gli innocenti devono diventare soldati mercenari per salvarsi.",
-            "La sofferenza degli innocenti dimostra che Dio non esiste."
-        ],
-        "correct": 0,
-        "explanation": "Nella visione di Wyclif, chi soffre con pazienza senza reagire con la violenza compie la perfetta carità ed è ricompensato con la salvezza eterna nel Regno dei Cieli."
-    },
-    {
-        "id": 207,
-        "title": "Il Ritorno al Pacifismo delle Origini",
-        "text": "La riflessione di Wyclif riallaccia i fili del pensiero cristiano con le posizioni dei primi Padri della Chiesa (es. Lattanzio).",
-        "question": "Quale principio accomuna il pacifismo di Lattanzio e quello di John Wyclif?",
-        "options": [
-            "Il divieto assoluto di mettere a morte un uomo e la condanna di ogni forma di servizio militare o guerra.",
-            "La necessità di costruire fortezze in pietra attorno alle chiese.",
-            "L'obbligo per i preti di guidare gli eserciti in battaglia.",
-            "La teoria che il re sia un dio infallibile sulla terra."
-        ],
-        "correct": 0,
-        "explanation": "Sia Lattanzio che Wyclif vedono nel messaggio cristiano una proibizione categorica dell'omicidio e della violenza bellica, indipendentemente dai motivi politici."
-    },
-    {
-        "id": 208,
-        "title": "Sintesi dell'Attacco di Wyclif alla Guerra Giusta",
-        "text": "La tabella comparativa tra Guerra Giusta e Wyclif mostra una confutazione punto per punto dei requisiti tradizionali.",
-        "question": "Qual è la conclusione generale di Wyclif sulla possibilità che esista una 'guerra giusta'?",
-        "options": [
-            "Nessuna guerra condotta dagli uomini può essere ritenuta giusta o esente da peccato mortale per un cattolico.",
-            "Tutte le guerre sono giuste purché vinte dall'Inghilterra.",
-            "Le guerre sono giuste solo se durano meno di un mese.",
-            "La guerra è giusta solo se approvata da tutti i cardinali."
-        ],
-        "correct": 0,
-        "explanation": "Poiché in guerra è impossibile servire l'amore di Cristo ed evitare il peccato, per Wyclif non è lecito a nessun cristiano muovere guerra: la guerra giusta è una finzione."
-    }
+    { id:201, title:"Il Contesto Storico di John Wyclif", text:"Il teologo e filosofo inglese John Wyclif (1328-1384) visse e scrisse durante uno dei conflitti più estenuanti dell'Europa medievale.", question:"Quale devastante conflitto fece esplodere la critica radicale di Wyclif contro la dottrina della guerra giusta?", options:[
+        "La Guerra dei Cent'anni tra Francia e Inghilterra, che insanguinò l'Europa per oltre un secolo.",
+        "Le Crociate in Terra Santa, combattute per liberare il Santo Sepolcro dai musulmani infedeli.",
+        "La Guerra delle Due Rose, che oppose le casate inglesi di Lancaster e York per il trono.",
+        "Le Guerre Puniche contro Cartagine, combattute da Roma nel III secolo prima dell'era cristiana."
+    ], correct:0, explanation:"Wyclif visse la maggior parte della vita durante la Guerra dei Cent'anni, vedendo la sofferenza delle popolazioni e l'incoerenza dei principi cristiani che la giustificavano." },
+    { id:202, title:"Demolizione del Criterio dell'Autorità Legittima", text:"Agostino e Tommaso affermavano che la guerra fosse legittima se dichiarata dal principe supremo insediato da Dio.", question:"Come confuta Wyclif il criterio dell'Autorità del Principe nei suoi scritti (De civili dominio)?", options:[
+        "L'unica vera autorità appartiene a Cristo; poiché Cristo non autorizza la guerra, nessun principe ha vera autorità.",
+        "I principi non sanno leggere i testi sacri in greco e quindi non comprendono il vero messaggio evangelico.",
+        "L'autorità di fare la guerra spetta unicamente ai contadini e ai poveri, non ai ricchi e ai nobili.",
+        "I principi devono chiedere il permesso al sultano di Persia prima di dichiarare guerra a qualcuno."
+    ], correct:0, explanation:"Wyclif sostiene che l'autorità dei re deriva da Cristo; ma Cristo predica la pace e l'amore per i nemici, negando di fatto ai re il potere morale di dichiarare guerra." },
+    { id:203, title:"Critica alla Giusta Causa dell'Autodifesa", text:"I teorici della guerra giusta consideravano l'autodifesa di fronte all'invasore straniero come la causa giusta per eccellenza.", question:"Qual è la posizione di Wyclif di fronte all'aggressione o all'invasione di un nemico?", options:[
+        "Il vero cristiano deve praticare la non-resistenza e respingere la forza del corpo con la forza dello spirito.",
+        "Il cristiano deve usare armi da fuoco più potenti e moderne di quelle usate dall'esercito invasore.",
+        "Il cristiano deve fuggire su un'isola deserta nel mare e attendere la fine del conflitto in preghiera.",
+        "Il cristiano deve offrire denaro all'invasore per diventare suo mercenario e combattere al suo fianco."
+    ], correct:0, explanation:"Wyclif sostiene radicalmente l'insegnamento evangelico della non-violenza: la sofferenza ingiusta viene ricompensata da Dio nel Regno dei Cieli." },
+    { id:204, title:"Critica alla Difesa della Proprietà Privata", text:"Moltissime guerre vengono combattute per difendere i propri beni materiali, le terre e le proprietà dall'usurpazione del nemico.", question:"Perché la difesa dei beni materiali e della proprietà privata non è per Wyclif una giusta causa?", options:[
+        "Perché per un cristiano i beni materiali non valgono la vita spirituale e fare la guerra per la proprietà è peccato.",
+        "Perché la proprietà privata appartiene di diritto al re di Francia, che ne è l'unico legittimo custode.",
+        "Perché i beni materiali si distruggono da soli sotto la pioggia e quindi non ha senso difenderli.",
+        "Perché solo i mercenari possono possedere terre e case, mentre i cristiani devono vivere in povertà."
+    ], correct:0, explanation:"Wyclif afferma che la carità cristiana esige il distacco dalle proprietà terrene; imbracciare le armi e uccidere un fratello per difendere beni materiali è un grave peccato." },
+    { id:205, title:"Incompatibilità tra Violenza e Carità Fraterna", text:"Agostino sosteneva che si potesse combattere ed uccidere in guerra mantenendo un 'cuore puro' pieno di carità verso il nemico.", question:"Come contesta Wyclif l'idea agostiniana di uccidere con intenzione retta e carità?", options:[
+        "Un atto di violenza e l'amore fraterno sono inconciliabili: è impossibile fare del male a qualcuno per suo amore.",
+        "Uccidere è lecito soltanto se si chiede scusa subito dopo al confessore e si recita una penitenza adeguata.",
+        "La carità si applica soltanto ai propri familiari e non ai soldati nemici, che sono estranei alla comunità.",
+        "L'intenzione retta vale soltanto per i cavalieri che possiedono uno scudo e un'armatura di buona fattura."
+    ], correct:0, explanation:"Wyclif sottolinea l'incoerenza psicologica ed etica: se ami davvero un fratello non gli fai violenza né lo uccidi; la guerra distrugge inevitabilmente la carità." },
+    { id:206, title:"La Sofferenza come Merito Spiritual-Eterno", text:"Wyclif risponde all'obiezione: 'Se non ci difendiamo con le armi, gli innocenti soffriranno e perderanno la vita'.", question:"Come interpreta Wyclif la sofferenza subita dagli innocenti privi di armi?", options:[
+        "Gli innocenti che sopportano la violenza con pazienza beneficente guadagnano meriti eterni davanti a Dio.",
+        "Gli innocenti vengono puniti da Dio per le loro colpe personali e per i peccati commessi in vita.",
+        "Gli innocenti devono diventare soldati mercenari per salvarsi la vita e ottenere un compenso in denaro.",
+        "La sofferenza degli innocenti dimostra che Dio non esiste e che la storia umana è priva di senso."
+    ], correct:0, explanation:"Nella visione di Wyclif, chi soffre con pazienza senza reagire con la violenza compie la perfetta carità ed è ricompensato con la salvezza eterna nel Regno dei Cieli." },
+    { id:207, title:"Il Ritorno al Pacifismo delle Origini", text:"La riflessione di Wyclif riallaccia i fili del pensiero cristiano con le posizioni dei primi Padri della Chiesa (es. Lattanzio).", question:"Quale principio accomuna il pacifismo di Lattanzio e quello di John Wyclif?", options:[
+        "Il divieto assoluto di mettere a morte un uomo e la condanna di ogni forma di guerra e servizio militare.",
+        "La necessità di costruire possenti fortezze in pietra attorno alle chiese e ai monasteri benedettini.",
+        "L'obbligo per i preti e i vescovi di guidare personalmente gli eserciti in battaglia contro gli infedeli.",
+        "La teoria secondo cui il re sarebbe un dio infallibile sulla terra, con potere assoluto sui sudditi."
+    ], correct:0, explanation:"Sia Lattanzio che Wyclif vedono nel messaggio cristiano una proibizione categorica dell'omicidio e della violenza bellica, indipendentemente dai motivi politici." },
+    { id:208, title:"Sintesi dell'Attacco di Wyclif alla Guerra Giusta", text:"La tabella comparativa tra Guerra Giusta e Wyclif mostra una confutazione punto per punto dei requisiti tradizionali.", question:"Qual è la conclusione generale di Wyclif sulla possibilità che esista una 'guerra giusta'?", options:[
+        "Nessuna guerra condotta dagli uomini può essere ritenuta giusta o esente da peccato mortale per un cattolico.",
+        "Tutte le guerre sono giuste purché vinte dall'Inghilterra contro la Francia nella Guerra dei Cent'anni.",
+        "Le guerre sono giuste solo se durano meno di un mese e causano poche vittime tra i civili innocenti.",
+        "La guerra è giusta solo se approvata da tutti i cardinali riuniti in concistoro solenne a Roma."
+    ], correct:0, explanation:"Poiché in guerra è impossibile servire l'amore di Cristo ed evitare il peccato, per Wyclif non è lecito a nessun cristiano muovere guerra: la guerra giusta è una finzione." }
 ];
         const ex3Pool = [
-    {
-        "id": 301,
-        "title": "La Nascita del Realismo Politico in Machiavelli",
-        "text": "Niccolò Machiavelli (1469-1527) rivoluziona il pensiero politico occidentale con Il Principe (1513).",
-        "question": "In cosa consiste la rottura fondamentale del realismo politico di Machiavelli rispetto alla tradizione medievale?",
-        "options": [
-            "L'autonomia della politica dalla morale e dalla religione: la politica risponde a leggi proprie orientate al potere e alla salvezza dello Stato.",
-            "La sottomissione completa del Principe ai decreti del Papa.",
-            "L'obbligo di applicare le leggi stoiche dell'amore universale.",
-            "L'abolizione di tutti gli eserciti e delle leggi civili."
-        ],
-        "correct": 0,
-        "explanation": "Machiavelli separa la politica dall'etica classica e religiosa: il successo politico e la conservazione dello Stato non si giudicano con categorie morali di bene/male."
-    },
-    {
-        "id": 302,
-        "title": "La Visione Antropologica di Machiavelli",
-        "text": "Nel Capitolo 17 de Il Principe, Machiavelli giustifica la necessità per il sovrano di ricorrere a mezzi duri e spietati.",
-        "question": "Come descrive Machiavelli la natura generale degli esseri umani?",
-        "options": [
-            "Gli uomini sono ingrati, volubili, simulatori e dissimulatori, fuggitori de' pericoli e cupidi di guadagno.",
-            "Gli uomini sono naturalmente angeli altruisti pronti al sacrificio.",
-            "Gli uomini sono creature perfettamente razionali e pacifiche.",
-            "Gli uomini sono guidati unicamente dalle leggi della matematica."
-        ],
-        "correct": 0,
-        "explanation": "Poiché gli uomini sono 'tristi' (malvagi ed egoisti) e non osserverebbero la fede data, il Principe non deve sentirsi vincolato a rispettarla verso di loro."
-    },
-    {
-        "id": 303,
-        "title": "Il Precetto: 'Imparare a Potere Essere Non Buono'",
-        "text": "Nel Capitolo 15 de Il Principe, Machiavelli rivolge un celebre avvertimento a chi detiene il potere supremo.",
-        "question": "Cosa deve imparare un Principe se desidera mantenere saldamente lo Stato?",
-        "options": [
-            "Deve imparare a potere essere non buono, e usarlo e non usare secondo la necessità della situazione.",
-            "Deve mostrarsi sempre santo, buono e indulgente in ogni occasione.",
-            "Deve cedere il potere ai filosofi della città.",
-            "Deve abbandonare l'uso delle armi ed applicare il Vangelo."
-        ],
-        "correct": 0,
-        "explanation": "Chi vuole fare in tutto la professione di buono rovina tra i molti che non sono buoni; per salvare lo Stato occorre saper usare la durezza se la necessità lo esige."
-    },
-    {
-        "id": 304,
-        "title": "La Guerra come Sola Arte di Chi Comanda",
-        "text": "Nel Capitolo 14 de Il Principe, Machiavelli assegna alla preparazione bellica un ruolo prioritario assoluto nella vita del sovrano.",
-        "question": "Quale ruolo attribuisce Machiavelli all'arte della guerra?",
-        "options": [
-            "La guerra è la sola arte che si aspetta a chi comanda; quando i principi hanno pensato più alle delicatezze che alle armi, hanno perso lo stato loro.",
-            "La guerra è un passatempo secondario da delegare ai poeti.",
-            "La guerra è un'attività dannosa che fa perdere consenso commerciale.",
-            "La guerra deve essere praticata solo nei mesi estivi."
-        ],
-        "correct": 0,
-        "explanation": "Per Machiavelli il fondamento principale degli Stati sono le 'buone armi': il Principe non deve avere altro pensiero né altra arte fuori della guerra e della sua disciplina."
-    },
-    {
-        "id": 305,
-        "title": "Condanna delle Truppe Mercenarie",
-        "text": "Nei Capitoli 12 e 13, Machiavelli dedica una durissima invettiva contro l'uso delle compagnie di ventura e dei soldati mercenari.",
-        "question": "Perché le armi mercenarie sono definite da Machiavelli 'inutile e periculose'?",
-        "options": [
-            "Sono disunite, ambiziose, senza disciplina, infedeli, gagliarde fra gli amici e vile fra i nemici, mosse solo da un poco di stipendio.",
-            "Perché costano troppo poco rispetto ai soldati paesani.",
-            "Perché rifiutano di indossare armature metalliche.",
-            "Perché combattono troppo energicamente distruggendo la città."
-        ],
-        "correct": 0,
-        "explanation": "I mercenari non hanno alcun amore né fedeltà per lo Stato, ma solo lo stipendio, insufficiente a farli morire per il Principe. In pace ti spogliano loro, in guerra i nemici."
-    },
-    {
-        "id": 306,
-        "title": "La Necessità delle 'Armi Proprie'",
-        "text": "In alternativa alle truppe mercenarie ed ausiliarie (fornite da altri stati), Machiavelli propone la creazione di un modello militare specifico.",
-        "question": "Cosa intende Machiavelli con il concetto di 'Armi Proprie'?",
-        "options": [
-            "Un esercito composto dai cittadini e sudditi dello Stato stesso, fedeli e pronti a difendere la propria patria.",
-            "Armi segrete costruite da inventori ed alchimisti.",
-            "Spade e lance di proprietà personale del Principe.",
-            "Eserciti mercenari pagati con monete d'oro purissimo."
-        ],
-        "correct": 0,
-        "explanation": "Le armi proprie sono composte da sudditi, cittadini o creature del Principe: solo essi combattono con vera devozione e patriottismo per la salvezza dello Stato."
-    },
-    {
-        "id": 307,
-        "title": "Rifiuto della Neutralità nei Conflitti",
-        "text": "Nel Capitolo 21 de Il Principe, Machiavelli analizza l'atteggiamento di un sovrano quando due potenti vicini entrano in guerra tra loro.",
-        "question": "Perché Machiavelli sconsiglia fortemente al Principe di rimanere neutrale?",
-        "options": [
-            "Chi rimane neutrale sarà sempre preda del vincitore con la soddisfazione del vinto, non avendo amici che lo difendano.",
-            "Perché la neutralità fa aumentare le tasse sui cittadini.",
-            "Perché il papa scomunica sempre i principi neutrali.",
-            "Perché i soldati si annoiano a non combattere."
-        ],
-        "correct": 0,
-        "explanation": "Machiavelli insegna che scoprirsi e fare buona guerra per una delle parti è sempre più utile: chi vince non vuole amici sospetti, e chi perde non ti riceve perché non hai corso la sua fortuna."
-    },
-    {
-        "id": 308,
-        "title": "Attualità del Realismo Militarista: Le PMC Moderne",
-        "text": "Il dibattito machiavelliano sulle truppe mercenarie trova uno straordinario parallelo nel panorama geopolitico contemporaneo.",
-        "question": "Con quale fenomeno militare del XXI secolo si collegano i moniti di Machiavelli sulle compagnie di ventura?",
-        "options": [
-            "La nascita delle Private Military Companies (PMC) come il Gruppo Wagner e le loro tensioni con la leadership statale.",
-            "L'uso dei droni di ricognizione aerea nei cieli.",
-            "La costruzione di satelliti spaziali per le telecomunicazioni.",
-            "I trattati di disarmo nucleare internazionale."
-        ],
-        "correct": 0,
-        "explanation": "L'ammutinamento del Gruppo Wagner (Prigozhin) nel 2023 in Russia ha confermato la diagnosi di Machiavelli: i capi mercenari ambiziosi diventano una minaccia mortale per la leadership dello Stato che li ha ingaggiati."
-    }
+    { id:301, title:"La Nascita del Realismo Politico in Machiavelli", text:"Niccolò Machiavelli (1469-1527) rivoluziona il pensiero politico occidentale con Il Principe (1513).", question:"In cosa consiste la rottura fondamentale del realismo politico di Machiavelli rispetto alla tradizione medievale?", options:[
+        "L'autonomia della politica dalla morale e dalla religione: la politica risponde a leggi proprie orientate al potere.",
+        "La sottomissione completa del Principe ai decreti del Papa e alle direttive della curia romana pontificia.",
+        "L'obbligo di applicare le leggi stoiche dell'amore universale e della fratellanza tra tutti i popoli.",
+        "L'abolizione di tutti gli eserciti e delle leggi civili in favore di una società anarchica e pacifica."
+    ], correct:0, explanation:"Machiavelli separa la politica dall'etica classica e religiosa: il successo politico e la conservazione dello Stato non si giudicano con categorie morali di bene/male." },
+    { id:302, title:"La Visione Antropologica di Machiavelli", text:"Nel Capitolo 17 de Il Principe, Machiavelli giustifica la necessità per il sovrano di ricorrere a mezzi duri e spietati.", question:"Come descrive Machiavelli la natura generale degli esseri umani?", options:[
+        "Gli uomini sono ingrati, volubili, simulatori e dissimulatori, fuggitori dei pericoli e cupidi di guadagno.",
+        "Gli uomini sono naturalmente angeli altruisti, pronti al sacrificio e alla dedizione verso il prossimo.",
+        "Gli uomini sono creature perfettamente razionali e pacifiche, capaci di autogovernarsi senza leggi.",
+        "Gli uomini sono guidati unicamente dalle leggi della matematica e della geometria euclidea nello spazio."
+    ], correct:0, explanation:"Poiché gli uomini sono 'tristi' (malvagi ed egoisti) e non osserverebbero la fede data, il Principe non deve sentirsi vincolato a rispettarla verso di loro." },
+    { id:303, title:"Il Precetto: 'Imparare a Potere Essere Non Buono'", text:"Nel Capitolo 15 de Il Principe, Machiavelli rivolge un celebre avvertimento a chi detiene il potere supremo.", question:"Cosa deve imparare un Principe se desidera mantenere saldamente lo Stato?", options:[
+        "Deve imparare a potere essere non buono, e usarlo e non usare secondo la necessità della situazione.",
+        "Deve mostrarsi sempre santo, buono e indulgente in ogni occasione, senza mai usare la forza bruta.",
+        "Deve cedere il potere ai filosofi della città, che sapranno governare secondo giustizia e saggezza.",
+        "Deve abbandonare l'uso delle armi ed applicare il Vangelo alla lettera, per conquistare il consenso popolare."
+    ], correct:0, explanation:"Chi vuole fare in tutto la professione di buono rovina tra i molti che non sono buoni; per salvare lo Stato occorre saper usare la durezza se la necessità lo esige." },
+    { id:304, title:"La Guerra come Sola Arte di Chi Comanda", text:"Nel Capitolo 14 de Il Principe, Machiavelli assegna alla preparazione bellica un ruolo prioritario assoluto nella vita del sovrano.", question:"Quale ruolo attribuisce Machiavelli all'arte della guerra?", options:[
+        "La guerra è la sola arte che si aspetta a chi comanda; chi pensa alle delicatezze perde lo Stato.",
+        "La guerra è un passatempo secondario da delegare ai poeti, ai letterati e agli artisti di corte.",
+        "La guerra è un'attività dannosa che fa perdere consenso commerciale e ricchezza alle casse dello Stato.",
+        "La guerra deve essere praticata solo nei mesi estivi, quando il clima è mite e i raccolti sono finiti."
+    ], correct:0, explanation:"Per Machiavelli il fondamento principale degli Stati sono le 'buone armi': il Principe non deve avere altro pensiero né altra arte fuori della guerra e della sua disciplina." },
+    { id:305, title:"Condanna delle Truppe Mercenarie", text:"Nei Capitoli 12 e 13, Machiavelli dedica una durissima invettiva contro l'uso delle compagnie di ventura e dei soldati mercenari.", question:"Perché le armi mercenarie sono definite da Machiavelli 'inutile e periculose'?", options:[
+        "Sono disunite, ambiziose, senza disciplina, infedeli, gagliarde fra gli amici e vili fra i nemici.",
+        "Perché costano troppo poco rispetto ai soldati paesani, che sono meglio addestrati e più fedeli.",
+        "Perché rifiutano di indossare armature metalliche e preferiscono combattere con abiti leggeri e comodi.",
+        "Perché combattono troppo energicamente distruggendo la città che dovrebbero difendere dai nemici."
+    ], correct:0, explanation:"I mercenari non hanno alcun amore né fedeltà per lo Stato, ma solo lo stipendio, insufficiente a farli morire per il Principe. In pace ti spogliano loro, in guerra i nemici." },
+    { id:306, title:"La Necessità delle 'Armi Proprie'", text:"In alternativa alle truppe mercenarie ed ausiliarie (fornite da altri stati), Machiavelli propone la creazione di un modello militare specifico.", question:"Cosa intende Machiavelli con il concetto di 'Armi Proprie'?", options:[
+        "Un esercito composto dai cittadini e sudditi dello Stato stesso, fedeli e pronti a difendere la patria.",
+        "Armi segrete costruite da inventori ed alchimisti nei laboratori sotterranei del palazzo ducale.",
+        "Spade e lance di proprietà personale del Principe, custodite nelle sale del castello di famiglia.",
+        "Eserciti mercenari pagati con monete d'oro purissimo, reclutati nei territori stranieri d'oltralpe."
+    ], correct:0, explanation:"Le armi proprie sono composte da sudditi, cittadini o creature del Principe: solo essi combattono con vera devozione e patriottismo per la salvezza dello Stato." },
+    { id:307, title:"Rifiuto della Neutralità nei Conflitti", text:"Nel Capitolo 21 de Il Principe, Machiavelli analizza l'atteggiamento di un sovrano quando due potenti vicini entrano in guerra tra loro.", question:"Perché Machiavelli sconsiglia fortemente al Principe di rimanere neutrale?", options:[
+        "Chi rimane neutrale sarà sempre preda del vincitore, senza avere amici che lo difendano in futuro.",
+        "Perché la neutralità fa aumentare le tasse sui cittadini e riduce le entrate fiscali dello Stato.",
+        "Perché il papa scomunica sempre i principi neutrali, escludendoli dalla comunione dei fedeli.",
+        "Perché i soldati si annoiano a non combattere e rischiano di ammutinarsi contro i propri ufficiali."
+    ], correct:0, explanation:"Machiavelli insegna che scoprirsi e fare buona guerra per una delle parti è sempre più utile: chi vince non vuole amici sospetti, e chi perde non ti riceve perché non hai corso la sua fortuna." },
+    { id:308, title:"Attualità del Realismo Militarista: Le PMC Moderne", text:"Il dibattito machiavelliano sulle truppe mercenarie trova uno straordinario parallelo nel panorama geopolitico contemporaneo.", question:"Con quale fenomeno militare del XXI secolo si collegano i moniti di Machiavelli sulle compagnie di ventura?", options:[
+        "La nascita delle Private Military Companies (PMC) come il Gruppo Wagner e le loro tensioni con gli Stati.",
+        "L'uso dei droni di ricognizione aerea nei cieli, che hanno rivoluzionato la guerra moderna e asimmetrica.",
+        "La costruzione di satelliti spaziali per le telecomunicazioni e lo spionaggio militare globale.",
+        "I trattati di disarmo nucleare internazionale firmati dalle grandi potenze durante la Guerra Fredda."
+    ], correct:0, explanation:"L'ammutinamento del Gruppo Wagner (Prigozhin) nel 2023 in Russia ha confermato la diagnosi di Machiavelli: i capi mercenari ambiziosi diventano una minaccia mortale per la leadership dello Stato che li ha ingaggiati." }
 ];
         const matchingPairsPool = [
+    { id:"m1", term:"Realismo Militare", text:"Dottrina per cui la guerra non è valutabile eticamente; conta solo la vittoria e l'utilità." },
+    { id:"m2", term:"Pacifismo Radicale", text:"Dottrina per cui la guerra è valutabile eticamente ed è sempre moralmente sbagliata." },
+    { id:"m3", term:"Guerra Giusta", text:"Dottrina per cui la guerra è valutabile e determinate guerre (es. difesa) possono essere lecite." },
+    { id:"m4", term:"Ius ad Bellum", text:"L'insieme dei criteri etici e giuridici per la legittima dichiarazione d'ingresso in guerra." },
+    { id:"m5", term:"Auctoritas Principis", text:"Criterio di Agostino e Tommaso: l'autorità legittima di dichiarare guerra spetta al principe." },
+    { id:"m6", term:"Intentio Recta", text:"Intenzione retta: la guerra deve essere mossa dall'obiettivo di promuovere il bene e la pace." },
+    { id:"m7", term:"John Wyclif", text:"Teologo inglese che demolì i tre criteri della guerra giusta sostenendo la non-violenza di Cristo." },
+    { id:"m8", term:"Respingere la forza col bene", text:"Principio wyclifiano per cui la forza del corpo si vince con la forza dello spirito senza armi." },
+    { id:"m9", term:"Niccolò Machiavelli", text:"Autore de Il Principe, fondatore del realismo politico e teorico dell'autonomia della politica." },
+    { id:"m10", term:"Imparare a essere non buono", text:"Massima machiavelliana per cui il Principe deve saper usare mezzi immorali se la necessità lo esige." },
+    { id:"m11", term:"Truppe Mercenarie", text:"Armi definite da Machiavelli 'inutile e periculose', prive di disciplina e fedeltà allo Stato." },
+    { id:"m12", term:"Armi Proprie", text:"Esercito composto dai cittadini e sudditi dello Stato, unico modello militare affidabile." }
+];
+        const clozeAnswers = { "1":"pacifismo","2":"Tommaso d'Aquino","3":"Auctoritas principis","4":"Intentio recta","5":"John Wyclif","6":"Cristo","7":"Niccolò Machiavelli","8":"non buono","9":"mercenarie","10":"armi proprie" };
+
+        const textualPool = [
     {
-        "id": "m1",
-        "term": "Realismo Militare",
-        "text": "Dottrina per cui la guerra non è valutabile eticamente; conta solo la vittoria e l'utilità."
+        id:"t1", title:"De civitate Dei, XIX — La pace come fine della guerra", source:"Agostino d'Ippona, De civitate Dei, Libro XIX, cap. 12",
+        text:"Risulta perciò che la pace è il fine che si desidera dalla guerra; ogni uomo infatti ricerca la pace anche attraverso la guerra, mentre nessuno ricerca la guerra attraverso la pace. Anche coloro che vogliono turbare lo stato di pace in cui si trovano, non odiano la pace, ma desiderano cambiarla a loro arbitrio. Non vogliono quindi che la pace non vi sia più, ma che sia come essi vogliono.",
+        questions:[
+            { id:"t1q1", question:"Secondo questo passo, perché anche chi fa la guerra desidera in realtà la pace?", options:[
+                "Perché ogni guerra viene iniziata in vista di una vittoria che elimini la resistenza e stabilisca una nuova pace.",
+                "Perché i soldati sono obbligati dai trattati internazionali a cercare la pace dopo ogni battaglia campale.",
+                "Perché la guerra è un piacere fine a se stesso, che gli uomini ricercano indipendentemente dalla pace.",
+                "Perché il papa ordina ai principi di fermarsi dopo un mese esatto dall'inizio delle ostilità militari."
+            ], correct:0, explanation:"Agostino sostiene che nessuno fa la 'guerra per la guerra': anche chi cerca il conflitto mira in realtà a una forma di pace, sebbene possa essere una pace a lui favorevole o ingiusta." },
+            { id:"t1q2", question:"Quale condizione dell''intenzione retta' ne deriva per una guerra giusta?", options:[
+                "La guerra deve mirare a una pacificazione stabile e duratura, non alla pura distruzione o vendetta.",
+                "La guerra deve durare il minor tempo possibile per ragioni economiche legate al costo degli eserciti.",
+                "La guerra è giusta solo se si conquistano tutte le terre del nemico e si annette il suo intero territorio.",
+                "La guerra è giusta solo se non si firma mai alcun trattato di pace, continuando il conflitto all'infinito."
+            ], correct:0, explanation:"Poiché la pace è il fine naturale della guerra, l'intenzione di chi combatte deve essere orientata a ristabilire una pace giusta e duratura, non a perpetrare il conflitto o a vendicarsi." }
+        ]
     },
     {
-        "id": "m2",
-        "term": "Pacifismo Radicale",
-        "text": "Dottrina per cui la guerra è valutabile eticamente ed è sempre moralmente sbagliata."
+        id:"t2", title:"De civili dominio, II — La non-resistenza di Wyclif", source:"John Wyclif, De civili dominio, Libro II",
+        text:"Ma si può argomentare con forza contro questa [non resistenza], che perdere la vita invano per non resistere contraddice il principio naturale... D'altra parte, si dice che le cose inanimate non resistono se non per il loro bene, e quindi nemmeno l'uomo dovrebbe, e di conseguenza né con la nostra volontà, né con le nostre parole, né con le nostre opere, dovremmo offendere il nostro fratello, ma piuttosto sconfiggere l'invasione con pazienza e beneficenza, e respingere la forza del corpo con la forza dello spirito.",
+        questions:[
+            { id:"t2q1", question:"Quale argomento usa Wyclif contro il principio di autoconservazione (difendersi per non perdere la vita)?", options:[
+                "Che la conservazione materiale non è il fine ultimo dell'uomo; la vera vittoria si ottiene sopportando con spirito e carità.",
+                "Che le cose inanimate sono più forti degli esseri umani e quindi non hanno bisogno di difendersi dalle minacce.",
+                "Che gli eserciti nemici sono sempre più numerosi e meglio equipaggiati di quelli dei principi cristiani.",
+                "Che la fisica aristotelica vieta la reazione violenta agli attacchi esterni, in base alle leggi del moto."
+            ], correct:0, explanation:"Wyclif sostiene che la resistenza violenta (che mira al bene del corpo) è inferiore alla sopportazione paziente, che mira al bene spirituale e alla salvezza eterna." },
+            { id:"t2q2", question:"Cosa significa 'respingere la forza del corpo con la forza dello spirito'?", options:[
+                "Opporre alla violenza fisica la pazienza, la fede e la carità, senza ricorrere alle armi materiali.",
+                "Combattere usando magie e poteri soprannaturali ottenuti grazie alla preghiera e alla penitenza.",
+                "Pregare affinché Dio mandi un esercito di angeli armati a difendere i cristiani dagli invasori.",
+                "Scappare a pregare in un monastero lontano, abbandonando la propria casa e i propri familiari."
+            ], correct:0, explanation:"È il nucleo del pacifismo radicale cristiano di Wyclif: la risposta alla violenza non deve essere altra violenza, ma una resistenza spirituale fatta di pazienza, preghiera e amore per il prossimo." }
+        ]
     },
     {
-        "id": "m3",
-        "term": "Guerra Giusta",
-        "text": "Dottrina per cui la guerra è valutabile e determinate guerre (es. difesa) possono essere lecite."
-    },
-    {
-        "id": "m4",
-        "term": "Ius ad Bellum",
-        "text": "L'insieme dei criteri etici e giuridici per la legittima dichiarazione d'ingresso in guerra."
-    },
-    {
-        "id": "m5",
-        "term": "Auctoritas Principis",
-        "text": "Criterio di Agostino e Tommaso: l'autorità legittima di dichiarare guerra spetta al principe."
-    },
-    {
-        "id": "m6",
-        "term": "Intentio Recta",
-        "text": "Intenzione retta: la guerra deve essere mossa dall'obiettivo di promuovere il bene e la pace."
-    },
-    {
-        "id": "m7",
-        "term": "John Wyclif",
-        "text": "Teologo inglese che demolì i tre criteri della guerra giusta sostenendo la non-violenza di Cristo."
-    },
-    {
-        "id": "m8",
-        "term": "Respingere la forza col bene",
-        "text": "Principio wyclifiano per cui la forza del corpo si vince con la forza dello spirito senza armi."
-    },
-    {
-        "id": "m9",
-        "term": "Niccolò Machiavelli",
-        "text": "Autore de Il Principe, fondatore del realismo politico e teorico dell'autonomia della politica."
-    },
-    {
-        "id": "m10",
-        "term": "Imparare a essere non buono",
-        "text": "Massima machiavelliana per cui il Principe deve saper usare mezzi immorali se la necessità lo esige."
-    },
-    {
-        "id": "m11",
-        "term": "Truppe Mercenarie",
-        "text": "Armi definite da Machiavelli 'inutile e periculose', prive di disciplina e fedeltà allo Stato."
-    },
-    {
-        "id": "m12",
-        "term": "Armi Proprie",
-        "text": "Esercito composto dai cittadini e sudditi dello Stato, unico modello militare affidabile."
+        id:"t3", title:"Il Principe, cap. 12 — Le armi mercenarie", source:"Niccolò Machiavelli, Il Principe, cap. 12",
+        text:"Le mercennarie et ausiliarie sono inutile e periculose; e, se uno tiene lo stato suo fondato in sulle arme mercennarie, non starà mai fermo né sicuro; perché le sono disunite, ambiziose, sanza disciplina, infedele; gagliarde fra' li amici; fra' nimici vile; non timore di Dio, non fede con li uomini, e tanto si differisce la ruina quanto si differisce lo assalto; e nella pace se' spogliato da loro, nella guerra da' nimici.",
+        questions:[
+            { id:"t3q1", question:"Perché secondo Machiavelli le armi mercenarie sono pericolose in tempo di pace?", options:[
+                "Perché in tempo di pace i mercenari spogliano e opprimono il Principe e i cittadini che li pagano.",
+                "Perché in tempo di pace si dedicano all'agricoltura e trascurano l'addestramento militare necessario.",
+                "Perché firmano trattati di pace senza il consenso del Principe, danneggiando gli interessi dello Stato.",
+                "Perché sciolgono le file e tornano a casa a riposare, lasciando il Principe senza alcuna difesa armata."
+            ], correct:0, explanation:"Machiavelli avverte che i mercenari, non avendo fedeltà allo Stato, in tempo di pace si rivoltano contro chi li ha ingaggiati, saccheggiando e opprimendo." },
+            { id:"t3q2", question:"Qual è il fondamento logico per cui un Principe non può fidarsi delle truppe mercenarie?", options:[
+                "Il loro unico movente è lo stipendio, che non è sufficiente a farle morire per il loro signore.",
+                "Sono troppo vecchie e malate per combattere, perché vengono reclutate tra i contadini più poveri.",
+                "Non parlano la lingua del Principe e quindi non comprendono gli ordini impartiti dai suoi ufficiali.",
+                "Hanno paura del buio e non combattono di notte, quando avvengono le battaglie più importanti."
+            ], correct:0, explanation:"Senza un vero amore per la patria o fedeltà al Principe, i mercenari combattono solo per il denaro; quando la situazione si fa pericolosa o il nemico paga di più, fuggono o tradiscono." }
+        ]
     }
 ];
-        const clozeAnswers = {
-    "1": "pacifismo",
-    "2": "Tommaso d'Aquino",
-    "3": "Auctoritas principis",
-    "4": "Intentio recta",
-    "5": "John Wyclif",
-    "6": "Cristo",
-    "7": "Niccolò Machiavelli",
-    "8": "non buono",
-    "9": "mercenarie",
-    "10": "armi proprie"
-};
+        const argumentPool = [
+    {
+        id:"a1", title:"I Tre Pilastri della Guerra Giusta (Tommaso d'Aquino)",
+        description:"Ricostruisci la logica con cui Tommaso d'Aquino sistematizza i criteri per una guerra moralmente lecita.",
+        steps:[
+            { id:"s1", text:"Affinché una guerra sia giusta, è necessaria l'Autorità del Principe (Auctoritas principis)." },
+            { id:"s2", text:"Poiché tra i privati c'è un giudice superiore, ma tra Stati no, solo il Principe può dichiarare guerra." },
+            { id:"s3", text:"È necessaria una Giusta Causa (Causa iusta): una colpa o un'ingiustizia commessa dal nemico." },
+            { id:"s4", text:"È necessaria un'Intenzione Rettа (Intentio recta): mirare a promuovere il bene ed evitare il male." },
+            { id:"s5", text:"L'obiettivo finale deve essere la 'pace buona', non la vendetta o la sottomissione ingiusta." }
+        ]
+    },
+    {
+        id:"a2", title:"La Confutazione Pacifista della Guerra Giusta (John Wyclif)",
+        description:"Ricostruisci il ragionamento con cui Wyclif smonta i tre criteri tradizionali della guerra giusta.",
+        steps:[
+            { id:"s1", text:"L'unica autorità legittima sugli uomini è quella di Cristo, che è il capo della Chiesa." },
+            { id:"s2", text:"Cristo ha predicato una religione di amore e pace, proibendo la violenza e l'uccisione." },
+            { id:"s3", text:"Pertanto, nessun principe terreno ha la vera autorità di dichiarare guerra." },
+            { id:"s4", text:"Inoltre, è impossibile uccidere qualcuno (come avviene in guerra) mantenendo la carità fraterna nel cuore." },
+            { id:"s5", text:"Dunque, è impossibile per un cristiano partecipare a una guerra senza commettere peccato mortale." }
+        ]
+    }
+];
+        const tfPool = [
+    { id:"tf1", statement:"Per la dottrina della guerra giusta, ogni forma di conflitto armato è sempre e comunque moralmente illecita.", correct:false, explanation:"Falso. La dottrina della guerra giusta distingue tra guerre eticamente lecite (es. difesa da un invasore) e guerre ingiuste. Il pacifismo radicale è la posizione che condanna ogni guerra." },
+    { id:"tf2", statement:"Secondo Agostino d'Ippona, un soldato cristiano può combattere e uccidere il nemico mantenendo la carità nel cuore.", correct:true, explanation:"Vero. Agostino distingue tra l'azione esteriore (combattere per difendere la pace) e la disposizione interiore: si può uccidere senza odio, brama di vendetta o crudeltà." },
+    { id:"tf3", statement:"Tommaso d'Aquino sostiene che la guerra possa essere dichiarata legittimamente da un singolo cittadino privato per difendere i propri beni.", correct:false, explanation:"Falso. Tommaso afferma che solo il Principe ha l'Auctoritas principis. Il cittadino privato deve ricorrere al giudice superiore." },
+    { id:"tf4", statement:"La 'pace buona' per Tommaso d'Aquino consiste in una pace vendicativa che punisce severamente i vinti.", correct:false, explanation:"Falso. La 'pace buona' mira alla concordia e alla stabilità; la 'pace cattiva' è quella oppressiva o vendicativa, che mira solo a sottomettere il nemico." },
+    { id:"tf5", statement:"John Wyclif riteneva che i cristiani dovessero opporre alla violenza fisica l'uso di armi ancora più potenti.", correct:false, explanation:"Falso. Wyclif era un pacifista radicale: sosteneva che si dovesse 'respingere la forza del corpo con la forza dello spirito', praticando la non-resistenza." },
+    { id:"tf6", statement:"Per Wyclif, difendere le proprie proprietà materiali dall'invasore straniero è una causa giusta per imbracciare le armi.", correct:false, explanation:"Falso. Wyclif riteneva che la proprietà privata non valesse la vita spirituale; fare la guerra per i beni materiali è un peccato, poiché la vera ricchezza per il cristiano è la carità." },
+    { id:"tf7", statement:"Machiavelli nel 'Principe' afferma che il sovrano deve sempre rispettare la morale cristiana per non essere disprezzato dal popolo.", correct:false, explanation:"Falso. Machiavelli ritiene che il principe debba imparare a 'potere essere non buono' e usare mezzi immorali se questo è necessario per mantenere lo Stato." },
+    { id:"tf8", statement:"Secondo Machiavelli, un Principe non deve mai rimanere neutrale quando due stati vicini entrano in conflitto.", correct:true, explanation:"Vero. Machiavelli considera la neutralità estremamente svantaggiosa: chi rimane neutrale sarà preda del vincitore e non avrà la gratitudine del vinto." },
+    { id:"tf9", statement:"Machiavelli consiglia di affidare la difesa dello Stato a truppe mercenarie, poiché sono più disciplinate e addestrate dei cittadini.", correct:false, explanation:"Falso. Machiavelli condanna duramente le armi mercenarie ('inutile e periculose'): solo le 'armi proprie', ovvero i cittadini fedeli, garantiscono la sicurezza dello Stato." },
+    { id:"tf10", statement:"L'idea di Wyclif che l'autorità di fare la guerra spetti solo a Cristo è un esempio di pensiero teocratico radicale.", correct:true, explanation:"Vero. Wyclif sosteneva che solo Cristo ha la vera autorità; i principi terreni ne sono solo derivati e, poiché Cristo proibisce la guerra, essi non possono dichiararla." }
+];
 
         function renderEx1() {
             const container = document.getElementById('ex1-container');
             if(!container) return;
             container.innerHTML = state.activeEx1Data.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="ex1-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
             `).join('');
         }
-
         function selectEx1(qId, oIdx, btn) {
             if (state.ex1Answers[qId] !== undefined) return;
             playSound('click');
             const item = state.activeEx1Data.find(d => d.id === qId);
             state.ex1Answers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`ex1-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -783,55 +626,27 @@
             if(!container) return;
             container.innerHTML = state.activeEx2Data.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="ex2-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
             `).join('');
         }
-
         function selectEx2(qId, oIdx, btn) {
             if (state.ex2Answers[qId] !== undefined) return;
             playSound('click');
             const item = state.activeEx2Data.find(d => d.id === qId);
             state.ex2Answers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`ex2-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -840,55 +655,27 @@
             if(!container) return;
             container.innerHTML = state.activeEx3Data.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="ex3-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
             `).join('');
         }
-
         function selectEx3(qId, oIdx, btn) {
             if (state.ex3Answers[qId] !== undefined) return;
             playSound('click');
             const item = state.activeEx3Data.find(d => d.id === qId);
             state.ex3Answers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`ex3-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -899,97 +686,203 @@
             termsContainer.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
             defsContainer.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
         }
-
         function selectMatchTerm(termId, btn) {
-            playSound('click');
-            state.selectedTermId = termId;
-
-            document.querySelectorAll('#matching-terms button').forEach(b => {
-                if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
-            });
+            playSound('click'); state.selectedTermId = termId;
+            document.querySelectorAll('#matching-terms button').forEach(b => { if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer"; });
             btn.className = "w-full text-left p-3 rounded-xl border-2 border-amber-500 bg-amber-950/80 text-xs font-bold text-amber-300 transition-all shadow-lg cursor-pointer";
-
             const fb = document.getElementById('matching-feedback');
-            if(fb) {
-                fb.className = "text-xs font-semibold text-amber-400 pt-2";
-                fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!";
-            }
+            if(fb) { fb.className = "text-xs font-semibold text-amber-400 pt-2"; fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!"; }
         }
-
         function selectMatchDef(matchId, btn) {
             const fb = document.getElementById('matching-feedback');
-            if(!state.selectedTermId) {
-                playSound('error');
-                if(fb) {
-                    fb.className = "text-xs font-semibold text-rose-400 pt-2";
-                    fb.innerText = "Prima seleziona un termine nella colonna di sinistra!";
-                }
-                return;
-            }
-
+            if(!state.selectedTermId) { playSound('error'); if(fb){ fb.className = "text-xs font-semibold text-rose-400 pt-2"; fb.innerText = "Prima seleziona un termine nella colonna di sinistra!"; } return; }
             if(state.selectedTermId === matchId) {
-                playSound('correct');
-                state.matchedPairs[matchId] = true;
-
+                playSound('correct'); state.matchedPairs[matchId] = true;
                 const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
-                if(termBtn) {
-                    termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed";
-                    termBtn.disabled = true;
-                }
-                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed";
-                btn.disabled = true;
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-emerald-400 pt-2";
-                    fb.innerText = "✓ Abbinamento corretto e bloccato!";
-                }
+                if(termBtn) { termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed"; termBtn.disabled = true; }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed"; btn.disabled = true;
+                if(fb) { fb.className = "text-xs font-bold text-emerald-400 pt-2"; fb.innerText = "✓ Abbinamento corretto e bloccato!"; }
             } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
-                setTimeout(() => {
-                    if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer";
-                }, 1000);
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-rose-400 pt-2";
-                    fb.innerText = "✗ Abbinamento errato. Riprova!";
-                }
+                playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => { if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer"; }, 1000);
+                if(fb) { fb.className = "text-xs font-bold text-rose-400 pt-2"; fb.innerText = "✗ Abbinamento errato. Riprova!"; }
             }
-            state.selectedTermId = null;
-            updateGlobalScore();
+            state.selectedTermId = null; updateGlobalScore();
         }
 
         function checkCloze() {
             if (state.clozeLocked) return;
             playSound('click');
             let correct = 0;
-            const keys = Object.keys(clozeAnswers);
-            keys.forEach(k => {
+            Object.keys(clozeAnswers).forEach(k => {
                 const el = document.getElementById(`cloze-${k}`);
-                if(el) {
-                    el.disabled = true;
-                    if(el.value === clozeAnswers[k]) { 
-                        correct++; 
-                        el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    } else { 
-                        el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    }
-                }
+                if(el) { el.disabled = true; if(el.value === clozeAnswers[k]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } else { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } }
             });
-            state.clozeScore = Math.round((correct / keys.length) * 100);
+            state.clozeScore = Math.round((correct / Object.keys(clozeAnswers).length) * 100);
             state.clozeLocked = true;
-
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed";
-                submitBtn.innerText = "Testo Verificato e Bloccato";
+            if(submitBtn) { submitBtn.disabled = true; submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed"; submitBtn.innerText = "Testo Verificato e Bloccato"; }
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) { if(correct === Object.keys(clozeAnswers).length) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (${correct}/${Object.keys(clozeAnswers).length}).`; } else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/${Object.keys(clozeAnswers).length}. Le risposte sono state bloccate.`; } }
+            updateGlobalScore();
+        }
+
+        function renderTextual() {
+            const container = document.getElementById('ex6-container');
+            if(!container) return;
+            container.innerHTML = state.activeTextual.map((passage, pIdx) => `
+                <div class="glass-card p-5 sm:p-6 rounded-2xl space-y-5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-orange-400 bg-orange-950/60 px-2.5 py-1 rounded-md border border-orange-800"><i class="fa-solid fa-quote-right mr-1"></i> Passo ${pIdx+1}: ${passage.title}</span>
+                    </div>
+                    <div class="passage p-4 sm:p-5">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-amber-400/80 mb-2">${passage.source}</p>
+                        <p class="text-sm sm:text-base text-slate-200 leading-relaxed italic">«${passage.text}»</p>
+                    </div>
+                    <div class="space-y-5">
+                        ${passage.questions.map((q, qIdx) => `
+                            <div class="space-y-2">
+                                <div class="font-bold text-slate-100 text-xs sm:text-sm">${pIdx+1}.${qIdx+1} — ${q.question}</div>
+                                <div class="space-y-2" id="tq-${q.id}">
+                                    ${q.options.map((opt, oIdx) => `<button onclick="selectTextual('${q.id}', ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
+                                </div>
+                                <div id="tfb-${q.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+        function selectTextual(qId, oIdx, btn) {
+            if (state.ex6Answers[qId] !== undefined) return;
+            playSound('click');
+            let question = null;
+            state.activeTextual.forEach(p => p.questions.forEach(q => { if(q.id === qId) question = q; }));
+            if (!question) return;
+            state.ex6Answers[qId] = oIdx;
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === question.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === question.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === question.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700"; fb.innerHTML = `<strong>${oIdx === question.correct ? 'Interpretazione Corretta!' : 'Interpretazione Errata e Bloccata.'}</strong> ${question.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderArgument() {
+            const titleEl = document.getElementById('arg-title');
+            const descEl = document.getElementById('arg-description');
+            const poolEl = document.getElementById('arg-pool');
+            const seqEl = document.getElementById('arg-sequence');
+            const submitBtn = document.getElementById('arg-submit');
+            const fbEl = document.getElementById('arg-feedback');
+            if(!poolEl || !seqEl || !state.activeArgument) return;
+
+            titleEl.innerText = state.activeArgument.title;
+            descEl.innerText = state.activeArgument.description;
+
+            poolEl.innerHTML = state.argPool.map(s => `
+                <button onclick="addToSequence('${s.id}')" class="w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 hover:border-cyan-600 transition-all cursor-pointer">
+                    <i class="fa-solid fa-grip-lines text-slate-500 mr-1.5"></i> ${s.text}
+                </button>
+            `).join('');
+
+            if (state.argOrder.length === 0) {
+                seqEl.innerHTML = `<div class="text-xs text-slate-500 text-center py-4 italic">Clicca i passi a sinistra per inserirli qui nell'ordine corretto.</div>`;
+            } else {
+                seqEl.innerHTML = state.argOrder.map((id, idx) => {
+                    const step = state.activeArgument.steps.find(s => s.id === id);
+                    let cls = "w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer flex items-start gap-2.5";
+                    if (state.argSubmitted) {
+                        const correctIds = state.activeArgument.steps.map(s => s.id);
+                        cls += (id === correctIds[idx]) ? " border-emerald-600 bg-emerald-950/60 text-emerald-300" : " border-rose-600 bg-rose-950/60 text-rose-300";
+                    } else {
+                        cls += " border-cyan-700/60 bg-cyan-950/40 text-cyan-100 hover:bg-cyan-900/40";
+                    }
+                    return `<button onclick="removeFromSequence('${id}')" class="${cls}" ${state.argSubmitted ? 'disabled' : ''}>
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-[10px]">${idx+1}</span>
+                        <span>${step.text}</span>
+                    </button>`;
+                }).join('');
             }
 
-            const fb = document.getElementById('cloze-feedback');
-            if(fb) {
-                if(correct === keys.length) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (${correct}/${keys.length}).`; }
-                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/${keys.length}. Le risposte sono state bloccate.`; }
+            if (submitBtn) {
+                const allPlaced = state.argOrder.length === state.activeArgument.steps.length;
+                submitBtn.disabled = !allPlaced || state.argSubmitted;
+                submitBtn.className = allPlaced && !state.argSubmitted ? "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer hover:bg-cyan-400 transition-all" : "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed";
+            }
+            if (fbEl && !state.argSubmitted) fbEl.innerText = "";
+        }
+        function addToSequence(id) {
+            if (state.argSubmitted) return;
+            playSound('click');
+            const idx = state.argPool.findIndex(s => s.id === id);
+            if (idx < 0) return;
+            state.argPool.splice(idx, 1);
+            state.argOrder.push(id);
+            renderArgument();
+        }
+        function removeFromSequence(id) {
+            if (state.argSubmitted) return;
+            playSound('click');
+            const idx = state.argOrder.indexOf(id);
+            if (idx < 0) return;
+            state.argOrder.splice(idx, 1);
+            const step = state.activeArgument.steps.find(s => s.id === id);
+            state.argPool.push(step);
+            renderArgument();
+        }
+        function checkArgument() {
+            if (state.argSubmitted || state.argOrder.length !== state.activeArgument.steps.length) return;
+            playSound('click');
+            const correctIds = state.activeArgument.steps.map(s => s.id);
+            let correct = 0;
+            for (let i = 0; i < state.argOrder.length; i++) {
+                if (state.argOrder[i] === correctIds[i]) correct++;
+            }
+            state.argSubmitted = true;
+            state.argCorrectPositions = correct;
+            renderArgument();
+            const fbEl = document.getElementById('arg-feedback');
+            if (fbEl) {
+                if (correct === correctIds.length) { playSound('correct'); fbEl.className = "text-emerald-400 font-bold"; fbEl.innerText = `✓ Sequenza perfetta! Hai ricostruito correttamente l'argomentazione (${correct}/${correctIds.length}).`; }
+                else { playSound('error'); fbEl.className = "text-amber-400 font-bold"; fbEl.innerText = `Posizioni corrette: ${correct}/${correctIds.length}. La sequenza non è ancora del tutto corretta.`; }
+            }
+            updateGlobalScore();
+        }
+
+        function renderTF() {
+            const container = document.getElementById('ex8-container');
+            if(!container) return;
+            container.innerHTML = state.activeTF.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-lime-500/20 text-lime-400 flex items-center justify-center font-bold text-xs">${idx+1}</span>
+                        <p class="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed">${item.statement}</p>
+                    </div>
+                    <div class="flex gap-3 pl-9">
+                        <button onclick="selectTF('${item.id}', true, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-emerald-300 hover:bg-emerald-950/50 hover:border-emerald-600 transition-all cursor-pointer" data-tf="true"><i class="fa-solid fa-check mr-1"></i> Vero</button>
+                        <button onclick="selectTF('${item.id}', false, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-rose-300 hover:bg-rose-950/50 hover:border-rose-600 transition-all cursor-pointer" data-tf="false"><i class="fa-solid fa-xmark mr-1"></i> Falso</button>
+                    </div>
+                    <div id="tfb2-${item.id}" class="hidden p-3 rounded-xl text-xs ml-9"></div>
+                </div>
+            `).join('');
+        }
+        function selectTF(id, value, btn) {
+            if (state.tfAnswers[id] !== undefined) return;
+            playSound('click');
+            const item = state.activeTF.find(d => d.id === id);
+            if (!item) return;
+            state.tfAnswers[id] = value;
+            const container = btn.closest('.glass-card');
+            container.querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); });
+            if (value === item.correct) { playSound('correct'); btn.className = "px-5 py-2 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs font-bold text-emerald-200 cursor-not-allowed"; }
+            else { playSound('error'); btn.className = "px-5 py-2 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs font-bold text-rose-200 cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb2-${id}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                fb.className = value === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 ml-9" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 ml-9";
+                fb.innerHTML = `<strong>${value === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`;
             }
             updateGlobalScore();
         }
@@ -1000,11 +893,32 @@
             let ex3Correct = 0; state.activeEx3Data.forEach(d => { if(state.ex3Answers[d.id] === d.correct) ex3Correct++; });
             let matchCount = Object.keys(state.matchedPairs || {}).length;
 
-            const total = Math.round((ex1Correct / (state.activeEx1Data.length || 1))*30 + 
-                                     (ex2Correct / (state.activeEx2Data.length || 1))*25 + 
-                                     (ex3Correct / (state.activeEx3Data.length || 1))*20 + 
-                                     (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
-                                     (state.clozeScore/100)*10);
+            let ex6Total = 0, ex6Correct = 0;
+            state.activeTextual.forEach(p => p.questions.forEach(q => {
+                ex6Total++;
+                if(state.ex6Answers[q.id] === q.correct) ex6Correct++;
+            }));
+
+            let argScore = 0;
+            if (state.argSubmitted) {
+                const totalSteps = state.activeArgument ? state.activeArgument.steps.length : 1;
+                argScore = (state.argCorrectPositions || 0) / totalSteps;
+            }
+
+            let tfCorrect = 0;
+            state.activeTF.forEach(d => { if(state.tfAnswers[d.id] === d.correct) tfCorrect++; });
+
+            const total = Math.round(
+                (ex1Correct / (state.activeEx1Data.length || 1)) * 12 +
+                (ex2Correct / (state.activeEx2Data.length || 1)) * 12 +
+                (ex3Correct / (state.activeEx3Data.length || 1)) * 10 +
+                (matchCount / (state.activeMatchingTerms.length || 1)) * 8 +
+                (state.clozeScore / 100) * 6 +
+                (ex6Total > 0 ? (ex6Correct / ex6Total) * 20 : 0) +
+                argScore * 16 +
+                (tfCorrect / (state.activeTF.length || 1)) * 16
+            );
+
             const scoreText = document.getElementById('global-score-text');
             if(scoreText) scoreText.innerText = `${total} / 100`;
             return total;
@@ -1018,12 +932,10 @@
             const certScore = document.getElementById('cert-score');
             const certTitle = document.getElementById('cert-title');
             if(certScore) certScore.innerText = `${score} / 100 XP`;
-
             let titleText = "Novizio di Filosofia della Guerra";
             if(score >= 90) titleText = "Maestro di Filosofia della Guerra e Politica Rinascimentale";
             else if(score >= 75) titleText = "Analista di Guerra Giusta e Realismo Politico";
             else if(score >= 55) titleText = "Praticante di Etica Bellica e Realismo";
-
             if(badgeEl) badgeEl.innerText = titleText;
             if(certTitle) certTitle.innerText = titleText;
         }
@@ -1032,32 +944,18 @@
             playSound('click');
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
             const targetTab = document.getElementById(tabId);
             if(targetTab) targetTab.classList.remove('hidden');
-
-            if(btnElement) {
-                btnElement.classList.add('active');
-            } else {
-                const navButtons = document.querySelectorAll('.tab-btn');
-                navButtons.forEach(b => {
-                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
-                        b.classList.add('active');
-                    }
-                });
-            }
-
+            if(btnElement) { btnElement.classList.add('active'); }
+            else { document.querySelectorAll('.tab-btn').forEach(b => { if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) b.classList.add('active'); }); }
             if(tabId === 'tab-report') updateReport();
         }
 
         function setupRandomQuestions() {
-            state.ex1Answers = {}; 
-            state.ex2Answers = {}; 
-            state.ex3Answers = {}; 
-            state.matchedPairs = {}; 
-            state.clozeScore = 0;
-            state.clozeLocked = false;
-            state.selectedTermId = null;
+            state.ex1Answers = {}; state.ex2Answers = {}; state.ex3Answers = {};
+            state.ex6Answers = {}; state.tfAnswers = {};
+            state.matchedPairs = {}; state.clozeScore = 0; state.clozeLocked = false;
+            state.selectedTermId = null; state.argSubmitted = false; state.argCorrectPositions = 0;
 
             state.activeEx1Data = shuffle(ex1Pool).slice(0, 5);
             state.activeEx2Data = shuffle(ex2Pool).slice(0, 5);
@@ -1067,45 +965,34 @@
             state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
             state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
 
-            const keys = Object.keys(clozeAnswers);
-            keys.forEach(k => {
+            state.activeTextual = shuffle(textualPool).slice(0, 3);
+
+            const arg = shuffle(argumentPool)[0];
+            state.activeArgument = { ...arg, steps: arg.steps };
+            state.argPool = shuffle(arg.steps);
+            state.argOrder = [];
+
+            state.activeTF = shuffle(tfPool).slice(0, 5);
+
+            Object.keys(clozeAnswers).forEach(k => {
                 const el = document.getElementById(`cloze-${k}`);
-                if(el) {
-                    el.disabled = false;
-                    el.value = "";
-                    el.className = "bg-slate-800 text-amber-300 rounded px-2 py-1";
-                }
+                if(el) { el.disabled = false; el.value = ""; el.className = "bg-slate-800 text-amber-300 rounded px-2 py-1"; }
             });
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.className = "bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer";
-                submitBtn.innerText = "Verifica e Blocca Testo";
-            }
+            if(submitBtn) { submitBtn.disabled = false; submitBtn.className = "bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"; submitBtn.innerText = "Verifica e Blocca Testo"; }
             const clozeFb = document.getElementById('cloze-feedback');
             if(clozeFb) clozeFb.innerText = "";
 
-            renderEx1(); 
-            renderEx2(); 
-            renderEx3(); 
-            renderMatching();
+            renderEx1(); renderEx2(); renderEx3(); renderMatching();
+            renderTextual(); renderArgument(); renderTF();
             updateGlobalScore();
         }
 
-        function resetAll() {
-            setupRandomQuestions();
-            switchTab('tab-studio');
-        }
+        function resetAll() { setupRandomQuestions(); switchTab('tab-studio'); }
+        function initApp() { setupRandomQuestions(); }
 
-        function initApp() {
-            setupRandomQuestions();
-        }
-
-        if (document.readyState === 'interactive' || document.readyState === 'complete') {
-            initApp();
-        } else {
-            document.addEventListener('DOMContentLoaded', initApp);
-        }
+        if (document.readyState === 'interactive' || document.readyState === 'complete') { initApp(); }
+        else { document.addEventListener('DOMContentLoaded', initApp); }
     </script>
 </body>
 </html>

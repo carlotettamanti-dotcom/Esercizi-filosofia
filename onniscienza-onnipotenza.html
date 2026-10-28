@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio: Onniscienza e Onnipotenza nella Filosofia Medievale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { emerald: { 450: '#10b981' } },
+                    fontFamily: { cinzel: ['Cinzel', 'serif'], sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <script>
+      window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080d16; color: #f1f5f9; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .tab-btn.active { background-color: #0284c7 !important; color: #ffffff !important; border-color: #38bdf8 !important; box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.5); }
+        .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .badge-glow { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+        .passage { border-left: 4px solid #f59e0b; background: rgba(15, 23, 42, 0.85); border-radius: 0 0.75rem 0.75rem 0; }
+        @media print {
+            body * { visibility: hidden; }
+            #printable-certificate, #printable-certificate * { visibility: visible; }
+            #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2 text-xs sm:text-sm">
+                <a href="index.html" class="text-slate-400 hover:text-amber-400 transition-colors flex items-center gap-1.5 font-semibold">
+                    <i class="fa-solid fa-house"></i> Home Portale
+                </a>
+                <span class="text-slate-600">/</span>
+                <a href="filosofia-medievale.html" class="text-slate-400 hover:text-amber-400 transition-colors font-semibold">
+                    Filosofia Medievale
+                </a>
+                <span class="text-slate-600">/</span>
+                <span class="text-amber-400 font-bold">Onniscienza e Onnipotenza</span>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-user-graduate absolute left-3 text-slate-400 text-xs"></i>
+                    <input type="text" id="student-name-input" placeholder="Inserisci il tuo nome" value="Studente" oninput="updateStudentName(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 w-40 sm:w-48">
+                </div>
+                <button onclick="toggleAudio()" id="sound-btn" class="p-2 rounded-lg bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-amber-400" title="Audio">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
+                </button>
+                <div class="flex items-center space-x-3 bg-slate-900 border border-amber-500/30 px-3.5 py-1.5 rounded-lg badge-glow">
+                    <div class="text-right">
+                        <span class="text-[10px] uppercase tracking-wider text-amber-400/80 block font-bold">Punti XP</span>
+                        <span id="global-score-text" class="text-sm font-extrabold text-amber-400">0 / 100</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-extrabold text-xs">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
+            <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
+                <i class="fa-solid fa-book-open text-amber-400"></i> 0. Quadro Teorico
+            </button>
+            <button onclick="switchTab('tab-ex1', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-brain text-emerald-400"></i> 1. Onniscienza
+            </button>
+            <button onclick="switchTab('tab-ex2', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-scale-balanced text-amber-400"></i> 2. Onnipotenza
+            </button>
+            <button onclick="switchTab('tab-ex3', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-puzzle-piece text-purple-400"></i> 3. Sintesi e Confronti
+            </button>
+            <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti
+            </button>
+            <button onclick="switchTab('tab-cloze', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Cloze
+            </button>
+            <button onclick="switchTab('tab-commento', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-quote-right text-orange-400"></i> 6. Commento Testuale
+            </button>
+            <button onclick="switchTab('tab-argomentazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-arrow-down-1-9 text-cyan-400"></i> 7. Ricostruzione
+            </button>
+            <button onclick="switchTab('tab-verofalso', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-check-double text-lime-400"></i> 8. Vero/Falso
+            </button>
+            <button onclick="switchTab('tab-report', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-certificate text-yellow-400"></i> Certificato
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+        <section id="tab-studio" class="tab-content space-y-8">
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border-amber-500/20 relative overflow-hidden">
+                <div class="max-w-3xl space-y-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+                        <i class="fa-solid fa-graduation-cap mr-1.5"></i> Modulo 5: Teologia Razionale & Metafisica
+                    </span>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-amber-400">Onniscienza e Onnipotenza</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Analisi dei due attributi divini più dibattuti del Medioevo: la prescienza di Dio rispetto al libero arbitrio umano (Agostino e Tommaso) e i limiti dell'onnipotenza divina (Pier Damiani e Tommaso d'Aquino).
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-eye"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">1. Il Problema della Prescienza</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Se Dio conosce infallibilmente il futuro, come possono gli uomini essere veramente liberi? La prescienza divina sembra rendere necessarie le nostre azioni, eliminando il libero arbitrio.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-brain"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">2. La Soluzione di Agostino</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Prevedere un'azione non significa obbligare a compierla. Analogia con la memoria: come il ricordo non causa il passato, la prescienza divina non causa il futuro. La scelta rimane nostra.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-clock"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">3. La Soluzione di Tommaso</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Dio è fuori dal tempo (Eternità = assenza di tempo). Vede tutti gli eventi passati, presenti e futuri in un unico istante eterno. Inoltre, Dio è causa della volontà, ma non la sostituisce.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-infinity"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">4. Onnipotenza Radicale (Pier Damiani)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Dio può fare tutto, anche ciò che ci sembra illogico. Distingue Potenza (ciò che si può fare) e Volontà (ciò che si sceglie di fare). Se "non volere" equivalesse a "non potere", Dio non potrebbe far piovere.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-ban"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">5. Onnipotenza Moderata (Tommaso)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Dio può fare tutto ciò che è logicamente possibile. Non può fare il contraddittorio (es. un quadrato rotondo), non per un difetto di potenza, ma perché la contraddizione è un "nulla".</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-link"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">6. Sintesi: Due Problemi Interconnessi</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">I due attributi pongono sfide filosofiche distinte ma convergenti. L'onniscienza interroga il rapporto tra Dio e il tempo; l'onnipotenza il rapporto tra Dio e la logica. Entrambi mostrano come la filosofia medievale abbia affinato gli strumenti della ragione.</p>
+                </div>
+            </div>
+
+            <div class="text-center pt-4">
+                <button onclick="switchTab('tab-ex1')" class="bg-gradient-to-r from-amber-500 to-emerald-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-amber-600 hover:to-emerald-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione Guidata ➔</button>
+            </div>
+        </section>
+
+        <section id="tab-ex1" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Il Problema dell'Onniscienza e il Libero Arbitrio</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Esamina il conflitto tra la prescienza divina e la libertà umana, le soluzioni di Agostino (De libero arbitrio) e di Tommaso d'Aquino (Summa Theologiae). <em>(Le risposte selezionate vengono bloccate subito)</em></p>
+            </div>
+            <div id="ex1-container" class="space-y-6"></div>
+        </section>
+
+        <section id="tab-ex2" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: I Limiti dell'Onnipotenza Divina</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Analizza la tesi radicale di Pier Damiani (De divina omnipotentia) e la confutazione logica di Tommaso d'Aquino basata sul principio di non contraddizione. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex2-container" class="space-y-6"></div>
+        </section>
+
+        <section id="tab-ex3" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Sintesi e Confronti sulle Due Concezioni</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Confronta le diverse visioni dell'onnipotenza e sintetizza i due problemi fondamentali: la prescienza divina e i limiti del potere divino. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex3-container" class="space-y-6"></div>
+        </section>
+
+        <section id="tab-classificazione" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Concettuali</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div id="matching-terms" class="space-y-2.5"></div>
+                    <div id="matching-defs" class="space-y-2.5"></div>
+                </div>
+                <div id="matching-feedback" class="text-xs sm:text-sm font-semibold pt-2"></div>
+            </div>
+        </section>
+
+        <section id="tab-cloze" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test su Onniscienza e Onnipotenza</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
+                    Il problema dell' <select id="cloze-1" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="onniscienza">onniscienza</option><option value="onnipotenza">onnipotenza</option></select> divina riguarda la capacità di Dio di conoscere in anticipo il futuro. Se Dio sa già cosa faremo, sembra che il nostro <select id="cloze-2" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="libero arbitrio">libero arbitrio</option><option value="peccato originale">peccato originale</option></select> venga negato. Agostino risponde che prevedere un'azione non significa <select id="cloze-3" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="obbligare">obbligare</option><option value="conoscere">conoscere</option></select> a compierla. Tommaso d'Aquino aggiunge che Dio è fuori dal <select id="cloze-4" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="tempo">tempo</option><option value="mondo">mondo</option></select>, in una dimensione di eternità intesa come <select id="cloze-5" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="assenza di tempo">assenza di tempo</option><option value="durata infinita">durata infinita</option></select>. Per quanto riguarda l'onnipotenza, Pier Damiani sostiene che Dio può fare <select id="cloze-6" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="tutto">tutto</option><option value="solo il bene">solo il bene</option></select>, anche ciò che sembra illogico. Tommaso d'Aquino lo critica, affermando che Dio può fare tutto ciò che non implica <select id="cloze-7" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="contraddizione">contraddizione</option><option value="sofferenza">sofferenza</option></select>. Un "quadrato rotondo" è un <select id="cloze-8" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="nulla">nulla</option><option value="miracolo">miracolo</option></select> e non rientra nelle possibilità divine. Infine, mentre Agostino sottolinea che la prescienza non <select id="cloze-9" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="causa">causa</option><option value="conosce">conosce</option></select> le nostre azioni, Tommaso chiarisce che Dio è causa <select id="cloze-10" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="interna">interna</option><option value="esterna">esterna</option></select> della volontà, dandole la capacità di scegliere liberamente.
+                </div>
+                <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
+                <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
+            </div>
+        </section>
+
+        <section id="tab-commento" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-orange-400">Esercizio 6: Commento Testuale di Passi Filosofici</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi con attenzione i passi tratti dalle opere originali e rispondi alle domande di interpretazione. Non si tratta di ricordare, ma di <strong>comprendere l'argomentazione</strong>. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex6-container" class="space-y-8"></div>
+        </section>
+
+        <section id="tab-argomentazione" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-cyan-400">Esercizio 7: Ricostruzione dell'Argomentazione</h2>
+                <p class="text-xs sm:text-sm text-slate-400">I passi dell'argomentazione filosofica sono stati mescolati. Clicca i passi nell'ordine logico corretto per ricostruire il ragionamento. Clicca un passo già inserito per rimuoverlo.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl space-y-5">
+                <div id="arg-title" class="font-cinzel text-lg font-bold text-cyan-300"></div>
+                <div id="arg-description" class="text-xs sm:text-sm text-slate-300 italic"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400"><i class="fa-solid fa-shuffle mr-1"></i> Passi da ordinare</h4>
+                        <div id="arg-pool" class="space-y-2.5"></div>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400"><i class="fa-solid fa-list-ol mr-1"></i> La tua sequenza</h4>
+                        <div id="arg-sequence" class="space-y-2.5 min-h-[80px] p-3 rounded-xl border-2 border-dashed border-slate-700/60"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 pt-2">
+                    <button id="arg-submit" onclick="checkArgument()" class="bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">Verifica Sequenza</button>
+                    <div id="arg-feedback" class="text-xs sm:text-sm font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-verofalso" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-lime-400">Esercizio 8: Vero o Falso Ragionato</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Valuta ciascuna affermazione. Dopo la scelta, la risposta viene bloccata e compare la spiegazione. Attenzione: alcune affermazioni sono formulate in modo sottile!</p>
+            </div>
+            <div id="ex8-container" class="space-y-4"></div>
+        </section>
+
+        <section id="tab-report" class="tab-content hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl text-center space-y-6">
+                <h2 class="font-cinzel text-2xl font-bold text-amber-400">Valutazione Finale: Onniscienza e Onnipotenza</h2>
+                <div class="text-4xl font-black text-amber-400" id="report-score">0 / 100 XP</div>
+                <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="window.print()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
+                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
+                </div>
+            </div>
+
+            <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-amber-500/40 text-center space-y-6">
+                <div class="border-2 border-dashed border-amber-500/30 p-8 rounded-2xl space-y-6">
+                    <div class="font-cinzel text-amber-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Filosofica</div>
+                    <p class="text-slate-300 text-sm">Si attesta che lo studente / la studentessa:</p>
+                    <div id="cert-student-name" class="font-cinzel text-2xl font-bold text-white underline decoration-amber-500 decoration-2">Studente</div>
+                    <p class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
+                        ha superato con successo la verifica approfondita su:
+                        <br><strong class="text-amber-400">"Onniscienza e Onnipotenza nella Filosofia Medievale: Prescienza Divina e Libero Arbitrio (Agostino e Tommaso) e Limiti Logici dell'Onnipotenza (Pier Damiani e Tommaso)"</strong>
+                    </p>
+                    <div class="flex justify-around items-center pt-6 border-t border-slate-800 text-xs text-slate-400">
+                        <div><span>Punteggio Conseguito:</span><div id="cert-score" class="font-bold text-amber-400 text-base">0 / 100 XP</div></div>
+                        <div><span>Livello Raggiunto:</span><div id="cert-title" class="font-bold text-emerald-400 text-base">In corso</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
+        <a href="index.html" class="hover:text-amber-400 transition-colors">
+            <i class="fa-solid fa-house mr-1"></i> Home Portale
+        </a>
+        <span>•</span>
+        <a href="pensiero-critico.html" class="hover:text-amber-400 transition-colors">
+            <i class="fa-solid fa-diagram-project mr-1"></i> Pensiero Critico & Filosofia
+        </a>
+    </footer>
+
+    <script>
+        const state = { 
+            studentName: "Studente", audioEnabled: true, 
+            ex1Answers: {}, ex2Answers: {}, ex3Answers: {}, 
+            ex6Answers: {}, tfAnswers: {},
+            matchedPairs: {}, clozeScore: 0, clozeLocked: false,
+            selectedTermId: null,
+            activeEx1Data: [], activeEx2Data: [], activeEx3Data: [],
+            activeMatchingTerms: [], activeMatchingDefs: [],
+            activeTextual: [], activeArgument: null,
+            argPool: [], argOrder: [], argSubmitted: false, argCorrectPositions: 0,
+            activeTF: []
+        };
+
+        let audioCtx = null;
+        function playSound(type) {
+            if (!state.audioEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                if (type === 'click') { osc.frequency.setValueAtTime(400, audioCtx.currentTime); gain.gain.setValueAtTime(0.04, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.04); }
+                else if (type === 'correct') { osc.frequency.setValueAtTime(880, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+                else if (type === 'error') { osc.frequency.setValueAtTime(220, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+            } catch(e){}
+        }
+
+        function toggleAudio() { state.audioEnabled = !state.audioEnabled; }
+        function updateStudentName(val) { 
+            state.studentName = val || "Studente"; 
+            const certName = document.getElementById('cert-student-name');
+            if(certName) certName.innerText = state.studentName;
+        }
+
+        function shuffle(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // ================= POOL QUESITI DATA (opzioni a lunghezza bilanciata) =================
+        const ex1Pool = [
+    { id:101, title:"Il Problema della Prescienza Divina", text:"Agostino d'Ippona e Tommaso d'Aquino si confrontano con un problema logico-teologico: se Dio è onnisciente, come può l'uomo essere libero?", question:"Qual è l'essenza del conflitto tra prescienza divina e libero arbitrio?", options:[
+        "Se Dio conosce in anticipo le nostre scelte, allora queste sembrano essere necessarie e non libere.",
+        "Se l'uomo è dotato di libero arbitrio, allora Dio non può essere considerato onnipotente e onnisciente.",
+        "Dio non conosce affatto il futuro perché è anch'egli immerso nel tempo insieme alle sue creature.",
+        "La prescienza divina riguarda soltanto gli eventi naturali e mai le azioni libere compiute dagli uomini."
+    ], correct:0, explanation:"Il problema (detto dei 'futuri contingenti') è che la conoscenza infallibile di un evento futuro sembra implicare che quell'evento non possa non accadere, negando la possibilità di scegliere altrimenti." },
+    { id:102, title:"La Soluzione di Agostino: Prevedere non è Obbligare", text:"Nel De libero arbitrio (Libro III), Agostino risponde a Evodio che teme che la prescienza divina renda le nostre azioni necessarie.", question:"Qual è la strategia argomentativa di Agostino per difendere il libero arbitrio?", options:[
+        "Prevedere un'azione non significa costringere a compierla; la prescienza divina non causa le nostre scelte.",
+        "Dio prevede le nostre azioni perché le ha già scritte nel destino di ciascuno, quindi non siamo per nulla liberi.",
+        "La prescienza di Dio è limitata soltanto alle cose buone e non si estende mai ai peccati commessi dagli uomini.",
+        "Agostino nega apertamente che Dio abbia una prescienza del futuro, poiché ciò limiterebbe la libertà umana."
+    ], correct:0, explanation:"Agostino sostiene che la prescienza non è la causa dell'evento. Dio prevede che peccheremo, ma non ci costringe a peccare: la scelta rimane nostra." },
+    { id:103, title:"L'Analogia della Memoria in Agostino", text:"Per chiarire il rapporto tra prescienza e causalità, Agostino introduce un'interessante analogia con una facoltà umana.", question:"Quale analogia usa Agostino per spiegare che la prescienza non causa gli eventi futuri?", options:[
+        "La memoria umana: come il ricordo non causa gli eventi passati, la prescienza divina non causa quelli futuri.",
+        "Il pittore e la tela: come l'artista non crea la materia che dipinge, Dio non crea il futuro che prevede.",
+        "L'orologio meccanico: come l'orologio misura il tempo senza esserne la causa, Dio conosce senza determinare.",
+        "Lo specchio fedele: come lo specchio riflette le immagini senza modificarle, Dio riflette il futuro senza causarlo."
+    ], correct:0, explanation:"Agostino paragona la prescienza alla memoria: noi ricordiamo il passato senza averlo causato; Dio conosce il futuro senza determinarne le scelte." },
+    { id:104, title:"La Debolezza della Soluzione Agostiniana", text:"La critica moderna alla risposta di Agostino si concentra sul ruolo di Dio come Creatore e non solo come osservatore.", question:"Qual è la principale critica alla soluzione di Agostino?", options:[
+        "Dio non è un semplice spettatore: creando l'uomo e conoscendo le sue scelte future, la scelta diventa una conseguenza ineludibile della creazione.",
+        "L'analogia con la memoria umana è troppo poetica e suggestiva, ma non possiede alcun valore filosofico o argomentativo rigoroso.",
+        "Agostino non tiene conto del peccato originale e della concupiscenza che, secondo la sua stessa dottrina, offusca gravemente la libertà.",
+        "Agostino afferma implicitamente che Dio non è realmente onnisciente, contraddicendo così la fede cristiana tradizionale e l'ortodossia."
+    ], correct:0, explanation:"Se Dio crea un individuo sapendo esattamente che compirà una certa azione, sembra che quella scelta sia già determinata dall'atto creativo divino, anche se Dio non interviene direttamente." },
+    { id:105, title:"La Soluzione di Tommaso d'Aquino: Dio e l'Eternità", text:"Tommaso affronta il tema dei futuri contingenti nella Summa Theologiae (I, q. 14, a. 13), partendo da una concezione diversa del tempo.", question:"Come definisce Tommaso il rapporto tra Dio e il tempo?", options:[
+        "Dio è fuori dal tempo; la sua eternità è un unico istante simultaneo che abbraccia passato, presente e futuro.",
+        "Dio vive nel tempo ma possiede una memoria perfetta del passato e una conoscenza anticipata di ogni futuro.",
+        "Dio è collocato nel futuro e da quel punto privilegiato osserva in anticipo tutti gli eventi che accadranno.",
+        "Dio ha creato il tempo ma rimane comunque soggetto alle sue leggi, come qualsiasi altra creatura dell'universo."
+    ], correct:0, explanation:"Per Tommaso, l'eternità divina non è una durata infinita, ma un'assenza totale di tempo. Dio vede tutti gli eventi in un unico 'adesso' eterno, senza successione." },
+    { id:106, title:"La Metafora del Libro e dell'Autore", text:"Il PDF propone un esperimento mentale per comprendere la soluzione di Tommaso sulla prescienza divina.", question:"Cosa illustra la metafora del libro e dell'autore?", options:[
+        "Che Dio vede la nostra vita come un autore vede tutte le pagine del suo libro contemporaneamente, mentre noi le viviamo pagina per pagina.",
+        "Che la nostra vita è già scritta nel libro del destino e non possiamo cambiarla o modificarla in nessun modo, come sostiene il fatalismo.",
+        "Che Dio è un lettore paziente che scopre la trama della nostra vita man mano che noi la viviamo giorno per giorno, senza anticiparla.",
+        "Che il libero arbitrio è puramente un'illusione, perché l'autore del libro ha già deciso in anticipo tutto il destino dei suoi personaggi."
+    ], correct:0, explanation:"La metafora serve a spiegare la simultaneità della visione divina rispetto alla successione temporale umana. Tuttavia, Tommaso aggiunge che Dio non è un autore che costringe i personaggi, ma colui che dà loro la capacità di agire liberamente." },
+    { id:107, title:"Dio Causa della Volontà ma non Sostitutiva", text:"Per risolvere definitivamente il problema, Tommaso precisa in che modo Dio agisce sulla volontà umana.", question:"Secondo Tommaso, come agisce Dio sulla volontà umana?", options:[
+        "Dio è causa interna della volontà: le dà la capacità di volere, ma è la volontà stessa che determina cosa scegliere.",
+        "Dio spinge la volontà dall'esterno come il vento con una foglia, determinando meccanicamente ogni scelta compiuta.",
+        "Dio non ha alcun rapporto con la volontà umana, che opera in modo completamente autonomo e indipendente da Lui.",
+        "Dio elimina la volontà umana per sostituirla con la propria, privando l'uomo di qualsiasi forma di libertà."
+    ], correct:0, explanation:"Tommaso sostiene che Dio dà alla volontà la capacità di agire liberamente. Non è una causa esterna che determina meccanicamente la scelta, ma la causa che rende possibile il libero arbitrio." },
+    { id:108, title:"Futuri Contingenti e Infallibilità Divina", text:"Tommaso si chiede se la scienza di Dio si estenda ai futuri contingenti, cioè a quegli eventi che potrebbero accadere o non accadere.", question:"Come concilia Tommaso l'infallibilità della conoscenza divina con la contingenza degli eventi futuri?", options:[
+        "Dio conosce i futuri contingenti in quanto sono presenti al suo cospetto nell'eternità, pur rimanendo contingenti rispetto alle loro cause prossime.",
+        "Dio non conosce affatto i futuri contingenti, altrimenti l'uomo non potrebbe essere considerato veramente libero nelle sue scelte.",
+        "Dio conosce i futuri contingenti solo dopo che essi si sono effettivamente verificati nel corso del tempo e della storia.",
+        "Dio costringe i futuri contingenti a realizzarsi necessariamente per non smentire la propria conoscenza infallibile degli eventi."
+    ], correct:0, explanation:"La conoscenza divina non rende necessario l'evento. L'evento è contingente rispetto alle sue cause mondane, ma è certo rispetto alla visione eterna di Dio, che lo vede come già presente." }
+];
+        const ex2Pool = [
+    { id:201, title:"La Tesi Radicale di Pier Damiani", text:"Nel De divina omnipotentia (1067), il monaco Pier Damiani espone una concezione estrema dell'onnipotenza divina.", question:"Qual è la tesi principale di Pier Damiani riguardo all'onnipotenza di Dio?", options:[
+        "Dio può fare tutto, anche ciò che a noi sembra illogico o impossibile, senza alcun limite di sorta.",
+        "Dio può fare solo ciò che è logicamente possibile e che non implichi alcuna forma di contraddizione.",
+        "Dio non può fare il male perché la sua infinita bontà glielo impedisce in modo assoluto e necessario.",
+        "Dio ha limitato la sua onnipotenza dopo la creazione del mondo per rispettare la libertà delle creature."
+    ], correct:0, explanation:"Damiani sostiene che l'onnipotenza divina non deve avere nessun limite logico. Dio può fare anche ciò che a noi sembra impossibile, come far tornare vergine una donna violata." },
+    { id:202, title:"L'Argomento del 'Non Volere' in Pier Damiani", text:"I teologi prima di Damiani sostenevano che Dio 'non può' fare alcune cose perché 'non vuole' farle. Damiani attacca questa soluzione.", question:"Quale conseguenza inaccettabile deriva, secondo Damiani, dall'equivalenza tra 'non volere' e 'non potere'?", options:[
+        "Che Dio non può fare nulla al di fuori di ciò che sta effettivamente facendo in questo preciso momento.",
+        "Che Dio sarebbe costretto a fare tutto ciò che vuole, senza poter scegliere liberamente cosa realizzare nel mondo.",
+        "Che Dio non sarebbe più libero di scegliere tra le infinite possibilità che avrebbe a disposizione per agire.",
+        "Che l'uomo diventerebbe onnipotente come Dio, potendo fare tutto ciò che vuole senza alcun limite di sorta."
+    ], correct:0, explanation:"Se 'non può' significa solo 'non vuole', allora l'ambito della potenza divina si riduce a ciò che Dio sta facendo ora (se non piove, Dio non può far piovere). Damiani mostra l'assurdità di questa conseguenza." },
+    { id:203, title:"La Distinzione tra Potenza e Volontà", text:"Per comprendere il ragionamento di Damiani, è fondamentale distinguere due concetti spesso confusi.", question:"Come definisce il PDF la differenza tra Potenza e Volontà?", options:[
+        "La Potenza è il serbatoio delle possibilità (ciò che si può fare), la Volontà è l'atto di selezionare quale possibilità realizzare.",
+        "La Potenza è la forza fisica di cui Dio dispone, mentre la Volontà è il desiderio irrazionale che lo muove a compiere le sue azioni.",
+        "La Potenza è sempre limitata dalle leggi della natura e della fisica, mentre la Volontà divina è completamente infinita e illimitata.",
+        "La Potenza e la Volontà sono in realtà la stessa identica cosa in Dio, poiché Egli non può volere nulla se non ciò che già può."
+    ], correct:0, explanation:"In un essere onnipotente, la Potenza è infinitamente più ampia della Volontà. Dio può fare infinite cose, ma sceglie di realizzarne solo alcune." },
+    { id:204, title:"La Critica di Tommaso d'Aquino alla Definizione di Damiani", text:"Tommaso d'Aquino (Summa Theologiae, I, q. 25, a. 3) critica la posizione di Pier Damiani.", question:"Perché Tommaso ritiene che la definizione di onnipotenza di Damiani sia circolare e vuota?", options:[
+        "Perché dire che Dio è onnipotente perché può tutto ciò che può è una tautologia che non spiega nulla delle sue reali possibilità.",
+        "Perché Pier Damiani non cita mai le Sacre Scritture né i Padri della Chiesa a sostegno della propria tesi sull'onnipotenza divina.",
+        "Perché la definizione proposta da Damiani è troppo lunga, complicata e difficile da comprendere anche per i teologi più esperti e preparati.",
+        "Perché secondo Tommaso Dio non è affatto onnipotente nel senso inteso da Damiani, ma soltanto in senso metaforico e puramente morale."
+    ], correct:0, explanation:"Tommaso afferma che la definizione 'Dio può tutto ciò che è possibile alla sua potenza' è un circolo vizioso. Non definisce in modo sostanziale cosa significhi onnipotenza." },
+    { id:205, title:"Il Limite Logico di Tommaso: Il Possibile Assoluto", text:"Tommaso cerca di caratterizzare meglio l'onnipotenza divina concentrandosi sul termine 'possibile'.", question:"Cosa intende Tommaso per 'possibile assoluto'?", options:[
+        "Ciò che non implica contraddizione logica, ovvero quando il predicato non ripugna al soggetto.",
+        "Ciò che è fisicamente possibile secondo le leggi della natura e della fisica aristotelica tradizionale.",
+        "Ciò che Dio ha già deciso di realizzare nel suo piano provvidenziale, escludendo tutto il resto.",
+        "Ciò che l'uomo è in grado di immaginare con la propria fantasia e di rappresentare mentalmente."
+    ], correct:0, explanation:"Per Tommaso, un fatto è possibile se non comporta contraddizione. Ad esempio, 'Socrate siede' è possibile, ma 'l'uomo è un asino' è impossibile in senso assoluto." },
+    { id:206, title:"Il Quadrato Rotondo e la Contraddizione", text:"Tommaso porta esempi concreti per chiarire cosa Dio può e non può fare.", question:"Perché Dio non può creare un 'quadrato rotondo' secondo Tommaso?", options:[
+        "Perché implica una contraddizione logica: la rotondità e la quadratura si escludono a vicenda, e la contraddizione è un 'nulla'.",
+        "Perché la geometria non è considerata una scienza divina e quindi Dio non si occupa affatto delle forme geometriche.",
+        "Perché Dio non si interessa minimamente di forme geometriche, che appartengono soltanto alla mente degli uomini.",
+        "Perché i quadrati rotondi esistono soltanto nella mente umana e non hanno alcuna consistenza ontologica nella realtà."
+    ], correct:0, explanation:"La contraddizione (essere e non essere simultaneamente) non è una 'cosa' che possa essere creata. Non è un difetto della potenza di Dio, ma un limite del 'possibile'." },
+    { id:207, title:"La Differenza tra Miracolo e Contraddizione", text:"Tommaso distingue tra ciò che è impossibile secondo le leggi naturali e ciò che è impossibile in senso assoluto.", question:"Camminare sull'acqua è impossibile secondo le leggi naturali. Come lo considera Tommaso?", options:[
+        "È un miracolo possibile per Dio, perché non implica contraddizione logica (è un possibile particolare).",
+        "È impossibile anche per Dio, perché viola le leggi della fisica e della natura stabilite dal Creatore stesso.",
+        "È una contraddizione logica che non può essere realizzata da nessun essere, nemmeno da Dio onnipotente.",
+        "È soltanto un'illusione ottica che i sensi umani percepiscono in modo distorto, senza alcuna realtà effettiva."
+    ], correct:0, explanation:"Camminare sull'acqua non è logicamente contraddittorio (il predicato non ripugna al soggetto). È impossibile solo rispetto alle leggi ordinarie della natura, ma Dio può compierlo (come con Cristo)." },
+    { id:208, title:"Sintesi delle Due Concezioni di Onnipotenza", text:"Il PDF riassume il dibattito tra Damiani e Tommaso in due visioni contrapposte.", question:"Qual è la differenza fondamentale tra le due concezioni?", options:[
+        "Damiani: onnipotenza senza limiti (radicale); Tommaso: onnipotenza limitata a ciò che è logicamente non contraddittorio (moderata).",
+        "Damiani: onnipotenza limitata alle leggi della natura; Tommaso: onnipotenza completamente illimitata e senza restrizioni.",
+        "Damiani: Dio non può assolutamente fare il male in nessun caso; Tommaso: Dio può fare il male ma sceglie liberamente di non farlo.",
+        "Damiani: Dio è soggetto al tempo e alla storia umana; Tommaso: Dio è eterno e completamente fuori dal tempo e dalla storia."
+    ], correct:0, explanation:"La sintesi del PDF è chiara: Damiani rappresenta la concezione radicale (Dio può fare tutto), Tommaso quella moderata (Dio può fare tutto ciò che è logicamente possibile)." }
+];
+        const ex3Pool = [
+    { id:301, title:"Il Metodo Filosofico nel Dibattito Medievale", text:"Il dibattito su onniscienza e onnipotenza non è solo teologico, ma anche profondamente filosofico.", question:"Quale strumento filosofico è centrale nelle soluzioni di Agostino e Tommaso?", options:[
+        "L'analisi logica dei concetti e la distinzione tra possibilità e contraddizione.",
+        "L'uso esclusivo della fede religiosa, senza alcun ricorso alla ragione filosofica.",
+        "L'esperimento scientifico e l'osservazione empirica dei fenomeni naturali e dei loro meccanismi.",
+        "La retorica e l'arte del persuadere, più che la logica e l'analisi concettuale."
+    ], correct:0, explanation:"Entrambi i pensatori usano la logica e l'analisi concettuale: Agostino distingue tra prevedere e causare; Tommaso distingue tra possibile e contraddittorio." },
+    { id:302, title:"Il Paradosso della Pietra", text:"Il PDF ricorda che il paradosso della pietra è un problema interno alla nozione di onnipotenza.", question:"Come si risolve il paradosso della pietra alla luce della soluzione di Tommaso?", options:[
+        "Il paradosso è un gioco di parole che implica una contraddizione logica, quindi non rientra nelle possibilità di Dio.",
+        "Tommaso afferma che Dio può creare la pietra e sollevarla contemporaneamente, superando ogni contraddizione apparente.",
+        "Il paradosso dimostra in modo definitivo che Dio non è onnipotente nel senso tradizionale e filosofico del termine.",
+        "Il paradosso si risolve dicendo semplicemente che Dio non può creare pietre, perché non è un muratore né un artigiano."
+    ], correct:0, explanation:"La richiesta di creare una pietra che Dio non possa sollevare implica una contraddizione (Dio onnipotente e non onnipotente contemporaneamente). Per Tommaso, Dio non può fare il contraddittorio." },
+    { id:303, title:"L'Eternità come Assenza di Tempo", text:"Sia Agostino che Tommaso concepiscono l'eternità divina in un modo specifico, diverso dal senso comune.", question:"Come va intesa l'eternità di Dio nella tradizione medievale?", options:[
+        "Come assenza totale di tempo, un unico istante simultaneo che abbraccia tutto.",
+        "Come una durata infinita di tempo che scorre parallelamente al nostro tempo umano.",
+        "Come un tempo ciclico che si ripete all'infinito, in un eterno ritorno delle medesime cose.",
+        "Come il futuro ultimo e definitivo dell'umanità, alla fine della storia e del tempo."
+    ], correct:0, explanation:"Il PDF sottolinea con forza: 'l'eternità di Dio... non è durata infinita del tempo. È qualcosa di completamente diverso: è assenza di tempo.'" },
+    { id:304, title:"La Causa Interna della Volontà", text:"Per Tommaso, Dio non è una causa esterna che determina meccanicamente la volontà umana.", question:"Che tipo di causa è Dio rispetto alla volontà umana?", options:[
+        "Una causa interna che dà alla volontà la capacità di volere e di scegliere liberamente.",
+        "Una causa esterna che spinge la volontà dall'esterno come il vento spinge una foglia.",
+        "Una causa occasionale che si limita a osservare le scelte umane senza intervenire in alcun modo.",
+        "Una causa finale che attrae la volontà verso di sé senza che essa se ne accorga minimamente."
+    ], correct:0, explanation:"Tommaso specifica che Dio dà alla volontà la capacità di agire. Non sostituisce la volontà, ma le permette di essere veramente libera." },
+    { id:305, title:"Il Ruolo della Logica in Tommaso", text:"Tommaso utilizza la logica aristotelica per definire i limiti dell'onnipotenza divina.", question:"Perché la logica è fondamentale nella soluzione di Tommaso?", options:[
+        "Perché definisce cosa è 'possibile' e cosa è 'contraddittorio', chiarendo l'ambito dell'onnipotenza.",
+        "Perché permette di dimostrare l'esistenza di Dio con le cinque vie della Somma Teologica.",
+        "Perché confuta in modo definitivo le eresie dei manichei e dei catari diffusesi nel Medioevo.",
+        "Perché sostituisce completamente la fede religiosa con la ragione filosofica, logica e scientifica."
+    ], correct:0, explanation:"Tommaso usa la logica per distinguere i possibili (ciò che non è contraddittorio) dagli impossibili (le contraddizioni). Dio può fare tutti i possibili, ma non le contraddizioni." },
+    { id:306, title:"Il Peccato e la Bontà Divina", text:"Pier Damiani distingue tra la potenza assoluta di Dio e la sua volontà guidata dalla bontà.", question:"Perché Dio 'non può' compiere il male, secondo Damiani?", options:[
+        "Non per mancanza di potenza, ma perché la sua volontà è perpetuamente retta e buona.",
+        "Perché il male non esiste come sostanza autonoma, ma è soltanto privazione del bene.",
+        "Perché Dio è limitato dalla legge morale naturale che egli stesso ha stabilito per gli uomini.",
+        "Perché il male è stato creato liberamente dall'uomo e non da Dio, che ne è del tutto estraneo."
+    ], correct:0, explanation:"Damiani spiega che l'espressione 'Dio non può fare il male' non va intesa letteralmente come un limite di potere, ma come espressione della sua volontà infinita e perfettamente buona." },
+    { id:307, title:"L'Influenza di Agostino e Tommaso", text:"Le soluzioni di Agostino e Tommaso al problema della prescienza hanno influenzato profondamente la teologia e la filosofia successive.", question:"Qual è la differenza principale tra le due soluzioni?", options:[
+        "Agostino insiste sulla non-causalità della prescienza (analogia con la memoria); Tommaso sposta il problema sul piano dell'eternità divina e della causalità interna.",
+        "Agostino nega l'onniscienza divina, mentre Tommaso la afferma con forza e la difende dalle obiezioni mosse dai filosofi pagani e dagli eretici.",
+        "Agostino crede fermamente nel determinismo astrale e fatale, mentre Tommaso difende il libero arbitrio contro ogni forma di necessità esteriore.",
+        "Agostino è un filosofo di formazione greca e platonica, mentre Tommaso è un filosofo cristiano di formazione aristotelica e scolastica."
+    ], correct:0, explanation:"Agostino si concentra sul fatto che la prescienza non causa l'azione. Tommaso, invece, chiarisce che Dio è fuori dal tempo e che la sua causalità sulla volontà è interna, non esterna." },
+    { id:308, title:"Onnipotenza e Libertà Umana", text:"Sia l'onniscienza che l'onnipotenza divina pongono problemi riguardanti la libertà umana.", question:"Qual è la differenza principale nel modo in cui i due attributi minacciano la libertà?", options:[
+        "L'onniscienza sembra rendere necessarie le azioni future; l'onnipotenza sembra rendere Dio responsabile del male o limitare la scelta umana.",
+        "L'onniscienza elimina completamente la libertà umana, mentre l'onnipotenza la rafforza e la rende più salda, sicura, autentica e responsabile.",
+        "L'onnipotenza riguarda soltanto i miracoli e i prodigi divini, mentre l'onniscienza riguarda esclusivamente la morale e i comandamenti della legge divina.",
+        "Nessuno dei due attributi divini ha alcuna implicazione reale per la libertà umana, che rimane sempre intatta, integra, sovrana e responsabile."
+    ], correct:0, explanation:"La prescienza minaccia la libertà perché sembra implicare la necessità degli eventi futuri; l'onnipotenza può minacciarla perché solleva il problema della causalità divina sulle scelte umane." }
+];
+        const matchingPairsPool = [
+    { id:"m1", term:"Prescienza Divina", text:"La capacità di Dio di conoscere in anticipo tutti gli eventi futuri, comprese le scelte umane." },
+    { id:"m2", term:"Futuri Contingenti", text:"Eventi futuri che, dal nostro punto di vista, potrebbero accadere o non accadere." },
+    { id:"m3", term:"Eternità (Assenza di Tempo)", text:"La dimensione divina in cui non c'è successione temporale (prima, durante, dopo), ma un unico istante simultaneo." },
+    { id:"m4", term:"Paradosso della Pietra", text:"Aporia logica che mette in crisi la nozione ingenua di onnipotenza divina." },
+    { id:"m5", term:"Potenza (per Damiani)", text:"Il serbatoio infinito di tutte le possibilità che Dio ha la capacità di realizzare." },
+    { id:"m6", term:"Volontà (per Damiani)", text:"L'atto con cui Dio seleziona quali possibilità trasformare in realtà." },
+    { id:"m7", term:"Contraddizione Logica", text:"Ciò che implica l'essere e il non essere simultaneamente; è un 'nulla' che limita l'onnipotenza." },
+    { id:"m8", term:"Analogia della Memoria", text:"Il paragone di Agostino per cui la prescienza non causa il futuro, come la memoria non causa il passato." },
+    { id:"m9", term:"De libero arbitrio", text:"Opera di Agostino in cui si affronta il problema della prescienza divina e della libertà umana." },
+    { id:"m10", term:"De divina omnipotentia", text:"Saggio di Pier Damiani sulla natura illimitata dell'onnipotenza divina." },
+    { id:"m11", term:"Causa Interna della Volontà", text:"Modo in cui Dio agisce sulla volontà umana, dandole la capacità di scegliere liberamente." },
+    { id:"m12", term:"Summa Theologiae", text:"Opera di Tommaso d'Aquino in cui si affrontano i futuri contingenti e i limiti logici dell'onnipotenza." }
+];
+        const clozeAnswers = {
+    "1": "onniscienza",
+    "2": "libero arbitrio",
+    "3": "obbligare",
+    "4": "tempo",
+    "5": "assenza di tempo",
+    "6": "tutto",
+    "7": "contraddizione",
+    "8": "nulla",
+    "9": "causa",
+    "10": "interna"
+};
+
+        const textualPool = [
+    {
+        id:"t1", title:"De libero arbitrio, III — Previsione e necessità", source:"Agostino d'Ippona, De libero arbitrio, Libro III, 4.10-11",
+        text:"Agostino. Per quale motivo ti sembra che il nostro libero arbitrio sia opposto alla prescienza di Dio? Perché è prescienza ovvero perché è prescienza di Dio? Evodio. Perché è di Dio piuttosto. Agostino. Dunque se tu avessi prescienza che un tizio pecchèrà, non sarebbe necessario che pecchi? Evodio. Anzi sarebbe necessario che pecchi. La mia non sarebbe prescienza se non avessi prescienza di eventi certi. Agostino. Dunque non perché è prescienza di Dio, è necessario che avvengano gli eventi, di cui è presciente, ma perché è prescienza e tale non sarebbe se non preconsce eventi certi.",
+        questions:[
+            { id:"t1q1", question:"Quale distinzione logica introduce Agostino in questo passo?", options:[
+                "Che la necessità deriva dalla natura della prescienza (conoscere eventi certi), non dal fatto che sia Dio a possederla.",
+                "Che Dio non è realmente onnisciente, poiché la sua conoscenza è limitata agli eventi già accaduti e non a quelli futuri.",
+                "Che il libero arbitrio non esiste come facoltà umana autonoma, ma è solo un'illusione creata dai filosofi pagani.",
+                "Che la prescienza di Dio è limitata soltanto alle azioni buone e non si estende mai alle azioni cattive o peccaminose."
+            ], correct:0, explanation:"Agostino mostra che il problema non è 'Dio' in sé, ma la logica della prescienza: se conosci con certezza un evento futuro, quell'evento deve accadere. Tuttavia, ciò non significa che la prescienza lo causi." },
+            { id:"t1q2", question:"Quale conclusione trae Agostino da questa distinzione per salvare il libero arbitrio?", options:[
+                "Che la prescienza non costringe la volontà: Dio prevede le nostre scelte libere, ma non le determina.",
+                "Che la prescienza elimina completamente la libertà, ma questo è un mistero insondabile che va accettato per fede.",
+                "Che l'uomo può cambiare il proprio passato e modificare gli eventi già accaduti attraverso la preghiera.",
+                "Che Dio non sa con certezza cosa accadrà domani, poiché anche la sua conoscenza è immersa nel tempo."
+            ], correct:0, explanation:"Agostino distingue tra 'prevedere' e 'costringere'. La prescienza divina non è la causa dell'azione umana, così come la memoria non causa gli eventi passati." }
+        ]
+    },
+    {
+        id:"t2", title:"Summa Theologiae, I, q. 14 — L'eternità divina", source:"Tommaso d'Aquino, Summa Theologiae, I, q. 14, a. 13",
+        text:"E sebbene i contingenti si attuino uno dopo l'altro, pure Dio non li conosce in loro stessi, successivamente, come li conosciamo noi, tutti insieme. Poiché la sua conoscenza, come anche il suo essere, ha per misura l'eternità e questa, esistendo tutta insieme, chiude nel suo ambito tutti i tempi, come fu dimostrato altrove. Quindi tutte le realtà esistenti nel tempo sono presenti a Dio dall'eternità non solo perché egli ne ha presenti presso di sé i tipi ideali, come dicono alcuni, ma perché il suo sguardo si porta dall'eternità su tutte cose in quanto sono presenti dinanzi a lui.",
+        questions:[
+            { id:"t2q1", question:"Secondo Tommaso, in che modo Dio conosce gli eventi futuri?", options:[
+                "In un unico istante eterno, simultaneamente, perché il suo sguardo abbraccia tutti i tempi.",
+                "In successione temporale, come noi che aspettiamo pazientemente che gli eventi futuri accadano.",
+                "Solo dopo che gli eventi futuri si sono effettivamente verificati nel corso della storia umana.",
+                "Attraverso la mediazione degli angeli, che gli riferiscono tutto ciò che accade nel mondo."
+            ], correct:0, explanation:"Tommaso spiega che Dio non è nel tempo. La sua conoscenza è misurata dall'eternità, che contiene tutti i tempi in un unico 'adesso' simultaneo." },
+            { id:"t2q2", question:"Qual è la conseguenza di questa visione per il problema del libero arbitrio?", options:[
+                "Che la conoscenza divina non rende necessari gli eventi: Dio li vede presenti nella sua eternità, noi li viviamo come contingenti.",
+                "Che gli eventi futuri sono necessari perché Dio li ha già visti da sempre nella sua eternità, e quindi non c'è spazio per la libertà umana.",
+                "Che il libero arbitrio è un'illusione ottica e psicologica, prodotta dalla nostra ignoranza del destino già scritto nei decreti divini.",
+                "Che Dio non può conoscere in alcun modo le scelte umane, perché altrimenti la sua stessa conoscenza le determinerebbe necessariamente."
+            ], correct:0, explanation:"Tommaso sostiene che la visione eterna di Dio non toglie la contingenza agli eventi. Gli eventi sono futuri e contingenti rispetto alle loro cause terrene, ma sono presenti e certi rispetto alla visione divina." }
+        ]
+    },
+    {
+        id:"t3", title:"De divina omnipotentia — La potenza infinita", source:"Pier Damiani, De divina omnipotentia",
+        text:"A questo io rispondo: se Dio non può fare nulla che non voglia [fare], ma [piuttosto] non fa nulla se non ciò che vuole, quindi non può fare assolutamente nulla che non faccia. E così, di conseguenza, per dirla senza mezzi termini, Dio oggi non [fa] piovere perché non può. Non risuscita i deboli per il motivo che non può. Per lo stesso motivo non uccide gli ingiusti. Per lo stesso motivo non libera i beati dalle loro oppressioni. Queste e molte altre cose Dio non le fa, per il motivo che non vuole. E poiché non vuole, non può.",
+        questions:[
+            { id:"t3q1", question:"Qual è la conseguenza assurda che Pier Damiani vuole smascherare in questo passo?", options:[
+                "Che se 'non volere' equivale a 'non potere', allora Dio non può fare nulla al di fuori di ciò che sta facendo ora.",
+                "Che Dio non è realmente onnipotente nel senso tradizionale del termine, ma solo in senso metaforico e relativo.",
+                "Che Dio non può far piovere quando vuole, poiché è limitato dalle leggi naturali che egli stesso ha stabilito.",
+                "Che Dio è limitato dalla natura e dalle sue leggi fisiche, che pongono dei vincoli al suo potere creatore."
+            ], correct:0, explanation:"Damiani mostra che l'equivalenza tra 'non volere' e 'non potere' porta a negare l'onnipotenza divina, perché limiterebbe il potere di Dio a ciò che Egli attualmente fa." },
+            { id:"t3q2", question:"Qual è la soluzione proposta da Damiani per evitare questa conseguenza?", options:[
+                "Distinguere tra la Potenza (infinito serbatoio di possibilità) e la Volontà (scelta di cosa realizzare).",
+                "Affermare che Dio non è realmente onnipotente, ma che il suo potere è limitato dalle leggi della logica.",
+                "Negare che Dio possa compiere miracoli, perché i miracoli violano le leggi immutabili della natura.",
+                "Sostenere che l'uomo è più potente di Dio, perché può scegliere liberamente mentre Dio è vincolato."
+            ], correct:0, explanation:"Damiani distingue Potenza e Volontà: Dio ha la potenza di fare infinite cose, ma sceglie di realizzarne solo alcune. Il suo 'non fare' non implica un 'non potere'." }
+        ]
+    }
+];
+        const argumentPool = [
+    {
+        id:"a1", title:"La Soluzione di Agostino alla Prescienza",
+        description:"Ricostruisci l'argomentazione con cui Agostino cerca di conciliare prescienza divina e libero arbitrio umano.",
+        steps:[
+            { id:"s1", text:"Dio ha la prescienza di tutti gli eventi futuri, comprese le azioni umane." },
+            { id:"s2", text:"Prevedere un evento non significa causarlo o obbligare qualcuno a compierlo." },
+            { id:"s3", text:"Come la memoria non causa gli eventi passati, la prescienza non causa quelli futuri." },
+            { id:"s4", text:"Dio prevede le nostre scelte libere, ma non le determina." },
+            { id:"s5", text:"Pertanto, la prescienza divina e il libero arbitrio umano sono compatibili." }
+        ]
+    },
+    {
+        id:"a2", title:"I Limiti dell'Onnipotenza in Tommaso d'Aquino",
+        description:"Ricostruisci il ragionamento con cui Tommaso definisce i limiti logici dell'onnipotenza divina.",
+        steps:[
+            { id:"s1", text:"Dio è onnipotente, cioè può fare tutto ciò che è 'possibile assoluto'." },
+            { id:"s2", text:"Un fatto è 'possibile assoluto' quando non implica contraddizione logica." },
+            { id:"s3", text:"Una contraddizione (es. un quadrato rotondo) implica essere e non essere simultaneamente." },
+            { id:"s4", text:"La contraddizione è un 'nulla', non una 'cosa' che possa essere creata." },
+            { id:"s5", text:"Dunque Dio non può fare il contraddittorio, non per difetto di potenza, ma perché non è un possibile." }
+        ]
+    }
+];
+        const tfPool = [
+    { id:"tf1", statement:"Per Agostino, la prescienza divina obbliga l'uomo a compiere le azioni che Dio prevede.", correct:false, explanation:"Falso. Agostino sostiene che la prescienza non obbliga: Dio prevede le nostre scelte libere, ma non le causa. La scelta rimane nostra." },
+    { id:"tf2", statement:"Tommaso d'Aquino ritiene che l'eternità divina sia una durata infinita di tempo che scorre in parallelo al nostro.", correct:false, explanation:"Falso. Per Tommaso, l'eternità non è durata infinita, ma assenza totale di tempo. Dio vede tutti gli eventi in un unico istante simultaneo." },
+    { id:"tf3", statement:"Pier Damiani sostiene che Dio può fare anche ciò che a noi sembra logicamente impossibile, come far tornare vergine una donna violata.", correct:true, explanation:"Vero. Damiani è il rappresentante della concezione radicale dell'onnipotenza: Dio non ha limiti, nemmeno quelli logici." },
+    { id:"tf4", statement:"Secondo Tommaso d'Aquino, Dio non può creare un quadrato rotondo perché la contraddizione logica è un 'nulla' e non rientra nei possibili.", correct:true, explanation:"Vero. Tommaso limita l'onnipotenza a ciò che non è contraddittorio. Un quadrato rotondo è un'impossibilità logica, non una 'cosa'." },
+    { id:"tf5", statement:"Per Tommaso d'Aquino, Dio non può creare un essere che sia contemporaneamente uomo e asino, perché sarebbe una contraddizione logica.", correct:true, explanation:"Vero. Tommaso usa proprio questo esempio: 'l'uomo è un asino' è un'impossibilità assoluta, perché il predicato ripugna al soggetto. Dio non può farlo." },
+    { id:"tf6", statement:"Per Tommaso, Dio è una causa esterna che spinge la volontà umana a scegliere in un certo modo, come il vento con una foglia.", correct:false, explanation:"Falso. Tommaso afferma che Dio è una causa interna: dà alla volontà la capacità di volere, ma è la volontà stessa che determina le sue scelte." },
+    { id:"tf7", statement:"Il paradosso della pietra è un problema che riguarda la coerenza interna del concetto di onniscienza divina.", correct:false, explanation:"Falso. Il paradosso della pietra riguarda l'onnipotenza (può Dio creare una pietra che non può sollevare?), non l'onniscienza." },
+    { id:"tf8", statement:"Secondo Agostino, l'analogia tra memoria e prescienza è perfetta: come la memoria non causa il passato, la prescienza non causa il futuro.", correct:true, explanation:"Vero, sebbene il PDF evidenzi che questa analogia sia stata criticata perché Dio non è un semplice osservatore, ma il Creatore." },
+    { id:"tf9", statement:"Per Damiani, se Dio non fa piovere in questo momento, significa che non ha il potere di far piovere.", correct:false, explanation:"Falso. Damiani critica proprio questa conclusione: il 'non fare' non implica il 'non potere'. Dio ha la potenza, ma sceglie di non esercitarla." },
+    { id:"tf10", statement:"Per Tommaso d'Aquino, la prescienza divina e il libero arbitrio umano sono completamente incompatibili e non possono essere conciliati in alcun modo.", correct:false, explanation:"Falso. Tommaso ritiene che siano compatibili: Dio conosce il futuro in modo eterno e simultaneo, senza per questo togliere la contingenza alle scelte umane." }
+];
+
+        function renderEx1() {
+            const container = document.getElementById('ex1-container');
+            if(!container) return;
+            container.innerHTML = state.activeEx1Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
+                    </div>
+                    <div id="ex1-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+        function selectEx1(qId, oIdx, btn) {
+            if (state.ex1Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx1Data.find(d => d.id === qId);
+            state.ex1Answers[qId] = oIdx;
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`ex1-fb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderEx2() {
+            const container = document.getElementById('ex2-container');
+            if(!container) return;
+            container.innerHTML = state.activeEx2Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
+                    </div>
+                    <div id="ex2-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+        function selectEx2(qId, oIdx, btn) {
+            if (state.ex2Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx2Data.find(d => d.id === qId);
+            state.ex2Answers[qId] = oIdx;
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`ex2-fb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderEx3() {
+            const container = document.getElementById('ex3-container');
+            if(!container) return;
+            container.innerHTML = state.activeEx3Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
+                    </div>
+                    <div id="ex3-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>
+            `).join('');
+        }
+        function selectEx3(qId, oIdx, btn) {
+            if (state.ex3Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx3Data.find(d => d.id === qId);
+            state.ex3Answers[qId] = oIdx;
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`ex3-fb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderMatching() {
+            const termsContainer = document.getElementById('matching-terms');
+            const defsContainer = document.getElementById('matching-defs');
+            if(!termsContainer || !defsContainer) return;
+            termsContainer.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
+            defsContainer.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
+        }
+        function selectMatchTerm(termId, btn) {
+            playSound('click'); state.selectedTermId = termId;
+            document.querySelectorAll('#matching-terms button').forEach(b => { if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer"; });
+            btn.className = "w-full text-left p-3 rounded-xl border-2 border-amber-500 bg-amber-950/80 text-xs font-bold text-amber-300 transition-all shadow-lg cursor-pointer";
+            const fb = document.getElementById('matching-feedback');
+            if(fb) { fb.className = "text-xs font-semibold text-amber-400 pt-2"; fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!"; }
+        }
+        function selectMatchDef(matchId, btn) {
+            const fb = document.getElementById('matching-feedback');
+            if(!state.selectedTermId) { playSound('error'); if(fb){ fb.className = "text-xs font-semibold text-rose-400 pt-2"; fb.innerText = "Prima seleziona un termine nella colonna di sinistra!"; } return; }
+            if(state.selectedTermId === matchId) {
+                playSound('correct'); state.matchedPairs[matchId] = true;
+                const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
+                if(termBtn) { termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed"; termBtn.disabled = true; }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed"; btn.disabled = true;
+                if(fb) { fb.className = "text-xs font-bold text-emerald-400 pt-2"; fb.innerText = "✓ Abbinamento corretto e bloccato!"; }
+            } else {
+                playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => { if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer"; }, 1000);
+                if(fb) { fb.className = "text-xs font-bold text-rose-400 pt-2"; fb.innerText = "✗ Abbinamento errato. Riprova!"; }
+            }
+            state.selectedTermId = null; updateGlobalScore();
+        }
+
+        function checkCloze() {
+            if (state.clozeLocked) return;
+            playSound('click');
+            let correct = 0;
+            Object.keys(clozeAnswers).forEach(k => {
+                const el = document.getElementById(`cloze-${k}`);
+                if(el) { el.disabled = true; if(el.value === clozeAnswers[k]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } else { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } }
+            });
+            state.clozeScore = Math.round((correct / Object.keys(clozeAnswers).length) * 100);
+            state.clozeLocked = true;
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) { submitBtn.disabled = true; submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed"; submitBtn.innerText = "Testo Verificato e Bloccato"; }
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) { if(correct === Object.keys(clozeAnswers).length) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (${correct}/${Object.keys(clozeAnswers).length}).`; } else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/${Object.keys(clozeAnswers).length}. Le risposte sono state bloccate.`; } }
+            updateGlobalScore();
+        }
+
+        function renderTextual() {
+            const container = document.getElementById('ex6-container');
+            if(!container) return;
+            container.innerHTML = state.activeTextual.map((passage, pIdx) => `
+                <div class="glass-card p-5 sm:p-6 rounded-2xl space-y-5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-orange-400 bg-orange-950/60 px-2.5 py-1 rounded-md border border-orange-800"><i class="fa-solid fa-quote-right mr-1"></i> Passo ${pIdx+1}: ${passage.title}</span>
+                    </div>
+                    <div class="passage p-4 sm:p-5">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-amber-400/80 mb-2">${passage.source}</p>
+                        <p class="text-sm sm:text-base text-slate-200 leading-relaxed italic">«${passage.text}»</p>
+                    </div>
+                    <div class="space-y-5">
+                        ${passage.questions.map((q, qIdx) => `
+                            <div class="space-y-2">
+                                <div class="font-bold text-slate-100 text-xs sm:text-sm">${pIdx+1}.${qIdx+1} — ${q.question}</div>
+                                <div class="space-y-2" id="tq-${q.id}">
+                                    ${q.options.map((opt, oIdx) => `<button onclick="selectTextual('${q.id}', ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
+                                </div>
+                                <div id="tfb-${q.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+        function selectTextual(qId, oIdx, btn) {
+            if (state.ex6Answers[qId] !== undefined) return;
+            playSound('click');
+            let question = null;
+            state.activeTextual.forEach(p => p.questions.forEach(q => { if(q.id === qId) question = q; }));
+            if (!question) return;
+            state.ex6Answers[qId] = oIdx;
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === question.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === question.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === question.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700"; fb.innerHTML = `<strong>${oIdx === question.correct ? 'Interpretazione Corretta!' : 'Interpretazione Errata e Bloccata.'}</strong> ${question.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderArgument() {
+            const titleEl = document.getElementById('arg-title');
+            const descEl = document.getElementById('arg-description');
+            const poolEl = document.getElementById('arg-pool');
+            const seqEl = document.getElementById('arg-sequence');
+            const submitBtn = document.getElementById('arg-submit');
+            const fbEl = document.getElementById('arg-feedback');
+            if(!poolEl || !seqEl || !state.activeArgument) return;
+
+            titleEl.innerText = state.activeArgument.title;
+            descEl.innerText = state.activeArgument.description;
+
+            poolEl.innerHTML = state.argPool.map(s => `
+                <button onclick="addToSequence('${s.id}')" class="w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 hover:border-cyan-600 transition-all cursor-pointer">
+                    <i class="fa-solid fa-grip-lines text-slate-500 mr-1.5"></i> ${s.text}
+                </button>
+            `).join('');
+
+            if (state.argOrder.length === 0) {
+                seqEl.innerHTML = `<div class="text-xs text-slate-500 text-center py-4 italic">Clicca i passi a sinistra per inserirli qui nell'ordine corretto.</div>`;
+            } else {
+                seqEl.innerHTML = state.argOrder.map((id, idx) => {
+                    const step = state.activeArgument.steps.find(s => s.id === id);
+                    let cls = "w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer flex items-start gap-2.5";
+                    if (state.argSubmitted) {
+                        const correctIds = state.activeArgument.steps.map(s => s.id);
+                        cls += (id === correctIds[idx]) ? " border-emerald-600 bg-emerald-950/60 text-emerald-300" : " border-rose-600 bg-rose-950/60 text-rose-300";
+                    } else {
+                        cls += " border-cyan-700/60 bg-cyan-950/40 text-cyan-100 hover:bg-cyan-900/40";
+                    }
+                    return `<button onclick="removeFromSequence('${id}')" class="${cls}" ${state.argSubmitted ? 'disabled' : ''}>
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-[10px]">${idx+1}</span>
+                        <span>${step.text}</span>
+                    </button>`;
+                }).join('');
+            }
+
+            if (submitBtn) {
+                const allPlaced = state.argOrder.length === state.activeArgument.steps.length;
+                submitBtn.disabled = !allPlaced || state.argSubmitted;
+                submitBtn.className = allPlaced && !state.argSubmitted ? "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer hover:bg-cyan-400 transition-all" : "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed";
+            }
+            if (fbEl && !state.argSubmitted) fbEl.innerText = "";
+        }
+        function addToSequence(id) {
+            if (state.argSubmitted) return;
+            playSound('click');
+            const idx = state.argPool.findIndex(s => s.id === id);
+            if (idx < 0) return;
+            state.argPool.splice(idx, 1);
+            state.argOrder.push(id);
+            renderArgument();
+        }
+        function removeFromSequence(id) {
+            if (state.argSubmitted) return;
+            playSound('click');
+            const idx = state.argOrder.indexOf(id);
+            if (idx < 0) return;
+            state.argOrder.splice(idx, 1);
+            const step = state.activeArgument.steps.find(s => s.id === id);
+            state.argPool.push(step);
+            renderArgument();
+        }
+        function checkArgument() {
+            if (state.argSubmitted || state.argOrder.length !== state.activeArgument.steps.length) return;
+            playSound('click');
+            const correctIds = state.activeArgument.steps.map(s => s.id);
+            let correct = 0;
+            for (let i = 0; i < state.argOrder.length; i++) {
+                if (state.argOrder[i] === correctIds[i]) correct++;
+            }
+            state.argSubmitted = true;
+            state.argCorrectPositions = correct;
+            renderArgument();
+            const fbEl = document.getElementById('arg-feedback');
+            if (fbEl) {
+                if (correct === correctIds.length) { playSound('correct'); fbEl.className = "text-emerald-400 font-bold"; fbEl.innerText = `✓ Sequenza perfetta! Hai ricostruito correttamente l'argomentazione (${correct}/${correctIds.length}).`; }
+                else { playSound('error'); fbEl.className = "text-amber-400 font-bold"; fbEl.innerText = `Posizioni corrette: ${correct}/${correctIds.length}. La sequenza non è ancora del tutto corretta.`; }
+            }
+            updateGlobalScore();
+        }
+
+        function renderTF() {
+            const container = document.getElementById('ex8-container');
+            if(!container) return;
+            container.innerHTML = state.activeTF.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-lime-500/20 text-lime-400 flex items-center justify-center font-bold text-xs">${idx+1}</span>
+                        <p class="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed">${item.statement}</p>
+                    </div>
+                    <div class="flex gap-3 pl-9">
+                        <button onclick="selectTF('${item.id}', true, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-emerald-300 hover:bg-emerald-950/50 hover:border-emerald-600 transition-all cursor-pointer" data-tf="true"><i class="fa-solid fa-check mr-1"></i> Vero</button>
+                        <button onclick="selectTF('${item.id}', false, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-rose-300 hover:bg-rose-950/50 hover:border-rose-600 transition-all cursor-pointer" data-tf="false"><i class="fa-solid fa-xmark mr-1"></i> Falso</button>
+                    </div>
+                    <div id="tfb2-${item.id}" class="hidden p-3 rounded-xl text-xs ml-9"></div>
+                </div>
+            `).join('');
+        }
+        function selectTF(id, value, btn) {
+            if (state.tfAnswers[id] !== undefined) return;
+            playSound('click');
+            const item = state.activeTF.find(d => d.id === id);
+            if (!item) return;
+            state.tfAnswers[id] = value;
+            const container = btn.closest('.glass-card');
+            container.querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); });
+            if (value === item.correct) { playSound('correct'); btn.className = "px-5 py-2 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs font-bold text-emerald-200 cursor-not-allowed"; }
+            else { playSound('error'); btn.className = "px-5 py-2 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs font-bold text-rose-200 cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb2-${id}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                fb.className = value === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 ml-9" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 ml-9";
+                fb.innerHTML = `<strong>${value === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`;
+            }
+            updateGlobalScore();
+        }
+
+        function updateGlobalScore() {
+            let ex1Correct = 0; state.activeEx1Data.forEach(d => { if(state.ex1Answers[d.id] === d.correct) ex1Correct++; });
+            let ex2Correct = 0; state.activeEx2Data.forEach(d => { if(state.ex2Answers[d.id] === d.correct) ex2Correct++; });
+            let ex3Correct = 0; state.activeEx3Data.forEach(d => { if(state.ex3Answers[d.id] === d.correct) ex3Correct++; });
+            let matchCount = Object.keys(state.matchedPairs || {}).length;
+
+            let ex6Total = 0, ex6Correct = 0;
+            state.activeTextual.forEach(p => p.questions.forEach(q => {
+                ex6Total++;
+                if(state.ex6Answers[q.id] === q.correct) ex6Correct++;
+            }));
+
+            let argScore = 0;
+            if (state.argSubmitted) {
+                const totalSteps = state.activeArgument ? state.activeArgument.steps.length : 1;
+                argScore = (state.argCorrectPositions || 0) / totalSteps;
+            }
+
+            let tfCorrect = 0;
+            state.activeTF.forEach(d => { if(state.tfAnswers[d.id] === d.correct) tfCorrect++; });
+
+            const total = Math.round(
+                (ex1Correct / (state.activeEx1Data.length || 1)) * 12 +
+                (ex2Correct / (state.activeEx2Data.length || 1)) * 12 +
+                (ex3Correct / (state.activeEx3Data.length || 1)) * 10 +
+                (matchCount / (state.activeMatchingTerms.length || 1)) * 8 +
+                (state.clozeScore / 100) * 6 +
+                (ex6Total > 0 ? (ex6Correct / ex6Total) * 20 : 0) +
+                argScore * 16 +
+                (tfCorrect / (state.activeTF.length || 1)) * 16
+            );
+
+            const scoreText = document.getElementById('global-score-text');
+            if(scoreText) scoreText.innerText = `${total} / 100`;
+            return total;
+        }
+
+        function updateReport() {
+            const score = updateGlobalScore();
+            const repScore = document.getElementById('report-score');
+            if(repScore) repScore.innerText = `${score} / 100 XP`;
+            const badgeEl = document.getElementById('report-badge');
+            const certScore = document.getElementById('cert-score');
+            const certTitle = document.getElementById('cert-title');
+            if(certScore) certScore.innerText = `${score} / 100 XP`;
+            let titleText = "Novizio di Teologia Razionale";
+            if(score >= 90) titleText = "Maestro di Teologia Razionale e Metafisica Medievale";
+            else if(score >= 75) titleText = "Analista dell'Onniscienza e dell'Onnipotenza Divina";
+            else if(score >= 55) titleText = "Praticante di Filosofia della Religione";
+            if(badgeEl) badgeEl.innerText = titleText;
+            if(certTitle) certTitle.innerText = titleText;
+        }
+
+        function switchTab(tabId, btnElement) {
+            playSound('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+            if(btnElement) { btnElement.classList.add('active'); }
+            else { document.querySelectorAll('.tab-btn').forEach(b => { if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) b.classList.add('active'); }); }
+            if(tabId === 'tab-report') updateReport();
+        }
+
+        function setupRandomQuestions() {
+            state.ex1Answers = {}; state.ex2Answers = {}; state.ex3Answers = {};
+            state.ex6Answers = {}; state.tfAnswers = {};
+            state.matchedPairs = {}; state.clozeScore = 0; state.clozeLocked = false;
+            state.selectedTermId = null; state.argSubmitted = false; state.argCorrectPositions = 0;
+
+            state.activeEx1Data = shuffle(ex1Pool).slice(0, 5);
+            state.activeEx2Data = shuffle(ex2Pool).slice(0, 5);
+            state.activeEx3Data = shuffle(ex3Pool).slice(0, 5);
+
+            const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
+            state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
+            state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
+
+            state.activeTextual = shuffle(textualPool).slice(0, 3);
+
+            const arg = shuffle(argumentPool)[0];
+            state.activeArgument = { ...arg, steps: arg.steps };
+            state.argPool = shuffle(arg.steps);
+            state.argOrder = [];
+
+            state.activeTF = shuffle(tfPool).slice(0, 5);
+
+            Object.keys(clozeAnswers).forEach(k => {
+                const el = document.getElementById(`cloze-${k}`);
+                if(el) { el.disabled = false; el.value = ""; el.className = "bg-slate-800 text-amber-300 rounded px-2 py-1"; }
+            });
+            const submitBtn = document.getElementById('cloze-submit-btn');
+            if(submitBtn) { submitBtn.disabled = false; submitBtn.className = "bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"; submitBtn.innerText = "Verifica e Blocca Testo"; }
+            const clozeFb = document.getElementById('cloze-feedback');
+            if(clozeFb) clozeFb.innerText = "";
+
+            renderEx1(); renderEx2(); renderEx3(); renderMatching();
+            renderTextual(); renderArgument(); renderTF();
+            updateGlobalScore();
+        }
+
+        function resetAll() { setupRandomQuestions(); switchTab('tab-studio'); }
+        function initApp() { setupRandomQuestions(); }
+
+        if (document.readyState === 'interactive' || document.readyState === 'complete') { initApp(); }
+        else { document.addEventListener('DOMContentLoaded', initApp); }
+    </script>
+</body>
+</html>

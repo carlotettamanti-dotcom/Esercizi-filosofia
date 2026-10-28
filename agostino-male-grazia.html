@@ -383,7 +383,7 @@
 ];
         const clozeAnswers = { "1":"manicheismo","2":"ordine","3":"privatio boni","4":"Evodio","5":"teodicea","6":"medio","7":"Pelagio","8":"massa damnata","9":"grazia divina","10":"eternità" };
 
-        // ====== NUOVO: POOL COMMENTO TESTUALE ======
+        // ====== POOL COMMENTO TESTUALE ======
         const textualPool = [
     {
         id:"t1", title:"De natura boni, 3 — Misura, forma e ordine", source:"Agostino d'Ippona, De natura boni, 3",
@@ -418,7 +418,7 @@
         ]
     }
 ];
-        // ====== NUOVO: POOL RICOSTRUZIONE ARGOMENTATIVA ======
+        // ====== POOL RICOSTRUZIONE ARGOMENTATIVA ======
         const argumentPool = [
     {
         id:"a1", title:"L'argomentazione del De libero arbitrio: donde viene il male?",
@@ -443,7 +443,7 @@
         ]
     }
 ];
-        // ====== NUOVO: POOL VERO/FALSO ======
+        // ====== POOL VERO/FALSO ======
         const tfPool = [
     { id:"tf1", statement:"Per Agostino il male è una sostanza autonoma creata da un principio malvagio.", correct:false, explanation:"Falso. Per Agostino il male è privatio boni: non è una sostanza, ma corruzione o mancanza di bene. La tesi della sostanza malvagia è quella manichea." },
     { id:"tf2", statement:"Il manicheismo sostiene che il male non è creato da Dio, ma è un principio autonomo a lui contrapposto.", correct:true, explanation:"Vero. Il dualismo manicheo pone due principi coeterni: il Regno della Luce e il Regno delle Tenebre. Il male non è creato da Dio, ma è autonomo." },
@@ -463,7 +463,7 @@
             if(!container) return;
             container.innerHTML = state.activeEx1Data.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
@@ -492,7 +492,7 @@
             if(!container) return;
             container.innerHTML = state.activeEx2Data.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
@@ -521,7 +521,7 @@
             if(!container) return;
             container.innerHTML = state.activeEx3Data.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">

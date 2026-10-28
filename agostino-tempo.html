@@ -16,13 +16,8 @@
             }
         }
     </script>
-    <!-- Configurazione e Caricamento MathJax per LaTeX -->
     <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        }
-      };
+      window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -33,6 +28,7 @@
         .tab-btn.active { background-color: #0284c7 !important; color: #ffffff !important; border-color: #38bdf8 !important; box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.5); }
         .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .badge-glow { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+        .passage { border-left: 4px solid #f59e0b; background: rgba(15, 23, 42, 0.85); border-radius: 0 0.75rem 0.75rem 0; }
         @media print {
             body * { visibility: hidden; }
             #printable-certificate, #printable-certificate * { visibility: visible; }
@@ -42,7 +38,6 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- Header con Navigation Breadcrumb -->
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-2 text-xs sm:text-sm">
@@ -78,26 +73,34 @@
         </div>
     </header>
 
-    <!-- Navigation Bar -->
     <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
             <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
                 <i class="fa-solid fa-book-open text-amber-400"></i> 0. Quadro Teorico
             </button>
             <button onclick="switchTab('tab-ex1', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-brain text-emerald-400"></i> 1. Presentismo e i Tre Tempi della Mente
+                <i class="fa-solid fa-brain text-emerald-400"></i> 1. Presentismo e i Tre Tempi
             </button>
             <button onclick="switchTab('tab-ex2', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-scale-balanced text-amber-400"></i> 2. Inestensione del Presente e Distentio Animi
+                <i class="fa-solid fa-scale-balanced text-amber-400"></i> 2. Inestensione e Distensio
             </button>
             <button onclick="switchTab('tab-ex3', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-puzzle-piece text-purple-400"></i> 3. Confronti Filosofici e Soluzione del Dilemma
+                <i class="fa-solid fa-puzzle-piece text-purple-400"></i> 3. Confronti e Soluzione
             </button>
             <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti Concettuali
+                <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti
             </button>
             <button onclick="switchTab('tab-cloze', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
-                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Testo Guidato
+                <i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Cloze
+            </button>
+            <button onclick="switchTab('tab-commento', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-quote-right text-orange-400"></i> 6. Commento Testuale
+            </button>
+            <button onclick="switchTab('tab-argomentazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-arrow-down-1-9 text-cyan-400"></i> 7. Ricostruzione
+            </button>
+            <button onclick="switchTab('tab-verofalso', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
+                <i class="fa-solid fa-check-double text-lime-400"></i> 8. Vero/Falso
             </button>
             <button onclick="switchTab('tab-report', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
                 <i class="fa-solid fa-certificate text-yellow-400"></i> Certificato
@@ -105,10 +108,8 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
 
-        <!-- TAB 0: STUDIO -->
         <section id="tab-studio" class="tab-content space-y-8">
             <div class="glass-card p-6 sm:p-8 rounded-2xl border-amber-500/20 relative overflow-hidden">
                 <div class="max-w-3xl space-y-3">
@@ -117,12 +118,11 @@
                     </span>
                     <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-amber-400">Agostino e la Riflessione sul Tempo</h2>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                        Analisi rigorosa del Libro XI delle Confessioni: dal paradosso del tempo al presentismo, dai tre tempi della mente alla formulazione del tempo come distentio animi.
+                        Analisi rigorosa del Libro XI delle Confessioni: dal paradosso del tempo al presentismo, dai tre tempi della mente alla formulazione del tempo come distensio animi.
                     </p>
                 </div>
             </div>
 
-            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-hourglass-start"></i></div>
@@ -130,7 +130,7 @@
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Nel libro XI delle <em>Confessioni</em>, Agostino scrive: <em>"Cos'è il tempo? Se nessuno me lo chiede, lo so; se volessi spiegarlo a chi me lo chiede, non lo so."</em> Esprime la difficoltà di definire un concetto d'uso comune.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-[#t] fa-[#f] fa-timeline"></i></div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-timeline"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">2. Il Presentismo</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Il passato non esiste più (perché è concluso) e il futuro non esiste ancora (perché non è accaduto). L'unica dimensione temporale dotata di reale sussistenza è il <strong>tempo presente</strong>.</p>
                 </div>
@@ -151,47 +151,42 @@
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-feather"></i></div>
-                    <h3 class="font-bold text-lg text-slate-100">6. Distentio Animi (Estensione dello Spirito)</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">La soluzione agostiniana: ciò che misuriamo è la <strong>distentio animi</strong> (distensione dello spirito). Misuriamo le impressioni lasciate dalle cose che trascorrono e che rimangono impresse nella nostra mente.</p>
+                    <h3 class="font-bold text-lg text-slate-100">6. Distensio Animi (Estensione dello Spirito)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">La soluzione agostiniana: ciò che misuriamo è la <strong>distensio animi</strong> (distensione dello spirito). Misuriamo le impressioni lasciate dalle cose che trascorrono e che rimangono impresse nella nostra mente.</p>
                 </div>
             </div>
-
 
             <div class="text-center pt-4">
                 <button onclick="switchTab('tab-ex1')" class="bg-gradient-to-r from-amber-500 to-emerald-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-amber-600 hover:to-emerald-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione Guidata ➔</button>
             </div>
         </section>
 
-        <!-- TAB 1: ESERCIZIO 1 -->
         <section id="tab-ex1" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Presentismo e i Tre Tempi della Mente (5 Quesiti estratti da Pool)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Presentismo e i Tre Tempi della Mente</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Esamina l'irrealtà di passato e futuro, il sillogismo agostiniano e la triade interiore: memoria, visione e attesa. <em>(Le risposte selezionate vengono bloccate subito)</em></p>
             </div>
             <div id="ex1-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 2: ESERCIZIO 2 -->
         <section id="tab-ex2" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Inestensione del Presente e Distentio Animi (5 Quesiti estratti da Pool)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Inestensione del Presente e distensio Animi</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Analizza la scomposizione della durata, il paradosso degli istanti zeri e la misurazione delle impressioni dello spirito. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="ex2-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 3: ESERCIZIO 3 -->
         <section id="tab-ex3" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Confronti Filosofici e Soluzione del Dilemma (5 Quesiti estratti da Pool)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Confronti Filosofici e Soluzione del Dilemma</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Esamina il confronto con Aristotele, l'esempio del Salmo, l'anticipazione di Kant/Bergson e l'Eternità divina. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="ex3-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 4: CLASSIFICAZIONE MATCHING -->
         <section id="tab-classificazione" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Concettuali sulla Filosofia del Tempo (8 Coppie Estratte)</h2>
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Concettuali sulla Filosofia del Tempo</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div id="matching-terms" class="space-y-2.5"></div>
@@ -201,25 +196,64 @@
             </div>
         </section>
 
-        <!-- TAB 5: CLOZE TEST -->
         <section id="tab-cloze" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test sulle Confessioni e la Distentio Animi</h2>
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test sulle Confessioni e la distensio Animi</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
                 <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
-                    La riflessione sul tempo condotta da Agostino nel XI libro delle <select id="cloze-1" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Confessioni">Confessioni</option><option value="Retratazioni">Retratazioni</option></select> prende avvio da una celebre aporia sulla difficoltà di darne una definizione concettuale. Attraverso l'analisi della sussistenza ontologica, Agostino formula la tesi del <select id="cloze-2" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="presentismo">presentismo</option><option value="eterna durata">eterna durata</option></select>: il passato non esiste più e il futuro non esiste ancora. Più che di tre tempi reali nel cosmo, occorre parlare di presente del passato, identificato con la <select id="cloze-3" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="memoria">memoria</option><option value="profezia">profezia</option></select>, presente del presente, coincidente con la <select id="cloze-4" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="visione">visione</option><option value="durata">durata</option></select>, e presente del futuro, dato dall' <select id="cloze-5" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="attesa">attesa</option><option value="storia">storia</option></select>. Analizzando la durata, Agostino dimostra che il presente oggettivo è un <select id="cloze-6" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="istante inesteso">istante inesteso</option><option value="secolo intero">secolo intero</option></select>. Per evitare il paradosso per cui una somma di zeri darebbe durata nulla, Agostino conclude che ciò che misuriamo quando misuriamo il tempo non sono le cose materiali che trascorrono, ma le impressioni rimaste nello spirito. Il tempo è dunque definito come <select id="cloze-7" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="distentio animi">distentio animi</option><option value="motus corporum">motus corporum</option></select>, ovvero un'estensione dell'anima humana. Questo colloca il tempo non nel mondo fisico ma nella <select id="cloze-8" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="soggettività spirituale">soggettività spirituale</option><option value="materia atomica">materia atomica</option></select>, anticipando la filosofia di Kant e distinguendosi dalla definizione cosmica di <select id="cloze-9" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Aristotele">Aristotele</option><option value="Epicuro">Epicuro</option></select>. Rispetto all'Eternità divina immobile, il tempo umano è l'estensione vissuta della <select id="cloze-10" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="coscienza">coscienza</option><option value="natura corporea">natura corporea</option></select>.
+                    La riflessione sul tempo condotta da Agostino nel XI libro delle <select id="cloze-1" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Confessioni">Confessioni</option><option value="Retratazioni">Retratazioni</option></select> prende avvio da una celebre aporia sulla difficoltà di darne una definizione concettuale. Attraverso l'analisi della sussistenza ontologica, Agostino formula la tesi del <select id="cloze-2" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="presentismo">presentismo</option><option value="eterna durata">eterna durata</option></select>: il passato non esiste più e il futuro non esiste ancora. Più che di tre tempi reali nel cosmo, occorre parlare di presente del passato, identificato con la <select id="cloze-3" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="memoria">memoria</option><option value="profezia">profezia</option></select>, presente del presente, coincidente con la <select id="cloze-4" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="visione">visione</option><option value="durata">durata</option></select>, e presente del futuro, dato dall' <select id="cloze-5" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="attesa">attesa</option><option value="storia">storia</option></select>. Analizzando la durata, Agostino dimostra che il presente oggettivo è un <select id="cloze-6" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="istante inesteso">istante inesteso</option><option value="secolo intero">secolo intero</option></select>. Per evitare il paradosso per cui una somma di zeri darebbe durata nulla, Agostino conclude che ciò che misuriamo quando misuriamo il tempo non sono le cose materiali che trascorrono, ma le impressioni rimaste nello spirito. Il tempo è dunque definito come <select id="cloze-7" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="distensio animi">distensio animi</option><option value="motus corporum">motus corporum</option></select>, ovvero un'estensione dell'anima humana. Questo colloca il tempo non nel mondo fisico ma nella <select id="cloze-8" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="soggettività spirituale">soggettività spirituale</option><option value="materia atomica">materia atomica</option></select>, anticipando la filosofia di Kant e distinguendosi dalla definizione cosmica di <select id="cloze-9" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="Aristotele">Aristotele</option><option value="Epicuro">Epicuro</option></select>. Rispetto all'Eternità divina immobile, il tempo umano è l'estensione vissuta della <select id="cloze-10" class="bg-slate-800 text-amber-300 rounded px-2 py-1"><option value="">[?]</option><option value="coscienza">coscienza</option><option value="natura corporea">natura corporea</option></select>.
                 </div>
                 <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
                 <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
             </div>
         </section>
 
-        <!-- TAB 6: REPORT -->
+        <section id="tab-commento" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-orange-400">Esercizio 6: Commento Testuale di Passi Agostiniani</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi con attenzione i passi tratti dalle <em>Confessioni</em> e rispondi alle domande di interpretazione. Non si tratta di ricordare, ma di <strong>comprendere l'argomentazione</strong>. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex6-container" class="space-y-8"></div>
+        </section>
+
+        <section id="tab-argomentazione" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-cyan-400">Esercizio 7: Ricostruzione dell'Argomentazione</h2>
+                <p class="text-xs sm:text-sm text-slate-400">I passi dell'argomentazione agostiniana sono stati mescolati. Clicca i passi nell'ordine logico corretto per ricostruire il ragionamento. Clicca un passo già inserito per rimuoverlo.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl space-y-5">
+                <div id="arg-title" class="font-cinzel text-lg font-bold text-cyan-300"></div>
+                <div id="arg-description" class="text-xs sm:text-sm text-slate-300 italic"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400"><i class="fa-solid fa-shuffle mr-1"></i> Passi da ordinare</h4>
+                        <div id="arg-pool" class="space-y-2.5"></div>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400"><i class="fa-solid fa-list-ol mr-1"></i> La tua sequenza</h4>
+                        <div id="arg-sequence" class="space-y-2.5 min-h-[80px] p-3 rounded-xl border-2 border-dashed border-slate-700/60"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 pt-2">
+                    <button id="arg-submit" onclick="checkArgument()" class="bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">Verifica Sequenza</button>
+                    <div id="arg-feedback" class="text-xs sm:text-sm font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-verofalso" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-lime-400">Esercizio 8: Vero o Falso Ragionato</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Valuta ciascuna affermazione. Dopo la scelta, la risposta viene bloccata e compare la spiegazione. Attenzione: alcune affermazioni sono formulate in modo sottile!</p>
+            </div>
+            <div id="ex8-container" class="space-y-4"></div>
+        </section>
+
         <section id="tab-report" class="tab-content hidden space-y-6">
             <div class="glass-card p-8 rounded-2xl text-center space-y-6">
                 <h2 class="font-cinzel text-2xl font-bold text-amber-400">Valutazione Finale: Agostino e la Riflessione sul Tempo</h2>
                 <div class="text-4xl font-black text-amber-400" id="report-score">0 / 100 XP</div>
                 <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
-                <div class="flex justify-center gap-4">
+                <div class="flex flex-wrap justify-center gap-4">
                     <button onclick="window.print()" class="bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
                     <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
                 </div>
@@ -232,7 +266,7 @@
                     <div id="cert-student-name" class="font-cinzel text-2xl font-bold text-white underline decoration-amber-500 decoration-2">Studente</div>
                     <p class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
                         ha superato con successo la verifica approfondita su:
-                        <br><strong class="text-amber-400">"Agostino d'Ippona: L'Irrealtà del Tempo, Presentismo, I Tre Tempi dell'Animo e la Distentio Animi nelle Confessioni XI"</strong>
+                        <br><strong class="text-amber-400">"Agostino d'Ippona: L'Irrealtà del Tempo, Presentismo, I Tre Tempi dell'Animo e la distensio Animi nelle Confessioni XI"</strong>
                     </p>
                     <div class="flex justify-around items-center pt-6 border-t border-slate-800 text-xs text-slate-400">
                         <div><span>Punteggio Conseguito:</span><div id="cert-score" class="font-bold text-amber-400 text-base">0 / 100 XP</div></div>
@@ -244,7 +278,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
         <a href="index.html" class="hover:text-amber-400 transition-colors">
             <i class="fa-solid fa-house mr-1"></i> Home Portale
@@ -257,20 +290,16 @@
 
     <script>
         const state = { 
-            studentName: "Studente", 
-            audioEnabled: true, 
-            ex1Answers: {}, 
-            ex2Answers: {}, 
-            ex3Answers: {}, 
-            matchedPairs: {}, 
-            clozeScore: 0, 
-            clozeLocked: false,
+            studentName: "Studente", audioEnabled: true, 
+            ex1Answers: {}, ex2Answers: {}, ex3Answers: {}, 
+            ex6Answers: {}, tfAnswers: {},
+            matchedPairs: {}, clozeScore: 0, clozeLocked: false,
             selectedTermId: null,
-            activeEx1Data: [],
-            activeEx2Data: [],
-            activeEx3Data: [],
-            activeMatchingTerms: [],
-            activeMatchingDefs: []
+            activeEx1Data: [], activeEx2Data: [], activeEx3Data: [],
+            activeMatchingTerms: [], activeMatchingDefs: [],
+            activeTextual: [], activeArgument: null,
+            argPool: [], argOrder: [], argSubmitted: false, argCorrectPositions: 0,
+            activeTF: []
         };
 
         let audioCtx = null;
@@ -303,478 +332,294 @@
             return arr;
         }
 
-        // ================= POOL QUESITI DATA =================
+        // ================= POOL QUESITI DATA (opzioni a lunghezza bilanciata) =================
         const ex1Pool = [
-    {
-        "id": 101,
-        "title": "Il Dilemma di Agostino nelle Confessioni",
-        "text": "Nel Libro XI delle Confessioni, Agostino si confronta con il concetto di tempo formulando un pensiero diventato celebre nella storia della filosofia.",
-        "question": "Cosa esprime Agostino quando afferma: 'Se nessuno m'interroga lo so; se volessi spiegarlo a chi m'interroga non lo so'?",
-        "options": [
-            "La difficoltà e complessità nel dare una definizione formale e concettuale di una realtà apparentemente ovvia come il tempo.",
-            "Che il tempo è un'invenzione dei matematici greci priva di valore spirituale.",
-            "Che il tempo non può essere percepito dagli esseri umani ma solo dagli angeli.",
-            "Che la parola 'tempo' non ha alcun significato nella lingua latina."
-        ],
-        "correct": 0,
-        "explanation": "Agostino sottolinea la differenza tra l'uso intuitivo e quotidiano del concetto di tempo e la difficoltà analitica di fornirne una definizione filosofica rigorosa."
-    },
-    {
-        "id": 102,
-        "title": "Definizione di Presentismo",
-        "text": "Nell'analizzare la sussistenza dei tre tempi (passato, presente, futuro), Agostino dimostra che due di essi non esistono nel cosmo oggettivo.",
-        "question": "Qual è il pilastro fondamentale della tesi del presentismo agostiniano?",
-        "options": [
-            "Il passato non esiste più perché è trascorso, il futuro non esiste ancora; soltanto il tempo presente ha reale esistenza.",
-            "Il passato e il futuro sono eterni, mentre il presente è un'illusione dei sensi.",
-            "Tutti e tre i tempi esistono contemporaneamente come linee parallele nello spazio.",
-            "Il tempo non è mai esistito né mai esisterà in alcuna forma."
-        ],
-        "correct": 0,
-        "explanation": "Agostino nota che il passato non è più e il futuro non è ancora; l'unica dimensione temporale che possiede essere reale è il presente."
-    },
-    {
-        "id": 103,
-        "title": "I Tre Tempi dell'Animo Humano",
-        "text": "Poiché passato e futuro non esistono oggettivamente nel mondo esterno, Agostino li riconduce a precisi meccanismi della mente humana.",
-        "question": "Come rinomina Agostino le tre dimensioni temporali nel Libro XI delle Confessioni?",
-        "options": [
-            "Presente del passato (memoria), Presente del presente (visione/percezione), Presente del futuro (attesa).",
-            "Passato del passato, Presente del presente, Futuro del futuro.",
-            "Memoria storica, Concezione cosmica, Profezia divina.",
-            "Tempo fisico, Tempo matematico, Tempo astronomico."
-        ],
-        "correct": 0,
-        "explanation": "Agostino afferma che le tre specie di tempi esistono nell'animo: il presente del passato è la memoria, il presente del presente è la visione, il presente del futuro è l'attesa."
-    },
-    {
-        "id": 104,
-        "title": "Funzione della Memoria nel Tempo",
-        "text": "Quando ricordiamo l'incoronazione di Carlo Magno o la nostra infanzia, ci riferiamo ad eventi passati che non esistono più.",
-        "question": "In che modo l'evento passato sussiste nel tempo presente secondo Agostino?",
-        "options": [
-            "Sussiste mediante l'immagine o la traccia che l'evento ha lasciato impressa nella nostra memoria presente.",
-            "L'evento passato continua a svolgersi fisicamente in un altro pianeta.",
-            "Il passato è memorizzato nella materia delle pietre.",
-            "L'evento passato viene ricreato materialmente ogni volta che lo pronunciamo."
-        ],
-        "correct": 0,
-        "explanation": "Quando rievochiamo l'infanzia passato, vediam la sua immagine nel tempo presente poiché sussiste ancora nella nostra memoria."
-    },
-    {
-        "id": 105,
-        "title": "Funzione dell'Attesa nel Futuro",
-        "text": "Agostino riflette su come possiamo premeditare i nostri atti futuri e formulare previsioni su eventi non ancora accaduti.",
-        "question": "Dove si trova l'atto futuro prima che esso si realizzi nel mondo reale?",
-        "options": [
-            "Nell'attesa o meditazione presente dell'animo umano, dove prefiguriamo l'immagine di ciò che accadrà.",
-            "Nello spazio fisico invisibile situato dietro le stelle.",
-            "Nel tempo passato di un altro individuo.",
-            "Nessuno può avere alcuna attesa o premeditazione del futuro."
-        ],
-        "correct": 0,
-        "explanation": "La meditazione o l'attesa dell'atto futuro è presente nella mente ora, anche se l'atto premeditato non è ancora avvenuto."
-    },
-    {
-        "id": 106,
-        "title": "Il Sillogismo sull'Esistenza dei Tempi",
-        "text": "Agostino costruisce un'argomentazione logica a tre premesse per dimostrare quali tempi abbiano reale sussistenza ontologica.",
-        "question": "Qual è la conclusione del sillogismo: P1 I tempi sono 3; P2 Il passato non è più; P3 Il futuro non è ancora?",
-        "options": [
-            "Esiste propriamente soltanto il tempo presente.",
-            "Esistono solo il passato e il futuro.",
-            "Nessun tempo è reale, neppure il presente.",
-            "Il presente si traduce immediatamente in eternità oggettiva."
-        ],
-        "correct": 0,
-        "explanation": "Avendo escluso la reale sussistenza del passato (non è più) e del futuro (non è ancora), l'unico tempo reale resta il presente."
-    },
-    {
-        "id": 107,
-        "title": "Differenza tra Tempo ed Eternità",
-        "text": "Agostino osserva che se il tempo presente rimanesse fisso senza trascorrere mai nel passato, muterebbe la sua stessa natura.",
-        "question": "Cosa diventerebbe il presente se fosse sempre presente senza tradursi mai in passato?",
-        "options": [
-            "Non sarebbe più tempo, ma diventerebbe Eternità.",
-            "Diventerebbe un secondo futuro.",
-            "Si trasformerebbe in materia solida.",
-            "Diventerebbe una misurazione matematica infinita."
-        ],
-        "correct": 0,
-        "explanation": "Agostino specifica: 'E quanto al presente, se fosse sempre presente senza tradursi in passato, non sarebbe più tempo, ma eternità.'"
-    },
-    {
-        "id": 108,
-        "title": "Tempi Lunghi e Tempi Brevi",
-        "text": "Nel linguaggio comune diciamo che 'cento anni fa è un tempo passato lungo' o 'tra dieci giorni è un tempo futuro breve'.",
-        "question": "Quale aporia rileva Agostino in questo modo di parlare comune?",
-        "options": [
-            "Non si può propriamente attribuire la lunghezza o la brevità a ciò che non esiste (passato e futuro non sono).",
-            "Che cento anni sono in realtà pochissimi rispetto all'universo.",
-            "Che i giorni non possono essere misurati in ore.",
-            "Che il passato è sempre più breve del futuro."
-        ],
-        "correct": 0,
-        "explanation": "Agostino si chiede: come può essere lungo o breve ciò che non è? Il passato non è più e il futuro non è ancora, quindi l'estensione non può risiedere in essi."
-    }
+    { id:101, title:"Il Dilemma di Agostino nelle Confessioni", text:"Nel Libro XI delle Confessioni, Agostino si confronta con il concetto di tempo formulando un pensiero diventato celebre nella storia della filosofia.", question:"Cosa esprime Agostino quando afferma: 'Se nessuno m'interroga lo so; se volessi spiegarlo a chi m'interroga non lo so'?", options:[
+        "La difficoltà e complessità nel dare una definizione formale e concettuale di una realtà apparentemente ovvia come il tempo.",
+        "La certezza che il tempo sia un'invenzione dei matematici greci, priva di qualsiasi valore spirituale o religioso.",
+        "L'impossibilità per gli esseri umani di percepire il tempo, che risulta visibile soltanto agli angeli e a Dio.",
+        "La convinzione che la parola 'tempo' non possieda alcun significato nella lingua latina classica né in quella greca."
+    ], correct:0, explanation:"Agostino sottolinea la differenza tra l'uso intuitivo e quotidiano del concetto di tempo e la difficoltà analitica di fornirne una definizione filosofica rigorosa." },
+    { id:102, title:"Definizione di Presentismo", text:"Nell'analizzare la sussistenza dei tre tempi (passato, presente, futuro), Agostino dimostra che due di essi non esistono nel cosmo oggettivo.", question:"Qual è il pilastro fondamentale della tesi del presentismo agostiniano?", options:[
+        "Il passato non esiste più perché è trascorso, il futuro non esiste ancora; soltanto il tempo presente ha reale esistenza.",
+        "Il passato e il futuro sono eterni e immutabili, mentre il presente è soltanto un'illusione prodotta dai sensi.",
+        "Tutti e tre i tempi esistono contemporaneamente come linee parallele che scorrono nello spazio fisico.",
+        "Il tempo non è mai esistito né mai esisterà in alcuna forma, essendo pura invenzione della mente umana."
+    ], correct:0, explanation:"Agostino nota che il passato non è più e il futuro non è ancora; l'unica dimensione temporale che possiede essere reale è il presente." },
+    { id:103, title:"I Tre Tempi dell'Animo Humano", text:"Poiché passato e futuro non esistono oggettivamente nel mondo esterno, Agostino li riconduce a precisi meccanismi della mente humana.", question:"Come rinomina Agostino le tre dimensioni temporali nel Libro XI delle Confessioni?", options:[
+        "Presente del passato (memoria), Presente del presente (visione/percezione), Presente del futuro (attesa).",
+        "Passato del passato (ricordo), Presente del presente (coscienza), Futuro del futuro (profezia divina).",
+        "Memoria storica (documenti), Concezione cosmica (astri), Profezia divina (rivelazione ai profeti).",
+        "Tempo fisico (orologi), Tempo matematico (calcoli), Tempo astronomico (movimento dei pianeti)."
+    ], correct:0, explanation:"Agostino afferma che le tre specie di tempi esistono nell'animo: il presente del passato è la memoria, il presente del presente è la visione, il presente del futuro è l'attesa." },
+    { id:104, title:"Funzione della Memoria nel Tempo", text:"Quando ricordiamo l'incoronazione di Carlo Magno o la nostra infanzia, ci riferiamo ad eventi passati che non esistono più.", question:"In che modo l'evento passato sussiste nel tempo presente secondo Agostino?", options:[
+        "Sussiste mediante l'immagine o la traccia che l'evento ha lasciato impressa nella nostra memoria presente.",
+        "L'evento passato continua a svolgersi fisicamente in un altro pianeta, in un tempo parallelo al nostro.",
+        "Il passato è conservato nella materia delle pietre e degli oggetti inanimati che ci circondano.",
+        "L'evento passato viene ricreato materialmente ogni volta che lo pronunciamo o lo ricordiamo."
+    ], correct:0, explanation:"Quando rievochiamo l'infanzia passata, vediamo la sua immagine nel tempo presente poiché sussiste ancora nella nostra memoria." },
+    { id:105, title:"Funzione dell'Attesa nel Futuro", text:"Agostino riflette su come possiamo premeditare i nostri atti futuri e formulare previsioni su eventi non ancora accaduti.", question:"Dove si trova l'atto futuro prima che esso si realizzi nel mondo reale?", options:[
+        "Nell'attesa o meditazione presente dell'animo umano, dove prefiguriamo l'immagine di ciò che accadrà.",
+        "Nello spazio fisico invisibile situato dietro le stelle, dove sono conservati tutti i futuri possibili.",
+        "Nel tempo passato di un altro individuo, che ha già vissuto in anticipo l'evento che accadrà.",
+        "In nessun luogo: è impossibile avere qualsiasi attesa o premeditazione degli eventi futuri."
+    ], correct:0, explanation:"La meditazione o l'attesa dell'atto futuro è presente nella mente ora, anche se l'atto premeditato non è ancora avvenuto." },
+    { id:106, title:"Il Sillogismo sull'Esistenza dei Tempi", text:"Agostino costruisce un'argomentazione logica a tre premesse per dimostrare quali tempi abbiano reale sussistenza ontologica.", question:"Qual è la conclusione del sillogismo: P1 I tempi sono 3; P2 Il passato non è più; P3 Il futuro non è ancora?", options:[
+        "Esiste propriamente soltanto il tempo presente, poiché passato e futuro non hanno sussistenza.",
+        "Esistono soltanto il passato e il futuro, mentre il presente è una pura illusione dei sensi.",
+        "Nessun tempo è reale, neppure il presente, che si dissolve non appena viene percepito.",
+        "Il presente si traduce immediatamente in eternità oggettiva, perdendo la sua natura temporale."
+    ], correct:0, explanation:"Avendo escluso la reale sussistenza del passato (non è più) e del futuro (non è ancora), l'unico tempo reale resta il presente." },
+    { id:107, title:"Differenza tra Tempo ed Eternità", text:"Agostino osserva che se il tempo presente rimanesse fisso senza trascorrere mai nel passato, muterebbe la sua stessa natura.", question:"Cosa diventerebbe il presente se fosse sempre presente senza tradursi mai in passato?", options:[
+        "Non sarebbe più tempo, ma diventerebbe Eternità, cioè presenza immobile senza successione.",
+        "Diventerebbe un secondo futuro, aprendo una dimensione temporale parallela a quella ordinaria.",
+        "Si trasformerebbe in materia solida e misurabile con gli strumenti della fisica classica.",
+        "Diventerebbe una misurazione matematica infinita, priva di qualsiasi rapporto con l'esperienza."
+    ], correct:0, explanation:"Agostino specifica: 'E quanto al presente, se fosse sempre presente senza tradursi in passato, non sarebbe più tempo, ma eternità.'" },
+    { id:108, title:"Tempi Lunghi e Tempi Brevi", text:"Nel linguaggio comune diciamo che 'cento anni fa è un tempo passato lungo' o 'tra dieci giorni è un tempo futuro breve'.", question:"Quale aporia rileva Agostino in questo modo di parlare comune?", options:[
+        "Non si può propriamente attribuire la lunghezza o la brevità a ciò che non esiste (passato e futuro non sono).",
+        "Che cento anni sono in realtà pochissimi rispetto all'età complessiva dell'universo e delle galassie.",
+        "Che i giorni non possono essere misurati in ore, poiché manca un'unità di misura universale condivisa.",
+        "Che il passato è sempre più breve del futuro, perché la memoria si affievolisce col passare del tempo."
+    ], correct:0, explanation:"Agostino si chiede: come può essere lungo o breve ciò che non è? Il passato non è più e il futuro non è ancora, quindi l'estensione non può risiedere in essi." }
 ];
         const ex2Pool = [
-    {
-        "id": 201,
-        "title": "Analisi della Durata del Presente",
-        "text": "Agostino tenta di individuare quanto duri il tempo presente provando a dividere un secolo in parti sempre più piccole.",
-        "question": "Cosa dimostra Agostino analizzando un secolo, un anno, un mese o un giorno presente?",
-        "options": [
-            "Che qualsiasi periodo esteso contiene sempre una parte già passata e una parte ancora futura, riducendo il presente a un istante indivisibile.",
-            "Che un secolo è interamente presente in tutti i suoi cento anni.",
-            "Che l'anno presente dura esattamente dodici mesi contemporaneamente.",
-            "Che il giorno è l'unica vera misura estesa del tempo presente."
-        ],
-        "correct": 0,
-        "explanation": "Se è in corso il primo anno di 100, gli altri 99 sono futuri; se è in corso il primo mese, 11 sono futuri. Il presente non può avere estensione estesa."
-    },
-    {
-        "id": 202,
-        "title": "L'Istante Privo di Estensione",
-        "text": "Dopo aver suddiviso l'ora in fugaci particelle di momenti, Agostino giunge alla definizione limite dell'istante presente.",
-        "question": "Qual è la caratteristica dimensionale dell'istante presente secondo Agostino?",
-        "options": [
-            "Il presente non ha alcuna estensione (durata zero), trapassando furtivamente dal futuro al passato.",
-            "L'istante dura esattamente un secondo e mezzo.",
-            "L'istante è un blocco di materia dura tre metri.",
-            "L'istante possiede un'estensione infinita ed eterna."
-        ],
-        "correct": 0,
-        "explanation": "Agostino conclude: 'Solo se si concepisce un periodo non più suddivisibile lo si può dir presente... ma il presente non ha nessuna estensione.'"
-    },
-    {
-        "id": 203,
-        "title": "Il Paradosso della Somma di Zeri",
-        "text": "Se il tempo è una successione o somma di istanti e ciascun istante ha durata pari a zero, nasce un paradosso matematico-filosofico.",
-        "question": "In cosa consiste il paradosso della durata del tempo ($0+0+0...=0$)?",
-        "options": [
-            "Se la materia del tempo è fatta di istanti senza durata, la somma di zeri darebbe durata totale zero, negando l'estensione del tempo.",
-            "Che la somma di zeri dà un numero infinito positivo.",
-            "Che l'addizione non si può applicare alla filosofia.",
-            "Che il tempo è composto soltanto da numeri complessi."
-        ],
-        "correct": 0,
-        "explanation": "Se il tempo è fatto di istanti privi di durata (0), la loro somma oggettiva sarebbe 0; eppure noi avvertiamo durate temporali."
-    },
-    {
-        "id": 204,
-        "title": "Che cosa Misuriamo quando Misuriamo il Tempo?",
-        "text": "Tutti noi confrontiamo intervalli di tempo dicendo che una lezione è durata il doppio di un'altra o che un giorno è più lungo di un'ora.",
-        "question": "Dove e cosa stiamo misurando realmente quando diciamo di misurare il tempo?",
-        "options": [
-            "Misuriamo le impressioni che le cose producono nello spirito umano e che perdurano in esso dopo il loro passaggio.",
-            "Misuriamo il movimento meccanico degli atomi nello spazio vuoto.",
-            "Misuriamo la distanza fisica tra la Terra e il Sole.",
-            "Misuriamo il peso in chilogrammi dell'aria che trascorre."
-        ],
-        "correct": 0,
-        "explanation": "Agostino afferma con certezza: 'È in te, spirito mio, che misuro il tempo. L'impressione che le cose producono in te al loro passaggio e che perdura... è quanto io misuro.'"
-    },
-    {
-        "id": 205,
-        "title": "Definizione di Distentio Animi",
-        "text": "Nel Libro XI (cap. 26), Agostino condensa l'intera sua scoperta sul tempo in una celebre formula latina.",
-        "question": "Qual è la definizione esatta del tempo data da Agostino?",
-        "options": [
-            "Il tempo è 'distentio animi' (estensione o distensione dello spirito stesso).",
-            "Il tempo è 'motus corporum' (il movimento dei corpi celesti).",
-            "Il tempo è 'creatio ex nihilo' (creazione dal nulla).",
-            "Il tempo è 'substantia immaterialis' (sostanza immateriale esterna)."
-        ],
-        "correct": 0,
-        "explanation": "Agostino scrive: 'Ne ho tratto l'opinione che il tempo non sia se non un'estensione (distentio); di che? Sarebbe sorprendente se non fosse un'estensione dello spirito stesso.'"
-    },
-    {
-        "id": 206,
-        "title": "Critica alla Teoria Astronomica del Tempo",
-        "text": "Alcuni filosofi dell'antichità sostenevano che il tempo fosse semplicemente il movimento del Sole, della Luna e delle stelle.",
-        "question": "Come confuta Agostino l'idea che il tempo sia il mero moto degli astri cosmici?",
-        "options": [
-            "Se anche gli astri si fermassero ma un vasaio continuasse a girare la sua ruota, tramonterebbe comunque un tempo misurabile.",
-            "Perché le stelle non si muovono mai nel cielo.",
-            "Perché il Sole è fatto di fuoco e non di tempo.",
-            "Perché il movimento degli astri è troppo veloce per essere misurato."
-        ],
-        "correct": 0,
-        "explanation": "Agostino nota che se i corpi celesti si fermassero ma una ruota continuasse a girare, misureremmo comunque la durata del movimento della ruota nella mente."
-    },
-    {
-        "id": 207,
-        "title": "La Velocità dello Spirito",
-        "text": "Se la misurazione del tempo risiede nello spirito, cosa accade alla percezione della durata se la mente umana cambia ritmo?",
-        "question": "Da cosa dipende la percezione della 'velocità' dello scorrere del tempo?",
-        "options": [
-            "Dalla capacità della nostra mente di distendersi tra memoria del passato, attenzione presente e attesa del futuro.",
-            "Dalla velocità a cui camminiamo lungo la strada.",
-            "Dal numero di orologi meccanici presenti nella stanza.",
-            "Dalla temperatura atmosferica percepita sul corpo."
-        ],
-        "correct": 0,
-        "explanation": "Ciò che misuriamo è la capacità del nostro spirito di contrarsi ed estendersi (distentio) mantenendo le tracce delle impressioni."
-    },
-    {
-        "id": 208,
-        "title": "I 8 Passaggi dell'Argomentazione Agostiniana",
-        "text": "L'argomentazione dell'idealità del tempo nelle Confessioni si sviluppa in una catena logica in 8 passaggi precisi.",
-        "question": "Qual è il punto di arrivo finale di questa sequenza di 8 passaggi?",
-        "options": [
-            "Lo scorrere e la durata del tempo non risiedono nel mondo fisico esterno, ma nella mente/spirito umano.",
-            "Il tempo è una sostanza chimica presente nell'atmosfera.",
-            "Il passato e il futuro sono luoghi fisici raggiungibili con la tecnologia.",
-            "Il tempo presente dura sempre novantanove anni."
-        ],
-        "correct": 0,
-        "explanation": "L'intero percorso agostiniano dimostra che il tempo non è un'entità oggettiva extra-mentale, ma una dimensione interna dell'anima (subiettività/idealità del tempo)."
-    }
+    { id:201, title:"Analisi della Durata del Presente", text:"Agostino tenta di individuare quanto duri il tempo presente provando a dividere un secolo in parti sempre più piccole.", question:"Cosa dimostra Agostino analizzando un secolo, un anno, un mese o un giorno presente?", options:[
+        "Che qualsiasi periodo esteso contiene una parte passata e una futura, riducendo il presente a un istante indivisibile.",
+        "Che un secolo è interamente presente in tutti i suoi cento anni, senza alcuna distinzione tra passato, presente e futuro.",
+        "Che l'anno presente dura esattamente dodici mesi contemporaneamente, tutti quanti vissuti nell'istante attuale.",
+        "Che il giorno è l'unica vera misura estesa del tempo presente, mentre le altre unità sono mere convenzioni sociali."
+    ], correct:0, explanation:"Se è in corso il primo anno di 100, gli altri 99 sono futuri; se è in corso il primo mese, 11 sono futuri. Il presente non può avere estensione estesa." },
+    { id:202, title:"L'Istante Privo di Estensione", text:"Dopo aver suddiviso l'ora in fugaci particelle di momenti, Agostino giunge alla definizione limite dell'istante presente.", question:"Qual è la caratteristica dimensionale dell'istante presente secondo Agostino?", options:[
+        "Il presente non ha alcuna estensione (durata zero), trapassando furtivamente dal futuro al passato.",
+        "L'istante dura esattamente un secondo e mezzo, secondo il sistema sessagesimale babilonese.",
+        "L'istante è un blocco di materia dura tre metri, misurabile con un comune righello.",
+        "L'istante possiede un'estensione infinita ed eterna, coincidendo con la durata dell'universo."
+    ], correct:0, explanation:"Agostino conclude: 'Solo se si concepisce un periodo non più suddivisibile lo si può dir presente... ma il presente non ha nessuna estensione.'" },
+    { id:203, title:"Il Paradosso della Somma di Zeri", text:"Se il tempo è una successione o somma di istanti e ciascun istante ha durata pari a zero, nasce un paradosso matematico-filosofico.", question:"In cosa consiste il paradosso della durata del tempo ($0+0+0...=0$)?", options:[
+        "Se il tempo è fatto di istanti senza durata, la somma di zeri darebbe durata totale zero, negando l'estensione.",
+        "Che la somma di zeri dà un numero infinito positivo, come dimostrato dal calcolo infinitesimale moderno.",
+        "Che l'addizione non si può applicare alla filosofia, essendo un'operazione matematica astratta e settoriale.",
+        "Che il tempo è composto soltanto da numeri complessi, non rappresentabili sulla retta reale dei numeri."
+    ], correct:0, explanation:"Se il tempo è fatto di istanti privi di durata (0), la loro somma oggettiva sarebbe 0; eppure noi avvertiamo durate temporali." },
+    { id:204, title:"Che cosa Misuriamo quando Misuriamo il Tempo?", text:"Tutti noi confrontiamo intervalli di tempo dicendo che una lezione è durata il doppio di un'altra o che un giorno è più lungo di un'ora.", question:"Dove e cosa stiamo misurando realmente quando diciamo di misurare il tempo?", options:[
+        "Misuriamo le impressioni che le cose producono nello spirito umano e che perdurano in esso dopo il loro passaggio.",
+        "Misuriamo il movimento meccanico degli atomi nello spazio vuoto, secondo le leggi fondamentali della fisica.",
+        "Misuriamo la distanza fisica tra la Terra e il Sole, utilizzando il tempo come unità di misura convenzionale.",
+        "Misuriamo il peso in chilogrammi dell'aria che trascorre, attraverso speciali bilance di estrema precisione."
+    ], correct:0, explanation:"Agostino afferma con certezza: 'È in te, spirito mio, che misuro il tempo. L'impressione che le cose producono in te al loro passaggio e che perdura... è quanto io misuro.'" },
+    { id:205, title:"Definizione di distensio Animi", text:"Nel Libro XI (cap. 26), Agostino condensa l'intera sua scoperta sul tempo in una celebre formula latina.", question:"Qual è la definizione esatta del tempo data da Agostino?", options:[
+        "Il tempo è 'distensio animi', cioè un'estensione o distensione dello spirito stesso.",
+        "Il tempo è 'motus corporum', cioè il movimento dei corpi celesti e delle sfere astronomiche.",
+        "Il tempo è 'creatio ex nihilo', cioè la creazione dal nulla da parte della potenza divina.",
+        "Il tempo è 'substantia immaterialis', cioè una sostanza immateriale esterna all'anima umana."
+    ], correct:0, explanation:"Agostino scrive: 'Ne ho tratto l'opinione che il tempo non sia se non un'estensione (distensio); di che? Sarebbe sorprendente se non fosse un'estensione dello spirito stesso.'" },
+    { id:206, title:"Critica alla Teoria Astronomica del Tempo", text:"Alcuni filosofi dell'antichità sostenevano che il tempo fosse semplicemente il movimento del Sole, della Luna e delle stelle.", question:"Come confuta Agostino l'idea che il tempo sia il mero moto degli astri cosmici?", options:[
+        "Se anche gli astri si fermassero ma un vasaio continuasse a girare la sua ruota, tramonterebbe comunque un tempo misurabile.",
+        "Perché le stelle non si muovono mai nel cielo, essendo fisse nella sfera delle stelle fisse aristotelica.",
+        "Perché il Sole è fatto di fuoco e non di tempo, e quindi non può essere considerato misura del tempo.",
+        "Perché il movimento degli astri è troppo veloce per essere misurato dagli strumenti umani più precisi."
+    ], correct:0, explanation:"Agostino nota che se i corpi celesti si fermassero ma una ruota continuasse a girare, misureremmo comunque la durata del movimento della ruota nella mente." },
+    { id:207, title:"La Velocità dello Spirito", text:"Se la misurazione del tempo risiede nello spirito, cosa accade alla percezione della durata se la mente umana cambia ritmo?", question:"Da cosa dipende la percezione della 'velocità' dello scorrere del tempo?", options:[
+        "Dalla capacità della nostra mente di distendersi tra memoria del passato, attenzione presente e attesa del futuro.",
+        "Dalla velocità a cui camminiamo lungo la strada, che modifica la percezione soggettiva della durata.",
+        "Dal numero di orologi meccanici presenti nella stanza, che sincronizzano il nostro ritmo interiore.",
+        "Dalla temperatura atmosferica percepita sul corpo, che influenza la percezione complessiva del tempo."
+    ], correct:0, explanation:"Ciò che misuriamo è la capacità del nostro spirito di contrarsi ed estendersi (distensio) mantenendo le tracce delle impressioni." },
+    { id:208, title:"I 8 Passaggi dell'Argomentazione Agostiniana", text:"L'argomentazione dell'idealità del tempo nelle Confessioni si sviluppa in una catena logica in 8 passaggi precisi.", question:"Qual è il punto di arrivo finale di questa sequenza di 8 passaggi?", options:[
+        "Lo scorrere e la durata del tempo non risiedono nel mondo fisico esterno, ma nella mente/spirito umano.",
+        "Il tempo è una sostanza chimica presente nell'atmosfera, che può essere isolata e misurata in laboratorio.",
+        "Il passato e il futuro sono luoghi fisici raggiungibili con la tecnologia, come dimensioni parallele.",
+        "Il tempo presente dura sempre novantanove anni, indipendentemente dalla percezione soggettiva del tempo."
+    ], correct:0, explanation:"L'intero percorso agostiniano dimostra che il tempo non è un'entità oggettiva extra-mentale, ma una dimensione interna dell'anima (subiettività/idealità del tempo)." }
 ];
         const ex3Pool = [
-    {
-        "id": 301,
-        "title": "Confronto con la Teoria del Tempo di Aristotele",
-        "text": "Nella Fisica, Aristotele aveva definito il tempo come 'la misura del movimento secondo il prima e il poi'.",
-        "question": "In che cosa si differenzia Agostino dalla concezione aristotelica del tempo?",
-        "options": [
-            "Agostino sposta il tempo dal movimento oggettivo dei corpi esterni all'interiorità dello spirito umano (distentio animi).",
-            "Agostino sostiene che il tempo sia un corpo solido tridimensionale.",
-            "Agostino nega che il movimento esista nel mondo fisico.",
-            "Agostino riprende integralmente Aristotele senza alcuna variazione."
-        ],
-        "correct": 0,
-        "explanation": "Mentre per Aristotele il tempo richiede il movimento fisico esterno dei corpi, per Agostino il tempo esiste nell'anima (distentio animi) anche in assenza di moti cosmici."
-    },
-    {
-        "id": 302,
-        "title": "La Cantica del Salmo e la Distentio",
-        "text": "Per spiegare come la mente tiene insieme passato, presente e futuro, Agostino fa l'esempio della recita di un canto o di un salmo che si conosce a memoria.",
-        "question": "Cosa accade nella mente mentre un individuo sta cantando un salmo noto?",
-        "options": [
-            "L'attesa della mente si protende verso le parole da cantare, la memoria trattiene quelle già cantate e la percezione presente unisce le due estensioni.",
-            "La mente dimentica la prima parola non appena pronuncia la seconda.",
-            "Il salmo esiste tutto contemporaneamente prima ancora di essere pensato.",
-            "Il salmo fa fermare il tempo esterno per tutta la sua durata."
-        ],
-        "correct": 0,
-        "explanation": "Mentre canto, l'attesa riguarda ciò che devo ancora cantare, la memoria ciò che ho cantato, e l'attenzione presente fa da perno all'estensione dell'animo."
-    },
-    {
-        "id": 303,
-        "title": "Anticipazione della Filosofia Kantiana",
-        "text": "Molti storici della filosofia vedono nel Libro XI delle Confessioni un'anticipazione della rivoluzione copernicana di Immanuel Kant sul tempo.",
-        "question": "Quale affinità lega la 'distentio animi' agostiniana al concetto di tempo in Kant?",
-        "options": [
-            "Entrambi considerano il tempo non come una cosa in sé reale nel mondo oggettivo, ma come forma a priori / condizione della mente umana.",
-            "Entrambi affermano che il tempo è un fluido invisibile creato dal Sole.",
-            "Entrambi negano la possibilità di ricordare la propria infanzia.",
-            "Entrambi sostengono che il tempo esiste solo nei sogni notturni."
-        ],
-        "correct": 0,
-        "explanation": "Sia Agostino che Kant collocano l'origine della temporalità nella struttura del soggetto conoscente (mente/spirito) e non nelle cose in sé."
-    },
-    {
-        "id": 304,
-        "title": "Il Tempo Prima della Creazione",
-        "text": "Nel Libro XI delle Confessioni, Agostino risponde alla provocazione dei pagani: 'Cosa faceva Dio prima di creare il cielo e la terra?'",
-        "question": "Come risponde Agostino a chi chiede cosa facesse Dio 'prima' della creazione?",
-        "options": [
-            "Prima della creazione non c'era alcun 'prima', poiché il tempo è stato creato insieme al mondo e Dio è nell'Eternità fuori dal tempo.",
-            "Dio stava preparando l'inferno per chi pone domande sciocche.",
-            "Dio era immerso nel tempo futuro riposandosi.",
-            "Dio misurava il tempo con un orologio solare."
-        ],
-        "correct": 0,
-        "explanation": "Agostino spiega che Dio ha creato il tempo insieme al mondo; nell'Eternità divina non vi è un 'prima' o un 'dopo', poiché Dio è al di là del tempo."
-    },
-    {
-        "id": 305,
-        "title": "Incoerenza della Misurazione Empirica Oggettiva",
-        "text": "Se provassimo a misurare il tempo passato o il tempo futuro nel mondo fisico con una riga o un bilanciere, incontremmo un blocco imbattibile.",
-        "question": "Perché è impossibile misurare direttamente il tempo passato o futuro nel cosmo fisico?",
-        "options": [
-            "Perché il passato non è più e il futuro non è ancora; non si può misurare con strumenti fisici ciò che non esiste nello spazio.",
-            "Perché il tempo passato è troppo pesante per le bilance.",
-            "Perché il tempo futuro scorre al contrario.",
-            "Perché gli strumenti fisici si rompono a contatto col tempo."
-        ],
-        "correct": 0,
-        "explanation": "Non si può applicare una riga spaziale a ciò che non ha consistenza attuale (il passato non è più e il futuro non è ancora); misuriamo solo le tracce nella mente."
-    },
-    {
-        "id": 306,
-        "title": "L'Attenzione Presente come Trasformatore",
-        "text": "Agostino descrive la facoltà della 'visio' o attenzione presente della mente come un perno dinamico.",
-        "question": "Qual è il compito dell'attenzione presente nell'esperienza dello scorrere del tempo?",
-        "options": [
-            "Trasferire continuamente il futuro (che attende) nel passato (che ricorda) facendo transitare le impressioni attraverso l'istante del presente.",
-            "Fermare il corso degli eventi fisici impedendo al futuro di accadere.",
-            "Cancellare la memoria degli eventi spiacevoli del passato.",
-            "Trasformare il corpo umano in uno spirito puro immortale."
-        ],
-        "correct": 0,
-        "explanation": "L'attenzione presente fa sì che il futuro proceda verso il passato attraverso il punto di passaggio del presente."
-    },
-    {
-        "id": 307,
-        "title": "Il Tempo nelle Fenomenologia del Novecento (Husserl e Bergson)",
-        "text": "L'analisi agostiniana della distentio animi è stata ripresa nel '900 da Henri Bergson (Tempo della vita vs Tempo della scienza) e Edmund Husserl.",
-        "question": "Quale intuizione agostiniana risuona nel concetto di 'durata reale' o 'tempo interno della coscienza'?",
-        "options": [
-            "L'idea che la vera esperienza temporale sia l'estensione vissuta dalla coscienza qualitativa e non il tempo spazializzato degli orologi.",
-            "Che la scienza sia l'unico modo per comprendere il tempo umano.",
-            "Che gli orologi meccanici siano gli unici custodi del tempo.",
-            "Che la coscienza non abbia alcun ruolo nel percepire il tempo."
-        ],
-        "correct": 0,
-        "explanation": "Bergson e Husserl riprendono Agostino: il tempo reale vissuto dalla coscienza (durata) si distingue dal tempo quantitativo spazializzato della fisica."
-    },
-    {
-        "id": 308,
-        "title": "Sintesi della Soluzione Agostiniana al Dilemma",
-        "text": "Riepilogando la risposta di Agostino alla domanda iniziale 'Cos'è il tempo?'.",
-        "question": "Qual è la risposta filosofica conclusiva fornita nel Libro XI delle Confessioni?",
-        "options": [
-            "Il tempo è una distensione dell'anima humana che connette memoria, attenzione presente e attesa, rendendo misurabile la vita dello spirito.",
-            "Il tempo è un enigma privo di soluzione che la filosofia deve abbandonare.",
-            "Il tempo è la distanza solare tra due solstizi d'estate.",
-            "Il tempo coincide unicamente con l'Eternità immobile di Dio."
-        ],
-        "correct": 0,
-        "explanation": "Agostino risolve l'enigma dimostrando che il tempo trova la sua consistenza e la sua misurabilità nella vita interiore e spirituale del soggetto."
-    }
+    { id:301, title:"Confronto con la Teoria del Tempo di Aristotele", text:"Nella Fisica, Aristotele aveva definito il tempo come 'la misura del movimento secondo il prima e il poi'.", question:"In che cosa si differenzia Agostino dalla concezione aristotelica del tempo?", options:[
+        "Agostino sposta il tempo dal movimento oggettivo dei corpi esterni all'interiorità dello spirito umano (distensio animi).",
+        "Agostino sostiene che il tempo sia un corpo solido tridimensionale, misurabile come qualsiasi oggetto fisico.",
+        "Agostino nega che il movimento esista nel mondo fisico, riducendolo a pura illusione dei sensi umani.",
+        "Agostino riprende integralmente Aristotele senza alcuna variazione, aggiungendo solo esempi tratti dalle Scritture."
+    ], correct:0, explanation:"Mentre per Aristotele il tempo richiede il movimento fisico esterno dei corpi, per Agostino il tempo esiste nell'anima (distensio animi) anche in assenza di moti cosmici." },
+    { id:302, title:"La Cantica del Salmo e la distensio", text:"Per spiegare come la mente tiene insieme passato, presente e futuro, Agostino fa l'esempio della recita di un canto o di un salmo che si conosce a memoria.", question:"Cosa accade nella mente mentre un individuo sta cantando un salmo noto?", options:[
+        "L'attesa si protende verso le parole da cantare, la memoria trattiene quelle già cantate, la percezione presente le unisce.",
+        "La mente dimentica la prima parola non appena pronuncia la seconda, rendendo impossibile seguire l'intero canto.",
+        "Il salmo esiste tutto contemporaneamente prima ancora di essere pensato, come un'idea eterna nella mente divina.",
+        "Il salmo fa fermare il tempo esterno per tutta la sua durata, sospendendo il corso degli eventi cosmici e naturali."
+    ], correct:0, explanation:"Mentre canto, l'attesa riguarda ciò che devo ancora cantare, la memoria ciò che ho cantato, e l'attenzione presente fa da perno all'estensione dell'animo." },
+    { id:303, title:"Anticipazione della Filosofia Kantiana", text:"Molti storici della filosofia vedono nel Libro XI delle Confessioni un'anticipazione della rivoluzione copernicana di Immanuel Kant sul tempo.", question:"Quale affinità lega la 'distensio animi' agostiniana al concetto di tempo in Kant?", options:[
+        "Entrambi considerano il tempo non come una cosa in sé reale, ma come forma a priori o condizione della mente umana.",
+        "Entrambi affermano che il tempo è un fluido invisibile creato dal Sole e diffuso nell'atmosfera terrestre.",
+        "Entrambi negano la possibilità di ricordare la propria infanzia, considerandola un'illusione retrospettiva.",
+        "Entrambi sostengono che il tempo esiste solo nei sogni notturni, come prodotto dell'immaginazione inconscia."
+    ], correct:0, explanation:"Sia Agostino che Kant collocano l'origine della temporalità nella struttura del soggetto conoscente (mente/spirito) e non nelle cose in sé." },
+    { id:304, title:"Il Tempo Prima della Creazione", text:"Nel Libro XI delle Confessioni, Agostino risponde alla provocazione dei pagani: 'Cosa faceva Dio prima di creare il cielo e la terra?'", question:"Come risponde Agostino a chi chiede cosa facesse Dio 'prima' della creazione?", options:[
+        "Prima della creazione non c'era alcun 'prima', poiché il tempo è stato creato insieme al mondo e Dio è fuori dal tempo.",
+        "Dio stava preparando l'inferno per chi pone domande sciocche, secondo un'interpretazione letterale delle Scritture.",
+        "Dio era immerso nel tempo futuro riposandosi, dopo aver creato in anticipo tutte le cose che sarebbero esistite.",
+        "Dio misurava il tempo con un orologio solare, strumento già disponibile prima della creazione del mondo fisico."
+    ], correct:0, explanation:"Agostino spiega che Dio ha creato il tempo insieme al mondo; nell'Eternità divina non vi è un 'prima' o un 'dopo', poiché Dio è al di là del tempo." },
+    { id:305, title:"Incoerenza della Misurazione Empirica Oggettiva", text:"Se provassimo a misurare il tempo passato o il tempo futuro nel mondo fisico con una riga o un bilanciere, incontremmo un blocco imbattibile.", question:"Perché è impossibile misurare direttamente il tempo passato o futuro nel cosmo fisico?", options:[
+        "Perché il passato non è più e il futuro non è ancora; non si può misurare con strumenti fisici ciò che non esiste nello spazio.",
+        "Perché il tempo passato è troppo pesante per le bilance, essendo carico di tutti i ricordi accumulati dalla memoria.",
+        "Perché il tempo futuro scorre al contrario, rendendo impossibile qualsiasi misurazione con gli strumenti ordinari.",
+        "Perché gli strumenti fisici si rompono a contatto col tempo, essendo questo una realtà puramente spirituale."
+    ], correct:0, explanation:"Non si può applicare una riga spaziale a ciò che non ha consistenza attuale (il passato non è più e il futuro non è ancora); misuriamo solo le tracce nella mente." },
+    { id:306, title:"L'Attenzione Presente come Trasformatore", text:"Agostino descrive la facoltà della 'visio' o attenzione presente della mente come un perno dinamico.", question:"Qual è il compito dell'attenzione presente nell'esperienza dello scorrere del tempo?", options:[
+        "Trasferire il futuro nel passato, facendo transitare le impressioni attraverso l'istante presente dell'attenzione.",
+        "Fermare il corso degli eventi fisici impedendo al futuro di accadere, in una sorta di blocco temporale totale.",
+        "Cancellare la memoria degli eventi spiacevoli del passato, sostituendoli con ricordi piacevoli inventati ad hoc.",
+        "Trasformare il corpo umano in uno spirito puro immortale, liberandolo dalla schiavitù del tempo fisico."
+    ], correct:0, explanation:"L'attenzione presente fa sì che il futuro proceda verso il passato attraverso il punto di passaggio del presente." },
+    { id:307, title:"Il Tempo nelle Fenomenologia del Novecento (Husserl e Bergson)", text:"L'analisi agostiniana della distensio animi è stata ripresa nel '900 da Henri Bergson (Tempo della vita vs Tempo della scienza) e Edmund Husserl.", question:"Quale intuizione agostiniana risuona nel concetto di 'durata reale' o 'tempo interno della coscienza'?", options:[
+        "L'idea che la vera esperienza temporale sia l'estensione vissuta dalla coscienza, non il tempo degli orologi.",
+        "Che la scienza sia l'unico modo per comprendere il tempo umano, escludendo qualsiasi approccio filosofico.",
+        "Che gli orologi meccanici siano gli unici custodi del tempo, indipendentemente dalla coscienza umana.",
+        "Che la coscienza non abbia alcun ruolo nel percepire il tempo, che esiste oggettivamente fuori di noi."
+    ], correct:0, explanation:"Bergson e Husserl riprendono Agostino: il tempo reale vissuto dalla coscienza (durata) si distingue dal tempo quantitativo spazializzato della fisica." },
+    { id:308, title:"Sintesi della Soluzione Agostiniana al Dilemma", text:"Riepilogando la risposta di Agostino alla domanda iniziale 'Cos'è il tempo?'.", question:"Qual è la risposta filosofica conclusiva fornita nel Libro XI delle Confessioni?", options:[
+        "Il tempo è una distensione dell'anima che connette memoria, attenzione presente e attesa, rendendo misurabile lo spirito.",
+        "Il tempo è un enigma privo di soluzione che la filosofia deve abbandonare, lasciando spazio solo alla fede religiosa.",
+        "Il tempo è la distanza solare tra due solstizi d'estate, misurata attraverso l'ombra degli gnomoni nei templi.",
+        "Il tempo coincide unicamente con l'Eternità immobile di Dio, essendo la dimensione umana un'illusione dei sensi."
+    ], correct:0, explanation:"Agostino risolve l'enigma dimostrando che il tempo trova la sua consistenza e la sua misurabilità nella vita interiore e spirituale del soggetto." }
 ];
         const matchingPairsPool = [
+    { id:"m1", term:"Confessioni (Libro XI)", text:"Opera in cui Agostino sviluppa la celebre trattazione filosofica sulla natura del tempo." },
+    { id:"m2", term:"Presentismo", text:"Tesi per cui solo il tempo presente esiste realmente, mentre passato e futuro non sono." },
+    { id:"m3", term:"Presente del Passato", text:"Dimensione interiore della Memoria che conserva le immagini degli eventi trascorsi." },
+    { id:"m4", term:"Presente del Presente", text:"Dimensione interiore della Percezione / Visio rivolta all'attenzione dell'istante attuale." },
+    { id:"m5", term:"Presente del Futuro", text:"Dimensione interiore dell'Attesa / Aspettativa che premedita gli atti futuri." },
+    { id:"m6", term:"distensio Animi", text:"La distensione o estensione dello spirito umano in cui risiede la vera natura del tempo." },
+    { id:"m7", term:"Istante Inesteso", text:"Il punto del presente privo di estensione durata che trapassa dal futuro al passato." },
+    { id:"m8", term:"Paradosso degli Zeri", text:"Aporia per cui la somma di istanti con durata pari a 0 darebbe durata temporale zero." },
+    { id:"m9", term:"Eternità Divina", text:"Dimensione immobile di Dio al di là del tempo in cui non vi è prima né dopo." },
+    { id:"m10", term:"Aristotele (Fisica)", text:"Filosofo che definiva il tempo come misura del movimento secondo il prima e il poi." },
+    { id:"m11", term:"Esemplificazione del Salmo", text:"Analogia agostiniana del canto in cui la mente unisce attesa, visione e memoria." },
+    { id:"m12", term:"Idealità del Tempo", text:"Concezione per cui il tempo non è realtà cosmica oggettiva ma forma della mente." }
+];
+        const clozeAnswers = { "1":"Confessioni","2":"presentismo","3":"memoria","4":"visione","5":"attesa","6":"istante inesteso","7":"distensio animi","8":"soggettività spirituale","9":"Aristotele","10":"coscienza" };
+
+        const textualPool = [
     {
-        "id": "m1",
-        "term": "Confessioni (Libro XI)",
-        "text": "Opera in cui Agostino sviluppa la celebre trattazione filosofica sulla natura del tempo."
+        id:"t1", title:"Confessioni, XI, 14 — Il paradosso e i tre tempi", source:"Agostino d'Ippona, Confessioni, Libro XI, 14",
+        text:"E inesatto dire che i tempi sono tre: passato, presente e futuro. Forse sarebbe esatto dire che i tempi sono tre: presente del passato, presente del presente, presente del futuro. Queste tre specie di tempi esistono in qualche modo nell'animo e non le vedo altrove: il presente del passato è la memoria, il presente del presente la visione, il presente del futuro l'attesa.",
+        questions:[
+            { id:"t1q1", question:"Nel passo, come risolve Agostino il problema dell'inesistenza di passato e futuro?", options:[
+                "Riconducendoli a tre dimensioni presenti della mente: la memoria, la visione e l'attesa.",
+                "Sostenendo che il passato e il futuro esistono in un mondo parallelo, separato da quello attuale.",
+                "Affermando che il tempo è solo un'illusione della vista, corretta dalla ragione filosofica.",
+                "Dicendo che il passato e il futuro sono parti integranti dell'eternità immobile di Dio."
+            ], correct:0, explanation:"Agostino sposta il problema dal piano ontologico-cosmico a quello psicologico: passato e futuro non esistono in sé, ma esistono come memoria e attesa nel presente della mente." },
+            { id:"t1q2", question:"Cosa significa che il 'presente del passato' è la memoria?", options:[
+                "Che gli eventi passati sussistono nella mente come immagini o tracce conservate dalla memoria.",
+                "Che la memoria è una sostanza fisica che esiste nel cervello, localizzabile con esami medici specifici.",
+                "Che tutto il passato è sempre presente in ogni momento, indipendentemente dal ricordo personale.",
+                "Che il passato è solo un'illusione della memoria, senza alcun fondamento nella realtà esterna."
+            ], correct:0, explanation:"Il passato non c'è più nella realtà fisica, ma rimane impresso nella nostra mente: quando lo rievochiamo, lo vediamo come immagine nel presente della nostra memoria." }
+        ]
     },
     {
-        "id": "m2",
-        "term": "Presentismo",
-        "text": "Tesi per cui solo il tempo presente esiste realmente, mentre passato e futuro non sono."
+        id:"t2", title:"Confessioni, XI, 20 — L'istante inesteso", source:"Agostino d'Ippona, Confessioni, Libro XI, 20",
+        text:"Ma quest'unica ora si svolge essa stessa attraverso fugaci particelle: quanto ne volò via, è passato; quanto le resta, futuro. Solo se si concepisce un periodo di tempo che non sia più possibile suddividere in parti anche minutissime di momenti, lo si può dire presente. Ma esso trapassa così furtivamente dal futuro al passato, che non ha una pur minima durata. Qualunque durata avesse, diventerebbe divisibile in passato e futuro; ma il presente non ha nessuna estensione.",
+        questions:[
+            { id:"t2q1", question:"Perché il presente, per Agostino, non può avere una durata?", options:[
+                "Perché qualsiasi durata sarebbe divisibile in una parte passata e una futura, quindi non sarebbe più totalmente presente.",
+                "Perché il tempo è un'illusione creata dai filosofi per spiegare i fenomeni naturali in modo sistematico.",
+                "Perché l'ora dura esattamente sessanta minuti e non si può dividere in parti più piccole senza perdere significato.",
+                "Perché Dio ha stabilito che il presente duri solo un secondo, secondo un decreto imperscrutabile e insindacabile."
+            ], correct:0, explanation:"Se il presente avesse una durata, potrebbe essere diviso: parte di esso sarebbe già passata e parte ancora futura. L'unico presente puro è un istante indivisibile e senza estensione." },
+            { id:"t2q2", question:"Quale paradosso deriva dal fatto che il presente non ha estensione?", options:[
+                "Se il tempo è fatto di istanti di durata zero, la somma totale sarebbe zero, eppure noi percepiamo durate reali.",
+                "Che il tempo è infinito perché fatto di infiniti istanti, ciascuno dei quali ha una durata positiva misurabile.",
+                "Che il passato è più reale del presente, essendo già accaduto e quindi fissato stabilmente nella memoria.",
+                "Che il tempo non può essere misurato in nessun modo, essendo privo di qualsiasi consistenza ontologica."
+            ], correct:0, explanation:"Se il tempo fosse composto da istanti privi di durata (0), la somma sarebbe 0+0+0...=0. Questo paradosso spinge Agostino a cercare la soluzione nella mente (distensio animi)." }
+        ]
     },
     {
-        "id": "m3",
-        "term": "Presente del Passato",
-        "text": "Dimensione interiore della Memoria che conserva le immagini degli eventi trascorsi."
-    },
-    {
-        "id": "m4",
-        "term": "Presente del Presente",
-        "text": "Dimensione interiore della Percezione / Visio rivolta all'attenzione dell'istante attuale."
-    },
-    {
-        "id": "m5",
-        "term": "Presente del Futuro",
-        "text": "Dimensione interiore dell'Attesa / Aspettativa che premedita gli atti futuri."
-    },
-    {
-        "id": "m6",
-        "term": "Distentio Animi",
-        "text": "La distensione o estensione dello spirito umano in cui risiede la vera natura del tempo."
-    },
-    {
-        "id": "m7",
-        "term": "Istante Inesteso",
-        "text": "Il punto del presente privo di estensione durata che trapassa dal futuro al passato."
-    },
-    {
-        "id": "m8",
-        "term": "Paradosso di Zeno / Zeri",
-        "text": "Aporia per cui la somma di istanti con durata pari a 0 darebbe durata temporale zero."
-    },
-    {
-        "id": "m9",
-        "term": "Eternità Divina",
-        "text": "Dimensione immobile di Dio al di là del tempo in cui non vi è prima né dopo."
-    },
-    {
-        "id": "m10",
-        "term": "Aristotele (Fisica)",
-        "text": "Filosofo che definiva il tempo come misura del movimento secondo il prima e il poi."
-    },
-    {
-        "id": "m11",
-        "term": "Esemplificazione del Salmo",
-        "text": "Analogia agostiniana del canto in cui la mente unisce attesa, visione e memoria."
-    },
-    {
-        "id": "m12",
-        "term": "Idealità del Tempo",
-        "text": "Concezione per cui il tempo non è realtà cosmica oggettiva ma forma della mente."
+        id:"t3", title:"Confessioni, XI, 27 — La distensio animi", source:"Agostino d'Ippona, Confessioni, Libro XI, 27",
+        text:"È in te, spirito mio, che misuro il tempo. L'impressione che le cose producono in te al loro passaggio e che perdura dopo il loro passaggio, è quanto io misuro, presente, e non già le cose che passano, per produrla; è quanto misuro, allorché misuro il tempo.",
+        questions:[
+            { id:"t3q1", question:"Cosa intende Agostino quando dice che misuriamo il tempo 'nello spirito'?", options:[
+                "Che misuriamo le impressioni o tracce che gli eventi lasciano nella nostra mente, non gli eventi fisici esterni.",
+                "Che il tempo si misura con gli orologi dell'anima, strumenti spirituali invisibili agli occhi del corpo.",
+                "Che lo spirito è fatto di una sostanza materiale misurabile, come l'aria o l'acqua che ci circonda.",
+                "Che il tempo esiste solo quando gli altri ci dicono che ore sono, in un accordo sociale condiviso e convenzionale."
+            ], correct:0, explanation:"L'impressione che le cose producono in noi permane dopo il loro passaggio: è questa traccia spirituale che possiamo misurare e confrontare, non l'evento passato in sé." },
+            { id:"t3q2", question:"Quale definizione del tempo è contenuta in questo passo?", options:[
+                "Il tempo è l'estensione dello spirito stesso (distensio animi), come Agostino afferma nelle Confessioni.",
+                "Il tempo è il movimento del Sole e delle stelle nel cielo (motus corporum), secondo la fisica aristotelica.",
+                "Il tempo è una somma di istanti infiniti che si succedono senza interruzione, come insegna Zenone.",
+                "Il tempo è l'eternità di Dio, nella quale tutti gli eventi sono simultaneamente presenti in un unico istante."
+            ], correct:0, explanation:"Nel capitolo 26-27 Agostino conclude: 'Ne ho tratto l'opinione che il tempo non sia se non un'estensione... dello spirito stesso', cioè la distensio animi." }
+        ]
     }
 ];
-        const clozeAnswers = {
-    "1": "Confessioni",
-    "2": "presentismo",
-    "3": "memoria",
-    "4": "visione",
-    "5": "attesa",
-    "6": "istante inesteso",
-    "7": "distentio animi",
-    "8": "soggettività spirituale",
-    "9": "Aristotele",
-    "10": "coscienza"
-};
+        const argumentPool = [
+    {
+        id:"a1", title:"L'Idealità del Tempo (i 8 passaggi delle Confessioni)",
+        description:"Ricostruisci il percorso argomentativo con cui Agostino dimostra che il tempo non è nel mondo fisico, ma nella mente.",
+        steps:[
+            { id:"s1", text:"Il passato non esiste più e il futuro non esiste ancora." },
+            { id:"s2", text:"Quindi esiste solo il presente, mentre passato e futuro esistono solo nella mente." },
+            { id:"s3", text:"Il passato è dato dalla memoria, il futuro dall'attesa (i tre presenti dell'animo)." },
+            { id:"s4", text:"Se esiste solo il presente, come possiamo misurare il tempo?" },
+            { id:"s5", text:"Il tempo sembra misurabile perché pensato come una somma o successione di istanti." },
+            { id:"s6", text:"Ma gli istanti non hanno durata (durata zero), quindi la somma darebbe zero." },
+            { id:"s7", text:"Eppure il tempo ha una durata e noi percepiamo intervalli più lunghi o più brevi." },
+            { id:"s8", text:"Allora lo scorrere del tempo non risiede nel mondo esterno, ma nella nostra mente (distensio animi)." }
+        ]
+    },
+    {
+        id:"a2", title:"Il Sillogismo del Presentismo",
+        description:"Ricostruisci il semplice sillogismo con cui Agostino dimostra che solo il presente ha reale esistenza.",
+        steps:[
+            { id:"s1", text:"I tempi tradizionalmente considerati sono tre: passato, presente e futuro." },
+            { id:"s2", text:"Il passato non esiste perché è già trascorso (non è più)." },
+            { id:"s3", text:"Il futuro non esiste perché non è ancora accaduto (non è ancora)." },
+            { id:"s4", text:"Dunque l'unica dimensione temporale che esiste realmente è il presente." }
+        ]
+    }
+];
+        const tfPool = [
+    { id:"tf1", statement:"Per Agostino, il passato e il futuro esistono realmente nel mondo fisico, mentre il presente è solo un'illusione.", correct:false, explanation:"Falso. È l'esatto contrario: Agostino sostiene il presentismo, per cui solo il presente esiste, mentre passato e futuro sono solo nella mente (memoria e attesa)." },
+    { id:"tf2", statement:"La definizione agostiniana del tempo è 'distensio animi', cioè un'estensione dello spirito o della mente.", correct:true, explanation:"Vero. Nelle Confessioni XI, Agostino conclude che il tempo non è una sostanza esterna, ma una distensione dell'anima che misura le proprie impressioni." },
+    { id:"tf3", statement:"Secondo Agostino, un'ora presente ha una durata oggettiva di 60 minuti tutti contemporaneamente presenti.", correct:false, explanation:"Falso. Se l'ora è in corso, i minuti già trascorsi sono passati e quelli che verranno sono futuri. Il presente è sempre un istante inesteso." },
+    { id:"tf4", statement:"Per Agostino, i tre tempi dell'animo sono memoria (presente del passato), visione (presente del presente) e attesa (presente del futuro).", correct:true, explanation:"Vero. Questa è la tripartizione psicologica con cui Agostino spiega come passato e futuro possano 'esistere' nel presente della mente." },
+    { id:"tf5", statement:"Agostino concorda con Aristotele nel definire il tempo esclusivamente come movimento dei corpi celesti.", correct:false, explanation:"Falso. Agostino critica questa visione: anche se gli astri si fermassero, il tempo continuerebbe a scorrere nella nostra mente (es. la ruota del vasaio)." },
+    { id:"tf6", statement:"Il paradosso degli istanti zeri mette in crisi l'idea che il tempo sia una semplice somma di istanti senza durata.", correct:true, explanation:"Vero. Se gli istanti hanno durata zero, la loro somma sarebbe zero; eppure percepiamo durate. Questo spinge Agostino verso la soluzione mentale." },
+    { id:"tf7", statement:"Per Agostino, quando misuriamo il tempo, misuriamo gli eventi fisici stessi che accadono nel mondo.", correct:false, explanation:"Falso. Misuriamo le impressioni che gli eventi lasciano nella nostra mente (distensio animi), non gli eventi in sé, che sono già passati o non ancora accaduti." },
+    { id:"tf8", statement:"Agostino afferma che Dio è immerso nel tempo e lo vive come noi esseri umani.", correct:false, explanation:"Falso. Dio è nell'Eternità, una dimensione fuori dal tempo, dove non c'è né passato né futuro, ma un eterno presente immobile." },
+    { id:"tf9", statement:"L'analisi di Agostino sul tempo anticipa per certi versi la concezione kantiana del tempo come forma della sensibilità interna del soggetto.", correct:true, explanation:"Vero. Entrambi collocano il tempo non nelle cose in sé, ma nella struttura del soggetto conoscente (la mente/anima)." },
+    { id:"tf10", statement:"Secondo Agostino, se il presente non si traducesse mai in passato, smetterebbe di essere tempo e diventerebbe eternità.", correct:true, explanation:"Vero. Agostino scrive esplicitamente: 'se fosse sempre presente senza tradursi in passato, non sarebbe più tempo, ma eternità'." }
+];
 
         function renderEx1() {
             const container = document.getElementById('ex1-container');
             if(!container) return;
             container.innerHTML = state.activeEx1Data.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="ex1-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
             `).join('');
         }
-
         function selectEx1(qId, oIdx, btn) {
             if (state.ex1Answers[qId] !== undefined) return;
             playSound('click');
             const item = state.activeEx1Data.find(d => d.id === qId);
             state.ex1Answers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`ex1-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -783,55 +628,27 @@
             if(!container) return;
             container.innerHTML = state.activeEx2Data.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="ex2-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
             `).join('');
         }
-
         function selectEx2(qId, oIdx, btn) {
             if (state.ex2Answers[qId] !== undefined) return;
             playSound('click');
             const item = state.activeEx2Data.find(d => d.id === qId);
             state.ex2Answers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`ex2-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -840,55 +657,27 @@
             if(!container) return;
             container.innerHTML = state.activeEx3Data.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="ex3-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
             `).join('');
         }
-
         function selectEx3(qId, oIdx, btn) {
             if (state.ex3Answers[qId] !== undefined) return;
             playSound('click');
             const item = state.activeEx3Data.find(d => d.id === qId);
             state.ex3Answers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`ex3-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -899,97 +688,203 @@
             termsContainer.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
             defsContainer.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
         }
-
         function selectMatchTerm(termId, btn) {
-            playSound('click');
-            state.selectedTermId = termId;
-
-            document.querySelectorAll('#matching-terms button').forEach(b => {
-                if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
-            });
+            playSound('click'); state.selectedTermId = termId;
+            document.querySelectorAll('#matching-terms button').forEach(b => { if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer"; });
             btn.className = "w-full text-left p-3 rounded-xl border-2 border-amber-500 bg-amber-950/80 text-xs font-bold text-amber-300 transition-all shadow-lg cursor-pointer";
-
             const fb = document.getElementById('matching-feedback');
-            if(fb) {
-                fb.className = "text-xs font-semibold text-amber-400 pt-2";
-                fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!";
-            }
+            if(fb) { fb.className = "text-xs font-semibold text-amber-400 pt-2"; fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!"; }
         }
-
         function selectMatchDef(matchId, btn) {
             const fb = document.getElementById('matching-feedback');
-            if(!state.selectedTermId) {
-                playSound('error');
-                if(fb) {
-                    fb.className = "text-xs font-semibold text-rose-400 pt-2";
-                    fb.innerText = "Prima seleziona un termine nella colonna di sinistra!";
-                }
-                return;
-            }
-
+            if(!state.selectedTermId) { playSound('error'); if(fb){ fb.className = "text-xs font-semibold text-rose-400 pt-2"; fb.innerText = "Prima seleziona un termine nella colonna di sinistra!"; } return; }
             if(state.selectedTermId === matchId) {
-                playSound('correct');
-                state.matchedPairs[matchId] = true;
-
+                playSound('correct'); state.matchedPairs[matchId] = true;
                 const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
-                if(termBtn) {
-                    termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed";
-                    termBtn.disabled = true;
-                }
-                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed";
-                btn.disabled = true;
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-emerald-400 pt-2";
-                    fb.innerText = "✓ Abbinamento corretto e bloccato!";
-                }
+                if(termBtn) { termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed"; termBtn.disabled = true; }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed"; btn.disabled = true;
+                if(fb) { fb.className = "text-xs font-bold text-emerald-400 pt-2"; fb.innerText = "✓ Abbinamento corretto e bloccato!"; }
             } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
-                setTimeout(() => {
-                    if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer";
-                }, 1000);
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-rose-400 pt-2";
-                    fb.innerText = "✗ Abbinamento errato. Riprova!";
-                }
+                playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => { if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer"; }, 1000);
+                if(fb) { fb.className = "text-xs font-bold text-rose-400 pt-2"; fb.innerText = "✗ Abbinamento errato. Riprova!"; }
             }
-            state.selectedTermId = null;
-            updateGlobalScore();
+            state.selectedTermId = null; updateGlobalScore();
         }
 
         function checkCloze() {
             if (state.clozeLocked) return;
             playSound('click');
             let correct = 0;
-            const keys = Object.keys(clozeAnswers);
-            keys.forEach(k => {
+            Object.keys(clozeAnswers).forEach(k => {
                 const el = document.getElementById(`cloze-${k}`);
-                if(el) {
-                    el.disabled = true;
-                    if(el.value === clozeAnswers[k]) { 
-                        correct++; 
-                        el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    } else { 
-                        el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    }
-                }
+                if(el) { el.disabled = true; if(el.value === clozeAnswers[k]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } else { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } }
             });
-            state.clozeScore = Math.round((correct / keys.length) * 100);
+            state.clozeScore = Math.round((correct / Object.keys(clozeAnswers).length) * 100);
             state.clozeLocked = true;
-
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed";
-                submitBtn.innerText = "Testo Verificato e Bloccato";
+            if(submitBtn) { submitBtn.disabled = true; submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed"; submitBtn.innerText = "Testo Verificato e Bloccato"; }
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) { if(correct === Object.keys(clozeAnswers).length) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (${correct}/${Object.keys(clozeAnswers).length}).`; } else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/${Object.keys(clozeAnswers).length}. Le risposte sono state bloccate.`; } }
+            updateGlobalScore();
+        }
+
+        function renderTextual() {
+            const container = document.getElementById('ex6-container');
+            if(!container) return;
+            container.innerHTML = state.activeTextual.map((passage, pIdx) => `
+                <div class="glass-card p-5 sm:p-6 rounded-2xl space-y-5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-orange-400 bg-orange-950/60 px-2.5 py-1 rounded-md border border-orange-800"><i class="fa-solid fa-quote-right mr-1"></i> Passo ${pIdx+1}: ${passage.title}</span>
+                    </div>
+                    <div class="passage p-4 sm:p-5">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-amber-400/80 mb-2">${passage.source}</p>
+                        <p class="text-sm sm:text-base text-slate-200 leading-relaxed italic">«${passage.text}»</p>
+                    </div>
+                    <div class="space-y-5">
+                        ${passage.questions.map((q, qIdx) => `
+                            <div class="space-y-2">
+                                <div class="font-bold text-slate-100 text-xs sm:text-sm">${pIdx+1}.${qIdx+1} — ${q.question}</div>
+                                <div class="space-y-2" id="tq-${q.id}">
+                                    ${q.options.map((opt, oIdx) => `<button onclick="selectTextual('${q.id}', ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
+                                </div>
+                                <div id="tfb-${q.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+        function selectTextual(qId, oIdx, btn) {
+            if (state.ex6Answers[qId] !== undefined) return;
+            playSound('click');
+            let question = null;
+            state.activeTextual.forEach(p => p.questions.forEach(q => { if(q.id === qId) question = q; }));
+            if (!question) return;
+            state.ex6Answers[qId] = oIdx;
+            const qContainer = btn.closest('.space-y-2');
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === question.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === question.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === question.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700"; fb.innerHTML = `<strong>${oIdx === question.correct ? 'Interpretazione Corretta!' : 'Interpretazione Errata e Bloccata.'}</strong> ${question.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderArgument() {
+            const titleEl = document.getElementById('arg-title');
+            const descEl = document.getElementById('arg-description');
+            const poolEl = document.getElementById('arg-pool');
+            const seqEl = document.getElementById('arg-sequence');
+            const submitBtn = document.getElementById('arg-submit');
+            const fbEl = document.getElementById('arg-feedback');
+            if(!poolEl || !seqEl || !state.activeArgument) return;
+
+            titleEl.innerText = state.activeArgument.title;
+            descEl.innerText = state.activeArgument.description;
+
+            poolEl.innerHTML = state.argPool.map(s => `
+                <button onclick="addToSequence('${s.id}')" class="w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 hover:border-cyan-600 transition-all cursor-pointer">
+                    <i class="fa-solid fa-grip-lines text-slate-500 mr-1.5"></i> ${s.text}
+                </button>
+            `).join('');
+
+            if (state.argOrder.length === 0) {
+                seqEl.innerHTML = `<div class="text-xs text-slate-500 text-center py-4 italic">Clicca i passi a sinistra per inserirli qui nell'ordine corretto.</div>`;
+            } else {
+                seqEl.innerHTML = state.argOrder.map((id, idx) => {
+                    const step = state.activeArgument.steps.find(s => s.id === id);
+                    let cls = "w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer flex items-start gap-2.5";
+                    if (state.argSubmitted) {
+                        const correctIds = state.activeArgument.steps.map(s => s.id);
+                        cls += (id === correctIds[idx]) ? " border-emerald-600 bg-emerald-950/60 text-emerald-300" : " border-rose-600 bg-rose-950/60 text-rose-300";
+                    } else {
+                        cls += " border-cyan-700/60 bg-cyan-950/40 text-cyan-100 hover:bg-cyan-900/40";
+                    }
+                    return `<button onclick="removeFromSequence('${id}')" class="${cls}" ${state.argSubmitted ? 'disabled' : ''}>
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-[10px]">${idx+1}</span>
+                        <span>${step.text}</span>
+                    </button>`;
+                }).join('');
             }
 
-            const fb = document.getElementById('cloze-feedback');
-            if(fb) {
-                if(correct === keys.length) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (${correct}/${keys.length}).`; }
-                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/${keys.length}. Le risposte sono state bloccate.`; }
+            if (submitBtn) {
+                const allPlaced = state.argOrder.length === state.activeArgument.steps.length;
+                submitBtn.disabled = !allPlaced || state.argSubmitted;
+                submitBtn.className = allPlaced && !state.argSubmitted ? "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer hover:bg-cyan-400 transition-all" : "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed";
+            }
+            if (fbEl && !state.argSubmitted) fbEl.innerText = "";
+        }
+        function addToSequence(id) {
+            if (state.argSubmitted) return;
+            playSound('click');
+            const idx = state.argPool.findIndex(s => s.id === id);
+            if (idx < 0) return;
+            state.argPool.splice(idx, 1);
+            state.argOrder.push(id);
+            renderArgument();
+        }
+        function removeFromSequence(id) {
+            if (state.argSubmitted) return;
+            playSound('click');
+            const idx = state.argOrder.indexOf(id);
+            if (idx < 0) return;
+            state.argOrder.splice(idx, 1);
+            const step = state.activeArgument.steps.find(s => s.id === id);
+            state.argPool.push(step);
+            renderArgument();
+        }
+        function checkArgument() {
+            if (state.argSubmitted || state.argOrder.length !== state.activeArgument.steps.length) return;
+            playSound('click');
+            const correctIds = state.activeArgument.steps.map(s => s.id);
+            let correct = 0;
+            for (let i = 0; i < state.argOrder.length; i++) {
+                if (state.argOrder[i] === correctIds[i]) correct++;
+            }
+            state.argSubmitted = true;
+            state.argCorrectPositions = correct;
+            renderArgument();
+            const fbEl = document.getElementById('arg-feedback');
+            if (fbEl) {
+                if (correct === correctIds.length) { playSound('correct'); fbEl.className = "text-emerald-400 font-bold"; fbEl.innerText = `✓ Sequenza perfetta! Hai ricostruito correttamente l'argomentazione (${correct}/${correctIds.length}).`; }
+                else { playSound('error'); fbEl.className = "text-amber-400 font-bold"; fbEl.innerText = `Posizioni corrette: ${correct}/${correctIds.length}. La sequenza non è ancora del tutto corretta.`; }
+            }
+            updateGlobalScore();
+        }
+
+        function renderTF() {
+            const container = document.getElementById('ex8-container');
+            if(!container) return;
+            container.innerHTML = state.activeTF.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-lime-500/20 text-lime-400 flex items-center justify-center font-bold text-xs">${idx+1}</span>
+                        <p class="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed">${item.statement}</p>
+                    </div>
+                    <div class="flex gap-3 pl-9">
+                        <button onclick="selectTF('${item.id}', true, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-emerald-300 hover:bg-emerald-950/50 hover:border-emerald-600 transition-all cursor-pointer" data-tf="true"><i class="fa-solid fa-check mr-1"></i> Vero</button>
+                        <button onclick="selectTF('${item.id}', false, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-rose-300 hover:bg-rose-950/50 hover:border-rose-600 transition-all cursor-pointer" data-tf="false"><i class="fa-solid fa-xmark mr-1"></i> Falso</button>
+                    </div>
+                    <div id="tfb2-${item.id}" class="hidden p-3 rounded-xl text-xs ml-9"></div>
+                </div>
+            `).join('');
+        }
+        function selectTF(id, value, btn) {
+            if (state.tfAnswers[id] !== undefined) return;
+            playSound('click');
+            const item = state.activeTF.find(d => d.id === id);
+            if (!item) return;
+            state.tfAnswers[id] = value;
+            const container = btn.closest('.glass-card');
+            container.querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); });
+            if (value === item.correct) { playSound('correct'); btn.className = "px-5 py-2 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs font-bold text-emerald-200 cursor-not-allowed"; }
+            else { playSound('error'); btn.className = "px-5 py-2 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs font-bold text-rose-200 cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb2-${id}`);
+            if (fb) {
+                fb.classList.remove('hidden');
+                fb.className = value === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 ml-9" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 ml-9";
+                fb.innerHTML = `<strong>${value === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`;
             }
             updateGlobalScore();
         }
@@ -1000,11 +895,32 @@
             let ex3Correct = 0; state.activeEx3Data.forEach(d => { if(state.ex3Answers[d.id] === d.correct) ex3Correct++; });
             let matchCount = Object.keys(state.matchedPairs || {}).length;
 
-            const total = Math.round((ex1Correct / (state.activeEx1Data.length || 1))*30 + 
-                                     (ex2Correct / (state.activeEx2Data.length || 1))*25 + 
-                                     (ex3Correct / (state.activeEx3Data.length || 1))*20 + 
-                                     (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
-                                     (state.clozeScore/100)*10);
+            let ex6Total = 0, ex6Correct = 0;
+            state.activeTextual.forEach(p => p.questions.forEach(q => {
+                ex6Total++;
+                if(state.ex6Answers[q.id] === q.correct) ex6Correct++;
+            }));
+
+            let argScore = 0;
+            if (state.argSubmitted) {
+                const totalSteps = state.activeArgument ? state.activeArgument.steps.length : 1;
+                argScore = (state.argCorrectPositions || 0) / totalSteps;
+            }
+
+            let tfCorrect = 0;
+            state.activeTF.forEach(d => { if(state.tfAnswers[d.id] === d.correct) tfCorrect++; });
+
+            const total = Math.round(
+                (ex1Correct / (state.activeEx1Data.length || 1)) * 12 +
+                (ex2Correct / (state.activeEx2Data.length || 1)) * 12 +
+                (ex3Correct / (state.activeEx3Data.length || 1)) * 10 +
+                (matchCount / (state.activeMatchingTerms.length || 1)) * 8 +
+                (state.clozeScore / 100) * 6 +
+                (ex6Total > 0 ? (ex6Correct / ex6Total) * 20 : 0) +
+                argScore * 16 +
+                (tfCorrect / (state.activeTF.length || 1)) * 16
+            );
+
             const scoreText = document.getElementById('global-score-text');
             if(scoreText) scoreText.innerText = `${total} / 100`;
             return total;
@@ -1018,12 +934,10 @@
             const certScore = document.getElementById('cert-score');
             const certTitle = document.getElementById('cert-title');
             if(certScore) certScore.innerText = `${score} / 100 XP`;
-
             let titleText = "Novizio della Filosofia del Tempo";
             if(score >= 90) titleText = "Maestro di Filosofia del Tempo e delle Confessioni";
-            else if(score >= 75) titleText = "Analista del Tempo e della Distentio Animi";
+            else if(score >= 75) titleText = "Analista del Tempo e della distensio Animi";
             else if(score >= 55) titleText = "Praticante di Fenomenologia Agostiniana";
-
             if(badgeEl) badgeEl.innerText = titleText;
             if(certTitle) certTitle.innerText = titleText;
         }
@@ -1032,32 +946,18 @@
             playSound('click');
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
             const targetTab = document.getElementById(tabId);
             if(targetTab) targetTab.classList.remove('hidden');
-
-            if(btnElement) {
-                btnElement.classList.add('active');
-            } else {
-                const navButtons = document.querySelectorAll('.tab-btn');
-                navButtons.forEach(b => {
-                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
-                        b.classList.add('active');
-                    }
-                });
-            }
-
+            if(btnElement) { btnElement.classList.add('active'); }
+            else { document.querySelectorAll('.tab-btn').forEach(b => { if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) b.classList.add('active'); }); }
             if(tabId === 'tab-report') updateReport();
         }
 
         function setupRandomQuestions() {
-            state.ex1Answers = {}; 
-            state.ex2Answers = {}; 
-            state.ex3Answers = {}; 
-            state.matchedPairs = {}; 
-            state.clozeScore = 0;
-            state.clozeLocked = false;
-            state.selectedTermId = null;
+            state.ex1Answers = {}; state.ex2Answers = {}; state.ex3Answers = {};
+            state.ex6Answers = {}; state.tfAnswers = {};
+            state.matchedPairs = {}; state.clozeScore = 0; state.clozeLocked = false;
+            state.selectedTermId = null; state.argSubmitted = false; state.argCorrectPositions = 0;
 
             state.activeEx1Data = shuffle(ex1Pool).slice(0, 5);
             state.activeEx2Data = shuffle(ex2Pool).slice(0, 5);
@@ -1067,45 +967,34 @@
             state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
             state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
 
-            const keys = Object.keys(clozeAnswers);
-            keys.forEach(k => {
+            state.activeTextual = shuffle(textualPool).slice(0, 3);
+
+            const arg = shuffle(argumentPool)[0];
+            state.activeArgument = { ...arg, steps: arg.steps };
+            state.argPool = shuffle(arg.steps);
+            state.argOrder = [];
+
+            state.activeTF = shuffle(tfPool).slice(0, 5);
+
+            Object.keys(clozeAnswers).forEach(k => {
                 const el = document.getElementById(`cloze-${k}`);
-                if(el) {
-                    el.disabled = false;
-                    el.value = "";
-                    el.className = "bg-slate-800 text-amber-300 rounded px-2 py-1";
-                }
+                if(el) { el.disabled = false; el.value = ""; el.className = "bg-slate-800 text-amber-300 rounded px-2 py-1"; }
             });
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.className = "bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer";
-                submitBtn.innerText = "Verifica e Blocca Testo";
-            }
+            if(submitBtn) { submitBtn.disabled = false; submitBtn.className = "bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"; submitBtn.innerText = "Verifica e Blocca Testo"; }
             const clozeFb = document.getElementById('cloze-feedback');
             if(clozeFb) clozeFb.innerText = "";
 
-            renderEx1(); 
-            renderEx2(); 
-            renderEx3(); 
-            renderMatching();
+            renderEx1(); renderEx2(); renderEx3(); renderMatching();
+            renderTextual(); renderArgument(); renderTF();
             updateGlobalScore();
         }
 
-        function resetAll() {
-            setupRandomQuestions();
-            switchTab('tab-studio');
-        }
+        function resetAll() { setupRandomQuestions(); switchTab('tab-studio'); }
+        function initApp() { setupRandomQuestions(); }
 
-        function initApp() {
-            setupRandomQuestions();
-        }
-
-        if (document.readyState === 'interactive' || document.readyState === 'complete') {
-            initApp();
-        } else {
-            document.addEventListener('DOMContentLoaded', initApp);
-        }
+        if (document.readyState === 'interactive' || document.readyState === 'complete') { initApp(); }
+        else { document.addEventListener('DOMContentLoaded', initApp); }
     </script>
 </body>
 </html>
