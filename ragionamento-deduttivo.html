@@ -16,15 +16,10 @@
             }
         }
     </script>
-<!-- Configurazione e Caricamento MathJax per LaTeX -->
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>
+      window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -33,6 +28,7 @@
         .tab-btn.active { background-color: #0284c7 !important; color: #ffffff !important; border-color: #38bdf8 !important; box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.5); }
         .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .badge-glow { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+        #cloze-content select { font-family: 'Plus Jakarta Sans', sans-serif; }
         @media print {
             body * { visibility: hidden; }
             #printable-certificate, #printable-certificate * { visibility: visible; }
@@ -42,7 +38,6 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-slate-950">
 
-    <!-- Header con Navigation Breadcrumb -->
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-2 text-xs sm:text-sm">
@@ -56,7 +51,6 @@
                 <span class="text-slate-600">/</span>
                 <span class="text-sky-400 font-bold">Ragionamento Deduttivo</span>
             </div>
-
             <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
                 <div class="relative flex items-center">
                     <i class="fa-solid fa-user-graduate absolute left-3 text-slate-400 text-xs"></i>
@@ -78,7 +72,6 @@
         </div>
     </header>
 
-    <!-- Navigation Bar -->
     <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
             <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
@@ -93,7 +86,6 @@
             <button onclick="switchTab('tab-condizioni', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
                 <i class="fa-solid fa-key text-purple-400"></i> 3. Condizioni Nec. & Suff.
             </button>
-
             <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
                 <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti Concettuali
             </button>
@@ -106,17 +98,15 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
 
-        <!-- TAB 0: STUDIO -->
         <section id="tab-studio" class="tab-content space-y-8">
             <div class="glass-card p-6 sm:p-8 rounded-2xl border-sky-500/20 relative overflow-hidden">
                 <div class="max-w-3xl space-y-3">
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-sky-500/10 text-sky-400 border border-sky-500/30">
                         <i class="fa-solid fa-shield-halved mr-1.5"></i> Modulo 2: Il Ragionamento Deduttivo
                     </span>
-                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-sky-400">Inferenza Certa e Trasmissione della Verità (Truth-Preserving)</h2>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-sky-400">Inferenza Certa e Trasmissione della Verità</h2>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
                         Il ragionamento deduttivo fa discendere la propria conclusione dalle premesse in modo necessario e autosufficiente. Se le premesse sono vere e la forma è valida, la conclusione è <strong>necessariamente vera</strong> (proprietà <em>truth-preserving</em>).
                     </p>
@@ -127,30 +117,22 @@
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-sky-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-landmark"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">1. I 3 Principi della Logica</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>Identità</strong> ($A=A$), <strong>Non-Contraddizione</strong> (non si può dire $A$ e 
-$\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è o vero o falso, senza terze opzioni).</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>Identità</strong>, <strong>Non-Contraddizione</strong> (non si può dire A e non-A assieme) e <strong>Terzo Escluso</strong> (un enunciato è o vero o falso, senza terze opzioni).</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-shapes"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">2. Enunciati Categorici</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Proposizioni $S 	\text{ è } P$. Quantità: <em>Universali / Particolari</em>. Qualità: <em>Affermative / Negative</em>. Quadrato aristotelico: A (Tutti), E/B (Nessuno), I (Qualche), O (Qualche non).</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Proposizioni S è P. Quantità: <em>Universali / Particolari</em>. Qualità: <em>Affermative / Negative</em>. Quadrato aristotelico: A (Tutti), E (Nessuno), I (Qualche), O (Qualche non).</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-amber-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-diagram-project"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">3. Struttura dei Sillogismi</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Premessa Maggiore, Premessa Minore e Conclusione. Eliminazione del <em>Termine Medio</em>. Sillogismi categorici, disgiuntivi ($A \lor B$) e ipotetici puri ($A 
-\rightarrow B, B 
-\rightarrow C  \Rightarrow A 
-\rightarrow C$).</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Premessa Maggiore, Premessa Minore e Conclusione. Eliminazione del <em>Termine Medio</em>. Sillogismi categorici, disgiuntivi e ipotetici puri.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-code-branch"></i></div>
                     <h3 class="font-bold text-lg text-slate-100">4. Modus Ponens & Tollens</h3>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>MP:</strong> $A 
-\rightarrow B, A  \Rightarrow B$. <strong>MT:</strong> $A 
-\rightarrow B, 
-\neg B  \Rightarrow
-\neg A$. Attenzione alle fallacie: <em>Affermazione del Conseguente</em> e <em>Negazione dell'Antecedente</em>.</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><strong>MP:</strong> Se A allora B, A, quindi B. <strong>MT:</strong> Se A allora B, non B, quindi non A. Attenzione alle fallacie: <em>Affermazione del Conseguente</em> e <em>Negazione dell'Antecedente</em>.</p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-rose-500/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-check-double"></i></div>
@@ -169,36 +151,32 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             </div>
         </section>
 
-        <!-- TAB 1: SILLOGISMI -->
         <section id="tab-sillogismi" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Sillogismi Aristotelici, Disgiuntivi e Ipotetici (5 Quesiti)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Sillogismi Aristotelici, Disgiuntivi e Ipotetici</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Valuta le inferenze deduttive, identifica il termine medio e la conclusione corretta. <em>(Le risposte selezionate vengono bloccate subito)</em></p>
             </div>
             <div id="sillogismi-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 2: MODUS PONENS & TOLLENS -->
         <section id="tab-modus" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Modus Ponens, Modus Tollens ed Errori Formali (5 Quesiti)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Modus Ponens, Modus Tollens ed Errori Formali</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Distingui tra ragionamenti validi (MP/MT) e fallacie formali (Affermazione del conseguente, Negazione antecedente). <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="modus-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 3: CONDIZIONI NECESSARIE E SUFFICIENTI -->
         <section id="tab-condizioni" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Condizioni Necessarie e Sufficienti e Conseguenza Logica (5 Quesiti)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Condizioni Necessarie e Sufficienti e Conseguenza Logica</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Analizza le relazioni logiche tra antecedente e conseguente in contesti reali. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="condizioni-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 4: CLASSIFICAZIONE MATCHING -->
         <section id="tab-classificazione" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti della Logica Deduttiva (8 Coppie)</h2>
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti della Logica Deduttiva</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div id="matching-terms" class="space-y-2.5"></div>
@@ -208,30 +186,25 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             </div>
         </section>
 
-        <!-- TAB 5: CLOZE TEST -->
         <section id="tab-cloze" class="tab-content hidden space-y-6">
             <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test sulla Logica Deduttiva</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
-                <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
-                    Il ragionamento deduttivo è <select id="cloze-1" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="truth-preserving">truth-preserving</option><option value="probabile">probabile</option></select>, ovvero conserva la verità dalle premesse alla conclusione. Aristotele ha introdotto tre principi fondativi: identità, terzo escluso e <select id="cloze-2" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="non-contraddizione">non-contraddizione</option><option value="sufficienza">sufficienza</option></select>. Nei sillogismi categorici, la premessa maggiore e minore condividono il termine <select id="cloze-3" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="medio">medio</option><option value="estremo">estremo</option></select>, che scompare nella conclusione. Un ragionamento condizionale che afferma l'antecedente per derivare il conseguente si chiama <select id="cloze-4" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="Modus Ponens">Modus Ponens</option><option value="Modus Tollens">Modus Tollens</option></select>, mentre quello che nega il conseguente per negare l'antecedente è detto <select id="cloze-5" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="Modus Tollens">Modus Tollens</option><option value="Modus Ponens">Modus Ponens</option></select>. Se invece si afferma il conseguente, si commette una <select id="cloze-6" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="fallacia formale">fallacia formale</option><option value="deduzione valida">deduzione valida</option></select>. A livello epistemico, la <select id="cloze-7" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="validità">validità</option><option value="verità">verità</option></select> riguarda il rispetto formale delle regole inferenziali, mentre la <select id="cloze-8" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="verità">verità</option><option value="validità">validità</option></select> riguarda i fatti del mondo reale. Un argomento sia valido sia con premesse vere si definisce <select id="cloze-9" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="corretto">corretto</option><option value="induttivo">induttivo</option></select>. Infine, una condizione senza la quale un evento non può accadere è detta <select id="cloze-10" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="necessaria">necessaria</option><option value="sufficiente">sufficiente</option></select>.
-                </div>
+                <div id="cloze-content" class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200"></div>
                 <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-sky-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
                 <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
             </div>
         </section>
 
-        <!-- TAB 6: REPORT -->
         <section id="tab-report" class="tab-content hidden space-y-6">
             <div class="glass-card p-8 rounded-2xl text-center space-y-6">
                 <h2 class="font-cinzel text-2xl font-bold text-sky-400">Valutazione Finale: Ragionamento Deduttivo</h2>
                 <div class="text-4xl font-black text-sky-400" id="report-score">0 / 100 XP</div>
                 <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
-                <div class="flex justify-center gap-4">
+                <div class="flex flex-wrap justify-center gap-4">
                     <button onclick="window.print()" class="bg-sky-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
                     <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
                 </div>
             </div>
-
             <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-sky-500/40 text-center space-y-6">
                 <div class="border-2 border-dashed border-sky-500/30 p-8 rounded-2xl space-y-6">
                     <div class="font-cinzel text-sky-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Deduttiva</div>
@@ -251,7 +224,6 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
         <a href="index.html" class="hover:text-sky-400 transition-colors">
             <i class="fa-solid fa-house mr-1"></i> Home Portale
@@ -264,20 +236,13 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
 
     <script>
         const state = { 
-            studentName: "Studente", 
-            audioEnabled: true, 
-            sillAnswers: {}, 
-            modusAnswers: {}, 
-            condAnswers: {}, 
-            matchedPairs: {}, 
-            clozeScore: 0, 
-            clozeLocked: false,
+            studentName: "Studente", audioEnabled: true, 
+            sillAnswers: {}, modusAnswers: {}, condAnswers: {}, 
+            matchedPairs: {}, clozeScore: 0, clozeLocked: false,
             selectedTermId: null,
-            activeSillData: [],
-            activeModusData: [],
-            activeCondData: [],
-            activeMatchingTerms: [],
-            activeMatchingDefs: []
+            activeSillData: [], activeModusData: [], activeCondData: [],
+            activeMatchingTerms: [], activeMatchingDefs: [],
+            currentCloze: null
         };
 
         let audioCtx = null;
@@ -310,197 +275,201 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             return arr;
         }
 
-        // ================= POOL QUESITI DEDUZIONE =================
+        // NUOVA FUNZIONE: rimescola le opzioni di una domanda
+        function shuffleOptions(item) {
+            const indices = item.options.map((_, i) => i);
+            const shuffledIndices = shuffle(indices);
+            const newOptions = shuffledIndices.map(i => item.options[i]);
+            const newCorrect = shuffledIndices.indexOf(item.correct);
+            return { ...item, options: newOptions, correct: newCorrect };
+        }
+
+        // ===== POOLS A LUNGHEZZA BILANCIATA =====
         const sillogismiPool = [
-            {
-                id: 101, title: "Sillogismo del Cane (Disgiuntivo)",
-                text: "P1: Il coniglio ha seguito la strada A o B o C.\nP2: Non ha seguito la strada A.\nP3: Non ha seguito la strada B.",
-                question: "Quale conclusione si ricava deduttivamente in modo certo?",
-                options: ["Il coniglio ha seguito la strada C.", "Il coniglio si è nascosto nel bosco.", "Non possiamo sapere dove sia andato.", "Il coniglio ha seguito sia A che C."],
-                correct: 0, explanation: "Un sillogismo disgiuntivo elimina le alternative escluse (A e B) lasciando come unica opzione certa la strada C."
-            },
-            {
-                id: 102, title: "Sillogismo Categorico dei Felini",
-                text: "P1: Nessun cane è un felino.\nP2: Tutti i gatti sono felini.",
-                question: "Qual è la Conclusione corretta e valida di questo sillogismo?",
-                options: ["Nessun gatto è un cane.", "Alcuni cani sono gatti.", "Tutti i cani sono felini.", "Nessun felino è un animale."],
-                correct: 0, explanation: "Se l'insieme dei cani e dei felini è disgiunto, e i gatti stanno nei felini, nessun gatto potrà mai essere un cane."
-            },
-            {
-                id: 103, title: "Termine Medio nel Sillogismo dei Greci",
-                text: "PM: Tutti gli uomini sono mortali.\nPm: Tutti i greci sono uomini.\nConclusione: Tutti i greci sono mortali.",
-                question: "Qual è il TERMINE MEDIO (X) che scompare nella conclusione?",
-                options: ["Uomini", "Greci", "Mortali", "Tutti"],
-                correct: 0, explanation: "Il termine medio 'Uomini' collega la premessa maggiore e minore ma non compare nella conclusione finale."
-            },
-            {
-                id: 104, title: "Sillogismo Ipotetico Puro (Pioggia e Traffico)",
-                text: "P1: Se piove, allora le strade si bagnano.\nP2: Se le strade si bagnano, allora il traffico rallenta.",
-                question: "Quale conclusione collega direttamente antecedente e conseguente estremi?",
-                options: ["Se piove, allora il traffico rallenta.", "Se il traffico rallenta, allora piove.", "Se non piove, le strade rimangono asciutte.", "Il traffico rallenta sempre."],
-                correct: 0, explanation: "Il sillogismo ipotetico puro connette la catena di implicazioni: A -> B e B -> C produce A -> C."
-            },
-            {
-                id: 105, title: "Sillogismo con Premessa Particolare",
-                text: "P1: Qualche animale è feroce.\nP2: Tutti gli animali sono esseri viventi.",
-                question: "Quale conclusione segue necessariamente secondo le regole del sillogismo?",
-                options: ["Qualche essere vivente è feroce.", "Tutti gli esseri viventi sono feroci.", "Nessun essere vivente è feroce.", "Tutti gli animali sono feroci."],
-                correct: 0, explanation: "Se nelle premesse c'è un enunciato particolare (Qualche), la conclusione deve essere particolare."
-            },
-            {
-                id: 106, title: "Sillogismo Invalido (Due Negativi)",
-                text: "P1: Nessun rettile ha il pelo.\nP2: Nessun pesce ha il pelo.",
-                question: "Cosa possiamo dedurre con certezza da queste due premesse universali negative?",
-                options: ["Nessuna conclusione certa è derivabile.", "Nessun pesce è un rettile.", "Tutti i pesci sono rettili.", "Tutti gli animali con pelo sono pesci."],
-                correct: 0, explanation: "Regola del sillogismo: da due premesse universali negative (Nessuno... Nessuno...) non si può derivare alcuna conclusione certa."
-            },
-            {
-                id: 107, title: "Sillogismo dei Pianeti",
-                text: "P1: Tutti i pianeti ruotano attorno a una stella.\nP2: Marte è un pianeta.",
-                question: "Qual è la conclusione deduttivamente necessaria?",
-                options: ["Marte ruota attorno a una stella.", "Marte è una stella.", "Tutte le stelle ruotano attorno a Marte.", "Alcuni pianeti non ruotano."],
-                correct: 0, explanation: "È un sillogismo categorico perfetto: includendo Marte nella categoria pianeti, eredita la proprietà di ruotare attorno a una stella."
-            },
-            {
-                id: 108, title: "Sillogismo Disgiuntivo di Giovanni",
-                text: "P1: Giovanni o è a Roma o è a Milano.\nP2: Giovanni non è a Roma.",
-                question: "Qual è la conclusione corretta?",
-                options: ["Giovanni è a Milano.", "Giovanni è a Torino.", "Giovanni è sia a Roma che a Milano.", "Non è possibile determinare la città."],
-                correct: 0, explanation: "Data l'alternativa esclusiva in P1 e la negazione di una delle due sedi in P2, Giovanni è necessariamente a Milano."
-            }
+            { id:101, title:"Sillogismo del Cane (Disgiuntivo)", text:"P1: Il coniglio ha seguito la strada A o B o C.\nP2: Non ha seguito la strada A.\nP3: Non ha seguito la strada B.", question:"Quale conclusione si ricava deduttivamente in modo certo?", options:[
+                "Il coniglio ha seguito la strada C, perché le prime due alternative sono state escluse dalle premesse.",
+                "Il coniglio si è nascosto nel bosco, perché nessuna delle strade indicate è quella giusta per lui.",
+                "Non possiamo sapere dove sia andato il coniglio, perché le premesse non offrono informazioni sufficienti.",
+                "Il coniglio ha seguito sia la strada A che la strada C, in una sorta di percorso circolare completo."
+            ], correct:0, explanation:"Un sillogismo disgiuntivo elimina le alternative escluse (A e B) lasciando come unica opzione certa la strada C." },
+            { id:102, title:"Sillogismo Categorico dei Felini", text:"P1: Nessun cane è un felino.\nP2: Tutti i gatti sono felini.", question:"Qual è la Conclusione corretta e valida di questo sillogismo?", options:[
+                "Nessun gatto è un cane, perché l'insieme dei felini e quello dei cani sono totalmente disgiunti.",
+                "Alcuni cani sono gatti, perché la sovrapposizione tra le due specie è statisticamente possibile.",
+                "Tutti i cani sono felini, perché condividono con i gatti la stessa appartenenza biologica.",
+                "Nessun felino è un animale, perché la definizione di felino esclude quella di essere vivente."
+            ], correct:0, explanation:"Se l'insieme dei cani e dei felini è disgiunto, e i gatti stanno nei felini, nessun gatto potrà mai essere un cane." },
+            { id:103, title:"Termine Medio nel Sillogismo dei Greci", text:"PM: Tutti gli uomini sono mortali.\nPm: Tutti i greci sono uomini.\nConclusione: Tutti i greci sono mortali.", question:"Qual è il TERMINE MEDIO (X) che scompare nella conclusione?", options:[
+                "Uomini",
+                "Greci",
+                "Mortali",
+                "Tutti"
+            ], correct:0, explanation:"Il termine medio 'Uomini' collega la premessa maggiore e minore ma non compare nella conclusione finale." },
+            { id:104, title:"Sillogismo Ipotetico Puro (Pioggia e Traffico)", text:"P1: Se piove, allora le strade si bagnano.\nP2: Se le strade si bagnano, allora il traffico rallenta.", question:"Quale conclusione collega direttamente antecedente e conseguente estremi?", options:[
+                "Se piove, allora il traffico rallenta, per concatenazione delle due implicazioni iniziali.",
+                "Se il traffico rallenta, allora piove, invertendo erroneamente il rapporto di implicazione causale.",
+                "Se non piove, le strade rimangono asciutte, perché senza pioggia non c'è alcuna bagnatura.",
+                "Il traffico rallenta sempre, indipendentemente dalle condizioni meteorologiche e dalle strade."
+            ], correct:0, explanation:"Il sillogismo ipotetico puro connette la catena di implicazioni: A → B e B → C produce A → C." },
+            { id:105, title:"Sillogismo con Premessa Particolare", text:"P1: Qualche animale è feroce.\nP2: Tutti gli animali sono esseri viventi.", question:"Quale conclusione segue necessariamente secondo le regole del sillogismo?", options:[
+                "Qualche essere vivente è feroce, perché la particolarità va mantenuta anche nella conclusione.",
+                "Tutti gli esseri viventi sono feroci, generalizzando indebitamente da un caso particolare.",
+                "Nessun essere vivente è feroce, in aperta contraddizione con la premessa iniziale data.",
+                "Tutti gli animali sono feroci, perché l'universale prevale sempre sulla particolare."
+            ], correct:0, explanation:"Se nelle premesse c'è un enunciato particolare (Qualche), la conclusione deve essere particolare." },
+            { id:106, title:"Sillogismo Invalido (Due Negativi)", text:"P1: Nessun rettile ha il pelo.\nP2: Nessun pesce ha il pelo.", question:"Cosa possiamo dedurre con certezza da queste due premesse universali negative?", options:[
+                "Nessuna conclusione certa è derivabile, perché da due premesse negative non si ricava nulla.",
+                "Nessun pesce è un rettile, perché condividono la stessa caratteristica di non avere pelo.",
+                "Tutti i pesci sono rettili, in virtù della proprietà negativa che li accomuna entrambi.",
+                "Tutti gli animali con pelo sono pesci, applicando erroneamente la contronominale logica."
+            ], correct:0, explanation:"Regola del sillogismo: da due premesse universali negative (Nessuno... Nessuno...) non si può derivare alcuna conclusione certa." },
+            { id:107, title:"Sillogismo dei Pianeti", text:"P1: Tutti i pianeti ruotano attorno a una stella.\nP2: Marte è un pianeta.", question:"Qual è la conclusione deduttivamente necessaria?", options:[
+                "Marte ruota attorno a una stella, perché appartiene alla categoria dei pianeti per definizione.",
+                "Marte è una stella, perché condivide con i pianeti la proprietà di essere un corpo celeste.",
+                "Tutte le stelle ruotano attorno a Marte, invertendo erroneamente la relazione iniziale data.",
+                "Alcuni pianeti non ruotano, perché esistono eccezioni non menzionate nella premessa universale."
+            ], correct:0, explanation:"È un sillogismo categorico perfetto: includendo Marte nella categoria pianeti, eredita la proprietà di ruotare attorno a una stella." },
+            { id:108, title:"Sillogismo Disgiuntivo di Giovanni", text:"P1: Giovanni o è a Roma o è a Milano.\nP2: Giovanni non è a Roma.", question:"Qual è la conclusione corretta?", options:[
+                "Giovanni è a Milano, perché l'alternativa Roma è stata esclusa dalla seconda premessa.",
+                "Giovanni è a Torino, perché le grandi città del nord si escludono a vicenda in questo caso.",
+                "Giovanni è sia a Roma che a Milano, in una sorta di ubiquità logicamente impossibile.",
+                "Non è possibile determinare la città, perché mancano informazioni aggiuntive sul suo viaggio."
+            ], correct:0, explanation:"Data l'alternativa esclusiva in P1 e la negazione di una delle due sedi in P2, Giovanni è necessariamente a Milano." }
         ];
 
         const modusPool = [
-            {
-                id: 201, title: "Piove e la strada è bagnata",
-                text: "P1: Se piove, la strada è bagnata.\nP2: Piove.",
-                question: "A quale schema logico corrisponde questa inferenza valida?",
-                options: ["Modus Ponens (Valido)", "Modus Tollens (Valido)", "Affermazione del Conseguente (Fallacia)", "Negazione dell'Antecedente (Fallacia)"],
-                correct: 0, explanation: "Posta l'implicazione A -> B e affermato l'antecedente A, si deduce il conseguente B (Modus Ponens)."
-            },
-            {
-                id: 202, title: "Venezia e il Veneto",
-                text: "P1: Se sei a Venezia, sei in Veneto.\nP2: Non sei in Veneto.",
-                question: "Quale conclusione ed errore/regola si applica qui?",
-                options: ["Modus Tollens: Non sei a Venezia (Valido)", "Modus Ponens: Sei a Venezia (Valido)", "Negazione dell'antecedente: Sei a Venezia", "Affermazione del conseguente"],
-                correct: 0, explanation: "Negando il conseguente ('Non sei in Veneto'), si deduce con certezza la negazione dell'antecedente ('Non sei a Venezia')."
-            },
-            {
-                id: 203, title: "Diagnosi Fallacia della Strada Bagnata",
-                text: "P1: Se piove, la strada è bagnata.\nP2: La strada è bagnata.\nConclusione: Quindi piove.",
-                question: "Quale errore di ragionamento è stato commesso?",
-                options: ["Fallacia di Affermazione del Conseguente", "Fallacia di Negazione dell'Antecedente", "Modus Ponens corretto", "Sillogismo disgiuntivo"],
-                correct: 0, explanation: "La strada potrebbe essere bagnata perché qualcuno l'ha lavata o è esploso un tubo. Affermare il conseguente non dà certezza sulla pioggia."
-            },
-            {
-                id: 204, title: "Diagnosi Fallacia della Regione",
-                text: "P1: Se sono in Lombardia, sono in Italia.\nP2: Non sono in Lombardia.\nConclusione: Quindi non sono in Italia.",
-                question: "Quale errore formalizzato rappresenta questo ragionamento?",
-                options: ["Fallacia di Negazione dell'Antecedente", "Fallacia di Affermazione del Conseguente", "Modus Tollens valido", "Sillogismo ipotetico"],
-                correct: 0, explanation: "Negare l'antecedente ('Non sono in Lombardia') non impedisce di essere in Italia (potrei essere in Puglia o Veneto)."
-            },
-            {
-                id: 205, title: "Verità vs Validità (Kanye West)",
-                text: "P1: Kanye West è un uomo.\nP2: Ogni uomo è immortale.\nConclusione: Kanye West è immortale.",
-                question: "Come si definisce questo ragionamento logico?",
-                options: ["Valido dal punto di vista formale, ma scorretto perché la Premessa 2 è falsa.", "Invalido dal punto di vista formale, ma con conclusione vera.", "Corretto e vero in ogni aspetto.", "Un'induzione probabilistica."],
-                correct: 0, explanation: "Il ragionamento rispetta la forma deduttiva (è valido), ma poiché P2 è empiricamente falsa, l'argomento è scorretto (not sound)."
-            },
-            {
-                id: 206, title: "Parole Inventate e Validità Formale",
-                text: "P1: Ogni arterode è bagrado.\nP2: Ogni bagrado è salzusto.\nConclusione: Ogni arterode è salzusto.",
-                question: "Perché questo argomento è un classico esempio di VALIDITÀ pura?",
-                options: ["Perché rispetta perfettamente le regole della deduzione indipendentemente dal significato reale dei termini.", "Perché le premesse sono state verificate in laboratorio.", "Perché parla di biologia marina.", "Perché contiene una fallacia informale."],
-                correct: 0, explanation: "La validità deduttiva riguarda solo la struttura logica: le premesse obbligano ad accettare la conclusione a prescindere dal significato delle parole."
-            },
-            {
-                id: 207, title: "Allarme Antincendio",
-                text: "P1: Se c'è un incendio, scatta l'allarme antincendio.\nP2: L'allarme antincendio sta suonando.\nConclusione: C'è un incendio.",
-                question: "Che tipo di ragionamento è questo?",
-                options: ["Fallacia dell'Affermazione del Conseguente (l'allarme può suonare per un guasto o un test).", "Modus Ponens valido e ineccepibile.", "Modus Tollens rigoroso.", "Premessa nascosta normativa."],
-                correct: 0, explanation: "Affermare il conseguente (allarme suona) non garantisce la causa (incendio), poiché l'allarme potrebbe essere scattato per errore."
-            },
-            {
-                id: 208, title: "Assenza di Febbre",
-                text: "P1: Se un paziente ha l'influenza, ha la febbre alta.\nP2: Il paziente non ha la febbre alta.",
-                question: "Quale conclusione deduttiva valida si ottiene applicando il Modus Tollens?",
-                options: ["Il paziente non ha l'influenza.", "Il paziente ha l'influenza in forma lieve.", "Il paziente deve prendere antibiotici.", "Non possiamo concludere nulla."],
-                correct: 0, explanation: "Negando il conseguente ('non ha la febbre'), si ottiene deduttivamente la negazione dell'antecedente ('non ha l'influenza')."
-            }
+            { id:201, title:"Piove e la strada è bagnata", text:"P1: Se piove, la strada è bagnata.\nP2: Piove.", question:"A quale schema logico corrisponde questa inferenza valida?", options:[
+                "Modus Ponens (Valido): affermato l'antecedente, si deduce necessariamente il conseguente.",
+                "Modus Tollens (Valido): negato il conseguente, si deduce necessariamente la negazione dell'antecedente.",
+                "Affermazione del Conseguente (Fallacia): dalla verità del conseguente si deduce quella dell'antecedente.",
+                "Negazione dell'Antecedente (Fallacia): dalla falsità dell'antecedente si deduce quella del conseguente."
+            ], correct:0, explanation:"Posta l'implicazione A → B e affermato l'antecedente A, si deduce il conseguente B (Modus Ponens)." },
+            { id:202, title:"Venezia e il Veneto", text:"P1: Se sei a Venezia, sei in Veneto.\nP2: Non sei in Veneto.", question:"Quale conclusione ed errore/regola si applica qui?", options:[
+                "Modus Tollens: Non sei a Venezia (Valido), perché negando il conseguente si nega l'antecedente.",
+                "Modus Ponens: Sei a Venezia (Valido), perché il condizionale garantisce la verità dell'antecedente.",
+                "Negazione dell'antecedente: Sei a Venezia, cadendo nell'omonima fallacia formale già nota.",
+                "Affermazione del conseguente: Sei a Venezia, invertendo indebitamente la relazione tra A e B."
+            ], correct:0, explanation:"Negando il conseguente ('Non sei in Veneto'), si deduce con certezza la negazione dell'antecedente ('Non sei a Venezia')." },
+            { id:203, title:"Diagnosi Fallacia della Strada Bagnata", text:"P1: Se piove, la strada è bagnata.\nP2: La strada è bagnata.\nConclusione: Quindi piove.", question:"Quale errore di ragionamento è stato commesso?", options:[
+                "Fallacia di Affermazione del Conseguente: la strada può essere bagnata anche per altre cause diverse.",
+                "Fallacia di Negazione dell'Antecedente: viene negata una premessa senza averne titolo logico.",
+                "Modus Ponens corretto: la regola è applicata bene perché la strada bagnata è un dato di fatto.",
+                "Sillogismo disgiuntivo: viene eliminata un'alternativa senza giustificazione razionale adeguata."
+            ], correct:0, explanation:"La strada potrebbe essere bagnata perché qualcuno l'ha lavata o è esploso un tubo. Affermare il conseguente non dà certezza sulla pioggia." },
+            { id:204, title:"Diagnosi Fallacia della Regione", text:"P1: Se sono in Lombardia, sono in Italia.\nP2: Non sono in Lombardia.\nConclusione: Quindi non sono in Italia.", question:"Quale errore formalizzato rappresenta questo ragionamento?", options:[
+                "Fallacia di Negazione dell'Antecedente: si potrebbe essere in Italia pur non essendo in Lombardia.",
+                "Fallacia di Affermazione del Conseguente: il ragionamento conclude invertendo la relazione logica.",
+                "Modus Tollens valido: la negazione dell'antecedente implica logicamente quella del conseguente.",
+                "Sillogismo ipotetico: la concatenazione di premesse garantisce la validità della conclusione."
+            ], correct:0, explanation:"Negare l'antecedente ('Non sono in Lombardia') non impedisce di essere in Italia (potrei essere in Puglia o Veneto)." },
+            { id:205, title:"Verità vs Validità (Kanye West)", text:"P1: Kanye West è un uomo.\nP2: Ogni uomo è immortale.\nConclusione: Kanye West è immortale.", question:"Come si definisce questo ragionamento logico?", options:[
+                "Valido dal punto di vista formale, ma scorretto perché la Premessa 2 è empiricamente falsa.",
+                "Invalido dal punto di vista formale, ma con conclusione vera nonostante la forma scorretta.",
+                "Corretto e vero in ogni aspetto, perché la forma e le premesse sono entrambe garantite.",
+                "Un'induzione probabilistica che fornisce una conclusione solo probabile, non necessaria."
+            ], correct:0, explanation:"Il ragionamento rispetta la forma deduttiva (è valido), ma poiché P2 è empiricamente falsa, l'argomento è scorretto (not sound)." },
+            { id:206, title:"Parole Inventate e Validità Formale", text:"P1: Ogni arterode è bagrado.\nP2: Ogni bagrado è salzusto.\nConclusione: Ogni arterode è salzusto.", question:"Perché questo argomento è un classico esempio di VALIDITÀ pura?", options:[
+                "Perché rispetta perfettamente le regole della deduzione indipendentemente dal significato reale dei termini.",
+                "Perché le premesse sono state verificate in laboratorio con sofisticate apparecchiature scientifiche.",
+                "Perché parla di biologia marina e quindi si rifà a conoscenze empiriche universalmente condivise.",
+                "Perché contiene una fallacia informale che ne garantisce comunque la validità formale interna."
+            ], correct:0, explanation:"La validità deduttiva riguarda solo la struttura logica: le premesse obbligano ad accettare la conclusione a prescindere dal significato delle parole." },
+            { id:207, title:"Allarme Antincendio", text:"P1: Se c'è un incendio, scatta l'allarme antincendio.\nP2: L'allarme antincendio sta suonando.\nConclusione: C'è un incendio.", question:"Che tipo di ragionamento è questo?", options:[
+                "Fallacia dell'Affermazione del Conseguente: l'allarme può suonare anche per un guasto o un test.",
+                "Modus Ponens valido e ineccepibile: la premessa e la conclusione sono logicamente connesse.",
+                "Modus Tollens rigoroso: la negazione del conseguente porta alla negazione dell'antecedente.",
+                "Premessa nascosta normativa: il ragionamento presuppone un dovere morale di sicurezza."
+            ], correct:0, explanation:"Affermare il conseguente (allarme suona) non garantisce la causa (incendio), poiché l'allarme potrebbe essere scattato per errore." },
+            { id:208, title:"Assenza di Febbre", text:"P1: Se un paziente ha l'influenza, ha la febbre alta.\nP2: Il paziente non ha la febbre alta.", question:"Quale conclusione deduttiva valida si ottiene applicando il Modus Tollens?", options:[
+                "Il paziente non ha l'influenza, perché negando il conseguente si nega necessariamente l'antecedente.",
+                "Il paziente ha l'influenza in forma lieve, perché i sintomi possono essere attenuati da farmaci.",
+                "Il paziente deve prendere antibiotici per prevenire eventuali complicazioni respiratorie future.",
+                "Non possiamo concludere nulla, perché la febbre potrebbe essere mascherata da altri medicinali."
+            ], correct:0, explanation:"Negando il conseguente ('non ha la febbre'), si ottiene deduttivamente la negazione dell'antecedente ('non ha l'influenza')." }
         ];
 
         const condizioniPool = [
-            {
-                id: 301, title: "Studiare e Passare l'Esame",
-                text: "«Per riuscire a superare l'esame di Logica è necessario studiare.»",
-                question: "Che valore logico ha l'evento 'Studiare' rispetto al 'Passare l'esame'?",
-                options: ["Condizione Necessaria (senza studiare non passi, ma da sola può non bastare se stai male o c'è sfortuna)", "Condizione Sufficiente (basta aprire il libro 5 minuti per passare certamente)", "Condizione sia Necessaria che Sufficiente", "Nessun legame logico"],
-                correct: 0, explanation: "È una condizione necessaria: se non si verifica l'evento 'studiare', l'esame non si supera, ma occorrono anche altre condizioni favorevoli."
-            },
-            {
-                id: 302, title: "Voto 62 all'Esame",
-                text: "«Il punteggio minimo per passare l'esame è 60. Marco ha preso 62.»",
-                question: "Prendere 62 è una condizione...?",
-                options: ["Sufficiente per passare l'esame (basta quel voto, anche se si poteva passare anche con 70 o 80)", "Necessaria per passare l'esame (chiunque passi deve prendere esattamente 62)", "Sia necessaria che sufficiente", "Invalida"],
-                correct: 0, explanation: "È sufficiente perché 62 garantisce il superamento, ma non necessaria poiché si può superare l'esame anche con altri voti (es. 60, 75, 100)."
-            },
-            {
-                id: 303, title: "Patente di Guida",
-                text: "«Avere la patente di guida è indispensabile per guidare un'automobile su strada pubblica.»",
-                question: "Avere la patente è condizione sufficiente per il fatto reale di guidare?",
-                options: ["No, è una condizione necessaria ma non sufficiente (puoi avere la patente ma non possedere o non guidare mai un'auto).", "Sì, chiunque prenda la patente sta guidando automaticamente un'auto ogni secondo.", "Sì, è sufficiente ma non necessaria.", "È una fallacia ad hominem."],
-                correct: 0, explanation: "Avere la patente è necessario per guidare legalmente, ma non sufficiente (potresti non guidare o non avere un'auto a disposizione)."
-            },
-            {
-                id: 304, title: "Diciotto Anni e Voto in Italia",
-                text: "«Avere almeno 18 anni e la cittadinanza italiana per poter votare alle elezioni politiche.»",
-                question: "Come viene definita questa relazione condizionale doppiamente vincolante?",
-                options: ["Condizione Necessaria e Sufficiente (Bicondizionale)", "Condizione unicamente Sufficiente", "Condizione unicamente Necessaria", "Premessa Nascosta"],
-                correct: 0, explanation: "È sia necessaria (senza 18 anni non voti) sia sufficiente (se hai 18 anni e cittadinanza hai il diritto di voto)."
-            },
-            {
-                id: 305, title: "Pioggia e Ombrello",
-                text: "«Se piove e non hai un ombrello, ti bagnerai.»",
-                question: "Trovarsi sotto la pioggia senza ombrello è condizione necessaria o sufficiente per bagnarsi?",
-                options: ["Condizione Sufficiente (basta questo per bagnarsi, ma potresti bagnarti anche cadendo in piscina)", "Condizione Necessaria (è l'unico modo assoluto esistente sull'universo per bagnarsi)", "Condizione Bicondizionale", "Fallacia formale"],
-                correct: 0, explanation: "È una condizione sufficiente: garantisce di bagnarsi, ma non è necessaria (ci si può bagnare anche in mare o sotto la doccia)."
-            },
-            {
-                id: 306, title: "Conseguenza Logica (Esempio delle Figlie)",
-                text: "P1: Giovanna è mia figlia o è figlia di Luca.\nP2: Giovanna non è figlia di Luca.",
-                question: "La conclusione 'Giovanna è mia figlia' è una CONSEGUENZA LOGICA delle premesse?",
-                options: ["Sì, perché è impossibile che le premesse siano vere e la conclusione sia falsa.", "No, perché Giovanna potrebbe essere una vicina di casa.", "No, perché il nome Luca è ambiguo.", "Solo se dimostrato con il test del DNA."],
-                correct: 0, explanation: "La conseguenza logica è quella relazione formale per cui, se si accettano le premesse P1 e P2, la conclusione è necessariamente vera."
-            },
-            {
-                id: 307, title: "Incoerenza tra Pregi e Paternità",
-                text: "P1: Giovanna è simpatica.\nP2: Giovanna è intelligente.\nConclusione: Giovanna è mia figlia.",
-                question: "Perché la conclusione NON è conseguenza logica delle premesse?",
-                options: ["Perché le premesse possono essere entrambe vere, ma Giovanna potrebbe non essere figlia dell'autore.", "Perché le persone intelligenti non hanno genitori.", "Perché la premessa 1 è una fallacia ad hominem.", "Perché manca il Modus Tollens."],
-                correct: 0, explanation: "Essere simpatica e intelligente non fornisce alcuna informazione logica che vincoli la relazione di paternità."
-            },
-            {
-                id: 308, title: "Numero WhatsApp",
-                text: "«Avere il numero di telefono di una persona per poterle inviare un messaggio WhatsApp.»",
-                question: "Che tipo di condizione rappresenta avere il numero di cellulare attivo?",
-                options: ["Condizione Necessaria e Sufficiente", "Condizione unicamente Sufficiente", "Condizione del terzo escluso", "Premessa fattuale irrilevante"],
-                correct: 0, explanation: "Avere il numero è necessario (senza di esso non puoi inviare il messaggio) e sufficiente per aprire la chat e inviarlo."
-            }
+            { id:301, title:"Studiare e Passare l'Esame", text:"«Per riuscire a superare l'esame di Logica è necessario studiare.»", question:"Che valore logico ha l'evento 'Studiare' rispetto al 'Passare l'esame'?", options:[
+                "Condizione Necessaria: senza studiare non passi, ma da sola può non bastare se stai male o c'è sfortuna.",
+                "Condizione Sufficiente: basta aprire il libro 5 minuti per passare certamente l'esame senza problemi.",
+                "Condizione sia Necessaria che Sufficiente: studiare garantisce e al contempo è indispensabile al passaggio.",
+                "Nessun legame logico: il rapporto tra studio e superamento dell'esame è puramente casuale e soggettivo."
+            ], correct:0, explanation:"È una condizione necessaria: se non si verifica l'evento 'studiare', l'esame non si supera, ma occorrono anche altre condizioni favorevoli." },
+            { id:302, title:"Voto 62 all'Esame", text:"«Il punteggio minimo per passare l'esame è 60. Marco ha preso 62.»", question:"Prendere 62 è una condizione...?", options:[
+                "Sufficiente per passare l'esame: basta quel voto, anche se si poteva passare anche con 70 o 80.",
+                "Necessaria per passare l'esame: chiunque passi deve necessariamente prendere esattamente 62.",
+                "Sia necessaria che sufficiente: prendere 62 è l'unico voto che garantisce il superamento dell'esame.",
+                "Irrilevante: il voto è solo un numero e non ha alcuna incidenza logica sul superamento dell'esame."
+            ], correct:0, explanation:"È sufficiente perché 62 garantisce il superamento, ma non necessaria poiché si può superare l'esame anche con altri voti (es. 60, 75, 100)." },
+            { id:303, title:"Patente di Guida", text:"«Avere la patente di guida è indispensabile per guidare un'automobile su strada pubblica.»", question:"Avere la patente è condizione sufficiente per il fatto reale di guidare?", options:[
+                "No, è una condizione necessaria ma non sufficiente: puoi avere la patente ma non guidare mai.",
+                "Sì, chiunque prenda la patente sta guidando automaticamente un'auto ogni secondo della giornata.",
+                "Sì, è sufficiente ma non necessaria: si può guidare anche senza patente in alcune circostanze speciali.",
+                "È una fallacia ad hominem: l'argomento attacca la persona anziché la questione logica sollevata."
+            ], correct:0, explanation:"Avere la patente è necessario per guidare legalmente, ma non sufficiente (potresti non guidare o non avere un'auto a disposizione)." },
+            { id:304, title:"Diciotto Anni e Voto in Italia", text:"«Avere almeno 18 anni e la cittadinanza italiana per poter votare alle elezioni politiche.»", question:"Come viene definita questa relazione condizionale doppiamente vincolante?", options:[
+                "Condizione Necessaria e Sufficiente (Bicondizionale), perché il diritto di voto scatta esattamente al soddisfacimento.",
+                "Condizione unicamente Sufficiente, perché basta la maggiore età per votare senza altri requisiti.",
+                "Condizione unicamente Necessaria, perché si può votare anche senza avere la cittadinanza italiana.",
+                "Premessa Nascosta di natura normativa, perché il voto è un dovere morale e non un diritto giuridico."
+            ], correct:0, explanation:"È sia necessaria (senza 18 anni non voti) sia sufficiente (se hai 18 anni e cittadinanza hai il diritto di voto)." },
+            { id:305, title:"Pioggia e Ombrello", text:"«Se piove e non hai un ombrello, ti bagnerai.»", question:"Trovarsi sotto la pioggia senza ombrello è condizione necessaria o sufficiente per bagnarsi?", options:[
+                "Condizione Sufficiente: basta questo per bagnarsi, ma potresti bagnarti anche cadendo in piscina.",
+                "Condizione Necessaria: è l'unico modo assoluto esistente nell'universo per bagnarsi in senso stretto.",
+                "Condizione Bicondizionale: senza pioggia e senza ombrello non ci si può bagnare in alcun modo.",
+                "Fallacia formale: la premessa condizionale non implica alcuna conseguenza logica valida in merito."
+            ], correct:0, explanation:"È una condizione sufficiente: garantisce di bagnarsi, ma non è necessaria (ci si può bagnare anche in mare o sotto la doccia)." },
+            { id:306, title:"Conseguenza Logica (Esempio delle Figlie)", text:"P1: Giovanna è mia figlia o è figlia di Luca.\nP2: Giovanna non è figlia di Luca.", question:"La conclusione 'Giovanna è mia figlia' è una CONSEGUENZA LOGICA delle premesse?", options:[
+                "Sì, perché è impossibile che le premesse siano vere e la conclusione sia falsa in qualsiasi scenario.",
+                "No, perché Giovanna potrebbe essere una vicina di casa o una conoscente della famiglia allargata.",
+                "No, perché il nome Luca è ambiguo e potrebbe riferirsi a più persone diverse nel contesto reale.",
+                "Solo se dimostrato con il test del DNA: la logica formale non è sufficiente a stabilire la paternità."
+            ], correct:0, explanation:"La conseguenza logica è quella relazione formale per cui, se si accettano le premesse P1 e P2, la conclusione è necessariamente vera." },
+            { id:307, title:"Incoerenza tra Pregi e Paternità", text:"P1: Giovanna è simpatica.\nP2: Giovanna è intelligente.\nConclusione: Giovanna è mia figlia.", question:"Perché la conclusione NON è conseguenza logica delle premesse?", options:[
+                "Perché le premesse possono essere entrambe vere, ma Giovanna potrebbe non essere figlia dell'autore.",
+                "Perché le persone intelligenti non hanno genitori, secondo le ultime scoperte delle neuroscienze.",
+                "Perché la premessa 1 è una fallacia ad hominem che invalida immediatamente tutto il ragionamento.",
+                "Perché manca il Modus Tollens, la cui assenza impedisce qualsiasi forma di inferenza valida."
+            ], correct:0, explanation:"Essere simpatica e intelligente non fornisce alcuna informazione logica che vincoli la relazione di paternità." },
+            { id:308, title:"Numero WhatsApp", text:"«Avere il numero di telefono di una persona per poterle inviare un messaggio WhatsApp.»", question:"Che tipo di condizione rappresenta avere il numero di cellulare attivo?", options:[
+                "Condizione Necessaria e Sufficiente: senza numero non si può inviare, con il numero si può sempre inviare.",
+                "Condizione unicamente Sufficiente: basta avere il numero per poter inviare il messaggio senza problemi.",
+                "Condizione del Terzo Escluso: il numero o c'è o non c'è, senza vie intermedie possibili nel sistema.",
+                "Premessa Fattuale Irrilevante: il numero di telefono non ha alcuna relazione logica con WhatsApp."
+            ], correct:0, explanation:"Avere il numero è necessario (senza di esso non puoi inviare il messaggio) e sufficiente per aprire la chat e inviarlo." }
         ];
 
         const matchingPairsPool = [
-            { id: "m1", term: "Modus Ponens", text: "Schema valido: Se A allora B. A è vero. Dunque B è vero." },
-            { id: "m2", term: "Modus Tollens", text: "Schema valido: Se A allora B. B è falso. Dunque A è falso." },
-            { id: "m3", term: "Affermazione del Conseguente", text: "Fallacia formale: Se A allora B. B è vero. Dunque A è vero." },
-            { id: "m4", term: "Negazione dell'Antecedente", text: "Fallacia formale: Se A allora B. A è falso. Dunque B è falso." },
-            { id: "m5", term: "Principio di Non-Contraddizione", text: "Assioma logico: Non è possibile affermare nello stesso istante A e non-A." },
-            { id: "m6", term: "Principio del Terzo Escluso", text: "Assioma logico: Un enunciato dichiarativo è o vero o falso, senza terze opzioni." },
-            { id: "m7", term: "Condizione Necessaria", text: "Condizione senza la quale un evento non può verificarsi (ma da sola può non bastare)." },
-            { id: "m8", term: "Condizione Sufficiente", text: "Condizione la cui presenza garantisce il verificarsi dell'evento." },
-            { id: "m9", term: "Sillogismo Disgiuntivo", text: "Sillogismo basato su una disgiunzione (A o B). Escludendo A, resta B." },
-            { id: "m10", term: "Sillogismo Ipotetico Puro", text: "Catena di implicazioni: Se A allora B; se B allora C; dunque se A allora C." },
-            { id: "m11", term: "Validità Logica", text: "Rispetto delle regole formali di derivazione, indipendente dalla verità empirica." },
-            { id: "m12", term: "Correttezza (Soundness)", text: "Proprietà di un argomento sia valido nella forma sia con premesse vere nel mondo." }
+            { id:"m1", term:"Modus Ponens", text:"Schema valido: Se A allora B. A è vero. Dunque B è vero." },
+            { id:"m2", term:"Modus Tollens", text:"Schema valido: Se A allora B. B è falso. Dunque A è falso." },
+            { id:"m3", term:"Affermazione del Conseguente", text:"Fallacia formale: Se A allora B. B è vero. Dunque A è vero." },
+            { id:"m4", term:"Negazione dell'Antecedente", text:"Fallacia formale: Se A allora B. A è falso. Dunque B è falso." },
+            { id:"m5", term:"Principio di Non-Contraddizione", text:"Assioma logico: Non è possibile affermare nello stesso istante A e non-A." },
+            { id:"m6", term:"Principio del Terzo Escluso", text:"Assioma logico: Un enunciato dichiarativo è o vero o falso, senza terze opzioni." },
+            { id:"m7", term:"Condizione Necessaria", text:"Condizione senza la quale un evento non può verificarsi (ma da sola può non bastare)." },
+            { id:"m8", term:"Condizione Sufficiente", text:"Condizione la cui presenza garantisce il verificarsi dell'evento." },
+            { id:"m9", term:"Sillogismo Disgiuntivo", text:"Sillogismo basato su una disgiunzione (A o B). Escludendo A, resta B." },
+            { id:"m10", term:"Sillogismo Ipotetico Puro", text:"Catena di implicazioni: Se A allora B; se B allora C; dunque se A allora C." },
+            { id:"m11", term:"Validità Logica", text:"Rispetto delle regole formali di derivazione, indipendente dalla verità empirica." },
+            { id:"m12", term:"Correttezza (Soundness)", text:"Proprietà di un argomento sia valido nella forma sia con premesse vere nel mondo." }
+        ];
+
+        // ===== CLOZE POOL (3 testi, uno scelto casualmente a ogni sessione) =====
+        const clozePool = [
+            {
+                id: "c1",
+                html: `Il ragionamento deduttivo è <select id="cloze-1" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="truth-preserving">truth-preserving</option><option value="probabile">probabile</option><option value="induttivo">induttivo</option></select>, ovvero conserva la verità dalle premesse alla conclusione. Aristotele ha introdotto tre principi fondativi: identità, terzo escluso e <select id="cloze-2" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="non-contraddizione">non-contraddizione</option><option value="sufficienza">sufficienza</option><option value="causalità">causalità</option></select>. Nei sillogismi categorici, la premessa maggiore e minore condividono il termine <select id="cloze-3" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="medio">medio</option><option value="estremo">estremo</option><option value="maggiore">maggiore</option></select>, che scompare nella conclusione. Un ragionamento condizionale che afferma l'antecedente per derivare il conseguente si chiama <select id="cloze-4" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="Modus Ponens">Modus Ponens</option><option value="Modus Tollens">Modus Tollens</option><option value="Sillogismo disgiuntivo">Sillogismo disgiuntivo</option></select>, mentre quello che nega il conseguente per negare l'antecedente è detto <select id="cloze-5" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="Modus Tollens">Modus Tollens</option><option value="Modus Ponens">Modus Ponens</option><option value="Sillogismo ipotetico">Sillogismo ipotetico</option></select>. Se invece si afferma il conseguente, si commette una <select id="cloze-6" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="fallacia formale">fallacia formale</option><option value="deduzione valida">deduzione valida</option><option value="induzione corretta">induzione corretta</option></select>. A livello epistemico, la <select id="cloze-7" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="validità">validità</option><option value="verità">verità</option><option value="credenza">credenza</option></select> riguarda il rispetto formale delle regole inferenziali, mentre la <select id="cloze-8" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="verità">verità</option><option value="validità">validità</option><option value="opinione">opinione</option></select> riguarda i fatti del mondo reale. Un argomento sia valido sia con premesse vere si definisce <select id="cloze-9" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="corretto">corretto</option><option value="induttivo">induttivo</option><option value="fallace">fallace</option></select>. Infine, una condizione senza la quale un evento non può accadere è detta <select id="cloze-10" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="necessaria">necessaria</option><option value="sufficiente">sufficiente</option><option value="sufficiente e necessaria">sufficiente e necessaria</option></select>.`,
+                answers: { 1:"truth-preserving", 2:"non-contraddizione", 3:"medio", 4:"Modus Ponens", 5:"Modus Tollens", 6:"fallacia formale", 7:"validità", 8:"verità", 9:"corretto", 10:"necessaria" }
+            },
+            {
+                id: "c2",
+                html: `La logica formale studia la <select id="cloze-1" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="struttura">struttura</option><option value="verità empirica">verità empirica</option><option value="morale">morale</option></select> degli argomenti, indipendentemente dal loro contenuto materiale. Un argomento è <select id="cloze-2" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="valido">valido</option><option value="vero">vero</option><option value="probabile">probabile</option></select> quando è impossibile che le premesse siano vere e la conclusione falsa. Aristotele distingueva quattro tipi di enunciati categorici nel celebre <select id="cloze-3" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="quadrato delle opposizioni">quadrato delle opposizioni</option><option value="albero di Porfirio">albero di Porfirio</option><option value="sillogismo disgiuntivo">sillogismo disgiuntivo</option></select>. Nel sillogismo categorico il termine che compare in entrambe le premesse ma non nella conclusione si chiama termine <select id="cloze-4" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="medio">medio</option><option value="maggiore">maggiore</option><option value="minore">minore</option></select>. Il principio di <select id="cloze-5" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="identità">identità</option><option value="sufficienza">sufficienza</option><option value="induzione">induzione</option></select> stabilisce che ogni cosa è uguale a se stessa (A = A). La fallacia di <select id="cloze-6" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="negazione dell'antecedente">negazione dell'antecedente</option><option value="Modus Ponens">Modus Ponens</option><option value="sillogismo disgiuntivo">sillogismo disgiuntivo</option></select> consiste nel concludere falsamente il falso del conseguente dalla falsità dell'antecedente. Un argomento con premesse false ma forma valida è <select id="cloze-7" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="valido ma non corretto">valido ma non corretto</option><option value="corretto ma non valido">corretto ma non valido</option><option value="né valido né corretto">né valido né corretto</option></select>. Una condizione che, se presente, garantisce sempre l'evento è detta <select id="cloze-8" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="sufficiente">sufficiente</option><option value="necessaria">necessaria</option><option value="bicondizionale">bicondizionale</option></select>. Il sillogismo <select id="cloze-9" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="ipotetico puro">ipotetico puro</option><option value="categorico">categorico</option><option value="induttivo">induttivo</option></select> concatena due condizionali per derivarne un terzo. In sintesi, la deduzione è l'unico ragionamento in cui la verità delle premesse <select id="cloze-10" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="trasmette necessariamente">trasmette necessariamente</option><option value="suggerisce vagamente">suggerisce vagamente</option><option value="confuta sempre">confuta sempre</option></select> la verità della conclusione.`,
+                answers: { 1:"struttura", 2:"valido", 3:"quadrato delle opposizioni", 4:"medio", 5:"identità", 6:"negazione dell'antecedente", 7:"valido ma non corretto", 8:"sufficiente", 9:"ipotetico puro", 10:"trasmette necessariamente" }
+            },
+            {
+                id: "c3",
+                html: `La deduzione è il ragionamento che procede dal <select id="cloze-1" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="generale al particolare">generale al particolare</option><option value="particolare al generale">particolare al generale</option><option value="caso al caso">caso al caso</option></select>, a differenza dell'induzione che generalizza dal particolare. Il celebre esempio aristotelico 'Tutti gli uomini sono mortali; Socrate è un uomo; dunque Socrate è mortale' è un sillogismo <select id="cloze-2" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="categorico">categorico</option><option value="disgiuntivo">disgiuntivo</option><option value="ipotetico">ipotetico</option></select> perfetto. La forma <select id="cloze-3" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="Modus Ponens">Modus Ponens</option><option value="Modus Tollens">Modus Tollens</option><option value="Sillogismo disgiuntivo">Sillogismo disgiuntivo</option></select> è una regola valida che dalla verità di A e dall'implicazione A → B deduce la verità di B. Se invece neghiamo B e abbiamo A → B, otteniamo per <select id="cloze-4" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="Modus Tollens">Modus Tollens</option><option value="Modus Ponens">Modus Ponens</option><option value="induzione">induzione</option></select> la negazione di A. La <select id="cloze-5" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="validità">validità</option><option value="verità">verità</option><option value="credenza">credenza</option></select> è una proprietà formale indipendente dal contenuto delle premesse. Un argomento è detto <select id="cloze-6" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="corretto">corretto</option><option value="fallace">fallace</option><option value="induttivo">induttivo</option></select> quando è sia valido sia con premesse vere. La fallacia dell'<select id="cloze-7" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="affermazione del conseguente">affermazione del conseguente</option><option value="Modus Tollens">Modus Tollens</option><option value="sillogismo categorico">sillogismo categorico</option></select> scambia il ruolo di antecedente e conseguente. Una condizione necessaria è quella senza la quale l'evento <select id="cloze-8" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="non può accadere">non può accadere</option><option value="accade sempre">accade sempre</option><option value="è probabile">è probabile</option></select>. Il <select id="cloze-9" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="principio del terzo escluso">principio del terzo escluso</option><option value="principio di induzione">principio di induzione</option><option value="criterio di Popper">criterio di Popper</option></select> afferma che ogni enunciato è o vero o falso, senza vie intermedie. In definitiva, la deduzione è lo strumento principe della <select id="cloze-10" class="bg-slate-800 text-sky-300 rounded px-2 py-1"><option value="">[?]</option><option value="logica formale">logica formale</option><option value="statistica inferenziale">statistica inferenziale</option><option value="retorica persuasiva">retorica persuasiva</option></select>.`,
+                answers: { 1:"generale al particolare", 2:"categorico", 3:"Modus Ponens", 4:"Modus Tollens", 5:"validità", 6:"corretto", 7:"affermazione del conseguente", 8:"non può accadere", 9:"principio del terzo escluso", 10:"logica formale" }
+            }
         ];
 
         function renderSillogismi() {
@@ -508,13 +477,11 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             if(!container) return;
             container.innerHTML = state.activeSillData.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectSill(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectSill(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="sill-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
@@ -526,37 +493,12 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             playSound('click');
             const item = state.activeSillData.find(d => d.id === qId);
             state.sillAnswers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`sill-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Inferenza Corretta! (Risposta Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Inferenza Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Inferenza Corretta!' : 'Inferenza Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -565,13 +507,11 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             if(!container) return;
             container.innerHTML = state.activeModusData.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectModus(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectModus(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="modus-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
@@ -583,37 +523,12 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             playSound('click');
             const item = state.activeModusData.find(d => d.id === qId);
             state.modusAnswers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`modus-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Analisi Formale Esatta! (Risposta Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Analisi Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Analisi Formale Esatta!' : 'Analisi Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -622,13 +537,11 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             if(!container) return;
             container.innerHTML = state.activeCondData.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectCond(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectCond(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="cond-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
@@ -640,37 +553,12 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             playSound('click');
             const item = state.activeCondData.find(d => d.id === qId);
             state.condAnswers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`cond-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Corretta! (Risposta Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Risposta Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -685,94 +573,55 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
         function selectMatchTerm(termId, btn) {
             playSound('click');
             state.selectedTermId = termId;
-
-            document.querySelectorAll('#matching-terms button').forEach(b => {
-                if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
-            });
+            document.querySelectorAll('#matching-terms button').forEach(b => { if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer"; });
             btn.className = "w-full text-left p-3 rounded-xl border-2 border-sky-500 bg-sky-950/80 text-xs font-bold text-sky-300 transition-all shadow-lg cursor-pointer";
-
             const fb = document.getElementById('matching-feedback');
-            if(fb) {
-                fb.className = "text-xs font-semibold text-sky-400 pt-2";
-                fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!";
-            }
+            if(fb) { fb.className = "text-xs font-semibold text-sky-400 pt-2"; fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!"; }
         }
 
         function selectMatchDef(matchId, btn) {
             const fb = document.getElementById('matching-feedback');
-            if(!state.selectedTermId) {
-                playSound('error');
-                if(fb) {
-                    fb.className = "text-xs font-semibold text-rose-400 pt-2";
-                    fb.innerText = "Prima seleziona un termine nella colonna di sinistra!";
-                }
-                return;
-            }
-
+            if(!state.selectedTermId) { playSound('error'); if(fb){ fb.className = "text-xs font-semibold text-rose-400 pt-2"; fb.innerText = "Prima seleziona un termine nella colonna di sinistra!"; } return; }
             if(state.selectedTermId === matchId) {
-                playSound('correct');
-                state.matchedPairs[matchId] = true;
-
+                playSound('correct'); state.matchedPairs[matchId] = true;
                 const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
-                if(termBtn) {
-                    termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed";
-                    termBtn.disabled = true;
-                }
-                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed";
-                btn.disabled = true;
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-emerald-400 pt-2";
-                    fb.innerText = "✓ Abbinamento corretto e bloccato!";
-                }
+                if(termBtn) { termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed"; termBtn.disabled = true; }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed"; btn.disabled = true;
+                if(fb) { fb.className = "text-xs font-bold text-emerald-400 pt-2"; fb.innerText = "✓ Abbinamento corretto e bloccato!"; }
             } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
-                setTimeout(() => {
-                    if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer";
-                }, 1000);
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-rose-400 pt-2";
-                    fb.innerText = "✗ Abbinamento errato. Riprova!";
-                }
+                playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => { if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer"; }, 1000);
+                if(fb) { fb.className = "text-xs font-bold text-rose-400 pt-2"; fb.innerText = "✗ Abbinamento errato. Riprova!"; }
             }
-            state.selectedTermId = null;
-            updateGlobalScore();
+            state.selectedTermId = null; updateGlobalScore();
+        }
+
+        // ===== CLOZE DINAMICO =====
+        function renderCloze() {
+            const container = document.getElementById('cloze-content');
+            if (!container || !state.currentCloze) return;
+            container.innerHTML = state.currentCloze.html;
         }
 
         function checkCloze() {
             if (state.clozeLocked) return;
             playSound('click');
-            const answers = { 1: "truth-preserving", 2: "non-contraddizione", 3: "medio", 4: "Modus Ponens", 5: "Modus Tollens", 6: "fallacia formale", 7: "validità", 8: "verità", 9: "corretto", 10: "necessaria" };
+            const answers = state.currentCloze.answers;
             let correct = 0;
             for(let i=1; i<=10; i++) {
                 const el = document.getElementById(`cloze-${i}`);
                 if(el) {
                     el.disabled = true;
-                    if(el.value === answers[i]) { 
-                        correct++; 
-                        el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    } else { 
-                        el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    }
+                    if(el.value === answers[i]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; }
+                    else { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; }
                 }
             }
             state.clozeScore = Math.round((correct / 10) * 100);
             state.clozeLocked = true;
-
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed";
-                submitBtn.innerText = "Testo Verificato e Bloccato";
-            }
-
+            if(submitBtn) { submitBtn.disabled = true; submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed"; submitBtn.innerText = "Testo Verificato e Bloccato"; }
             const fb = document.getElementById('cloze-feedback');
-            if(fb) {
-                if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = "Perfetto! Testo completato senza errori (10/10)."; }
-                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Le risposte sono state bloccate.`; }
-            }
+            if(fb) { if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = "Perfetto! Testo completato senza errori (10/10)."; } else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Le risposte sono state bloccate.`; } }
             updateGlobalScore();
         }
 
@@ -781,12 +630,13 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             let modusCorrect = 0; state.activeModusData.forEach(d => { if(state.modusAnswers[d.id] === d.correct) modusCorrect++; });
             let condCorrect = 0; state.activeCondData.forEach(d => { if(state.condAnswers[d.id] === d.correct) condCorrect++; });
             let matchCount = Object.keys(state.matchedPairs || {}).length;
-
-            const total = Math.round((sillCorrect / (state.activeSillData.length || 1))*30 + 
-                                     (modusCorrect / (state.activeModusData.length || 1))*25 + 
-                                     (condCorrect / (state.activeCondData.length || 1))*20 + 
-                                     (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
-                                     (state.clozeScore/100)*10);
+            const total = Math.round(
+                (sillCorrect / (state.activeSillData.length || 1))*30 + 
+                (modusCorrect / (state.activeModusData.length || 1))*25 + 
+                (condCorrect / (state.activeCondData.length || 1))*20 + 
+                (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
+                (state.clozeScore/100)*10
+            );
             const scoreText = document.getElementById('global-score-text');
             if(scoreText) scoreText.innerText = `${total} / 100`;
             return total;
@@ -800,12 +650,10 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             const certScore = document.getElementById('cert-score');
             const certTitle = document.getElementById('cert-title');
             if(certScore) certScore.innerText = `${score} / 100 XP`;
-
             let titleText = "Novizio della Deduzione";
             if(score >= 90) titleText = "Maestro del Sillogismo e della Logica Formale";
             else if(score >= 75) titleText = "Analista Deduttivo Esperto";
             else if(score >= 55) titleText = "Praticante di Logica Formale";
-
             if(badgeEl) badgeEl.innerText = titleText;
             if(certTitle) certTitle.innerText = titleText;
         }
@@ -814,79 +662,44 @@ $\neg A$ assieme) e <strong>Terzo Escluso</strong> (un enunciato dichiarativo è
             playSound('click');
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
             const targetTab = document.getElementById(tabId);
             if(targetTab) targetTab.classList.remove('hidden');
-
-            if(btnElement) {
-                btnElement.classList.add('active');
-            } else {
-                const navButtons = document.querySelectorAll('.tab-btn');
-                navButtons.forEach(b => {
-                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
-                        b.classList.add('active');
-                    }
-                });
-            }
-
+            if(btnElement) { btnElement.classList.add('active'); }
+            else { document.querySelectorAll('.tab-btn').forEach(b => { if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) b.classList.add('active'); }); }
             if(tabId === 'tab-report') updateReport();
         }
 
         function setupRandomQuestions() {
-            state.sillAnswers = {}; 
-            state.modusAnswers = {}; 
-            state.condAnswers = {}; 
-            state.matchedPairs = {}; 
-            state.clozeScore = 0;
-            state.clozeLocked = false;
-            state.selectedTermId = null;
+            state.sillAnswers = {}; state.modusAnswers = {}; state.condAnswers = {}; 
+            state.matchedPairs = {}; state.clozeScore = 0; state.clozeLocked = false; state.selectedTermId = null;
 
-            state.activeSillData = shuffle(sillogismiPool).slice(0, 5);
-            state.activeModusData = shuffle(modusPool).slice(0, 5);
-            state.activeCondData = shuffle(condizioniPool).slice(0, 5);
+            // MODIFICA: .map(shuffleOptions) per randomizzare la posizione della risposta corretta
+            state.activeSillData = shuffle(sillogismiPool).slice(0, 5).map(shuffleOptions);
+            state.activeModusData = shuffle(modusPool).slice(0, 5).map(shuffleOptions);
+            state.activeCondData = shuffle(condizioniPool).slice(0, 5).map(shuffleOptions);
 
             const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
             state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
             state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
 
-            for(let i=1; i<=10; i++) {
-                const el = document.getElementById(`cloze-${i}`);
-                if(el) {
-                    el.disabled = false;
-                    el.value = "";
-                    el.className = "bg-slate-800 text-sky-300 rounded px-2 py-1";
-                }
-            }
+            // MODIFICA: cloze scelto casualmente da un pool di 3 testi
+            state.currentCloze = shuffle(clozePool)[0];
+            renderCloze();
+
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.className = "bg-sky-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer";
-                submitBtn.innerText = "Verifica e Blocca Testo";
-            }
+            if(submitBtn) { submitBtn.disabled = false; submitBtn.className = "bg-sky-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"; submitBtn.innerText = "Verifica e Blocca Testo"; }
             const clozeFb = document.getElementById('cloze-feedback');
             if(clozeFb) clozeFb.innerText = "";
 
-            renderSillogismi(); 
-            renderModus(); 
-            renderCondizioni(); 
-            renderMatching();
+            renderSillogismi(); renderModus(); renderCondizioni(); renderMatching();
             updateGlobalScore();
         }
 
-        function resetAll() {
-            setupRandomQuestions();
-            switchTab('tab-studio');
-        }
+        function resetAll() { setupRandomQuestions(); switchTab('tab-studio'); }
+        function initApp() { setupRandomQuestions(); }
 
-        function initApp() {
-            setupRandomQuestions();
-        }
-
-        if (document.readyState === 'interactive' || document.readyState === 'complete') {
-            initApp();
-        } else {
-            document.addEventListener('DOMContentLoaded', initApp);
-        }
+        if (document.readyState === 'interactive' || document.readyState === 'complete') { initApp(); }
+        else { document.addEventListener('DOMContentLoaded', initApp); }
     </script>
 </body>
 </html>

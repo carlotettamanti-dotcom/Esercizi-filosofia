@@ -33,7 +33,6 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-rose-500 selection:text-slate-950">
 
-    <!-- Header con Navigation Breadcrumb -->
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-2 text-xs sm:text-sm">
@@ -47,7 +46,6 @@
                 <span class="text-slate-600">/</span>
                 <span class="text-rose-400 font-bold">Fallacie & Bias</span>
             </div>
-
             <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
                 <div class="relative flex items-center">
                     <i class="fa-solid fa-user-graduate absolute left-3 text-slate-400 text-xs"></i>
@@ -69,7 +67,6 @@
         </div>
     </header>
 
-    <!-- Navigation Bar -->
     <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
             <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent">
@@ -84,7 +81,6 @@
             <button onclick="switchTab('tab-bias', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
                 <i class="fa-solid fa-brain text-purple-400"></i> 3. Bias Cognitivi
             </button>
-
             <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900">
                 <i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti Concettuali
             </button>
@@ -97,10 +93,8 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
 
-        <!-- TAB 0: STUDIO -->
         <section id="tab-studio" class="tab-content space-y-8">
             <div class="glass-card p-6 sm:p-8 rounded-2xl border-rose-500/20 relative overflow-hidden">
                 <div class="max-w-3xl space-y-3">
@@ -152,36 +146,32 @@
             </div>
         </section>
 
-        <!-- TAB 1: FALLACIE INFORMALI -->
         <section id="tab-strutturali" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 1: Fallacie di Distorsione, Attacco ed Evitamento (5 Quesiti)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 1: Fallacie di Distorsione, Attacco ed Evitamento</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Identifica Strawman, Ad Hominem, Falsa Dicotomia, Red Herring e Pendio Scivoloso. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="strutturali-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 2: FALLACIE DEGLI APPELLI -->
         <section id="tab-appelli" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 2: Le Fallacie degli Appelli Esterni (5 Quesiti)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-sky-400">Esercizio 2: Le Fallacie degli Appelli Esterni</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Riconosci i richiami indebiti a Natura, Popolarità, Emozioni, Autorità, Tradizione ed Ignoranza. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="appelli-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 3: BIAS COGNITIVI -->
         <section id="tab-bias" class="tab-content hidden space-y-6">
             <div class="space-y-2">
-                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Bias Cognitivi ed Euristiche Mentali (5 Quesiti)</h2>
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Bias Cognitivi ed Euristiche Mentali</h2>
                 <p class="text-xs sm:text-sm text-slate-400">Analizza Cherry Picking, Echo Chamber, Backfire Effect e Bias di Conferma. <em>(Risposte bloccate al primo click)</em></p>
             </div>
             <div id="bias-container" class="space-y-6"></div>
         </section>
 
-        <!-- TAB 4: CLASSIFICAZIONE MATCHING -->
         <section id="tab-classificazione" class="tab-content hidden space-y-6">
-            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti delle Fallacie e dei Bias (8 Coppie)</h2>
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti delle Fallacie e dei Bias</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div id="matching-terms" class="space-y-2.5"></div>
@@ -191,30 +181,27 @@
             </div>
         </section>
 
-        <!-- TAB 5: CLOZE TEST -->
         <section id="tab-cloze" class="tab-content hidden space-y-6">
             <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 5: Cloze Test su Fallacie e Bias</h2>
             <div class="glass-card p-6 rounded-2xl space-y-6">
                 <div class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200">
-                    Le fallacie si dividono in formali e informali. La fallacia dello <select id="cloze-1" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Strawman">Strawman</option><option value="Modus Tollens">Modus Tollens</option></select> consiste nel ridicolizzare o distorcere la tesi avversaria per confutarla agevolmente. L'attacco rivolto direttamente alla persona anziché al suo argomento si chiama <select id="cloze-2" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Ad Hominem">Ad Hominem</option><option value="Ad Populum">Ad Populum</option></select>. Quando si presuppone che esistano unicamente due scelte opposte ignorando le sfumature si commette una <select id="cloze-3" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Falsa Dicotomia">Falsa Dicotomia</option><option value="Aringa Rossa">Aringa Rossa</option></select>. Sviare la conversazione verso un argomento irrilevante è detto anche <select id="cloze-4" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Red Herring">Red Herring</option><option value="Pendio Scivoloso">Pendio Scivoloso</option></select>. Ritenere che un prodotto sia buono solo perché 'naturale' rappresenta l'appello alla <select id="cloze-5" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Natura">Natura</option><option value="Tradizione">Tradizione</option></select>. L'onere della prova (<select id="cloze-6" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="burden of proof">burden of proof</option><option value="strawman">strawman</option></select>) spetta sempre a chi fa un'affermazione. A livello psicologico, la tendenza a considerare unicamente le informazioni coerenti con le proprie idee preesistenti è il bias della <select id="cloze-7" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Conferma">Conferma</option><option value="Selezione">Selezione</option></select>. Selezionare opportunisticamente solo i dati favorevoli ignorando le critiche è noto come <select id="cloze-8" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Cherry Picking">Cherry Picking</option><option value="Echo Chamber">Echo Chamber</option></select>. Quando un gruppo sui social network rafforza continuamente le proprie idee isolate si crea una <select id="cloze-9" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Echo Chamber">Echo Chamber</option><option value="Falsa Dicotomia">Falsa Dicotomia</option></select>. Infine, il fenomeno per cui presentare prove contrarie porta la persona a rafforzare l'opinione errata è il <select id="cloze-10" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Backfire Effect">Backfire Effect</option><option value="Tu Quoque">Tu Quoque</option></select>.
+                    Le fallacie si dividono in formali e informali. La fallacia dello <select id="cloze-1" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Strawman">Strawman</option><option value="Ad Hominem">Ad Hominem</option><option value="Modus Tollens">Modus Tollens</option></select> consiste nel ridicolizzare o distorcere la tesi avversaria per confutarla agevolmente. L'attacco rivolto direttamente alla persona anziché al suo argomento si chiama <select id="cloze-2" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Ad Hominem">Ad Hominem</option><option value="Ad Populum">Ad Populum</option><option value="Tu Quoque">Tu Quoque</option></select>. Quando si presuppone che esistano unicamente due scelte opposte ignorando le sfumature si commette una <select id="cloze-3" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Falsa Dicotomia">Falsa Dicotomia</option><option value="Aringa Rossa">Aringa Rossa</option><option value="Pendio Scivoloso">Pendio Scivoloso</option></select>. Sviare la conversazione verso un argomento irrilevante è detto anche <select id="cloze-4" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Red Herring">Red Herring</option><option value="Pendio Scivoloso">Pendio Scivoloso</option><option value="Cherry Picking">Cherry Picking</option></select>. Ritenere che un prodotto sia buono solo perché 'naturale' rappresenta l'appello alla <select id="cloze-5" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Natura">Natura</option><option value="Tradizione">Tradizione</option><option value="Novità">Novità</option></select>. L'onere della prova (<select id="cloze-6" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="burden of proof">burden of proof</option><option value="strawman">strawman</option><option value="modus tollens">modus tollens</option></select>) spetta sempre a chi fa un'affermazione. A livello psicologico, la tendenza a considerare unicamente le informazioni coerenti con le proprie idee preesistenti è il bias della <select id="cloze-7" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Conferma">Conferma</option><option value="Selezione">Selezione</option><option value="Disponibilità">Disponibilità</option></select>. Selezionare opportunisticamente solo i dati favorevoli ignorando le critiche è noto come <select id="cloze-8" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Cherry Picking">Cherry Picking</option><option value="Echo Chamber">Echo Chamber</option><option value="Backfire Effect">Backfire Effect</option></select>. Quando un gruppo sui social network rafforza continuamente le proprie idee isolate si crea una <select id="cloze-9" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Echo Chamber">Echo Chamber</option><option value="Falsa Dicotomia">Falsa Dicotomia</option><option value="Ad Populum">Ad Populum</option></select>. Infine, il fenomeno per cui presentare prove contrarie porta la persona a rafforzare l'opinione errata è il <select id="cloze-10" class="bg-slate-800 text-rose-300 rounded px-2 py-1"><option value="">[?]</option><option value="Backfire Effect">Backfire Effect</option><option value="Tu Quoque">Tu Quoque</option><option value="Strawman">Strawman</option></select>.
                 </div>
                 <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-rose-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
                 <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
             </div>
         </section>
 
-        <!-- TAB 6: REPORT -->
         <section id="tab-report" class="tab-content hidden space-y-6">
             <div class="glass-card p-8 rounded-2xl text-center space-y-6">
                 <h2 class="font-cinzel text-2xl font-bold text-rose-400">Valutazione Finale: Fallacie e Bias Cognitivi</h2>
                 <div class="text-4xl font-black text-rose-400" id="report-score">0 / 100 XP</div>
                 <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
-                <div class="flex justify-center gap-4">
+                <div class="flex flex-wrap justify-center gap-4">
                     <button onclick="window.print()" class="bg-rose-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
                     <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
                 </div>
             </div>
-
             <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-rose-500/40 text-center space-y-6">
                 <div class="border-2 border-dashed border-rose-500/30 p-8 rounded-2xl space-y-6">
                     <div class="font-cinzel text-rose-400 text-3xl font-black tracking-widest uppercase">Certificato di Bonifica delle Fallacie</div>
@@ -234,7 +221,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
         <a href="index.html" class="hover:text-rose-400 transition-colors">
             <i class="fa-solid fa-house mr-1"></i> Home Portale
@@ -247,20 +233,12 @@
 
     <script>
         const state = { 
-            studentName: "Studente", 
-            audioEnabled: true, 
-            struAnswers: {}, 
-            appAnswers: {}, 
-            biasAnswers: {}, 
-            matchedPairs: {}, 
-            clozeScore: 0, 
-            clozeLocked: false,
+            studentName: "Studente", audioEnabled: true, 
+            struAnswers: {}, appAnswers: {}, biasAnswers: {}, 
+            matchedPairs: {}, clozeScore: 0, clozeLocked: false,
             selectedTermId: null,
-            activeStruData: [],
-            activeAppData: [],
-            activeBiasData: [],
-            activeMatchingTerms: [],
-            activeMatchingDefs: []
+            activeStruData: [], activeAppData: [], activeBiasData: [],
+            activeMatchingTerms: [], activeMatchingDefs: []
         };
 
         let audioCtx = null;
@@ -293,317 +271,182 @@
             return arr;
         }
 
-        // ================= POOL QUESITI FALLACIE =================
+        // NUOVA FUNZIONE: rimescola le opzioni di una domanda
+        function shuffleOptions(item) {
+            const indices = item.options.map((_, i) => i);
+            const shuffledIndices = shuffle(indices);
+            const newOptions = shuffledIndices.map(i => item.options[i]);
+            const newCorrect = shuffledIndices.indexOf(item.correct);
+            return { ...item, options: newOptions, correct: newCorrect };
+        }
+
+        // ===== POOLS A LUNGHEZZA BILANCIATA =====
         const strutturaliPool = [
-            {
-                id: 101, title: "L'Articolo Scientifico e lo Studente (Strawman)",
-                text: "«Studente: 'Dati i miei contributi a questa ricerca, penso di meritare di condividere i crediti con il primo autore.'\nProfessore: 'Ah, quindi la fama per te è più importante della scienza? Che tristezza!'»",
-                question: "Quale fallacia ha applicato il professore?",
-                options: [
-                    "Strawman (Argomento Fantoccio): ha distorto la richiesta legittima dello studente trasformandolo in un assetato di fama per rifiutarla facilmente.",
-                    "Ad Hominem diretto sul peso corporeo.",
-                    "Fallacia dell'Appello alla Natura.",
-                    "Modus Tollens non corretto."
-                ],
-                correct: 0, explanation: "Lo Strawman consiste nel malrappresentare l'argomento altrui in una forma estremizzata e debole per poterlo confutare agevolmente."
-            },
-            {
-                id: 102, title: "Limiti allo Schermo dei Bambini (Strawman)",
-                text: "«Persona A: 'Dovremmo limitare il tempo che i bambini passano davanti agli schermi per proteggere la loro salute.'\nPersona B: 'Quindi vuoi vietare la tecnologia ai bambini e farli vivere come nel Medioevo?'»",
-                question: "Quale errore argomentativo commette la Persona B?",
-                options: [
-                    "Strawman (Fantoccio): estrapola un divieto totale medioevale mai proposto dalla Persona A.",
-                    "Falsa Dicotomia tra matematica e fisica.",
-                    "Appello all'Autorità di Einstein.",
-                    "Negazione dell'antecedente."
-                ],
-                correct: 0, explanation: "Limitare il tempo non significa vietare la tecnologia: la risposta distorce la posizione di A in un fantoccio assurdo."
-            },
-            {
-                id: 103, title: "Dieta, Esercizio e Sovrappeso (Ad Hominem)",
-                text: "«Persona A: 'Gli studi dimostrano che dieta equilibrata ed esercizio fisico sono fondamentali.'\nPersona B: 'Non mi interessa cosa dici sulla salute, sei in sovrappeso!'»",
-                question: "Quale fallacia è stata commessa dalla Persona B?",
-                options: [
-                    "Ad Hominem: attacca le caratteristiche personali di A anziché confutare i dati scientifici sulla salute.",
-                    "Sillogismo disgiuntivo invalido.",
-                    "Appello alla popolarità.",
-                    "Red Herring sull'economia."
-                ],
-                correct: 0, explanation: "L'Ad Hominem sposta l'attenzione dalla verità della tesi alle presunte mancanze della persona che la esprime."
-            },
-            {
-                id: 104, title: "Il Medico Fumatore (Tu Quoque)",
-                text: "«Un medico fumatore spiega scientificamente a un paziente perché il fumo danneggia i polmoni. Il paziente risponde: 'Ma se tu fumi! La tua spiegazione non vale niente!'»",
-                question: "Quale variante dell'Ad Hominem commette il paziente?",
-                options: [
-                    "Fallacia del Tu Quoque ('anche tu'): accusa il parlante di ipocrisia, ignorando che l'ipocrisia non altera la verità dei fatti medici.",
-                    "Falsa dicotomia.",
-                    "Appello alla natura.",
-                    "Pendio scivoloso."
-                ],
-                correct: 0, explanation: "L'essere ipocriti non rende falsa un'affermazione medica provata: la risposta è una fallacia del Tu Quoque."
-            },
-            {
-                id: 105, title: "Riforma dell'Istruzione e Meriti Personali (Red Herring)",
-                text: "«Alice: 'Dovremmo concentrarci sulla riforma strutturale dell'istruzione.'\nBob: 'Ma io ho fatto l'insegnante per anni e ho dedicato la mia vita ai bambini, e sembra che tu non apprezzi i miei sforzi!'»",
-                question: "Quale fallacia commette Bob spostando il discorso sui suoi sentimenti?",
-                options: [
-                    "Red Herring (Aringa Rossa / Irrilevanza): svia dalla riforma generale verso la difesa personale irrilevante.",
-                    "Modus Ponens corretto.",
-                    "Appello all'ignoranza.",
-                    "Cherry picking statistico."
-                ],
-                correct: 0, explanation: "L'Aringa Rossa introduce un tema personale patetico ma irrilevante rispetto al problema della riforma dell'istruzione."
-            },
-            {
-                id: 106, title: "Posizionamento Politico (Falsa Dicotomia)",
-                text: "«'Se critichi le proposte della sinistra allora sei un fascista; se critichi la destra allora sei un comunista.'»",
-                question: "Perché questa affermazione è una FALSA DICOTOMIA (Bianco o Nero)?",
-                options: [
-                    "Riduce la complessa realtà politica a due sole opzioni estreme escludendo lo spettro delle posizioni moderate e sfumate.",
-                    "Perché usa parole in latino.",
-                    "Perché è un attacco Ad Hominem.",
-                    "Perché usa un campione di 1000 persone."
-                ],
-                correct: 0, explanation: "La falsa dicotomia ignora la gamma dei grigi fingendo che esistano solo due alternative mutualmente esclusive."
-            },
-            {
-                id: 107, title: "Videogiochi e Criminalità (Pendio Scivoloso)",
-                text: "«'Se permettiamo ai ragazzi di giocare ai videogiochi violenti, diventeranno insensibili, poi aggressivi e infine diventeranno tutti criminali.'»",
-                question: "Quale errore argomentativo è presente?",
-                options: [
-                    "Pendio Scivoloso (Slippery Slope): assume una catena inevitabile ed estrema di eventi negativi senza alcuna prova.",
-                    "Appello alla popolarità.",
-                    "Strawman sul Medioevo.",
-                    "Modus Tollens valido."
-                ],
-                correct: 0, explanation: "Il Pendio Scivoloso prospetta scenari catastrofici concatenati senza dimostrare la necessità dei singoli passaggi."
-            },
-            {
-                id: 108, title: "Voto all'Esame e Senzatetto (Pendio Scivoloso + Emozioni)",
-                text: "«Studente al prof: 'Se mi boccia, la mia vita andrà a rotoli, finirò a fare il senzatetto sotto una tenda e sarà colpa sua!'»",
-                question: "Quale combinazione di fallacie sta tentando lo studente?",
-                options: [
-                    "Pendio Scivoloso unito ad Appello alle Emozioni (senso di colpa).",
-                    "Modus Ponens valido.",
-                    "Appello alla Tradizione.",
-                    "Rasoio di Ockham."
-                ],
-                correct: 0, explanation: "Catena estrema non provata (bocciatura -> tenda da senzatetto) associata al ricatto emotivo sul docente."
-            }
+            { id:101, title:"L'Articolo Scientifico e lo Studente (Strawman)", text:"«Studente: 'Dati i miei contributi a questa ricerca, penso di meritare di condividere i crediti con il primo autore.'\nProfessore: 'Ah, quindi la fama per te è più importante della scienza? Che tristezza!'»", question:"Quale fallacia ha applicato il professore?", options:[
+                "Strawman (Fantoccio): ha distorto la richiesta legittima dello studente in un'accusa di avidità di fama per rifiutarla con facilità.",
+                "Ad Hominem: ha attaccato la persona dello studente anziché la sua richiesta, magari deridendolo per l'aspetto fisico o per l'età.",
+                "Appello alla Natura: ha sostenuto che la richiesta dello studente è sbagliata solo perché non corrisponde alla natura umana.",
+                "Modus Tollens: ha negato una conclusione valida del ragionamento, invertendo erroneamente il rapporto di implicazione logica."
+            ], correct:0, explanation:"Lo Strawman consiste nel malrappresentare l'argomento altrui in una forma estremizzata e debole per poterlo confutare agevolmente." },
+            { id:102, title:"Limiti allo Schermo dei Bambini (Strawman)", text:"«Persona A: 'Dovremmo limitare il tempo che i bambini passano davanti agli schermi per proteggere la loro salute.'\nPersona B: 'Quindi vuoi vietare la tecnologia ai bambini e farli vivere come nel Medioevo?'»", question:"Quale errore argomentativo commette la Persona B?", options:[
+                "Strawman (Fantoccio): estrapola un divieto totale medioevale mai proposto dalla Persona A, per renderlo facile da attaccare.",
+                "Falsa Dicotomia: riduce la questione a due sole opzioni opposte, schermo libero oppure divieto totale senza vie di mezzo.",
+                "Appello all'Autorità: cita presunte direttive scientifiche senza fornire alcun riferimento verificabile o documento ufficiale.",
+                "Negazione dell'Antecedente: scambia antecedente e conseguente del condizionale logico originario in modo scorretto."
+            ], correct:0, explanation:"Limitare il tempo non significa vietare la tecnologia: la risposta distorce la posizione di A in un fantoccio assurdo." },
+            { id:103, title:"Dieta, Esercizio e Sovrappeso (Ad Hominem)", text:"«Persona A: 'Gli studi dimostrano che dieta equilibrata ed esercizio fisico sono fondamentali.'\nPersona B: 'Non mi interessa cosa dici sulla salute, sei in sovrappeso!'»", question:"Quale fallacia è stata commessa dalla Persona B?", options:[
+                "Ad Hominem: attacca le caratteristiche personali di A anziché confutare i dati scientifici sulla salute da lui citati.",
+                "Sillogismo disgiuntivo: ha eliminato un'alternativa logicamente sbagliata senza giustificarne in alcun modo il motivo.",
+                "Appello alla Popolarità: sostiene la tesi solo perché è condivisa da una maggioranza di persone all'interno della società.",
+                "Red Herring: devia il discorso su un tema economico completamente estraneo alla questione di partenza iniziale."
+            ], correct:0, explanation:"L'Ad Hominem sposta l'attenzione dalla verità della tesi alle presunte mancanze della persona che la esprime." },
+            { id:104, title:"Il Medico Fumatore (Tu Quoque)", text:"«Un medico fumatore spiega scientificamente a un paziente perché il fumo danneggia i polmoni. Il paziente risponde: 'Ma se tu fumi! La tua spiegazione non vale niente!'»", question:"Quale variante dell'Ad Hominem commette il paziente?", options:[
+                "Fallacia del Tu Quoque ('anche tu'): accusa il parlante di ipocrisia, ignorando che l'ipocrisia non altera la verità dei fatti medici.",
+                "Falsa Dicotomia: riduce la questione del fumo a due sole alternative opposte senza considerare le sfumature intermedie possibili.",
+                "Appello alla Natura: sostiene che fumare sia giusto perché è una pratica storicamente diffusa tra gli esseri umani da secoli.",
+                "Pendio Scivoloso: prevede una catena inevitabile di conseguenze estreme che non hanno alcun fondamento scientifico dimostrato."
+            ], correct:0, explanation:"L'essere ipocriti non rende falsa un'affermazione medica provata: la risposta è una fallacia del Tu Quoque." },
+            { id:105, title:"Riforma dell'Istruzione e Meriti Personali (Red Herring)", text:"«Alice: 'Dovremmo concentrarci sulla riforma strutturale dell'istruzione.'\nBob: 'Ma io ho fatto l'insegnante per anni e ho dedicato la mia vita ai bambini, e sembra che tu non apprezzi i miei sforzi!'»", question:"Quale fallacia commette Bob spostando il discorso sui suoi sentimenti?", options:[
+                "Red Herring (Aringa Rossa): svia dalla riforma generale verso la difesa personale dei suoi meriti di insegnante da anni.",
+                "Modus Ponens: ha applicato correttamente il condizionale 'Se X allora Y, X è vero, quindi Y è vero' al tema della riforma.",
+                "Appello all'Ignoranza: sostiene che la riforma sia impossibile solo perché non è stata ancora dimostrata la sua piena fattibilità.",
+                "Cherry Picking: seleziona solo le statistiche favorevoli alla sua tesi trascurando quelle contrarie e per lui scomode."
+            ], correct:0, explanation:"L'Aringa Rossa introduce un tema personale patetico ma irrilevante rispetto al problema della riforma dell'istruzione." },
+            { id:106, title:"Posizionamento Politico (Falsa Dicotomia)", text:"«'Se critichi le proposte della sinistra allora sei un fascista; se critichi la destra allora sei un comunista.'»", question:"Perché questa affermazione è una FALSA DICOTOMIA (Bianco o Nero)?", options:[
+                "Riduce la complessa realtà politica a due sole opzioni estreme, escludendo lo spettro delle posizioni moderate e sfumate.",
+                "Perché utilizza parole e concetti in latino, rendendo incomprensibile ai più il ragionamento politico che viene proposto.",
+                "Perché è un attacco Ad Hominem rivolto alla persona di chi parla anziché al contenuto delle sue argomentazioni politiche.",
+                "Perché usa un campione statistico di soli 1000 cittadini intervistati, non rappresentativo dell'intera popolazione elettorale."
+            ], correct:0, explanation:"La falsa dicotomia ignora la gamma dei grigi fingendo che esistano solo due alternative mutualmente esclusive." },
+            { id:107, title:"Videogiochi e Criminalità (Pendio Scivoloso)", text:"«'Se permettiamo ai ragazzi di giocare ai videogiochi violenti, diventeranno insensibili, poi aggressivi e infine diventeranno tutti criminali.'»", question:"Quale errore argomentativo è presente?", options:[
+                "Pendio Scivoloso: assume una catena inevitabile ed estrema di eventi negativi senza portare alcuna prova empirica a supporto.",
+                "Appello alla Popolarità: sostiene una tesi solo perché è condivisa da una maggioranza di persone all'interno della società.",
+                "Strawman: distorce l'argomento dell'avversario in una caricatura estrema che non corrisponde alla posizione originale espressa.",
+                "Modus Tollens: ha applicato in modo corretto il condizionale 'Se X allora Y, non Y quindi non X' al fenomeno in questione."
+            ], correct:0, explanation:"Il Pendio Scivoloso prospetta scenari catastrofici concatenati senza dimostrare la necessità dei singoli passaggi." },
+            { id:108, title:"Voto all'Esame e Senzatetto (Pendio Scivoloso + Emozioni)", text:"«Studente al prof: 'Se mi boccia, la mia vita andrà a rotoli, finirò a fare il senzatetto sotto una tenda e sarà colpa sua!'»", question:"Quale combinazione di fallacie sta tentando lo studente?", options:[
+                "Pendio Scivoloso unito ad Appello alle Emozioni: prevede esiti estremi e usa il senso di colpa per manipolare il docente.",
+                "Modus Ponens valido accompagnato da una premessa empirica verificata attraverso ricerche statistiche ufficiali nel settore.",
+                "Appello alla Tradizione accompagnato da una petizione di principio che assume ciò che deve essere ancora dimostrato in merito.",
+                "Rasoio di Ockham applicato correttamente per ridurre la complessità del problema a un unico fattore determinante di causa."
+            ], correct:0, explanation:"Catena estrema non provata (bocciatura -> tenda da senzatetto) associata al ricatto emotivo sul docente." }
         ];
 
         const appelliPool = [
-            {
-                id: 201, title: "Cosmesi e Cibo Biologico (Appello alla Natura)",
-                text: "«'Questa crema corpo è al 100% naturale, quindi è assolutamente benefica e priva di rischi rispetto ai prodotti chimici di laboratorio.'»",
-                question: "Perché questo ragionamento è una Fallacia dell'Appello alla Natura?",
-                options: [
-                    "Presuppone erroneamente che ciò che è naturale sia sempre buono, ignorando che in natura esistono veleni letali come l'arsenico o funghi velenosi.",
-                    "Perché la crema è stata testata su un cigno nero.",
-                    "Perché i laboratori sono una falsa dicotomia.",
-                    "Perché usa un Modus Ponens."
-                ],
-                correct: 0, explanation: "La natura non ha un valore morale intrinsecamente positivo: l'arsenico o il veleno di vipera sono naturali ma altamente tossici."
-            },
-            {
-                id: 202, title: "Musica e Classifiche (Appello alla Popolarità - Ad Populum)",
-                text: "«'Questo cantante è un genio assoluto dell'arte musicale: il suo ultimo disco ha venduto milioni di copie ed è primo in classifica!'»",
-                question: "Quale fallacia sostiene la bontà della musica basandosi sulle vendite?",
-                options: [
-                    "Appello alla Popolarità (Ad Populum): confonde il successo commerciale o di moda con il valore artistico reale.",
-                    "Ad Hominem Tu Quoque.",
-                    "Strawman sul passato.",
-                    "Pendio Scivoloso."
-                ],
-                correct: 0, explanation: "Il fatto che una cosa piaccia a molte persone (popolarità) non ne dimostra la qualità intrinseca o la verità."
-            },
-            {
-                id: 203, title: "Elon Musk e l'Intelligenza Artificiale (Appello all'Autorità)",
-                text: "«'Elon Musk ha detto che l'Intelligenza Artificiale distruggerà l'umanità, quindi deve essere per forza così!'»",
-                question: "Quale fallacia viene applicata citando Musk?",
-                options: [
-                    "Appello all'Autorità (Ad Verecundiam): ricorre alla fama di un personaggio anziché fornire argomenti e dati tecnici sulla sicurezza dell'AI.",
-                    "Appello alla Natura.",
-                    "Falsa Dicotomia.",
-                    "Red Herring economico."
-                ],
-                correct: 0, explanation: "Invocare l'opinione di una celebrità senza portare prove fattuali o consenso scientifico è un appello all'autorità."
-            },
-            {
-                id: 204, title: "Matrimonio e Tradizione (Appello alla Tradizione)",
-                text: "«'Il matrimonio è sempre stato inteso tra uomo e donna nel corso dei secoli, quindi non dobbiamo cambiare la legge.'»",
-                question: "Quale fallacia presuppone che la storicità sia valore di verità?",
-                options: [
-                    "Appello alla Tradizione: assume che una pratica sia giusta solo perché è stata fatta per molto tempo nel passato.",
-                    "Appello alla Novità.",
-                    "Bias di autoselezione.",
-                    "Modus Tollens."
-                ],
-                correct: 0, explanation: "L'anzianità di una consuetudine non la rende eticamente o logicamente corretta (anche lo schiavismo è stato una tradizione millenaria)."
-            },
-            {
-                id: 205, title: "Nuovo Modello di Smartphone (Appello alla Novità)",
-                text: "«'Devi assolutamente comprare questo nuovo modello di telefono: è appena uscito sul mercato quindi è senz'altro migliore di quello vecchio!'»",
-                question: "Qual è il difetto logico dell'Appello alla Novità?",
-                options: [
-                    "Presuppone che la novità cronologica garantisca superiorità senza confrontare le specifiche tecniche reali.",
-                    "È una fallacia di affermazione del conseguente.",
-                    "È un bias di campionamento telefonico.",
-                    "È un attacco ad hominem."
-                ],
-                correct: 0, explanation: "Il semplice fatto che un prodotto sia recente non implica che funzioni meglio o valga il prezzo rispetto alle versioni precedenti."
-            },
-            {
-                id: 206, title: "Fantasmi in Casa ed Onere della Prova (Appello all'Ignoranza)",
-                text: "«'La mia casa è infestata dai fantasmi. Dici di no? Allora dimostrami che NON ci sono i fantasmi!'»",
-                question: "Quale fallacia commette chi ribalta il carico della prova?",
-                options: [
-                    "Appello all'Ignoranza (Ad Ignorantiam) e violazione dell'Onere della Prova (Burden of Proof).",
-                    "Appello alle emozioni di paura.",
-                    "Modus Ponens della fisica.",
-                    "Cherry picking delle foto."
-                ],
-                correct: 0, explanation: "L'onere della prova spetta sempre a chi afferma l'esistenza di un fatto insolito, non a chi lo nega."
-            },
-            {
-                id: 207, title: "Pubblicità Politica sulla Paura (Appello alle Emozioni)",
-                text: "«'Non votate per i nostri avversari! Se vincono loro non sarete più al sicuro nemmeno dentro le vostre case!'»",
-                question: "Su quale meccanismo retorico si regge questo manifesto?",
-                options: [
-                    "Appello alle Emozioni (Paura): manipola lo stato emotivo dell'elettore anziché presentare un programma economico.",
-                    "Appello all'Autorità scientifica.",
-                    "Rasoio di Ockham.",
-                    "Legge dei grandi numeri."
-                ],
-                correct: 0, explanation: "Le emozioni (paura, rabbia, pietà) vengono usate in sostituzione delle prove e della discussione razionale."
-            },
-            {
-                id: 208, title: "Premio Nobel e Vaccini (Autorità Impropria)",
-                text: "«'Un premio Nobel per la medicina di 20 anni fa ha espresso dubbi sui vaccini attuali, quindi i vaccini sono pericolosi.'»",
-                question: "Perché citare un singolo scienziato isolato è un Appello all'Autorità fallace?",
-                options: [
-                    "Perché ignora il consenso scientifico generale basato su migliaia di studi, affidandosi all'opinione personale di un singolo individuo.",
-                    "Perché il premio Nobel è una falsa dicotomia.",
-                    "Perché la medicina è un'abduzione.",
-                    "Perché i vaccini sono naturali."
-                ],
-                correct: 0, explanation: "Anche uno scienziato celebre può sbagliare: nella scienza vale il consenso delle prove trasparenti, non l'autorità del singolo."
-            }
+            { id:201, title:"Cosmesi e Cibo Biologico (Appello alla Natura)", text:"«'Questa crema corpo è al 100% naturale, quindi è assolutamente benefica e priva di rischi rispetto ai prodotti chimici di laboratorio.'»", question:"Perché questo ragionamento è una Fallacia dell'Appello alla Natura?", options:[
+                "Presuppone che ciò che è naturale sia sempre buono, ignorando che in natura esistono veleni letali come l'arsenico o funghi mortali.",
+                "Perché la crema è stata testata su un cigno nero, animale esotico che non è rappresentativo della popolazione umana di riferimento.",
+                "Perché i laboratori sono una falsa dicotomia tra prodotti artificiali e naturali, senza considerare le vie di mezzo intermedie possibili.",
+                "Perché usa un Modus Ponens in cui la premessa maggiore è la conclusione stessa, generando così una petizione di principio."
+            ], correct:0, explanation:"La natura non ha un valore morale intrinsecamente positivo: l'arsenico o il veleno di vipera sono naturali ma altamente tossici." },
+            { id:202, title:"Musica e Classifiche (Appello alla Popolarità - Ad Populum)", text:"«'Questo cantante è un genio assoluto dell'arte musicale: il suo ultimo disco ha venduto milioni di copie ed è primo in classifica!'»", question:"Quale fallacia sostiene la bontà della musica basandosi sulle vendite?", options:[
+                "Appello alla Popolarità (Ad Populum): confonde il successo commerciale o di moda con il valore artistico reale e duraturo.",
+                "Ad Hominem Tu Quoque: attacca la persona del critico accusandola di ipocrisia invece di analizzare il valore dell'opera.",
+                "Strawman sul passato: distorce l'argomento di chi apprezza la musica classica per renderlo più facile da confutare in pubblico.",
+                "Pendio Scivoloso: immagina che il successo commerciale porti inevitabilmente a una degenerazione dell'intero settore musicale."
+            ], correct:0, explanation:"Il fatto che una cosa piaccia a molte persone (popolarità) non ne dimostra la qualità intrinseca o la verità." },
+            { id:203, title:"Elon Musk e l'Intelligenza Artificiale (Appello all'Autorità)", text:"«'Elon Musk ha detto che l'Intelligenza Artificiale distruggerà l'umanità, quindi deve essere per forza così!'»", question:"Quale fallacia viene applicata citando Musk?", options:[
+                "Appello all'Autorità (Ad Verecundiam): ricorre alla fama di un personaggio anziché a dati tecnici e a un consenso scientifico.",
+                "Appello alla Natura: sostiene che l'AI sia pericolosa solo perché non è un prodotto naturale creato dalla selezione biologica.",
+                "Falsa Dicotomia: riduce la questione dell'AI a due sole alternative estreme, salvezza totale o distruzione completa dell'umanità.",
+                "Red Herring economico: introduce considerazioni di mercato azionario irrilevanti rispetto alla questione etica dell'AI stessa."
+            ], correct:0, explanation:"Invocare l'opinione di una celebrità senza portare prove fattuali o consenso scientifico è un appello all'autorità." },
+            { id:204, title:"Matrimonio e Tradizione (Appello alla Tradizione)", text:"«'Il matrimonio è sempre stato inteso tra uomo e donna nel corso dei secoli, quindi non dobbiamo cambiare la legge.'»", question:"Quale fallacia presuppone che la storicità sia valore di verità?", options:[
+                "Appello alla Tradizione: assume che una pratica sia giusta solo perché è stata fatta per molto tempo nel passato storico.",
+                "Appello alla Novità: sostiene che una pratica sia giusta solo perché è recente, rovesciando erroneamente il criterio di valutazione.",
+                "Bias di autoselezione: valuta solo i casi favorevoli alla propria tesi trascurando quelli contrari che pure esistono nella realtà.",
+                "Modus Tollens: applica correttamente il condizionale logico 'Se X allora Y, non Y quindi non X' alla questione storica del matrimonio."
+            ], correct:0, explanation:"L'anzianità di una consuetudine non la rende eticamente o logicamente corretta (anche lo schiavismo è stato una tradizione millenaria)." },
+            { id:205, title:"Nuovo Modello di Smartphone (Appello alla Novità)", text:"«'Devi assolutamente comprare questo nuovo modello di telefono: è appena uscito sul mercato quindi è senz'altro migliore di quello vecchio!'»", question:"Qual è il difetto logico dell'Appello alla Novità?", options:[
+                "Presuppone che la novità cronologica garantisca superiorità senza confrontare le specifiche tecniche reali dei due dispositivi.",
+                "È una fallacia di Affermazione del Conseguente, perché deduce la qualità del prodotto dalla sua presenza sul mercato attuale.",
+                "È un Bias di campionamento telefonico, perché le opinioni sui nuovi telefoni sono raccolte solo da un pubblico specialistico.",
+                "È un attacco Ad Hominem verso chi preferisce i modelli vecchi, accusato ingiustamente di essere un nostalgico retrogrado."
+            ], correct:0, explanation:"Il semplice fatto che un prodotto sia recente non implica che funzioni meglio o valga il prezzo rispetto alle versioni precedenti." },
+            { id:206, title:"Fantasmi in Casa ed Onere della Prova (Appello all'Ignoranza)", text:"«'La mia casa è infestata dai fantasmi. Dici di no? Allora dimostrami che NON ci sono i fantasmi!'»", question:"Quale fallacia commette chi ribalta il carico della prova?", options:[
+                "Appello all'Ignoranza (Ad Ignorantiam): viola l'Onere della Prova, che spetta sempre a chi afferma un fatto, non a chi lo nega.",
+                "Appello alle Emozioni di paura: cerca di spaventare l'interlocutore per indurlo ad accettare la tesi senza discuterla razionalmente.",
+                "Modus Ponens della fisica: applica erroneamente una legge fisica alla questione spirituale, confondendo piani di discorso diversi.",
+                "Cherry Picking delle foto: mostra solo le immagini che confermano la sua tesi, omettendo accuratamente quelle contrarie."
+            ], correct:0, explanation:"L'onere della prova spetta sempre a chi afferma l'esistenza di un fatto insolito, non a chi lo nega." },
+            { id:207, title:"Pubblicità Politica sulla Paura (Appello alle Emozioni)", text:"«'Non votate per i nostri avversari! Se vincono loro non sarete più al sicuro nemmeno dentro le vostre case!'»", question:"Su quale meccanismo retorico si regge questo manifesto?", options:[
+                "Appello alle Emozioni (Paura): manipola lo stato emotivo dell'elettore anziché presentare un programma politico concreto.",
+                "Appello all'Autorità scientifica: cita presunti esperti che sostengono la tesi senza però fornirne alcuna prova verificabile.",
+                "Rasoio di Ockham: riduce eccessivamente la complessità del dibattito politico a un unico semplicistico fattore causale.",
+                "Legge dei Grandi Numeri: applica erroneamente un principio statistico alla previsione degli esiti elettorali futuri."
+            ], correct:0, explanation:"Le emozioni (paura, rabbia, pietà) vengono usate in sostituzione delle prove e della discussione razionale." },
+            { id:208, title:"Premio Nobel e Vaccini (Autorità Impropria)", text:"«'Un premio Nobel per la medicina di 20 anni fa ha espresso dubbi sui vaccini attuali, quindi i vaccini sono pericolosi.'»", question:"Perché citare un singolo scienziato isolato è un Appello all'Autorità fallace?", options:[
+                "Perché ignora il consenso scientifico generale basato su migliaia di studi, affidandosi all'opinione personale di un singolo.",
+                "Perché il premio Nobel è una falsa dicotomia tra scienza ufficiale e scienza alternativa, senza considerare le vie intermedie.",
+                "Perché la medicina è un'abduzione, cioè un ragionamento probabilistico che non può mai raggiungere alcuna certezza.",
+                "Perché i vaccini sono naturali e quindi, per definizione, non possono essere sottoposti ad analisi scientifica razionale."
+            ], correct:0, explanation:"Anche uno scienziato celebre può sbagliare: nella scienza vale il consenso delle prove trasparenti, non l'autorità del singolo." }
         ];
 
         const biasPool = [
-            {
-                id: 301, title: "Ricerca di Notizie Politiche (Bias della Conferma)",
-                text: "«Un elettore convinto delle idee di destra legge unicamente giornali e canali social di destra, ignorando le critiche e dichiarando 'Tutti i fatti mi danno ragione'.»",
-                question: "Quale distorsione cognitiva sta subendo l'elettore?",
-                options: [
-                    "Bias della Conferma: la tendenza a cercare e valorizzare solo le informazioni che confermano i propri pregiudizi.",
-                    "Bias della legge dei grandi numeri.",
-                    "Fallacia dello Strawman.",
-                    "Modus Tollens invalido."
-                ],
-                correct: 0, explanation: "Il bias della conferma ci rende ciechi di fronte ai dati contrari, spingendoci a selezionare unicamente conferme."
-            },
-            {
-                id: 302, title: "Recensioni del Videogioco (Cherry Picking)",
-                text: "«Per dimostrare che un videogioco pieno di bug è un capolavoro, un ragazzo mostra agli amici solo le 2 recensioni entusiaste ignorando le 98 recensioni negative.»",
-                question: "Come si chiama questa selezione opportunistica dei dati?",
-                options: [
-                    "Cherry Picking ('raccogliere le ciliegie'): estrapolazione chirurgica dei soli dati favorevoli a una tesi.",
-                    "Echo Chamber social.",
-                    "Backfire effect.",
-                    "Appello alla tradizione."
-                ],
-                correct: 0, explanation: "Il Cherry Picking è la scelta deliberata o inconscia delle sole informazioni comode, scartando la massa di prove opposte."
-            },
-            {
-                id: 303, title: "Gruppi Social Isolati (Echo Chamber)",
-                text: "«Su un social network un gruppo di utenti complottisti si scambia articoli selezionati. Chi esprime dubbi viene bloccato e le opinioni diventano sempre più estreme.»",
-                question: "Come viene definito questo fenomeno di rimbombo delle opinioni?",
-                options: [
-                    "Echo Chamber (Camera dell'Eco): ambiente chiuso in cui le stesse idee vengono ripetute e amplificate all'infinito.",
-                    "Rasoio di Ockham.",
-                    "Sillogismo ipotetico puro.",
-                    "Appello alla natura."
-                ],
-                correct: 0, explanation: "Nelle Echo Chambers l'assenza di contraddittorio polarizza le opinioni isolando il gruppo dalla realtà esterna."
-            },
-            {
-                id: 304, title: "Reazione di Fronte alle Smentite (Backfire Effect)",
-                text: "«Mostrando a un sostenitore della Terra Piatta foto satellitari e misurazioni scientifiche irrefutabili, la persona si sente minacciata e si convince ANCOR DI PIÙ che la Terra sia piatta.»",
-                question: "Quale paradossale effetto psicologico si è verificato?",
-                options: [
-                    "Backfire Effect (Effetto Rimbalzo): la presentazione di prove contrarie rafforza la convinzione iniziale per difesa dell'identità.",
-                    "Modus Ponens valido.",
-                    "Bias di campionamento telefonico.",
-                    "Falsa dicotomia."
-                ],
-                correct: 0, explanation: "Quando una convinzione è legata all'identità, le smentite vengono percepite come attacchi personali scatenando l'effetto rimbalzo."
-            },
-            {
-                id: 305, title: "Euristica della Disponibilità nello Snack",
-                text: "«Al supermercato una persona sceglie uno snack da comprare senza pensarci, solo perché ha visto frequentemente la sua pubblicità in TV.»",
-                question: "Che cos'è un'EURISTICA in psicologia cognitiva?",
-                options: [
-                    "Una scorciatoia mentale rapida usata dal cervello per risparmiare tempo ed energia, che talvolta porta a errori di giudizio.",
-                    "Un principio della logica deduttiva formale.",
-                    "Una fallacia ad hominem.",
-                    "Un test del Modus Tollens."
-                ],
-                correct: 0, explanation: "Le euristiche sono automatismi mentali utili per decisioni veloci, ma vulnerabili a distorsioni (bias)."
-            },
-            {
-                id: 306, title: "Oroscopo e Convalida Soggettiva",
-                text: "«Leggendo l'oroscopo una persona nota solo la frase 'oggi avrai una sorpresa' (e si ricorda di aver trovato 1 euro) dimenticando le 10 previsioni sbagliate della giornata.»",
-                question: "Quale bias spiega il successo apparente degli oroscopi?",
-                options: [
-                    "Bias della Conferma unito a convalidazione soggettiva.",
-                    "Legge dei grandi numeri.",
-                    "Appello all'autorità.",
-                    "Strawman del futuro."
-                ],
-                correct: 0, explanation: "Notiamo e ricordiamo solo la coincidenza fortunata, cancellando dalla memoria i fallimenti sistematici."
-            },
-            {
-                id: 307, title: "Polarizzazione nei Forum Social",
-                text: "«In un forum di discussione online i moderatori eliminano tutti gli utenti moderati lasciando solo gli estremisti delle due fazioni.»",
-                question: "Cosa produce questa dinamica sulle opinioni degli iscritti?",
-                options: [
-                    "Una radicalizzazione estrema favorita da Echo Chambers e Falsa Dicotomia.",
-                    "Un ragionamento deduttivo truth-preserving.",
-                    "La scoperta di un cigno nero.",
-                    "Un'applicazione del Rasoio di Ockham."
-                ],
-                correct: 0, explanation: "L'eliminazione delle voci sfumate spinge gli utenti verso gli estremi ideologici opposti."
-            },
-            {
-                id: 308, title: "Differenza tra Fallacia e Bias Cognitivo",
-                text: "«Un docente spiega agli studenti la distinzione tra fallacie argomentative e bias psicologici.»",
-                question: "Qual è la differenza concettuale fondamentale?",
-                options: [
-                    "La fallacia è un errore nella costruzione dell'argomento verbale; il bias è una distorsione cognitiva o scorciatoia della mente.",
-                    "Le fallacie sono sempre matematiche, i bias sono solo politici.",
-                    "I bias riguardano i cigni neri, le fallacie i dadi.",
-                    "Non esiste alcuna differenza."
-                ],
-                correct: 0, explanation: "La fallacia riguarda la struttura o il contenuto del discorso; il bias riguarda il funzionamento della nostra mente."
-            }
+            { id:301, title:"Ricerca di Notizie Politiche (Bias della Conferma)", text:"«Un elettore convinto delle idee di destra legge unicamente giornali e canali social di destra, ignorando le critiche e dichiarando 'Tutti i fatti mi danno ragione'.»", question:"Quale distorsione cognitiva sta subendo l'elettore?", options:[
+                "Bias della Conferma: la tendenza a cercare e valorizzare solo le informazioni che confermano i propri pregiudizi preesistenti.",
+                "Bias della legge dei grandi numeri: crede erroneamente che i grandi campioni diano automaticamente ragione alla sua tesi politica.",
+                "Fallacia dello Strawman: distorce sistematicamente le posizioni degli avversari politici per poterle confutare con maggiore facilità.",
+                "Modus Tollens invalido: applica male il condizionale logico 'Se X allora Y, non Y quindi non X' alle sue opinioni politiche."
+            ], correct:0, explanation:"Il bias della conferma ci rende ciechi di fronte ai dati contrari, spingendoci a selezionare unicamente conferme." },
+            { id:302, title:"Recensioni del Videogioco (Cherry Picking)", text:"«Per dimostrare che un videogioco pieno di bug è un capolavoro, un ragazzo mostra agli amici solo le 2 recensioni entusiaste ignorando le 98 recensioni negative.»", question:"Come si chiama questa selezione opportunistica dei dati?", options:[
+                "Cherry Picking ('raccogliere le ciliegie'): estrapolazione chirurgica dei soli dati favorevoli a una tesi, ignorando quelli contrari.",
+                "Echo Chamber social: ambiente chiuso in cui le opinioni si amplificano a vicenda senza alcun contraddittorio esterno.",
+                "Backfire Effect: tendenza a rafforzare le proprie convinzioni quando vengono presentate prove che le contraddicono apertamente.",
+                "Appello alla Tradizione: sostiene che il gioco sia un capolavoro solo perché è simile ai classici del passato videoludico."
+            ], correct:0, explanation:"Il Cherry Picking è la scelta deliberata o inconscia delle sole informazioni comode, scartando la massa di prove opposte." },
+            { id:303, title:"Gruppi Social Isolati (Echo Chamber)", text:"«Su un social network un gruppo di utenti complottisti si scambia articoli selezionati. Chi esprime dubbi viene bloccato e le opinioni diventano sempre più estreme.»", question:"Come viene definito questo fenomeno di rimbombo delle opinioni?", options:[
+                "Echo Chamber (Camera dell'Eco): ambiente chiuso in cui le stesse idee vengono ripetute e amplificate all'infinito, senza contraddittorio.",
+                "Rasoio di Ockham: principio metodologico per cui si sceglie sempre la spiegazione più semplice ed economica di un fenomeno.",
+                "Sillogismo ipotetico puro: catena di implicazioni 'Se A allora B, se B allora C, quindi se A allora C' applicata alla politica.",
+                "Appello alla Natura: sostiene che le opinioni del gruppo siano giuste perché 'naturali', cioè condivise spontaneamente dagli iscritti."
+            ], correct:0, explanation:"Nelle Echo Chambers l'assenza di contraddittorio polarizza le opinioni isolando il gruppo dalla realtà esterna." },
+            { id:304, title:"Reazione di Fronte alle Smentite (Backfire Effect)", text:"«Mostrando a un sostenitore della Terra Piatta foto satellitari e misurazioni scientifiche irrefutabili, la persona si sente minacciata e si convince ANCOR DI PIÙ che la Terra sia piatta.»", question:"Quale paradossale effetto psicologico si è verificato?", options:[
+                "Backfire Effect (Effetto Rimbalzo): la presentazione di prove contrarie rafforza la convinzione iniziale per difesa dell'identità.",
+                "Modus Ponens: ha applicato correttamente la regola 'Se A allora B, A è vero, quindi B è vero' alle foto satellitari mostrate.",
+                "Bias di campionamento telefonico: ha tratto conclusioni generali da un campione troppo ristretto di immagini satellitari.",
+                "Falsa Dicotomia: ha ridotto la questione della forma terrestre a due sole alternative, sferica o piatta, senza vie intermedie."
+            ], correct:0, explanation:"Quando una convinzione è legata all'identità, le smentite vengono percepite come attacchi personali scatenando l'effetto rimbalzo." },
+            { id:305, title:"Euristica della Disponibilità nello Snack", text:"«Al supermercato una persona sceglie uno snack da comprare senza pensarci, solo perché ha visto frequentemente la sua pubblicità in TV.»", question:"Che cos'è un'EURISTICA in psicologia cognitiva?", options:[
+                "Una scorciatoia mentale rapida usata dal cervello per risparmiare tempo ed energia, che talvolta porta a errori di giudizio.",
+                "Un principio della logica deduttiva formale che garantisce la verità della conclusione se le premesse sono vere.",
+                "Una fallacia argomentativa Ad Hominem che consiste nell'attaccare la persona anziché la sua tesi razionale.",
+                "Un test del Modus Tollens utilizzato per verificare la validità formale dei sillogismi categorici aristotelici."
+            ], correct:0, explanation:"Le euristiche sono automatismi mentali utili per decisioni veloci, ma vulnerabili a distorsioni (bias)." },
+            { id:306, title:"Oroscopo e Convalida Soggettiva", text:"«Leggendo l'oroscopo una persona nota solo la frase 'oggi avrai una sorpresa' (e si ricorda di aver trovato 1 euro) dimenticando le 10 previsioni sbagliate della giornata.»", question:"Quale bias spiega il successo apparente degli oroscopi?", options:[
+                "Bias della Conferma unito a convalida soggettiva: nota e ricorda solo le previsioni azzeccate, cancellando quelle sbagliate.",
+                "Legge dei Grandi Numeri: la ripetizione quotidiana delle previsioni oroscopiche le rende statisticamente sempre più accurate.",
+                "Appello all'Autorità: gli astrologi sono considerati esperti del settore e quindi le loro previsioni sono per definizione vere.",
+                "Strawman del futuro: distorce il significato delle previsioni per renderle compatibili con qualsiasi evento sia poi accaduto."
+            ], correct:0, explanation:"Notiamo e ricordiamo solo la coincidenza fortunata, cancellando dalla memoria i fallimenti sistematici." },
+            { id:307, title:"Polarizzazione nei Forum Social", text:"«In un forum di discussione online i moderatori eliminano tutti gli utenti moderati lasciando solo gli estremisti delle due fazioni.»", question:"Cosa produce questa dinamica sulle opinioni degli iscritti?", options:[
+                "Una radicalizzazione estrema favorita da Echo Chambers e Falsa Dicotomia: rimangono solo le voci più estreme e contrapposte.",
+                "Un ragionamento deduttivo truth-preserving: la conclusione è garantita dalla verità delle premesse, che sono state verificate.",
+                "La scoperta di un cigno nero: un evento inaspettato che smentisce la regola generale, in questo caso sulla moderazione dei forum.",
+                "Un'applicazione del Rasoio di Ockham: viene scelta la spiegazione più semplice, cioè che gli utenti moderati non esistano più."
+            ], correct:0, explanation:"L'eliminazione delle voci sfumate spinge gli utenti verso gli estremi ideologici opposti." },
+            { id:308, title:"Differenza tra Fallacia e Bias Cognitivo", text:"«Un docente spiega agli studenti la distinzione tra fallacie argomentative e bias psicologici.»", question:"Qual è la differenza concettuale fondamentale?", options:[
+                "La fallacia è un errore nella costruzione dell'argomento verbale; il bias è una distorsione cognitiva o scorciatoia della mente.",
+                "Le fallacie sono sempre di natura matematica, i bias sono esclusivamente di natura politica e non hanno rilevanza logica.",
+                "I bias riguardano esclusivamente i cigni neri e le eccezioni statistiche, le fallacie invece riguardano solo i dadi e il calcolo probabilistico.",
+                "Non esiste alcuna differenza sostanziale: fallacie e bias sono due nomi diversi per indicare lo stesso identico fenomeno logico."
+            ], correct:0, explanation:"La fallacia riguarda la struttura o il contenuto del discorso; il bias riguarda il funzionamento della nostra mente." }
         ];
 
         const matchingPairsPool = [
-            { id: "m1", term: "Strawman Fallacy", text: "Distorcere e indebolire l'argomento altrui per potergli rispondere facilmente." },
-            { id: "m2", term: "Ad Hominem", text: "Attaccare la persona che sostiene una tesi anziché confutare la tesi stessa." },
-            { id: "m3", term: "Falsa Dicotomia", text: "Ridurre una questione complessa a sole due opzioni opposte escludendo le sfumature." },
-            { id: "m4", term: "Red Herring", text: "Introdurre un argomento irrilevante per sviare l'attenzione dalla questione principale." },
-            { id: "m5", term: "Pendio Scivoloso", text: "Ipotizzare una catena inevitabile ed estrema di conseguenze catastrofiche non provate." },
-            { id: "m6", term: "Appello alla Natura", text: "Ritenere un prodotto o comportamento buono solo perché giudicato 'naturale'." },
-            { id: "m7", term: "Bias della Conferma", text: "Tendenza a cercare e ricordare unicamente i dati coerenti con le proprie idee." },
-            { id: "m8", term: "Cherry Picking", text: "Selezione chirurgica e opportunistica delle sole prove o recensioni favorevoli." },
-            { id: "m9", term: "Echo Chamber", text: "Ambiente virtuale chiuso in cui le opinioni si ripetono senza contraddittorio." },
-            { id: "m10", term: "Backfire Effect", text: "Effetto rimbalzo per cui presentare prove opposte rafforza l'opinione errata." },
-            { id: "m11", term: "Burden of Proof", text: "Onere della prova spettante sempre a chi fa un'affermazione." },
-            { id: "m12", term: "Tu Quoque", text: "Accusare l'interlocutore di ipocrisia per ignorare il merito del suo discorso." }
+            { id:"m1", term:"Strawman Fallacy", text:"Distorcere e indebolire l'argomento altrui per potergli rispondere facilmente." },
+            { id:"m2", term:"Ad Hominem", text:"Attaccare la persona che sostiene una tesi anziché confutare la tesi stessa." },
+            { id:"m3", term:"Falsa Dicotomia", text:"Ridurre una questione complessa a sole due opzioni opposte escludendo le sfumature." },
+            { id:"m4", term:"Red Herring", text:"Introdurre un argomento irrilevante per sviare l'attenzione dalla questione principale." },
+            { id:"m5", term:"Pendio Scivoloso", text:"Ipotizzare una catena inevitabile ed estrema di conseguenze catastrofiche non provate." },
+            { id:"m6", term:"Appello alla Natura", text:"Ritenere un prodotto o comportamento buono solo perché giudicato 'naturale'." },
+            { id:"m7", term:"Bias della Conferma", text:"Tendenza a cercare e ricordare unicamente i dati coerenti con le proprie idee." },
+            { id:"m8", term:"Cherry Picking", text:"Selezione chirurgica e opportunistica delle sole prove o recensioni favorevoli." },
+            { id:"m9", term:"Echo Chamber", text:"Ambiente virtuale chiuso in cui le opinioni si ripetono senza contraddittorio." },
+            { id:"m10", term:"Backfire Effect", text:"Effetto rimbalzo per cui presentare prove opposte rafforza l'opinione errata." },
+            { id:"m11", term:"Burden of Proof", text:"Onere della prova spettante sempre a chi fa un'affermazione." },
+            { id:"m12", term:"Tu Quoque", text:"Accusare l'interlocutore di ipocrisia per ignorare il merito del suo discorso." }
         ];
 
         function renderStrutturali() {
@@ -611,13 +454,11 @@
             if(!container) return;
             container.innerHTML = state.activeStruData.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectStru(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectStru(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="stru-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
@@ -629,37 +470,12 @@
             playSound('click');
             const item = state.activeStruData.find(d => d.id === qId);
             state.struAnswers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`stru-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Identificazione Corretta! (Risposta Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Identificazione Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Identificazione Corretta!' : 'Identificazione Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -668,13 +484,11 @@
             if(!container) return;
             container.innerHTML = state.activeAppData.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded-md border border-sky-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded-md border border-sky-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectApp(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectApp(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="app-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
@@ -686,37 +500,12 @@
             playSound('click');
             const item = state.activeAppData.find(d => d.id === qId);
             state.appAnswers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`app-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Analisi Corretta! (Risposta Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Analisi Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Analisi Corretta!' : 'Analisi Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -725,13 +514,11 @@
             if(!container) return;
             container.innerHTML = state.activeBiasData.map((item, idx) => `
                 <div class="glass-card p-5 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}: ${item.title}</span>
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}</span>
                     <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
                     <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
                     <div class="space-y-2">
-                        ${item.options.map((opt, oIdx) => `
-                            <button onclick="selectBias(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>
-                        `).join('')}
+                        ${item.options.map((opt, oIdx) => `<button onclick="selectBias(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}
                     </div>
                     <div id="bias-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
                 </div>
@@ -743,37 +530,12 @@
             playSound('click');
             const item = state.activeBiasData.find(d => d.id === qId);
             state.biasAnswers[qId] = oIdx;
-
             const qContainer = btn.closest('.space-y-2');
-            if (qContainer) {
-                qContainer.querySelectorAll('button').forEach((b, idx) => {
-                    b.disabled = true;
-                    b.classList.add('cursor-not-allowed', 'opacity-60');
-                    if (idx === item.correct) {
-                        b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed";
-                    }
-                });
-            }
-
-            if (oIdx === item.correct) {
-                playSound('correct');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20";
-            } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed";
-            }
-
+            if (qContainer) qContainer.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
             const fb = document.getElementById(`bias-fb-${qId}`);
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (oIdx === item.correct) {
-                    fb.className = "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2";
-                    fb.innerHTML = `<strong>Diagnosi del Bias Esatta! (Risposta Registrata)</strong> ${item.explanation}`;
-                } else {
-                    fb.className = "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2";
-                    fb.innerHTML = `<strong>Diagnosi Errata e Bloccata.</strong> ${item.explanation}`;
-                }
-            }
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Diagnosi del Bias Esatta!' : 'Diagnosi Errata e Bloccata.'}</strong> ${item.explanation}`; }
             updateGlobalScore();
         }
 
@@ -788,94 +550,48 @@
         function selectMatchTerm(termId, btn) {
             playSound('click');
             state.selectedTermId = termId;
-
-            document.querySelectorAll('#matching-terms button').forEach(b => {
-                if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer";
-            });
+            document.querySelectorAll('#matching-terms button').forEach(b => { if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer"; });
             btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs font-bold text-rose-300 transition-all shadow-lg cursor-pointer";
-
             const fb = document.getElementById('matching-feedback');
-            if(fb) {
-                fb.className = "text-xs font-semibold text-rose-400 pt-2";
-                fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!";
-            }
+            if(fb) { fb.className = "text-xs font-semibold text-rose-400 pt-2"; fb.innerText = "Termine selezionato. Ora clicca sulla corrispondente definizione a destra!"; }
         }
 
         function selectMatchDef(matchId, btn) {
             const fb = document.getElementById('matching-feedback');
-            if(!state.selectedTermId) {
-                playSound('error');
-                if(fb) {
-                    fb.className = "text-xs font-semibold text-rose-400 pt-2";
-                    fb.innerText = "Prima seleziona un termine nella colonna di sinistra!";
-                }
-                return;
-            }
-
+            if(!state.selectedTermId) { playSound('error'); if(fb){ fb.className = "text-xs font-semibold text-rose-400 pt-2"; fb.innerText = "Prima seleziona un termine nella colonna di sinistra!"; } return; }
             if(state.selectedTermId === matchId) {
-                playSound('correct');
-                state.matchedPairs[matchId] = true;
-
+                playSound('correct'); state.matchedPairs[matchId] = true;
                 const termBtn = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
-                if(termBtn) {
-                    termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed";
-                    termBtn.disabled = true;
-                }
-                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed";
-                btn.disabled = true;
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-emerald-400 pt-2";
-                    fb.innerText = "✓ Abbinamento corretto e bloccato!";
-                }
+                if(termBtn) { termBtn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed"; termBtn.disabled = true; }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed"; btn.disabled = true;
+                if(fb) { fb.className = "text-xs font-bold text-emerald-400 pt-2"; fb.innerText = "✓ Abbinamento corretto e bloccato!"; }
             } else {
-                playSound('error');
-                btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
-                setTimeout(() => {
-                    if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer";
-                }, 1000);
-
-                if(fb) {
-                    fb.className = "text-xs font-bold text-rose-400 pt-2";
-                    fb.innerText = "✗ Abbinamento errato. Riprova!";
-                }
+                playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => { if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer"; }, 1000);
+                if(fb) { fb.className = "text-xs font-bold text-rose-400 pt-2"; fb.innerText = "✗ Abbinamento errato. Riprova!"; }
             }
-            state.selectedTermId = null;
-            updateGlobalScore();
+            state.selectedTermId = null; updateGlobalScore();
         }
 
         function checkCloze() {
             if (state.clozeLocked) return;
             playSound('click');
-            const answers = { 1: "Strawman", 2: "Ad Hominem", 3: "Falsa Dicotomia", 4: "Red Herring", 5: "Natura", 6: "burden of proof", 7: "Conferma", 8: "Cherry Picking", 9: "Echo Chamber", 10: "Backfire Effect" };
+            const answers = { 1:"Strawman", 2:"Ad Hominem", 3:"Falsa Dicotomia", 4:"Red Herring", 5:"Natura", 6:"burden of proof", 7:"Conferma", 8:"Cherry Picking", 9:"Echo Chamber", 10:"Backfire Effect" };
             let correct = 0;
             for(let i=1; i<=10; i++) {
                 const el = document.getElementById(`cloze-${i}`);
                 if(el) {
                     el.disabled = true;
-                    if(el.value === answers[i]) { 
-                        correct++; 
-                        el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    } else { 
-                        el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; 
-                    }
+                    if(el.value === answers[i]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; }
+                    else { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; }
                 }
             }
             state.clozeScore = Math.round((correct / 10) * 100);
             state.clozeLocked = true;
-
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed";
-                submitBtn.innerText = "Testo Verificato e Bloccato";
-            }
-
+            if(submitBtn) { submitBtn.disabled = true; submitBtn.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed"; submitBtn.innerText = "Testo Verificato e Bloccato"; }
             const fb = document.getElementById('cloze-feedback');
-            if(fb) {
-                if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = "Perfetto! Testo completato senza errori (10/10)."; }
-                else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Le risposte sono state bloccate.`; }
-            }
+            if(fb) { if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = "Perfetto! Testo completato senza errori (10/10)."; } else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Le risposte sono state bloccate.`; } }
             updateGlobalScore();
         }
 
@@ -884,12 +600,13 @@
             let appCorrect = 0; state.activeAppData.forEach(d => { if(state.appAnswers[d.id] === d.correct) appCorrect++; });
             let biasCorrect = 0; state.activeBiasData.forEach(d => { if(state.biasAnswers[d.id] === d.correct) biasCorrect++; });
             let matchCount = Object.keys(state.matchedPairs || {}).length;
-
-            const total = Math.round((struCorrect / (state.activeStruData.length || 1))*30 + 
-                                     (appCorrect / (state.activeAppData.length || 1))*25 + 
-                                     (biasCorrect / (state.activeBiasData.length || 1))*20 + 
-                                     (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
-                                     (state.clozeScore/100)*10);
+            const total = Math.round(
+                (struCorrect / (state.activeStruData.length || 1))*30 + 
+                (appCorrect / (state.activeAppData.length || 1))*25 + 
+                (biasCorrect / (state.activeBiasData.length || 1))*20 + 
+                (matchCount / (state.activeMatchingTerms.length || 1))*15 + 
+                (state.clozeScore/100)*10
+            );
             const scoreText = document.getElementById('global-score-text');
             if(scoreText) scoreText.innerText = `${total} / 100`;
             return total;
@@ -903,12 +620,10 @@
             const certScore = document.getElementById('cert-score');
             const certTitle = document.getElementById('cert-title');
             if(certScore) certScore.innerText = `${score} / 100 XP`;
-
             let titleText = "Rilevatore di Fallacie Alle Prime Armi";
             if(score >= 90) titleText = "Debunker e Bonificatore di Fallacie & Bias";
             else if(score >= 75) titleText = "Analista del Discorso e della Retorica";
             else if(score >= 55) titleText = "Osservatore di Trappole Argomentative";
-
             if(badgeEl) badgeEl.innerText = titleText;
             if(certTitle) certTitle.innerText = titleText;
         }
@@ -917,36 +632,21 @@
             playSound('click');
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
             const targetTab = document.getElementById(tabId);
             if(targetTab) targetTab.classList.remove('hidden');
-
-            if(btnElement) {
-                btnElement.classList.add('active');
-            } else {
-                const navButtons = document.querySelectorAll('.tab-btn');
-                navButtons.forEach(b => {
-                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
-                        b.classList.add('active');
-                    }
-                });
-            }
-
+            if(btnElement) { btnElement.classList.add('active'); }
+            else { document.querySelectorAll('.tab-btn').forEach(b => { if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) b.classList.add('active'); }); }
             if(tabId === 'tab-report') updateReport();
         }
 
         function setupRandomQuestions() {
-            state.struAnswers = {}; 
-            state.appAnswers = {}; 
-            state.biasAnswers = {}; 
-            state.matchedPairs = {}; 
-            state.clozeScore = 0;
-            state.clozeLocked = false;
-            state.selectedTermId = null;
+            state.struAnswers = {}; state.appAnswers = {}; state.biasAnswers = {}; 
+            state.matchedPairs = {}; state.clozeScore = 0; state.clozeLocked = false; state.selectedTermId = null;
 
-            state.activeStruData = shuffle(strutturaliPool).slice(0, 5);
-            state.activeAppData = shuffle(appelliPool).slice(0, 5);
-            state.activeBiasData = shuffle(biasPool).slice(0, 5);
+            // MODIFICA: .map(shuffleOptions) per randomizzare la posizione della risposta corretta
+            state.activeStruData = shuffle(strutturaliPool).slice(0, 5).map(shuffleOptions);
+            state.activeAppData = shuffle(appelliPool).slice(0, 5).map(shuffleOptions);
+            state.activeBiasData = shuffle(biasPool).slice(0, 5).map(shuffleOptions);
 
             const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
             state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
@@ -954,42 +654,22 @@
 
             for(let i=1; i<=10; i++) {
                 const el = document.getElementById(`cloze-${i}`);
-                if(el) {
-                    el.disabled = false;
-                    el.value = "";
-                    el.className = "bg-slate-800 text-rose-300 rounded px-2 py-1";
-                }
+                if(el) { el.disabled = false; el.value = ""; el.className = "bg-slate-800 text-rose-300 rounded px-2 py-1"; }
             }
             const submitBtn = document.getElementById('cloze-submit-btn');
-            if(submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.className = "bg-rose-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer";
-                submitBtn.innerText = "Verifica e Blocca Testo";
-            }
+            if(submitBtn) { submitBtn.disabled = false; submitBtn.className = "bg-rose-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"; submitBtn.innerText = "Verifica e Blocca Testo"; }
             const clozeFb = document.getElementById('cloze-feedback');
             if(clozeFb) clozeFb.innerText = "";
 
-            renderStrutturali(); 
-            renderAppelli(); 
-            renderBias(); 
-            renderMatching();
+            renderStrutturali(); renderAppelli(); renderBias(); renderMatching();
             updateGlobalScore();
         }
 
-        function resetAll() {
-            setupRandomQuestions();
-            switchTab('tab-studio');
-        }
+        function resetAll() { setupRandomQuestions(); switchTab('tab-studio'); }
+        function initApp() { setupRandomQuestions(); }
 
-        function initApp() {
-            setupRandomQuestions();
-        }
-
-        if (document.readyState === 'interactive' || document.readyState === 'complete') {
-            initApp();
-        } else {
-            document.addEventListener('DOMContentLoaded', initApp);
-        }
+        if (document.readyState === 'interactive' || document.readyState === 'complete') { initApp(); }
+        else { document.addEventListener('DOMContentLoaded', initApp); }
     </script>
 </body>
 </html>
