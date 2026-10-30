@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio: Rivoluzione Scientifica - Le Teorie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { cinzel: ['Cinzel','serif'], sans: ['Plus Jakarta Sans','sans-serif'] } } }
+        }
+    </script>
+    <script>window.MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080d16; color: #f1f5f9; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .tab-btn.active { background-color: #0891b2 !important; color: #fff !important; border-color: #22d3ee !important; box-shadow: 0 4px 20px -2px rgba(8,145,178,0.5); }
+        .glass-card { background: linear-gradient(135deg, rgba(17,25,39,0.85), rgba(10,15,26,0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+        .badge-glow { box-shadow: 0 0 15px rgba(34,211,238,0.2); }
+        .passage { border-left: 4px solid #f59e0b; background: rgba(15,23,42,0.85); border-radius: 0 0.75rem 0.75rem 0; }
+        #cloze-content select { font-family: 'Plus Jakarta Sans', sans-serif; }
+        @media print { body * { visibility: hidden; } #printable-certificate, #printable-certificate * { visibility: visible; } #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-slate-950">
+
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2 text-xs sm:text-sm">
+                <a href="index.html" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5 font-semibold"><i class="fa-solid fa-house"></i> Home Portale</a>
+                <span class="text-slate-600">/</span>
+                <a href="filosofia-moderna.html" class="text-slate-400 hover:text-cyan-400 transition-colors font-semibold">Filosofia Moderna</a>
+                <span class="text-slate-600">/</span>
+                <span class="text-cyan-400 font-bold">Rivoluzione Scientifica: Teorie</span>
+            </div>
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-user-graduate absolute left-3 text-slate-400 text-xs"></i>
+                    <input type="text" id="student-name-input" placeholder="Inserisci il tuo nome" value="Studente" oninput="updateStudentName(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 w-40 sm:w-48">
+                </div>
+                <button onclick="toggleAudio()" id="sound-btn" class="p-2 rounded-lg bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-cyan-400" title="Audio"><i class="fa-solid fa-volume-high text-sm"></i></button>
+                <div class="flex items-center space-x-3 bg-slate-900 border border-cyan-500/30 px-3.5 py-1.5 rounded-lg badge-glow">
+                    <div class="text-right">
+                        <span class="text-[10px] uppercase tracking-wider text-cyan-400/80 block font-bold">Punti XP</span>
+                        <span id="global-score-text" class="text-sm font-extrabold text-cyan-400">0 / 100</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-extrabold text-xs"><i class="fa-solid fa-bolt"></i></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
+            <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent"><i class="fa-solid fa-book-open text-cyan-400"></i> 0. Quadro Teorico</button>
+            <button onclick="switchTab('tab-ex1', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-brain text-emerald-400"></i> 1. Fisica Antica vs Moderna</button>
+            <button onclick="switchTab('tab-ex2', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-globe text-amber-400"></i> 2. Astronomia</button>
+            <button onclick="switchTab('tab-ex3', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-puzzle-piece text-purple-400"></i> 3. Confronti e Sintesi</button>
+            <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti</button>
+            <button onclick="switchTab('tab-cloze', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Cloze</button>
+            <button onclick="switchTab('tab-commento', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-quote-right text-orange-400"></i> 6. Commento Testuale</button>
+            <button onclick="switchTab('tab-argomentazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-arrow-down-1-9 text-cyan-400"></i> 7. Ricostruzione</button>
+            <button onclick="switchTab('tab-verofalso', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-check-double text-lime-400"></i> 8. Vero/Falso</button>
+            <button onclick="switchTab('tab-report', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-certificate text-yellow-400"></i> Certificato</button>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+        <section id="tab-studio" class="tab-content space-y-8">
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border-cyan-500/20 relative overflow-hidden">
+                <div class="max-w-3xl space-y-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30"><i class="fa-solid fa-globe mr-1.5"></i> Modulo 1: La Rivoluzione Astronomica e Fisica</span>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-cyan-400">La Nascita della Nuova Scienza</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Dal sistema geocentrico tolemaico a quello eliocentrico (Copernico, Brahe, Galileo, Keplero, Newton). Dalla fisica aristotelica dei luoghi naturali alla fisica moderna (caduta dei gravi, inerzia, relatività galileiana, F=ma).</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-cyan-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-arrows-spin"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">1. I Quattro Nodi della Fisica</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Caduta dei gravi (indipendente dal peso), inerzia (il moto non richiede causa continua), relatività galileiana (moto uniforme e quiete indistinguibili), F=ma (la forza produce accelerazione).</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-cyan-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-sun"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">2. Copernico e i Tre Moti</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><em>De revolutionibus</em> (1543): Sole al centro, tre movimenti della Terra (rotazione, rivoluzione, declinazione). Motivo: il caos degli epicicli tolemaici.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-cyan-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-telescope"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">3. Brahe & Galileo</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Brahe: supernova 1572, cometa 1577 (cieli non immutabili), osservazioni di Marte. Galileo: macchie solari, rugosità lunare, satelliti di Giove.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-cyan-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-ellipsis"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">4. Keplero e le Ellissi</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Gli 8 minuti d'arco di scarto nelle osservazioni di Brahe su Marte confutano le orbite circolari. <em>Astronomia Nova</em> (1609): orbite ellittiche, Sole in un fuoco.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-cyan-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-apple-whole"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">5. Newton e l'Universo Unico</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">La stessa gravità che fa cadere una mela tiene i pianeti in orbita. Fine del dualismo aristotelico sub/superlunare: un unico universo con le stesse leggi.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-cyan-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">6. Tolomeo e gli Epicicli</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed"><em>Almagesto</em>: eccentrico, deferente, epiciclo, equante. L'equante era un "mostro" teorico perché violava il moto circolare uniforme rispetto al centro geometrico.</p>
+                </div>
+            </div>
+            <div class="text-center pt-4">
+                <button onclick="switchTab('tab-ex1')" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-cyan-600 hover:to-blue-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione ➔</button>
+            </div>
+        </section>
+
+        <section id="tab-ex1" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Fisica Aristotelica vs Nuova Fisica</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Caduta dei gravi, inerzia, relatività galileiana, forza e accelerazione. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex1-container" class="space-y-6"></div>
+        </section>
+
+        <section id="tab-ex2" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Astronomia Antica e Nuova</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Tolomeo, Copernico, Brahe, Galileo, Keplero e Newton. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex2-container" class="space-y-6"></div>
+        </section>
+
+        <section id="tab-ex3" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Confronti e Sintesi</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Riflessioni di sintesi tra vecchio e nuovo mondo, e tra i grandi protagonisti. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex3-container" class="space-y-6"></div>
+        </section>
+
+        <section id="tab-classificazione" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Concettuali</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div id="matching-terms" class="space-y-2.5"></div>
+                    <div id="matching-defs" class="space-y-2.5"></div>
+                </div>
+                <div id="matching-feedback" class="text-xs sm:text-sm font-semibold pt-2"></div>
+            </div>
+        </section>
+
+        <section id="tab-cloze" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div id="cloze-content" class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200"></div>
+                <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
+                <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
+            </div>
+        </section>
+
+        <section id="tab-commento" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-orange-400">Esercizio 6: Commento Testuale</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi i passi delle opere originali e rispondi alle domande di interpretazione. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex6-container" class="space-y-8"></div>
+        </section>
+
+        <section id="tab-argomentazione" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-cyan-400">Esercizio 7: Ricostruzione dell'Argomentazione</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Ordina i passi nel modo corretto. <em>(Clicca un passo per rimuoverlo)</em></p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl space-y-5">
+                <div id="arg-title" class="font-cinzel text-lg font-bold text-cyan-300"></div>
+                <div id="arg-description" class="text-xs sm:text-sm text-slate-300 italic"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400"><i class="fa-solid fa-shuffle mr-1"></i> Passi da ordinare</h4>
+                        <div id="arg-pool" class="space-y-2.5"></div>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400"><i class="fa-solid fa-list-ol mr-1"></i> La tua sequenza</h4>
+                        <div id="arg-sequence" class="space-y-2.5 min-h-[80px] p-3 rounded-xl border-2 border-dashed border-slate-700/60"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 pt-2">
+                    <button id="arg-submit" onclick="checkArgument()" class="bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">Verifica Sequenza</button>
+                    <div id="arg-feedback" class="text-xs sm:text-sm font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-verofalso" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-lime-400">Esercizio 8: Vero o Falso Ragionato</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Valuta ciascuna affermazione. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex8-container" class="space-y-4"></div>
+        </section>
+
+        <section id="tab-report" class="tab-content hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl text-center space-y-6">
+                <h2 class="font-cinzel text-2xl font-bold text-cyan-400">Valutazione Finale: Le Teorie della Rivoluzione Scientifica</h2>
+                <div class="text-4xl font-black text-cyan-400" id="report-score">0 / 100 XP</div>
+                <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="window.print()" class="bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
+                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
+                </div>
+            </div>
+            <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-cyan-500/40 text-center space-y-6">
+                <div class="border-2 border-dashed border-cyan-500/30 p-8 rounded-2xl space-y-6">
+                    <div class="font-cinzel text-cyan-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Scientifica</div>
+                    <p class="text-slate-300 text-sm">Si attesta che lo studente / la studentessa:</p>
+                    <div id="cert-student-name" class="font-cinzel text-2xl font-bold text-white underline decoration-cyan-500 decoration-2">Studente</div>
+                    <p class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
+                        ha superato con successo la verifica approfondita su:
+                        <br><strong class="text-cyan-400">"Fisica Aristotelica vs Nuova Fisica, Astronomia Tolemaica e Copernicana, Brahe, Galileo, Keplero e Newton"</strong>
+                    </p>
+                    <div class="flex justify-around items-center pt-6 border-t border-slate-800 text-xs text-slate-400">
+                        <div><span>Punteggio Conseguito:</span><div id="cert-score" class="font-bold text-cyan-400 text-base">0 / 100 XP</div></div>
+                        <div><span>Livello Raggiunto:</span><div id="cert-title" class="font-bold text-emerald-400 text-base">In corso</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
+        <a href="index.html" class="hover:text-cyan-400 transition-colors"><i class="fa-solid fa-house mr-1"></i> Home Portale</a>
+        <span>•</span>
+        <a href="filosofia-moderna.html" class="hover:text-cyan-400 transition-colors"><i class="fa-solid fa-diagram-project mr-1"></i> Filosofia Moderna</a>
+    </footer>
+
+    <script>
+        const state = {
+            studentName: "Studente", audioEnabled: true,
+            ex1Answers: {}, ex2Answers: {}, ex3Answers: {}, ex6Answers: {}, tfAnswers: {},
+            matchedPairs: {}, clozeScore: 0, clozeLocked: false,
+            selectedTermId: null,
+            activeEx1Data: [], activeEx2Data: [], activeEx3Data: [],
+            activeMatchingTerms: [], activeMatchingDefs: [],
+            activeTextual: [], activeArgument: null,
+            argPool: [], argOrder: [], argSubmitted: false, argCorrectPositions: 0,
+            activeTF: [], currentCloze: null
+        };
+
+        let audioCtx = null;
+        function playSound(type) {
+            if (!state.audioEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                if (type === 'click') { osc.frequency.setValueAtTime(400, audioCtx.currentTime); gain.gain.setValueAtTime(0.04, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.04); }
+                else if (type === 'correct') { osc.frequency.setValueAtTime(880, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+                else if (type === 'error') { osc.frequency.setValueAtTime(220, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+            } catch(e){}
+        }
+
+        function toggleAudio() { state.audioEnabled = !state.audioEnabled; }
+        function updateStudentName(val) { state.studentName = val || "Studente"; const c = document.getElementById('cert-student-name'); if(c) c.innerText = state.studentName; }
+        function shuffle(array) { let arr = [...array]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+        function shuffleOptions(item) {
+            const indices = item.options.map((_, i) => i);
+            const shuffledIndices = shuffle(indices);
+            const newOptions = shuffledIndices.map(i => item.options[i]);
+            const newCorrect = shuffledIndices.indexOf(item.correct);
+            return { ...item, options: newOptions, correct: newCorrect };
+        }
+
+        // ===== POOLS (opzioni bilanciate) =====
+        const ex1Pool = [
+            { id:101, title:"La teoria dei luoghi naturali", text:"Aristotele spiegava la caduta dei gravi sostenendo che ogni corpo tende al proprio luogo naturale in base alla sua composizione elementare.", question:"Secondo la fisica aristotelica, da cosa dipende la velocità di caduta di un corpo?", options:[
+                "Dal peso del corpo: più è pesante e più desidera raggiungere il suo luogo naturale, quindi cade più velocemente.",
+                "Dalla forma geometrica dell'oggetto, poiché le forme più regolari scivolano meglio attraverso l'aria circostante.",
+                "Dalla temperatura dell'aria circostante, che modifica la resistenza opposta al moto naturale verso il basso.",
+                "Dalla distanza dal centro della Terra, che determina l'intensità dell'attrazione verso il luogo naturale proprio."
+            ], correct:0, explanation:"Per Aristotele la velocità è proporzionale al peso e inversamente proporzionale alla resistenza del mezzo (v ∝ P/R)." },
+            { id:102, title:"L'argomento dei due corpi legati", text:"Galileo immagina due corpi, uno pesante (A) e uno leggero (B), e li lega insieme per mostrare una contraddizione nella teoria aristotelica.", question:"Qual è la contraddizione che Galileo fa emergere?", options:[
+                "Se la velocità dipende dal peso, A+B dovrebbe cadere sia più lento (per il freno di B) sia più veloce (per il peso maggiore): impossibile.",
+                "Se la velocità dipende dal peso, l'unione dei due corpi annullerebbe la gravità e i corpi rimarrebbero sospesi in aria.",
+                "Se la velocità dipende dal peso, i due corpi dovrebbero separarsi durante la caduta per tornare ciascuno alla propria velocità.",
+                "Se la velocità dipende dal peso, i due corpi dovrebbero raggiungere il suolo contemporaneamente per somma delle masse."
+            ], correct:0, explanation:"Il ragionamento per assurdo mostra che la premessa 'la velocità dipende dal peso' conduce a un risultato contraddittorio e quindi va abbandonata." },
+            { id:103, title:"Il principio di inerzia", text:"Galileo immagina una sfera che rotola lungo un piano inclinato e poi prosegue su un piano orizzontale privo di attrito.", question:"Quale conclusione rivoluzionaria ne trae?", options:[
+                "Un corpo in moto tende a proseguire di moto rettilineo uniforme all'infinito, senza bisogno di alcuna forza continua.",
+                "Un corpo in moto rallenta inevitabilmente per la resistenza del mezzo, e senza attrito si fermerebbe comunque per la gravità.",
+                "Un corpo in moto si ferma quando il motore cessa di agire, coerentemente con la fisica aristotelica tradizionale.",
+                "Un corpo in moto tende a cadere verso il basso, poiché il moto rettilineo uniforme è solo una finzione matematica."
+            ], correct:0, explanation:"È il nucleo del principio di inerzia, ripreso poi da Cartesio e Newton: la forza serve solo a modificare il moto, non a mantenerlo." },
+            { id:104, title:"La relatività galileiana", text:"Galileo descrive l'esperimento del 'gran naviglio': chiusi sottocoperta, senza guardare fuori, gli animali volano e i pesci nuotano allo stesso modo sia che la nave sia ferma sia che si muova di moto uniforme.", question:"Cosa dimostra questo esperimento mentale?", options:[
+                "Che non possiamo distinguere, con esperimenti meccanici interni, un sistema fermo da uno in moto rettilineo uniforme.",
+                "Che il moto della nave produce una forza centrifuga capace di modificare la traiettoria degli animali che volano.",
+                "Che la quiete è uno stato privilegiato e assoluto, rispetto al quale il moto può essere sempre riconosciuto.",
+                "Che gli esperimenti meccanici funzionano solo se il sistema di riferimento è solidale con la Terra in quiete."
+            ], correct:0, explanation:"Il principio di relatività galileiana stabilisce che le leggi della meccanica sono identiche in tutti i sistemi di riferimento inerziali." },
+            { id:105, title:"La forza e l'accelerazione", text:"Newton nei Principia (1687) formula la seconda legge del moto, superando la concezione aristotelica della forza.", question:"Secondo la nuova fisica, a cosa è proporzionale la forza applicata a un corpo?", options:[
+                "All'accelerazione impressa e alla massa del corpo, secondo la formula F = m · a, non alla velocità come per Aristotele.",
+                "Alla velocità mantenuta costante del corpo, poiché per muoversi a velocità fissa serve una forza continua proporzionale.",
+                "Al peso specifico del corpo, in quanto la forza è la manifestazione della tendenza al luogo naturale di appartenenza.",
+                "Alla distanza percorsa dal corpo, poiché la forza si accumula nel tempo di percorrenza secondo la legge del moto."
+            ], correct:0, explanation:"La forza è causa dell'accelerazione (variazione di velocità) e non della velocità stessa: questo è il cuore della nuova dinamica." },
+            { id:106, title:"Il vuoto e la caduta dei gravi", text:"La fisica sperimentale, dopo Galileo, riuscì a creare il vuoto all'interno di una campana di vetro.", question:"Cosa dimostrarono gli esperimenti nel vuoto?", options:[
+                "Che una piuma e un piombino cadono con la stessa velocità, perché la differenza ordinaria dipende solo dalla resistenza dell'aria.",
+                "Che una piuma e un piombino continuano a cadere a velocità diverse, perché la differenza dipende dal peso intrinseco.",
+                "Che nel vuoto non esiste più la gravità e i corpi rimangono sospesi in assenza di resistenza dell'aria.",
+                "Che nel vuoto i corpi cadono più lentamente, essendo venuta meno la spinta dell'aria verso il basso."
+            ], correct:0, explanation:"La verifica sperimentale confutò definitivamente la dipendenza della velocità dal peso prevista dalla fisica aristotelica." },
+            { id:107, title:"La distinzione moto naturale e violento", text:"Aristotele distingueva i moti naturali, che avvengono verso il luogo proprio del corpo, dai moti violenti, che richiedono un motore esterno.", question:"Perché questa distinzione entra in crisi con la nuova fisica?", options:[
+                "Perché il principio di inerzia rende superfluo distinguere moti naturali e violenti: ogni corpo mantiene il suo moto rettilineo uniforme.",
+                "Perché la distinzione aristotelica era già stata confutata nel mondo greco da Aristarco di Samo, che aveva proposto l'eliocentrismo.",
+                "Perché nella nuova fisica si distinguono moti naturali, violenti e spontanei, ciascuno con leggi proprie e autonome.",
+                "Perché la fisica moderna nega l'esistenza stessa del movimento, riducendolo a pura illusione dei sensi e della mente."
+            ], correct:0, explanation:"Con l'inerzia viene meno la necessità di spiegare il moto in base a luoghi naturali e motori continui, poiché esso non richiede causa." },
+            { id:108, title:"La forma della legge F = m · a", text:"La seconda legge della dinamica di Newton ha una forma matematica precisa, che la distingue dalle descrizioni qualitative precedenti.", question:"Perché la forma matematica F = m · a rappresenta un salto rispetto alla fisica antica?", options:[
+                "Perché quantifica esattamente il rapporto tra forza, massa e accelerazione, rendendo la legge calcolabile e verificabile.",
+                "Perché utilizza simboli al posto delle parole, cosa mai avvenuta prima nella storia del pensiero scientifico occidentale.",
+                "Perché è scritta in latino, lingua universalmente riconosciuta dalla comunità dei dotti del Seicento europeo.",
+                "Perché non si basa su alcun esperimento, ma soltanto su una deduzione puramente teorica a partire dai principi primi."
+            ], correct:0, explanation:"La matematizzazione trasforma le relazioni fisiche in equazioni calcolabili, aprendo la strada alle previsioni precise tipiche della scienza moderna." }
+        ];
+
+        const ex2Pool = [
+            { id:201, title:"L'astronomia tolemaica e l'equante", text:"Tolomeo nell'Almagesto introduce deferenti, epicicli, eccentrici ed equanti per 'salvare i fenomeni' del cielo.", question:"Che cos'è l'equante e perché era considerato un 'mostro' teorico?", options:[
+                "Un punto immaginario che rende uniforme il moto angolare dei pianeti rispetto ad esso, violando il moto circolare uniforme attorno al centro.",
+                "Un piccolo cerchio agganciato al deferente che descrive le inversioni apparenti dei pianeti nel cielo notturno osservato.",
+                "Un punto in cui si trova la Terra rispetto al centro geometrico del deferente, spiegando l'apparente velocità variabile.",
+                "Un cerchio perfetto su cui si muovono le stelle fisse, immutabili e incorruttibili rispetto al mondo sublunare."
+            ], correct:0, explanation:"L'equante salvava le previsioni ma violava il dogma aristotelico del moto circolare uniforme rispetto al centro geometrico del cerchio." },
+            { id:202, title:"Copernico e i tre moti della Terra", text:"Nel De revolutionibus (1543), Copernico sposta il Sole al centro e introduce tre movimenti della Terra.", question:"Quali sono i tre moti attribuiti da Copernico alla Terra?", options:[
+                "Rotazione (24 ore), Rivoluzione (un anno attorno al Sole), Declinazione (movimento dell'asse per la precessione degli equinozi).",
+                "Rotazione (un anno), Rivoluzione (24 ore), Declinazione (movimento del Sole attorno alla Terra in un anno).",
+                "Rotazione (un mese), Rivoluzione (un giorno), Declinazione (movimento dell'asse terrestre in vent'anni).",
+                "Rotazione (24 ore), Rivoluzione (un mese attorno alla Luna), Declinazione (movimento dell'asse per l'eclissi)."
+            ], correct:0, explanation:"I tre moti di Copernico spiegano alternanza giorno/notte, stagioni e precessione degli equinozi." },
+            { id:203, title:"La supernova del 1572 e la cometa del 1577", text:"Tycho Brahe osserva una nuova stella luminosa in Cassiopea (1572) e una cometa che attraversa le sfere celesti (1577).", question:"Quale conseguenza teorica ebbero queste osservazioni?", options:[
+                "Dimostrarono che i cieli non sono immutabili e che non esistono sfere celesti impenetrabili come voleva Aristotele.",
+                "Confermarono definitivamente il sistema tolemaico, mostrando che le sfere celesti sono solide e cristalline.",
+                "Dimostrarono che le stelle e le comete sono fenomeni atmosferici, come già sosteneva Aristotele nel mondo sublunare.",
+                "Provarono che Copernico aveva torto, perché solo il sistema geocentrico può spiegare i fenomeni celesti anomali."
+            ], correct:0, explanation:"Le osservazioni di Brahe mostravano la corruttibilità dei cieli, incrinando il dogma aristotelico del mondo superlunare perfetto." },
+            { id:204, title:"Keplero e gli 8 minuti d'arco", text:"Keplero cerca di adattare le osservazioni di Brahe su Marte a un'orbita circolare, ma rimane uno scarto di 8 minuti d'arco.", question:"A quale conclusione lo porta questo scarto?", options:[
+                "Che le orbite non sono circolari ma ellittiche, con il Sole posto in uno dei due fuochi dell'ellisse.",
+                "Che le osservazioni di Brahe erano imprecise e andavano scartate, perché lo scarto era troppo piccolo.",
+                "Che il sistema copernicano era sbagliato e bisognava tornare al sistema tolemaico degli epicicli.",
+                "Che Marte ha un moto irregolare e imprevedibile, sfuggendo a qualsiasi descrizione geometrica."
+            ], correct:0, explanation:"Data la precisione di Brahe, gli 8 minuti non potevano essere errori di misura: Keplero comprese che l'orbita era ellittica." },
+            { id:205, title:"Le osservazioni di Galileo con il telescopio", text:"Galileo, grazie al telescopio, osserva le macchie solari, la rugosità lunare e i satelliti di Giove.", question:"Quale implicazione teorica ebbero queste osservazioni?", options:[
+                "Confermarono che i cieli non sono perfetti né immutabili, ma presentano asperità, macchie e mutamenti come il mondo terreno.",
+                "Dimostrarono che la Luna è più grande di quanto sembri a occhio nudo, superando le stime di Tolomeo e Aristotele.",
+                "Provarono che il Sole ruota attorno alla Terra, riportando in auge il sistema geocentrico contro Copernico.",
+                "Dimostrarono che i pianeti sono fatti di fuoco, come nel Timeo platonico, e non del quinto elemento aristotelico."
+            ], correct:0, explanation:"Le osservazioni galileiane smontarono l'idea di cieli perfetti e incorruttibili, confermando la corruttibilità del mondo celeste." },
+            { id:206, title:"Newton e l'unificazione dei due mondi", text:"Newton, nei Principia mathematica (1687), mostra che la stessa forza di gravità spiega la caduta dei gravi e il moto dei pianeti.", question:"Quale conseguenza filosofica ha questa unificazione?", options:[
+                "Cade il dualismo aristotelico tra mondo sublunare e superlunare: esiste un solo universo con le stesse leggi fisiche.",
+                "Si rafforza la distinzione tra fisica terrestre e fisica celeste, che restano separate e indipendenti tra loro.",
+                "Si torna al sistema tolemaico, perché solo esso può rendere conto della diversità di leggi tra Terra e cielo.",
+                "Si nega la validità della matematica come strumento di descrizione del mondo fisico, sostituendola con la metafisica."
+            ], correct:0, explanation:"Newton unifica la fisica terrestre e celeste, chiudendo la stagione del dualismo cosmologico aristotelico." },
+            { id:207, title:"La critica di Galileo a Keplero", text:"Galileo, pur conoscendo il lavoro di Keplero sulle orbite ellittiche, continua a difendere la circolarità del moto nei suoi scritti.", question:"Cosa ci insegna questa resistenza di Galileo alle ellissi?", options:[
+                "Che anche i grandi scienziati possono mantenere pregiudizi teorici radicati, mostrando come la scienza proceda per tentativi ed errori.",
+                "Che Galileo aveva ragione e Keplero torto, poiché in seguito la fisica ha confermato la circolarità delle orbite planetarie.",
+                "Che Galileo non aveva letto l'Astronomia Nova di Keplero, e quindi non sapeva nulla delle orbite ellittiche.",
+                "Che Keplero aveva copiato le osservazioni da Brahe, senza comprendere il significato profondo delle sue misurazioni."
+            ], correct:0, explanation:"La storia della scienza mostra che anche i protagonisti possono opporre resistenza a nuove idee, e che la verità emerge dal confronto critico." },
+            { id:208, title:"La parallasse stellare e la conferma dell'eliocentrismo", text:"Solo nel 1838 Friedrich Bessel riuscì a misurare la parallasse stellare, un angolo piccolissimo ma misurabile.", question:"Perché la parallasse stellare è una prova dell'eliocentrismo?", options:[
+                "Perché dimostra che la posizione della Terra rispetto alle stelle vicine cambia nel corso dell'anno, come previsto dal moto orbitale attorno al Sole.",
+                "Perché dimostra che le stelle fisse si muovono attorno alla Terra in un anno, confermando il moto delle sfere cristalline aristoteliche.",
+                "Perché dimostra che la Terra è immobile al centro dell'universo, come sostenuto da Tolomeo e dalla tradizione aristotelica.",
+                "Perché dimostra che la luce delle stelle viaggia a velocità finita, cosa che Aristotele aveva già teorizzato nei suoi scritti."
+            ], correct:0, explanation:"La parallasse, prevista già da Aristarco, è una prova empirica del moto orbitale della Terra attorno al Sole." }
+        ];
+
+        const ex3Pool = [
+            { id:301, title:"Il confronto tra i due mondi", text:"Il PDF sintetizza le principali differenze tra il mondo antico e il nuovo mondo in una tabella comparativa.", question:"Quale di queste differenze sintetizza correttamente il passaggio tra i due mondi?", options:[
+                "Mondo antico: orbite circolari, velocità costante, due mondi; Nuovo mondo: orbite ellittiche, velocità variabile, un solo universo.",
+                "Mondo antico: orbite ellittiche, velocità variabile, un solo universo; Nuovo mondo: orbite circolari, velocità costante, due mondi.",
+                "Mondo antico: Terra al centro in quiete; Nuovo mondo: Sole al centro e Terra immobile rispetto ad esso.",
+                "Mondo antico: stelle fisse immutabili; Nuovo mondo: stelle e pianeti si muovono solo di moto circolare uniforme."
+            ], correct:0, explanation:"La tabella del PDF mostra il passaggio dal cosmo aristotelico-tolemaico all'universo newtoniano." },
+            { id:302, title:"Il ruolo dell'osservazione e della tecnologia in Brahe e Galileo", text:"Brahe e Galileo sono considerati i due campioni dell'osservazione sistematica nella rivoluzione scientifica.", question:"Che cosa rende le loro osservazioni migliori di quelle del passato?", options:[
+                "La sistematicità (registrazioni regolari), la replicabilità (possibilità di ripetere) e l'accuratezza (precisione strumentale).",
+                "La possibilità di osservare il cielo a occhio nudo senza strumenti, come facevano gli astronomi greci dell'antichità.",
+                "La casualità delle scoperte, che dipendeva dal caso e dalla fortuna personale del singolo osservatore.",
+                "L'uso esclusivo del latino accademico, che garantiva la trasmissione del sapere tra tutti gli studiosi d'Europa."
+            ], correct:0, explanation:"Il PDF sottolinea le tre caratteristiche chiave delle buone osservazioni: sistematicità, replicabilità e accuratezza." },
+            { id:303, title:"L'esperimento mentale come strumento teorico", text:"Galileo non poté eliminare realmente l'attrito dal mondo, eppure ne dimostrò l'irrilevanza teorica per il principio d'inerzia.", question:"Perché Galileo ricorse all'esperimento mentale?", options:[
+                "Per ovviare ai limiti tecnologici del suo tempo e isolare i fattori fisici rilevanti per la dimostrazione teorica.",
+                "Perché non aveva abbastanza denaro per finanziare gli esperimenti reali con strumenti appositi e costosi.",
+                "Perché non credeva nell'utilità degli esperimenti reali, che considerava un passatempo per artigiani e tecnici.",
+                "Perché preferiva la speculazione filosofica alla verifica sperimentale, seguendo la tradizione platonica delle idee."
+            ], correct:0, explanation:"L'esperimento mentale ovvia ai limiti tecnici, isola aspetti del fenomeno e fornisce una concezione alternativa che mostra le pecche della teoria opposta." },
+            { id:304, title:"Il senso della rivoluzione scientifica", text:"Il PDF sottolinea che la rivoluzione scientifica non fu un evento improvviso, ma un insieme di cambiamenti distribuiti tra il 1543 e il 1687.", question:"Perché l'arco 1543-1687 è considerato simbolico per la rivoluzione scientifica?", options:[
+                "Perché va dalla pubblicazione del De revolutionibus di Copernico ai Principia mathematica di Newton.",
+                "Perché coincide con la vita di Galileo Galilei, dalla nascita alla morte, e quindi con il periodo della sua attività.",
+                "Perché è l'intervallo tra la scoperta dell'America e la Rivoluzione Francese, eventi che segnano l'inizio dell'età moderna.",
+                "Perché è il periodo in cui visse Keplero, a cui si deve l'intera rivoluzione scientifica secondo gli storici moderni."
+            ], correct:0, explanation:"1543 (De revolutionibus di Copernico) e 1687 (Principia di Newton) sono le due opere simbolo che aprono e chiudono la stagione scientifica." },
+            { id:305, title:"Il passaggio dal qualitativo al quantitativo", text:"La scienza moderna abbandona le qualità aristoteliche (caldo/freddo, secco/umido) in favore delle grandezze misurabili.", question:"Quale passaggio metodologico caratterizza questa transizione?", options:[
+                "Il passaggio da un approccio qualitativo, basato sulle qualità dei corpi, a un approccio quantitativo, basato sulle grandezze misurabili.",
+                "Il passaggio da un approccio quantitativo, basato sui numeri, a un approccio qualitativo, basato sulle sensazioni soggettive.",
+                "Il passaggio dalla matematica alla filosofia, poiché la nuova scienza rifiuta ogni formalizzazione matematica della natura.",
+                "Il passaggio dalla fisica sperimentale alla metafisica astratta, che diventa l'unico sapere valido nell'età moderna."
+            ], correct:0, explanation:"La matematizzazione della natura trasforma i fatti in leggi calcolabili, superando l'approccio qualitativo aristotelico." },
+            { id:306, title:"La ricezione delle nuove teorie", text:"Le teorie scientifiche rivoluzionarie incontrarono resistenze, come mostra il caso di Horki contro il telescopio di Galileo.", question:"Come si può interpretare la resistenza alle innovazioni scientifiche?", options:[
+                "Come un fenomeno normale, che rivela come anche gli scienziati possano opporre resistenza a nuove idee con argomenti solo apparentemente sensati.",
+                "Come una prova del fatto che la scienza procede in modo cumulativo, senza mai incontrare ostacoli o conflitti al suo interno.",
+                "Come una conferma del fatto che le innovazioni sono sempre accolte con entusiasmo dalla comunità scientifica e dal pubblico.",
+                "Come una testimonianza dell'irrazionalità della scienza, che sarebbe un sapere puramente soggettivo e arbitrario."
+            ], correct:0, explanation:"Il caso di Horki mostra che le resistenze alle innovazioni sono normali, e che la verità scientifica emerge dal confronto critico." },
+            { id:307, title:"Il ruolo della matematica nell'astronomia", text:"Tolomeo, Copernico, Keplero e Newton usarono la matematica in misura crescente per descrivere i moti celesti.", question:"In che senso la matematica è stata essenziale per la rivoluzione astronomica?", options:[
+                "Ha permesso di costruire modelli quantitativi sempre più precisi, sostituendo le descrizioni puramente qualitative con leggi calcolabili.",
+                "Ha permesso di eliminare del tutto l'osservazione, sostituendola con ragionamenti puramente astratti e deduttivi.",
+                "Ha permesso di tradurre in latino le opere greche, che altrimenti sarebbero andate perdute nel corso del Medioevo.",
+                "Ha permesso di dimostrare l'esistenza di Dio attraverso il calcolo infinitesimale, come nelle Meditazioni di Cartesio."
+            ], correct:0, explanation:"La matematica trasforma le teorie in modelli quantitativi verificabili, capaci di previsioni precise e calcolabili." },
+            { id:308, title:"Il ruolo dell'ingenuità retrospettiva", text:"Il PDF avverte del rischio di sottovalutare le teorie antiche, ritenendole ingenue o infantili.", question:"Qual è il messaggio di questo avvertimento?", options:[
+                "Che le teorie antiche erano raffinate e profonde nel loro contesto, e che la loro confutazione richiese argomenti teorici potenti.",
+                "Che le teorie antiche erano effettivamente infantili, e che la scienza moderna è semplicemente più matura e più precisa.",
+                "Che le teorie antiche sono ancora valide oggi, e che la scienza moderna è un regresso rispetto al pensiero greco.",
+                "Che le teorie antiche non hanno alcuna rilevanza filosofica, poiché la filosofia si occupa solo del presente e del futuro."
+            ], correct:0, explanation:"Riconoscere la raffinatezza delle teorie antiche è essenziale per comprendere la portata della rivoluzione scientifica." }
+        ];
+
+        const matchingPairsPool = [
+            { id:"m1", term:"Teoria dei luoghi naturali", text:"Dottrina aristotelica per cui ogni corpo tende al proprio luogo naturale in base agli elementi che lo compongono." },
+            { id:"m2", term:"Etere (quinto elemento)", text:"Sostanza perfetta di cui sarebbero fatti i cieli, capace di moti circolari ed eterni." },
+            { id:"m3", term:"Equante", text:"Punto immaginario di Tolomeo che rende uniforme il moto angolare dei pianeti, violando il moto circolare uniforme." },
+            { id:"m4", term:"De revolutionibus", text:"Opera di Copernico (1543) che espone il sistema eliocentrico e i tre moti della Terra." },
+            { id:"m5", term:"Supernova 1572", text:"Osservazione di Brahe che mostra la corruttibilità del cielo, contro l'immutabilità aristotelica." },
+            { id:"m6", term:"Sidereus Nuncius", text:"Opera di Galileo (1610) con le osservazioni della Luna, delle stelle medicee e delle macchie solari." },
+            { id:"m7", term:"Astronomia Nova", text:"Opera di Keplero (1609) in cui si introducono le orbite ellittiche in sostituzione di quelle circolari." },
+            { id:"m8", term:"Principia mathematica", text:"Opera di Newton (1687) che unifica fisica terrestre e celeste sotto la legge di gravitazione universale." },
+            { id:"m9", term:"Principio di inerzia", text:"Un corpo permane nel suo stato di quiete o moto rettilineo uniforme finché non interviene una forza esterna." },
+            { id:"m10", term:"Relatività galileiana", text:"Le leggi della meccanica sono le stesse in tutti i sistemi di riferimento inerziali (esperimento del gran naviglio)." },
+            { id:"m11", term:"F = m · a", text:"Seconda legge della dinamica di Newton: la forza produce accelerazione, non velocità, come pensava Aristotele." },
+            { id:"m12", term:"Parallasse stellare", text:"Spostamento apparente delle stelle vicine dovuto al moto orbitale terrestre, misurato per la prima volta nel 1838." }
+        ];
+
+        const textualPool = [
+            { id:"t1", title:"Sidereus Nuncius — La rugosità della Luna", source:"Galileo Galilei, Sidereus Nuncius (1610)",
+              text:"La superficie della Luna non è affatto liscia, uniforme e di esattezza perfetta, come di essa e degli altri corpi celesti una numerosa schiera di filosofi ha ritenuto, ma al contrario diseguale, scabra, ripiena di cavità e sporgenze, non altrimenti che la faccia stessa della Terra la quale si differenzia qua per catene di monti, là per profondità di valli.",
+              questions:[
+                { id:"t1q1", question:"Quale tesi filosofica viene confutata da questa osservazione di Galileo?", options:[
+                    "La tesi aristotelica della perfezione e immutabilità dei cieli, fatti di etere e privi di asperità e mutamenti.",
+                    "La tesi platonica dell'esistenza del mondo delle idee, di cui il mondo sensibile sarebbe solo una copia imperfetta.",
+                    "La tesi tolemaica del geocentrismo, che presuppone la centralità e l'immobilità della Terra nell'universo.",
+                    "La tesi copernicana dell'eliocentrismo, che nega la distinzione tra mondo sublunare e mondo celeste."
+                ], correct:0, explanation:"La Luna con monti e valli è fatta della stessa materia corruttibile della Terra, contro la perfezione dei cieli aristotelici." },
+                { id:"t1q2", question:"Quale conseguenza teorica generale ne deriva?", options:[
+                    "Che la distinzione tra mondo sublunare e superlunare è priva di fondamento, e che la Luna è simile alla Terra.",
+                    "Che la Luna è più antica della Terra, e che quindi la Terra non è al centro dell'universo come voleva Tolomeo.",
+                    "Che la Luna è abitata da esseri viventi, come sosterranno in seguito gli astronomi del Seicento e del Settecento.",
+                    "Che la Luna è stata creata da Dio in un momento successivo rispetto alla Terra, secondo il racconto della Genesi."
+                ], correct:0, explanation:"La somiglianza tra Luna e Terra suggerisce un unico universo con le stesse leggi fisiche, contro il dualismo aristotelico." }
+              ]
+            },
+            { id:"t2", title:"De revolutionibus — La scelta del Sole", source:"Niccolò Copernico, De revolutionibus orbium caelestium (1543)",
+              text:"In mezzo a tutti sta il Sole. In effetti, chi, in questo tempio bellissimo, potrebbe collocare questa lampada in un luogo diverso o migliore di quello da cui possa illuminare tutto quanto insieme? Per questo, non a torto, alcuni lo chiamano lucerna del mondo, altri mente, altri guida.",
+              questions:[
+                { id:"t2q1", question:"Quale argomento filosofico, oltre a quello matematico, Copernico adduce per porre il Sole al centro?", options:[
+                    "Un argomento di tipo pitagorico e simbolico: il Sole come fuoco centrale e fonte di luce che illumina l'intero universo.",
+                    "Un argomento di tipo empirico: le osservazioni telescopiche mostrano che il Sole è al centro dell'universo visibile.",
+                    "Un argomento di tipo teologico: la Bibbia afferma esplicitamente che il Sole è al centro dell'universo creato.",
+                    "Un argomento di tipo aristotelico: il Sole, essendo il corpo più leggero, tende naturalmente al centro dell'universo."
+                ], correct:0, explanation:"Copernico unisce ragioni matematiche e ragioni filosofiche di ascendenza pitagorica, mostrando come nella scienza i due piani si intreccino." },
+                { id:"t2q2", question:"Perché Copernico pubblicò l'opera solo sul letto di morte?", options:[
+                    "Per il timore delle conseguenze che la sua teoria avrebbe potuto avere sul piano religioso e culturale.",
+                    "Perché l'opera non era ancora completa e fu terminata materialmente solo nelle ultime settimane di vita.",
+                    "Perché voleva che fosse il papa stesso a diffonderla, come atto di sottomissione alla Chiesa di Roma.",
+                    "Perché era in attesa dell'approvazione dell'Inquisizione, che arrivò soltanto dopo la sua morte prematura."
+                ], correct:0, explanation:"Copernico temeva le reazioni alla sua opera, come scrive nella dedica a papa Paolo III, e scelse la pubblicazione postuma." }
+              ]
+            },
+            { id:"t3", title:"Il gran naviglio — La relatività galileiana", source:"Galileo Galilei, Dialogo sopra i due massimi sistemi (1632)",
+              text:"Riserratevi con qualche amico nella maggiore stanza che sia sotto coverta di alcun gran navilio, e quivi fate d'aver mosche, farfalle e simili animaletti volanti; siavi anco un gran vaso d'acqua, e dentrovi de' pescetti... e stando ferma la nave, osservate diligentemente come quelli animaletti volanti con pari velocità vanno verso tutte le parti della stanza... fate muover la nave con quanta si voglia velocità; ché (pur che il moto sia uniforme e non fluttuante in qua e in là) voi non riconoscerete una minima mutazione in tutti li nominati effetti.",
+              questions:[
+                { id:"t3q1", question:"Quale principio fisico illustra l'esperimento del gran naviglio?", options:[
+                    "Il principio di relatività galileiana: le leggi della meccanica sono le stesse in tutti i sistemi di riferimento inerziali.",
+                    "Il principio di inerzia: i corpi in moto proseguono all'infinito di moto rettilineo uniforme se non ci sono forze.",
+                    "La legge di gravitazione universale: tutti i corpi si attraggono con una forza proporzionale alle loro masse.",
+                    "Il paradosso della pietra: l'onnipotenza divina è limitata dalle leggi della logica e della fisica."
+                ], correct:0, explanation:"Galileo mostra che, chiusi sottocoperta, non possiamo distinguere la quiete dal moto rettilineo uniforme tramite esperimenti meccanici interni." },
+                { id:"t3q2", question:"Perché secondo Galileo non percepiamo il moto della nave una volta che questa procede di moto uniforme?", options:[
+                    "Perché il moto della nave è comune a tutte le cose contenute in essa, compresa l'aria, e quindi nessun esperimento interno rivela il moto.",
+                    "Perché la nave si muove a una velocità così bassa che i nostri sensi non riescono a percepire alcuna differenza.",
+                    "Perché la gravità annulla il moto della nave, mantenendola ferma rispetto alla Terra e al mare sottostante.",
+                    "Perché l'aria esterna alla nave spinge gli oggetti interni in direzione opposta, bilanciando il moto della nave."
+                ], correct:0, explanation:"La comunanza del moto a tutte le cose interne al sistema è ciò che rende indistinguibile la quiete dal moto rettilineo uniforme." }
+              ]
+            }
+        ];
+
+        const argumentPool = [
+            {
+                id:"a1", title:"L'Argomento Galileo contro la Fisica Aristotelica della Caduta",
+                description:"Ricostruisci il ragionamento per assurdo con cui Galileo confuta la dipendenza della velocità di caduta dal peso.",
+                steps:[
+                    { id:"s1", text:"Secondo Aristotele, la velocità di caduta è proporzionale al peso del corpo." },
+                    { id:"s2", text:"Prendiamo due corpi, A pesante e B leggero: secondo Aristotele, A cade più veloce di B." },
+                    { id:"s3", text:"Leghiamo insieme A e B: da una parte il nuovo corpo dovrebbe cadere più lento (per il freno di B), dall'altra più veloce (per il peso maggiore)." },
+                    { id:"s4", text:"Ma è impossibile che il medesimo corpo cada sia più lento sia più veloce: la premessa aristotelica conduce a contraddizione." },
+                    { id:"s5", text:"Dunque la velocità di caduta non dipende dal peso, ma solo dalla resistenza del mezzo (e, nel vuoto, sono uguali)." }
+                ]
+            },
+            {
+                id:"a2", title:"L'Argomento Newtoniano dell'Unificazione dei Due Mondi",
+                description:"Ricostruisci il ragionamento con cui Newton unifica fisica terrestre e celeste sotto la gravitazione universale.",
+                steps:[
+                    { id:"s1", text:"Aristotele distingueva mondo sublunare (moti rettilinei) e superlunare (moti circolari), con leggi diverse." },
+                    { id:"s2", text:"Il principio di inerzia dice che un corpo, se lasciato a sé, si muove di moto rettilineo uniforme." },
+                    { id:"s3", text:"Ma i pianeti si muovono di moto ellittico attorno al Sole: qualcosa li devia dal loro moto inerziale." },
+                    { id:"s4", text:"La stessa forza di gravità che fa cadere una mela verso terra può deviare il pianeta dal moto rettilineo." },
+                    { id:"s5", text:"Dunque non esistono due mondi distinti: c'è un solo universo con le stesse leggi fisiche, dalla mela ai pianeti." }
+                ]
+            }
+        ];
+
+        const tfPool = [
+            { id:"tf1", statement:"Per Aristotele, la velocità di caduta di un corpo è indipendente dal suo peso.", correct:false, explanation:"Falso. Per Aristotele la velocità è proporzionale al peso (v ∝ P/R): più pesante è il corpo, più rapidamente cade." },
+            { id:"tf2", statement:"Secondo Galileo, nel vuoto una piuma e un piombino cadono con la stessa velocità.", correct:true, explanation:"Vero. La differenza osservata nell'aria dipende solo dalla resistenza del mezzo; nel vuoto i due corpi cadono insieme." },
+            { id:"tf3", statement:"Il principio di inerzia afferma che per mantenere un corpo in moto serve una forza continua.", correct:false, explanation:"Falso. Al contrario, il principio di inerzia afferma che un corpo in moto rettilineo uniforme persevera in esso senza bisogno di forze esterne." },
+            { id:"tf4", statement:"L'esperimento del gran naviglio illustra il principio di relatività galileiana.", correct:true, explanation:"Vero. Esso mostra che, chiusi sottocoperta, non possiamo distinguere quiete e moto rettilineo uniforme tramite esperimenti meccanici interni." },
+            { id:"tf5", statement:"Secondo Newton, la forza impressa a un corpo è proporzionale alla sua velocità.", correct:false, explanation:"Falso. La forza è proporzionale all'accelerazione (F = m·a), non alla velocità come sosteneva Aristotele." },
+            { id:"tf6", statement:"Copernico pubblicò il De revolutionibus nel 1543, anno della sua morte.", correct:true, explanation:"Vero. L'opera fu stampata quando Copernico era ormai sul letto di morte, per timore delle reazioni." },
+            { id:"tf7", statement:"L'osservazione della supernova del 1572 di Brahe confermò l'immutabilità dei cieli aristotelici.", correct:false, explanation:"Falso. Al contrario, la supernova mostrò che i cieli sono corruttibili, contraddicendo l'immutabilità aristotelica." },
+            { id:"tf8", statement:"Keplero, grazie agli 8 minuti d'arco di scarto nelle osservazioni di Brahe, scoprì che le orbite sono ellittiche.", correct:true, explanation:"Vero. Gli 8 minuti erano troppo grandi per essere errori, e portarono Keplero a sostituire il cerchio con l'ellisse." },
+            { id:"tf9", statement:"Newton distingueva ancora nettamente la fisica terrestre dalla fisica celeste, come voleva Aristotele.", correct:false, explanation:"Falso. Newton unificò i due mondi sotto la stessa legge di gravitazione universale, superando il dualismo aristotelico." },
+            { id:"tf10", statement:"Galileo riconobbe subito il valore delle orbite ellittiche di Keplero e le integrò nel suo Dialogo sopra i massimi sistemi.", correct:false, explanation:"Falso. Galileo continuò a difendere la circolarità del moto e non menzionò mai le orbite ellittiche nel Dialogo." }
+        ];
+
+        const clozePool = [
+            {
+                id: "c1",
+                html: `La rivoluzione scientifica segna il passaggio dal sistema <select id="cloze-1" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="geocentrico">geocentrico</option><option value="eliocentrico">eliocentrico</option><option value="eliostatico">eliostatico</option></select> al sistema <select id="cloze-2" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="eliocentrico">eliocentrico</option><option value="geocentrico">geocentrico</option><option value="antropocentrico">antropocentrico</option></select>. L'astronomo polacco <select id="cloze-3" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Copernico">Copernico</option><option value="Tolomeo">Tolomeo</option><option value="Aristotele">Aristotele</option></select> pubblicò il De revolutionibus nel 1543, introducendo i tre moti della Terra. L'osservazione della supernova del 1572 e della cometa del 1577 da parte di <select id="cloze-4" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Tycho Brahe">Tycho Brahe</option><option value="Keplero">Keplero</option><option value="Galileo">Galileo</option></select> mostrò che i cieli non sono immutabili. <select id="cloze-5" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Keplero">Keplero</option><option value="Newton">Newton</option><option value="Brahe">Brahe</option></select>, grazie agli 8 minuti d'arco di scarto nelle osservazioni di Marte, scoprì che le orbite sono <select id="cloze-6" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="ellittiche">ellittiche</option><option value="circolari">circolari</option><option value="paraboliche">paraboliche</option></select>. Nella nuova fisica, il principio di <select id="cloze-7" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="inerzia">inerzia</option><option value="gravità">gravità</option><option value="relatività">relatività</option></select> afferma che un corpo persevera nel suo stato di quiete o moto rettilineo uniforme. La <select id="cloze-8" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="relatività galileiana">relatività galileiana</option><option value="legge di gravità">legge di gravità</option><option value="teoria eliocentrica">teoria eliocentrica</option></select> mostra che quiete e moto uniforme sono indistinguibili all'interno di un sistema chiuso. Infine, <select id="cloze-9" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Newton">Newton</option><option value="Galileo">Galileo</option><option value="Copernico">Copernico</option></select> unificò fisica terrestre e celeste con la legge di gravitazione universale, sostenendo che la forza è proporzionale all'<select id="cloze-10" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="accelerazione">accelerazione</option><option value="velocità">velocità</option><option value="distanza">distanza</option></select>.`,
+                answers: { 1:"geocentrico", 2:"eliocentrico", 3:"Copernico", 4:"Tycho Brahe", 5:"Keplero", 6:"ellittiche", 7:"inerzia", 8:"relatività galileiana", 9:"Newton", 10:"accelerazione" }
+            },
+            {
+                id: "c2",
+                html: `La fisica aristotelica spiegava la caduta dei gravi con la <select id="cloze-1" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="teoria dei luoghi naturali">teoria dei luoghi naturali</option><option value="legge di gravitazione">legge di gravitazione</option><option value="teoria dell'inerzia">teoria dell'inerzia</option></select>, secondo cui ogni corpo tende al proprio luogo naturale in base agli elementi che lo compongono. Galileo confutò questa teoria con un <select id="cloze-2" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="esperimento mentale">esperimento mentale</option><option value="calcolo matematico">calcolo matematico</option><option value="sondaggio">sondaggio</option></select> che conduce a una contraddizione. Nel vuoto, una piuma e un piombino cadono alla <select id="cloze-3" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="stessa velocità">stessa velocità</option><option value="velocità diversa">velocità diversa</option><option value="velocità infinita">velocità infinita</option></select>. Il principio di <select id="cloze-4" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="inerzia">inerzia</option><option value="gravità">gravità</option><option value="relatività">relatività</option></select> stabilisce che un corpo persevera nel suo stato di quiete o moto rettilineo uniforme. Il principio di <select id="cloze-5" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="relatività galileiana">relatività galileiana</option><option value="gravitazione universale">gravitazione universale</option><option value="conservazione">conservazione</option></select> afferma che quiete e moto uniforme sono indistinguibili dall'interno di un sistema chiuso. Nell'astronomia antica, il sistema di <select id="cloze-6" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Tolomeo">Tolomeo</option><option value="Copernico">Copernico</option><option value="Newton">Newton</option></select> usava deferenti, epicicli, eccentrici ed equanti per 'salvare i fenomeni'. <select id="cloze-7" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Copernico">Copernico</option><option value="Tolomeo">Tolomeo</option><option value="Aristotele">Aristotele</option></select> propose il sistema eliocentrico per risolvere il caos degli epicicli. <select id="cloze-8" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Keplero">Keplero</option><option value="Brahe">Brahe</option><option value="Tycho">Tycho</option></select> scoprì che le orbite dei pianeti sono ellittiche. La stessa legge di <select id="cloze-9" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="gravitazione universale">gravitazione universale</option><option value="inerzia">inerzia</option><option value="relatività">relatività</option></select> spiega sia la caduta di una mela sia il moto dei pianeti. L'astronomo danese <select id="cloze-10" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Tycho Brahe">Tycho Brahe</option><option value="Copernico">Copernico</option><option value="Keplero">Keplero</option></select> costruì l'osservatorio di Uraniborg e fornì a Keplero i dati decisivi per la scoperta delle orbite ellittiche.`,
+                answers: { 1:"teoria dei luoghi naturali", 2:"esperimento mentale", 3:"stessa velocità", 4:"inerzia", 5:"relatività galileiana", 6:"Tolomeo", 7:"Copernico", 8:"Keplero", 9:"gravitazione universale", 10:"Tycho Brahe" }
+            },
+            {
+                id: "c3",
+                html: `La rivoluzione scientifica si colloca tra il 1543, anno del De revolutionibus di <select id="cloze-1" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Copernico">Copernico</option><option value="Newton">Newton</option><option value="Galileo">Galileo</option></select>, e il 1687, anno dei Principia mathematica di <select id="cloze-2" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="Newton">Newton</option><option value="Copernico">Copernico</option><option value="Keplero">Keplero</option></select>. Il sistema geocentrico tolemaico spiegava i moti celesti tramite <select id="cloze-3" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="deferenti ed epicicli">deferenti ed epicicli</option><option value="orbite ellittiche">orbite ellittiche</option><option value="gravitazione universale">gravitazione universale</option></select>. L'equante era considerato un 'mostro' teorico perché violava il moto circolare uniforme rispetto al <select id="cloze-4" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="centro geometrico">centro geometrico</option><option value="Sole">Sole</option><option value="baricentro">baricentro</option></select> del deferente. Tycho Brahe osservò una <select id="cloze-5" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="supernova">supernova</option><option value="cometa">cometa</option><option value="eclissi">eclissi</option></select> nel 1572 che mise in crisi l'immutabilità dei cieli. Galileo, grazie al <select id="cloze-6" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="telescopio">telescopio</option><option value="microscopio">microscopio</option><option value="termometro">termometro</option></select>, osservò le macchie solari e la rugosità lunare. Il passaggio chiave è la distinzione tra l'approccio <select id="cloze-7" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="qualitativo">qualitativo</option><option value="quantitativo">quantitativo</option><option value="matematico">matematico</option></select> tipico di Aristotele e l'approccio <select id="cloze-8" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="quantitativo">quantitativo</option><option value="qualitativo">qualitativo</option><option value="retorico">retorico</option></select> tipico della scienza moderna. La nuova fisica abbandona la teoria dei <select id="cloze-9" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="luoghi naturali">luoghi naturali</option><option value="quattro elementi">quattro elementi</option><option value="due mondi">due mondi</option></select> e introduce il principio di inerzia. Infine, Newton dimostra che l'universo è <select id="cloze-10" class="bg-slate-800 text-cyan-300 rounded px-2 py-1"><option value="">[?]</option><option value="unico">unico</option><option value="duplice">duplice</option><option value="triplice">triplice</option></select>, con le stesse leggi fisiche ovunque.`,
+                answers: { 1:"Copernico", 2:"Newton", 3:"deferenti ed epicicli", 4:"centro geometrico", 5:"supernova", 6:"telescopio", 7:"qualitativo", 8:"quantitativo", 9:"luoghi naturali", 10:"unico" }
+            }
+        ];
+
+        // ===== RENDER =====
+        function renderEx1() {
+            const c = document.getElementById('ex1-container'); if(!c) return;
+            c.innerHTML = state.activeEx1Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">${item.options.map((opt, oIdx) => `<button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}</div>
+                    <div id="ex1-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>`).join('');
+        }
+        function selectEx1(qId, oIdx, btn) {
+            if (state.ex1Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx1Data.find(d => d.id === qId);
+            state.ex1Answers[qId] = oIdx;
+            const qc = btn.closest('.space-y-2');
+            if (qc) qc.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`ex1-fb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderEx2() {
+            const c = document.getElementById('ex2-container'); if(!c) return;
+            c.innerHTML = state.activeEx2Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">${item.options.map((opt, oIdx) => `<button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}</div>
+                    <div id="ex2-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>`).join('');
+        }
+        function selectEx2(qId, oIdx, btn) {
+            if (state.ex2Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx2Data.find(d => d.id === qId);
+            state.ex2Answers[qId] = oIdx;
+            const qc = btn.closest('.space-y-2');
+            if (qc) qc.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`ex2-fb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderEx3() {
+            const c = document.getElementById('ex3-container'); if(!c) return;
+            c.innerHTML = state.activeEx3Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">${item.options.map((opt, oIdx) => `<button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}</div>
+                    <div id="ex3-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>`).join('');
+        }
+        function selectEx3(qId, oIdx, btn) {
+            if (state.ex3Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx3Data.find(d => d.id === qId);
+            state.ex3Answers[qId] = oIdx;
+            const qc = btn.closest('.space-y-2');
+            if (qc) qc.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`ex3-fb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderMatching() {
+            const tc = document.getElementById('matching-terms'), dc = document.getElementById('matching-defs');
+            if(!tc || !dc) return;
+            tc.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
+            dc.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
+        }
+        function selectMatchTerm(termId, btn) {
+            playSound('click'); state.selectedTermId = termId;
+            document.querySelectorAll('#matching-terms button').forEach(b => { if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer"; });
+            btn.className = "w-full text-left p-3 rounded-xl border-2 border-cyan-500 bg-cyan-950/80 text-xs font-bold text-cyan-300 transition-all shadow-lg cursor-pointer";
+            const fb = document.getElementById('matching-feedback');
+            if(fb) { fb.className = "text-xs font-semibold text-cyan-400 pt-2"; fb.innerText = "Termine selezionato. Ora clicca sulla definizione corrispondente!"; }
+        }
+        function selectMatchDef(matchId, btn) {
+            const fb = document.getElementById('matching-feedback');
+            if(!state.selectedTermId) { playSound('error'); if(fb){ fb.className = "text-xs font-semibold text-rose-400 pt-2"; fb.innerText = "Prima seleziona un termine a sinistra!"; } return; }
+            if(state.selectedTermId === matchId) {
+                playSound('correct'); state.matchedPairs[matchId] = true;
+                const tb = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
+                if(tb) { tb.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed"; tb.disabled = true; }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed"; btn.disabled = true;
+                if(fb) { fb.className = "text-xs font-bold text-emerald-400 pt-2"; fb.innerText = "✓ Abbinamento corretto e bloccato!"; }
+            } else {
+                playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => { if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer"; }, 1000);
+                if(fb) { fb.className = "text-xs font-bold text-rose-400 pt-2"; fb.innerText = "✗ Abbinamento errato. Riprova!"; }
+            }
+            state.selectedTermId = null; updateGlobalScore();
+        }
+
+        function renderCloze() {
+            const c = document.getElementById('cloze-content');
+            if (!c || !state.currentCloze) return;
+            c.innerHTML = state.currentCloze.html;
+        }
+        function checkCloze() {
+            if (state.clozeLocked) return;
+            playSound('click');
+            const answers = state.currentCloze.answers; let correct = 0;
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById(`cloze-${i}`);
+                if(el) { el.disabled = true; if(el.value === answers[i]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } else { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } }
+            }
+            state.clozeScore = Math.round((correct/10)*100); state.clozeLocked = true;
+            const sb = document.getElementById('cloze-submit-btn');
+            if(sb) { sb.disabled = true; sb.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed"; sb.innerText = "Testo Verificato e Bloccato"; }
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) { if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (10/10).`; } else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Le risposte sono state bloccate.`; } }
+            updateGlobalScore();
+        }
+
+        function renderTextual() {
+            const c = document.getElementById('ex6-container'); if(!c) return;
+            c.innerHTML = state.activeTextual.map((passage, pIdx) => `
+                <div class="glass-card p-5 sm:p-6 rounded-2xl space-y-5">
+                    <div class="flex items-center gap-2"><span class="text-xs font-bold text-orange-400 bg-orange-950/60 px-2.5 py-1 rounded-md border border-orange-800"><i class="fa-solid fa-quote-right mr-1"></i> Passo ${pIdx+1}: ${passage.title}</span></div>
+                    <div class="passage p-4 sm:p-5"><p class="text-[11px] font-bold uppercase tracking-wider text-amber-400/80 mb-2">${passage.source}</p><p class="text-sm sm:text-base text-slate-200 leading-relaxed italic">«${passage.text}»</p></div>
+                    <div class="space-y-5">
+                        ${passage.questions.map((q, qIdx) => `
+                            <div class="space-y-2">
+                                <div class="font-bold text-slate-100 text-xs sm:text-sm">${pIdx+1}.${qIdx+1} — ${q.question}</div>
+                                <div class="space-y-2" id="tq-${q.id}">${q.options.map((opt, oIdx) => `<button onclick="selectTextual('${q.id}', ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}</div>
+                                <div id="tfb-${q.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                            </div>`).join('')}
+                    </div>
+                </div>`).join('');
+        }
+        function selectTextual(qId, oIdx, btn) {
+            if (state.ex6Answers[qId] !== undefined) return;
+            playSound('click');
+            let question = null;
+            state.activeTextual.forEach(p => p.questions.forEach(q => { if(q.id === qId) question = q; }));
+            if (!question) return;
+            state.ex6Answers[qId] = oIdx;
+            const qc = btn.closest('.space-y-2');
+            if (qc) qc.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === question.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === question.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === question.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700"; fb.innerHTML = `<strong>${oIdx === question.correct ? 'Interpretazione Corretta!' : 'Interpretazione Errata e Bloccata.'}</strong> ${question.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderArgument() {
+            const titleEl = document.getElementById('arg-title'), descEl = document.getElementById('arg-description');
+            const poolEl = document.getElementById('arg-pool'), seqEl = document.getElementById('arg-sequence');
+            const submitBtn = document.getElementById('arg-submit'), fbEl = document.getElementById('arg-feedback');
+            if(!poolEl || !seqEl || !state.activeArgument) return;
+            titleEl.innerText = state.activeArgument.title; descEl.innerText = state.activeArgument.description;
+            poolEl.innerHTML = state.argPool.map(s => `<button onclick="addToSequence('${s.id}')" class="w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 hover:border-cyan-600 transition-all cursor-pointer"><i class="fa-solid fa-grip-lines text-slate-500 mr-1.5"></i> ${s.text}</button>`).join('');
+            if (state.argOrder.length === 0) { seqEl.innerHTML = `<div class="text-xs text-slate-500 text-center py-4 italic">Clicca i passi a sinistra per inserirli qui nell'ordine corretto.</div>`; }
+            else {
+                seqEl.innerHTML = state.argOrder.map((id, idx) => {
+                    const step = state.activeArgument.steps.find(s => s.id === id);
+                    let cls = "w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer flex items-start gap-2.5";
+                    if (state.argSubmitted) { const cIds = state.activeArgument.steps.map(s => s.id); cls += (id === cIds[idx]) ? " border-emerald-600 bg-emerald-950/60 text-emerald-300" : " border-rose-600 bg-rose-950/60 text-rose-300"; }
+                    else { cls += " border-cyan-700/60 bg-cyan-950/40 text-cyan-100 hover:bg-cyan-900/40"; }
+                    return `<button onclick="removeFromSequence('${id}')" class="${cls}" ${state.argSubmitted ? 'disabled' : ''}><span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-[10px]">${idx+1}</span><span>${step.text}</span></button>`;
+                }).join('');
+            }
+            if (submitBtn) { const allPlaced = state.argOrder.length === state.activeArgument.steps.length; submitBtn.disabled = !allPlaced || state.argSubmitted; submitBtn.className = allPlaced && !state.argSubmitted ? "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer hover:bg-cyan-400 transition-all" : "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"; }
+            if (fbEl && !state.argSubmitted) fbEl.innerText = "";
+        }
+        function addToSequence(id) { if (state.argSubmitted) return; playSound('click'); const idx = state.argPool.findIndex(s => s.id === id); if (idx < 0) return; state.argPool.splice(idx, 1); state.argOrder.push(id); renderArgument(); }
+        function removeFromSequence(id) { if (state.argSubmitted) return; playSound('click'); const idx = state.argOrder.indexOf(id); if (idx < 0) return; state.argOrder.splice(idx, 1); const step = state.activeArgument.steps.find(s => s.id === id); state.argPool.push(step); renderArgument(); }
+        function checkArgument() {
+            if (state.argSubmitted || state.argOrder.length !== state.activeArgument.steps.length) return;
+            playSound('click');
+            const cIds = state.activeArgument.steps.map(s => s.id);
+            let correct = 0;
+            for (let i = 0; i < state.argOrder.length; i++) { if (state.argOrder[i] === cIds[i]) correct++; }
+            state.argSubmitted = true; state.argCorrectPositions = correct; renderArgument();
+            const fbEl = document.getElementById('arg-feedback');
+            if (fbEl) { if (correct === cIds.length) { playSound('correct'); fbEl.className = "text-emerald-400 font-bold"; fbEl.innerText = `✓ Sequenza perfetta! (${correct}/${cIds.length})`; } else { playSound('error'); fbEl.className = "text-amber-400 font-bold"; fbEl.innerText = `Posizioni corrette: ${correct}/${cIds.length}. Riprova.`; } }
+            updateGlobalScore();
+        }
+
+        function renderTF() {
+            const c = document.getElementById('ex8-container'); if(!c) return;
+            c.innerHTML = state.activeTF.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <div class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-lime-500/20 text-lime-400 flex items-center justify-center font-bold text-xs">${idx+1}</span><p class="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed">${item.statement}</p></div>
+                    <div class="flex gap-3 pl-9">
+                        <button onclick="selectTF('${item.id}', true, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-emerald-300 hover:bg-emerald-950/50 hover:border-emerald-600 transition-all cursor-pointer"><i class="fa-solid fa-check mr-1"></i> Vero</button>
+                        <button onclick="selectTF('${item.id}', false, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-rose-300 hover:bg-rose-950/50 hover:border-rose-600 transition-all cursor-pointer"><i class="fa-solid fa-xmark mr-1"></i> Falso</button>
+                    </div>
+                    <div id="tfb2-${item.id}" class="hidden p-3 rounded-xl text-xs ml-9"></div>
+                </div>`).join('');
+        }
+        function selectTF(id, value, btn) {
+            if (state.tfAnswers[id] !== undefined) return;
+            playSound('click');
+            const item = state.activeTF.find(d => d.id === id);
+            if (!item) return;
+            state.tfAnswers[id] = value;
+            const cont = btn.closest('.glass-card');
+            cont.querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); });
+            if (value === item.correct) { playSound('correct'); btn.className = "px-5 py-2 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs font-bold text-emerald-200 cursor-not-allowed"; }
+            else { playSound('error'); btn.className = "px-5 py-2 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs font-bold text-rose-200 cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb2-${id}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = value === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 ml-9" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 ml-9"; fb.innerHTML = `<strong>${value === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function updateGlobalScore() {
+            let ex1C = 0; state.activeEx1Data.forEach(d => { if(state.ex1Answers[d.id] === d.correct) ex1C++; });
+            let ex2C = 0; state.activeEx2Data.forEach(d => { if(state.ex2Answers[d.id] === d.correct) ex2C++; });
+            let ex3C = 0; state.activeEx3Data.forEach(d => { if(state.ex3Answers[d.id] === d.correct) ex3C++; });
+            let matchC = Object.keys(state.matchedPairs || {}).length;
+            let ex6T = 0, ex6C = 0;
+            state.activeTextual.forEach(p => p.questions.forEach(q => { ex6T++; if(state.ex6Answers[q.id] === q.correct) ex6C++; }));
+            let argS = 0;
+            if (state.argSubmitted) { const ts = state.activeArgument ? state.activeArgument.steps.length : 1; argS = (state.argCorrectPositions || 0) / ts; }
+            let tfC = 0; state.activeTF.forEach(d => { if(state.tfAnswers[d.id] === d.correct) tfC++; });
+            const total = Math.round(
+                (ex1C / (state.activeEx1Data.length || 1)) * 12 +
+                (ex2C / (state.activeEx2Data.length || 1)) * 12 +
+                (ex3C / (state.activeEx3Data.length || 1)) * 10 +
+                (matchC / (state.activeMatchingTerms.length || 1)) * 8 +
+                (state.clozeScore / 100) * 6 +
+                (ex6T > 0 ? (ex6C / ex6T) * 20 : 0) +
+                argS * 16 +
+                (tfC / (state.activeTF.length || 1)) * 16
+            );
+            const st = document.getElementById('global-score-text');
+            if(st) st.innerText = `${total} / 100`;
+            return total;
+        }
+
+        function updateReport() {
+            const score = updateGlobalScore();
+            const rs = document.getElementById('report-score'); if(rs) rs.innerText = `${score} / 100 XP`;
+            const be = document.getElementById('report-badge'); const cs = document.getElementById('cert-score'); const ct = document.getElementById('cert-title');
+            if(cs) cs.innerText = `${score} / 100 XP`;
+            let titleText = "Novizio della Rivoluzione Scientifica";
+            if(score >= 90) titleText = "Maestro di Fisica e Astronomia Moderna";
+            else if(score >= 75) titleText = "Analista Esperto di Rivoluzione Scientifica";
+            else if(score >= 55) titleText = "Praticante di Storia della Scienza";
+            if(be) be.innerText = titleText; if(ct) ct.innerText = titleText;
+        }
+
+        function switchTab(tabId, btnElement) {
+            playSound('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+            if(btnElement) { btnElement.classList.add('active'); }
+            else { document.querySelectorAll('.tab-btn').forEach(b => { if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) b.classList.add('active'); }); }
+            if(tabId === 'tab-report') updateReport();
+        }
+
+        function setupRandomQuestions() {
+            state.ex1Answers = {}; state.ex2Answers = {}; state.ex3Answers = {};
+            state.ex6Answers = {}; state.tfAnswers = {};
+            state.matchedPairs = {}; state.clozeScore = 0; state.clozeLocked = false; state.selectedTermId = null;
+            state.argSubmitted = false; state.argCorrectPositions = 0;
+
+            state.activeEx1Data = shuffle(ex1Pool).slice(0, 5).map(shuffleOptions);
+            state.activeEx2Data = shuffle(ex2Pool).slice(0, 5).map(shuffleOptions);
+            state.activeEx3Data = shuffle(ex3Pool).slice(0, 5).map(shuffleOptions);
+
+            const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
+            state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
+            state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
+
+            state.activeTextual = shuffle(textualPool).slice(0, 3).map(passage => ({ ...passage, questions: passage.questions.map(shuffleOptions) }));
+
+            const arg = shuffle(argumentPool)[0];
+            state.activeArgument = { ...arg, steps: arg.steps };
+            state.argPool = shuffle(arg.steps);
+            state.argOrder = [];
+
+            state.activeTF = shuffle(tfPool).slice(0, 5);
+
+            state.currentCloze = shuffle(clozePool)[0];
+            renderCloze();
+            const sb = document.getElementById('cloze-submit-btn');
+            if(sb) { sb.disabled = false; sb.className = "bg-cyan-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"; sb.innerText = "Verifica e Blocca Testo"; }
+            const cf = document.getElementById('cloze-feedback');
+            if(cf) cf.innerText = "";
+
+            renderEx1(); renderEx2(); renderEx3(); renderMatching();
+            renderTextual(); renderArgument(); renderTF();
+            updateGlobalScore();
+        }
+
+        function resetAll() { setupRandomQuestions(); switchTab('tab-studio'); }
+        function initApp() { setupRandomQuestions(); }
+
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            initApp();
+        } else {
+            document.addEventListener('DOMContentLoaded', initApp);
+        }
+    </script>
+</body>
+</html>

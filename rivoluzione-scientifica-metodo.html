@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio: Rivoluzione Scientifica - Le Metodologie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { cinzel: ['Cinzel','serif'], sans: ['Plus Jakarta Sans','sans-serif'] } } }
+        }
+    </script>
+    <script>window.MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080d16; color: #f1f5f9; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .tab-btn.active { background-color: #0d9488 !important; color: #fff !important; border-color: #2dd4bf !important; box-shadow: 0 4px 20px -2px rgba(13,148,136,0.5); }
+        .glass-card { background: linear-gradient(135deg, rgba(17,25,39,0.85), rgba(10,15,26,0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+        .badge-glow { box-shadow: 0 0 15px rgba(45,212,191,0.2); }
+        .passage { border-left: 4px solid #f59e0b; background: rgba(15,23,42,0.85); border-radius: 0 0.75rem 0.75rem 0; }
+        #cloze-content select { font-family: 'Plus Jakarta Sans', sans-serif; }
+        @media print { body * { visibility: hidden; } #printable-certificate, #printable-certificate * { visibility: visible; } #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-teal-500 selection:text-slate-950">
+
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2 text-xs sm:text-sm">
+                <a href="index.html" class="text-slate-400 hover:text-teal-400 transition-colors flex items-center gap-1.5 font-semibold"><i class="fa-solid fa-house"></i> Home Portale</a>
+                <span class="text-slate-600">/</span>
+                <a href="filosofia-moderna.html" class="text-slate-400 hover:text-teal-400 transition-colors font-semibold">Filosofia Moderna</a>
+                <span class="text-slate-600">/</span>
+                <span class="text-teal-400 font-bold">Rivoluzione Scientifica: Metodo</span>
+            </div>
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-user-graduate absolute left-3 text-slate-400 text-xs"></i>
+                    <input type="text" id="student-name-input" placeholder="Inserisci il tuo nome" value="Studente" oninput="updateStudentName(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-teal-500 w-40 sm:w-48">
+                </div>
+                <button onclick="toggleAudio()" id="sound-btn" class="p-2 rounded-lg bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-teal-400" title="Audio"><i class="fa-solid fa-volume-high text-sm"></i></button>
+                <div class="flex items-center space-x-3 bg-slate-900 border border-teal-500/30 px-3.5 py-1.5 rounded-lg badge-glow">
+                    <div class="text-right">
+                        <span class="text-[10px] uppercase tracking-wider text-teal-400/80 block font-bold">Punti XP</span>
+                        <span id="global-score-text" class="text-sm font-extrabold text-teal-400">0 / 100</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center font-extrabold text-xs"><i class="fa-solid fa-bolt"></i></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-slate-950 border-b border-slate-800/80 sticky top-[61px] z-40 overflow-x-auto shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-2.5 min-w-max">
+            <button onclick="switchTab('tab-studio', this)" class="tab-btn active px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent"><i class="fa-solid fa-book-open text-teal-400"></i> 0. Quadro Metodologico</button>
+            <button onclick="switchTab('tab-ex1', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-eye text-emerald-400"></i> 1. Osservazione</button>
+            <button onclick="switchTab('tab-ex2', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-microscope text-amber-400"></i> 2. Tecnologia</button>
+            <button onclick="switchTab('tab-ex3', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-square-root-variable text-purple-400"></i> 3. Matematica e Ideale</button>
+            <button onclick="switchTab('tab-classificazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-layer-group text-teal-400"></i> 4. Abbinamenti</button>
+            <button onclick="switchTab('tab-cloze', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-pen-nib text-rose-400"></i> 5. Cloze</button>
+            <button onclick="switchTab('tab-commento', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-quote-right text-orange-400"></i> 6. Commento Testuale</button>
+            <button onclick="switchTab('tab-argomentazione', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-arrow-down-1-9 text-teal-400"></i> 7. Ricostruzione</button>
+            <button onclick="switchTab('tab-verofalso', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-check-double text-lime-400"></i> 8. Vero/Falso</button>
+            <button onclick="switchTab('tab-report', this)" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-transparent text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-certificate text-yellow-400"></i> Certificato</button>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+        <section id="tab-studio" class="tab-content space-y-8">
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border-teal-500/20 relative overflow-hidden">
+                <div class="max-w-3xl space-y-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-teal-500/10 text-teal-400 border border-teal-500/30"><i class="fa-solid fa-flask mr-1.5"></i> Modulo 2: Le Novità Metodologiche</span>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-teal-400">Come Cambia il Modo di Fare Scienza</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Dalla osservazione sistematica di Brahe e Galileo al ruolo della tecnologia (telescopio e microscopio), dagli esperimenti mentali di Galileo alla matematizzazione della natura. La rivoluzione scientifica non fu solo un cambio di teorie, ma un cambio di <em>metodo</em>.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-eye"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">1. Il Nuovo Ruolo dell'Osservazione</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Non è l'osservazione in sé a essere nuova, ma la sua <strong>sistematicità</strong> (condotta in modo organizzato), la <strong>replicabilità</strong> (ripetibile da altri) e l'<strong>accuratezza</strong> (strumenti adeguati).</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-star"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">2. Brahe e Galileo</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Brahe: registrazioni notturne continue, misure ripetute, giornali dettagliati, correzioni per rifrazione e errori strumentali. Galileo: annotazioni giorno per giorno delle Stelle medicee nel <em>Sidereus Nuncius</em>.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-telescope"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">3. Il Ruolo della Tecnologia</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">I sensi umani hanno limiti. Telescopio e microscopio ampliano le capacità percettive: l'infinitamente lontano e l'infinitamente piccolo. La resistenza di Horki al telescopio mostra lo scetticismo verso le innovazioni.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-bacteria"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">4. I Microscopisti Classici</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Hooke (cellula, <em>Micrographia</em>), Grew (anatomia vegetale), Leeuwenhoek (protozoi, batteri), Swammerdam (insetti, globuli rossi), Malpighi (capillari polmonari, istologia).</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-brain"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">5. Costruire Situazioni Ideali</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">L'esperimento mentale immagina situazioni ipotetiche per isolare fattori, ovviare a limiti tecnologici e fornire una concezione alternativa. È il caso del piano inclinato e della caduta dei gravi.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-square-root-variable"></i></div>
+                    <h3 class="font-bold text-lg text-slate-100">6. La Matematica come Linguaggio</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Galileo: "La filosofia è scritta in lingua matematica". Funzioni: quantificazione, linguaggio preciso, modellizzazione, astrazione. Passaggio dal qualitativo al quantitativo.</p>
+                </div>
+            </div>
+            <div class="text-center pt-4">
+                <button onclick="switchTab('tab-ex1')" class="bg-gradient-to-r from-teal-500 to-cyan-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:from-teal-600 hover:to-cyan-700 font-cinzel tracking-wide cursor-pointer">Inizia l'Esercitazione ➔</button>
+            </div>
+        </section>
+
+        <section id="tab-ex1" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-emerald-400">Esercizio 1: Il Nuovo Ruolo dell'Osservazione</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Sistematicità, replicabilità, accuratezza; Brahe e Galileo campioni dell'osservazione. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex1-container" class="space-y-6"></div>
+        </section>
+
+        <section id="tab-ex2" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-400">Esercizio 2: Il Ruolo della Tecnologia</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Telescopio, microscopio, microscopisti classici e il ruolo degli ingegneri. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex2-container" class="space-y-6"></div>
+        </section>
+
+        <section id="tab-ex3" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-400">Esercizio 3: Matematica ed Esperimenti Mentali</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Qualitativo vs quantitativo, funzioni della matematica, esperimenti ideali. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex3-container" class="space-y-6"></div>
+        </section>
+
+        <section id="tab-classificazione" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 4: Abbinamenti Metodologici</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div id="matching-terms" class="space-y-2.5"></div>
+                    <div id="matching-defs" class="space-y-2.5"></div>
+                </div>
+                <div id="matching-feedback" class="text-xs sm:text-sm font-semibold pt-2"></div>
+            </div>
+        </section>
+
+        <section id="tab-cloze" class="tab-content hidden space-y-6">
+            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-rose-400">Esercizio 5: Cloze Test</h2>
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <div id="cloze-content" class="p-5 bg-slate-900/90 rounded-xl leading-loose text-sm sm:text-base text-slate-200"></div>
+                <button id="cloze-submit-btn" onclick="checkCloze()" class="bg-teal-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer">Verifica e Blocca Testo</button>
+                <div id="cloze-feedback" class="text-xs sm:text-sm font-semibold"></div>
+            </div>
+        </section>
+
+        <section id="tab-commento" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-orange-400">Esercizio 6: Commento Testuale</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Leggi i passi delle opere originali e rispondi alle domande di interpretazione. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex6-container" class="space-y-8"></div>
+        </section>
+
+        <section id="tab-argomentazione" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-teal-400">Esercizio 7: Ricostruzione dell'Argomentazione</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Ordina i passi nel modo corretto. <em>(Clicca un passo per rimuoverlo)</em></p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl space-y-5">
+                <div id="arg-title" class="font-cinzel text-lg font-bold text-teal-300"></div>
+                <div id="arg-description" class="text-xs sm:text-sm text-slate-300 italic"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400"><i class="fa-solid fa-shuffle mr-1"></i> Passi da ordinare</h4>
+                        <div id="arg-pool" class="space-y-2.5"></div>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-teal-400"><i class="fa-solid fa-list-ol mr-1"></i> La tua sequenza</h4>
+                        <div id="arg-sequence" class="space-y-2.5 min-h-[80px] p-3 rounded-xl border-2 border-dashed border-slate-700/60"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 pt-2">
+                    <button id="arg-submit" onclick="checkArgument()" class="bg-teal-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">Verifica Sequenza</button>
+                    <div id="arg-feedback" class="text-xs sm:text-sm font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-verofalso" class="tab-content hidden space-y-6">
+            <div class="space-y-2">
+                <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-lime-400">Esercizio 8: Vero o Falso Ragionato</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Valuta ciascuna affermazione. <em>(Risposte bloccate al primo click)</em></p>
+            </div>
+            <div id="ex8-container" class="space-y-4"></div>
+        </section>
+
+        <section id="tab-report" class="tab-content hidden space-y-6">
+            <div class="glass-card p-8 rounded-2xl text-center space-y-6">
+                <h2 class="font-cinzel text-2xl font-bold text-teal-400">Valutazione Finale: Le Metodologie della Rivoluzione Scientifica</h2>
+                <div class="text-4xl font-black text-teal-400" id="report-score">0 / 100 XP</div>
+                <div id="report-badge" class="font-cinzel text-xl font-bold text-slate-200">In elaborazione...</div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="window.print()" class="bg-teal-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"><i class="fa-solid fa-print"></i> Stampa Certificato PDF</button>
+                    <button onclick="resetAll()" class="bg-slate-800 text-slate-300 font-bold px-6 py-2.5 rounded-xl border border-slate-700 cursor-pointer"><i class="fa-solid fa-arrows-rotate mr-1.5"></i> Nuova Prova (Pescaggio Nuove Domande)</button>
+                </div>
+            </div>
+            <div id="printable-certificate" class="hidden print:block glass-card bg-slate-950 p-8 rounded-3xl border-4 border-teal-500/40 text-center space-y-6">
+                <div class="border-2 border-dashed border-teal-500/30 p-8 rounded-2xl space-y-6">
+                    <div class="font-cinzel text-teal-400 text-3xl font-black tracking-widest uppercase">Certificato di Competenza Metodologica</div>
+                    <p class="text-slate-300 text-sm">Si attesta che lo studente / la studentessa:</p>
+                    <div id="cert-student-name" class="font-cinzel text-2xl font-bold text-white underline decoration-teal-500 decoration-2">Studente</div>
+                    <p class="text-slate-300 text-sm max-w-lg mx-auto leading-relaxed">
+                        ha superato con successo la verifica approfondita su:
+                        <br><strong class="text-teal-400">"Osservazione Sistematica, Ruolo della Tecnologia, Esperimenti Mentali e Matematizzazione della Natura nella Rivoluzione Scientifica"</strong>
+                    </p>
+                    <div class="flex justify-around items-center pt-6 border-t border-slate-800 text-xs text-slate-400">
+                        <div><span>Punteggio Conseguito:</span><div id="cert-score" class="font-bold text-teal-400 text-base">0 / 100 XP</div></div>
+                        <div><span>Livello Raggiunto:</span><div id="cert-title" class="font-bold text-emerald-400 text-base">In corso</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 space-x-4">
+        <a href="index.html" class="hover:text-teal-400 transition-colors"><i class="fa-solid fa-house mr-1"></i> Home Portale</a>
+        <span>•</span>
+        <a href="filosofia-moderna.html" class="hover:text-teal-400 transition-colors"><i class="fa-solid fa-diagram-project mr-1"></i> Filosofia Moderna</a>
+    </footer>
+
+    <script>
+        const state = {
+            studentName: "Studente", audioEnabled: true,
+            ex1Answers: {}, ex2Answers: {}, ex3Answers: {}, ex6Answers: {}, tfAnswers: {},
+            matchedPairs: {}, clozeScore: 0, clozeLocked: false,
+            selectedTermId: null,
+            activeEx1Data: [], activeEx2Data: [], activeEx3Data: [],
+            activeMatchingTerms: [], activeMatchingDefs: [],
+            activeTextual: [], activeArgument: null,
+            argPool: [], argOrder: [], argSubmitted: false, argCorrectPositions: 0,
+            activeTF: [], currentCloze: null
+        };
+
+        let audioCtx = null;
+        function playSound(type) {
+            if (!state.audioEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                if (type === 'click') { osc.frequency.setValueAtTime(400, audioCtx.currentTime); gain.gain.setValueAtTime(0.04, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.04); }
+                else if (type === 'correct') { osc.frequency.setValueAtTime(880, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+                else if (type === 'error') { osc.frequency.setValueAtTime(220, audioCtx.currentTime); gain.gain.setValueAtTime(0.06, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15); }
+            } catch(e){}
+        }
+
+        function toggleAudio() { state.audioEnabled = !state.audioEnabled; }
+        function updateStudentName(val) { state.studentName = val || "Studente"; const c = document.getElementById('cert-student-name'); if(c) c.innerText = state.studentName; }
+        function shuffle(array) { let arr = [...array]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+        function shuffleOptions(item) {
+            const indices = item.options.map((_, i) => i);
+            const shuffledIndices = shuffle(indices);
+            const newOptions = shuffledIndices.map(i => item.options[i]);
+            const newCorrect = shuffledIndices.indexOf(item.correct);
+            return { ...item, options: newOptions, correct: newCorrect };
+        }
+
+        // ===== POOLS =====
+        const ex1Pool = [
+            { id:101, title:"La sistematicità", text:"Il PDF sottolinea che la scienza moderna non ha 'inventato' l'osservazione, ma ne ha cambiato il modo.", question:"Qual è la prima caratteristica di un buon insieme di osservazioni secondo il PDF?", options:[
+                "La sistematicità: le osservazioni sono condotte in modo organizzato e secondo criteri precisi e confrontabili.",
+                "La casualità: le osservazioni sono lasciate all'intuizione del singolo scienziato e non seguono un metodo fisso.",
+                "La rapidità: le osservazioni devono essere compiute in poco tempo per evitare che i fenomeni naturali cambino.",
+                "La soggettività: ogni osservatore registra ciò che ritiene più significativo secondo la propria sensibilità."
+            ], correct:0, explanation:"La sistematicità è la prima delle tre caratteristiche indicate dal PDF, insieme a replicabilità e accuratezza." },
+            { id:102, title:"La replicabilità", text:"Un buon insieme di osservazioni deve possedere tre caratteristiche principali.", question:"Che cosa significa che un'osservazione deve essere 'replicabile'?", options:[
+                "Che deve poter essere ripetuta da altri ricercatori, nelle stesse condizioni, ottenendo risultati coerenti e confrontabili.",
+                "Che deve essere compiuta una sola volta, perché la ripetizione introduce errori e confonde i dati raccolti.",
+                "Che deve essere registrata su un supporto cartaceo, così da poter essere conservata e consultata in futuro.",
+                "Che deve essere approvata dalla comunità scientifica prima di essere resa pubblica e discussa dagli studiosi."
+            ], correct:0, explanation:"La replicabilità garantisce che i risultati non dipendano dall'osservatore, ma siano oggettivi e controllabili." },
+            { id:103, title:"L'accuratezza", text:"Le osservazioni devono essere effettuate con strumenti e procedure adeguati.", question:"Che cosa si intende per 'accuratezza' delle osservazioni?", options:[
+                "L'uso di strumenti e procedure adeguati, in modo da ottenere misurazioni il più possibile precise e ridurre gli errori.",
+                "La velocità con cui si compiono le osservazioni, per poter raccogliere il maggior numero di dati nel minor tempo.",
+                "La lunghezza del periodo di osservazione, che deve coprire almeno un anno per essere considerata valida.",
+                "La quantità di osservatori coinvolti, poiché più persone osservano lo stesso fenomeno, più il dato è affidabile."
+            ], correct:0, explanation:"L'accuratezza riguarda la precisione delle misure e la riduzione degli errori, grazie a strumenti e procedure adeguati." },
+            { id:104, title:"Le registrazioni di Brahe", text:"Tycho Brahe, nel suo osservatorio di Uraniborg, aveva pensato a come risolvere i problemi metodologici del passato.", question:"Quale di queste pratiche caratterizzava il metodo di Brahe?", options:[
+                "Registrare ogni notte serena senza interruzioni, prendere più volte ogni misura e annotare data, ora e condizioni.",
+                "Osservare il cielo solo nelle notti di festa, per concentrarsi sui fenomeni più spettacolari e degni di nota.",
+                "Affidare le osservazioni a un solo assistente fidato, per evitare che opinioni diverse inquinassero i dati.",
+                "Rinunciare a correggere gli errori strumentali, perché la perfezione degli strumenti era già sufficiente."
+            ], correct:0, explanation:"Brahe registrava ogni notte serena, ripeteva le misure e correggeva gli errori: fu il salto di qualità dell'osservazione." },
+            { id:105, title:"Le correzioni di Brahe", text:"Brahe conosceva le limitazioni delle osservazioni precedenti e aveva pensato a come risolverle.", question:"Quali correzioni introdusse Brahe nelle sue osservazioni?", options:[
+                "Correzioni per la rifrazione atmosferica e per gli errori strumentali, oltre a registrazioni dettagliate e ripetute.",
+                "Correzioni per la parallasse stellare, che egli fu il primo a misurare con precisione grazie al telescopio.",
+                "Correzioni per la precessione degli equinozi, che egli calcolò con esattezza superiore a quella di Copernico.",
+                "Correzioni per l'aberrazione della luce, fenomeno che egli scoprì osservando il moto apparente delle stelle."
+            ], correct:0, explanation:"Brahe correggeva rifrazione atmosferica ed errori strumentali, rendendo le sue osservazioni le migliori a occhio nudo." },
+            { id:106, title:"Le osservazioni di Galileo", text:"Nel Sidereus Nuncius Galileo annota giorno per giorno le posizioni delle Stelle medicee.", question:"Che cosa rende esemplare il metodo di Galileo nelle osservazioni dei satelliti di Giove?", options:[
+                "La sistematicità delle annotazioni quotidiane, con spiegazioni quando non riusciva a osservare tutte e quattro le stelle.",
+                "La rapidità con cui Galileo pubblicò le sue scoperte, anticipando tutti gli altri astronomi del suo tempo.",
+                "L'uso esclusivo del latino accademico, che garantiva la trasmissione del sapere tra tutti gli studiosi europei.",
+                "La rinuncia a qualsiasi strumento tecnologico, per dimostrare la superiorità dell'osservazione a occhio nudo."
+            ], correct:0, explanation:"La metodicità delle annotazioni galileiane è un esempio di precisione sperimentale che iniziava ad affermarsi." },
+            { id:107, title:"Gli 8 minuti d'arco", text:"Keplero cercò di adattare un'orbita circolare ai dati di Marte, ma gli errori di 8 minuti d'arco lo spinsero a cercare un'altra soluzione.", question:"Perché gli 8 minuti d'arco furono decisivi per Keplero?", options:[
+                "Perché erano troppo grandi per essere errori di osservazione, data la precisione di Brahe, e lo spinsero a scoprire l'ellisse.",
+                "Perché erano troppo piccoli per essere presi in considerazione, e Keplero li trascurò continuando a usare il cerchio.",
+                "Perché coincidevano esattamente con la parallasse stellare, che Keplero aveva misurato per la prima volta nel 1609.",
+                "Perché dimostravano che Brahe aveva falsificato i dati, e Keplero dovette ricostruire le osservazioni da zero."
+            ], correct:0, explanation:"Data la precisione di Brahe, gli 8 minuti non potevano essere errori: Keplero comprese che l'orbita era ellittica." },
+            { id:108, title:"I limiti dei sensi", text:"Gli esseri umani hanno strumenti limitati per ricavare informazioni sul mondo: i sensi.", question:"Perché la scienza moderna ha bisogno di strumenti tecnologici?", options:[
+                "Perché i sensi umani hanno limiti (spettro visibile, soglia uditiva, ingrandimento) che gli strumenti possono superare.",
+                "Perché i sensi umani sono infallibili e gli strumenti servono solo a confermare ciò che già percepiamo a occhio nudo.",
+                "Perché gli strumenti tecnologici sostituiscono completamente i sensi, rendendo l'osservazione diretta inutile.",
+                "Perché la tecnologia è più economica dell'osservazione diretta, e permette di risparmiare tempo e denaro."
+            ], correct:0, explanation:"Telescopio e microscopio ampliano le capacità percettive umane, superando i limiti naturali dei sensi." }
+        ];
+
+        const ex2Pool = [
+            { id:201, title:"Il telescopio non fu inventato da Galileo", text:"Il telescopio non fu inventato da Galileo, ma risulta legato alla figura dello scienziato italiano per l'uso innovativo che ne fece.", question:"Qual è il rapporto di Galileo con il telescopio?", options:[
+                "Non lo inventò, ma lo perfezionò e ne fece un uso innovativo, descritto nel Sidereus Nuncius del 1610.",
+                "Lo inventò personalmente, costruendo il primo esemplare della storia e brevettandolo presso la Repubblica di Venezia.",
+                "Lo acquistò già pronto da un artigiano belga e lo usò senza apportare alcuna modifica o miglioramento.",
+                "Lo ricevette in dono da Keplero, che lo aveva costruito seguendo le indicazioni di Tycho Brahe."
+            ], correct:0, explanation:"Galileo non inventò il telescopio ma lo migliorò progressivamente, fino a ottenere ingrandimenti notevoli." },
+            { id:202, title:"Lo scetticismo di Horki", text:"L'astronomo Martino Horki si oppose all'uso del telescopio in astronomia.", question:"Quale argomento usò Horki contro il telescopio di Galileo?", options:[
+                "Sostenne che lo strumento falliva nel cielo perché le stelle fisse apparivano duplicate, segno di errore.",
+                "Sostenne che lo strumento era troppo costoso e che solo i ricchi potevano permettersi di acquistarlo.",
+                "Sostenne che lo strumento era stato inventato dai nemici della fede e andava quindi rifiutato.",
+                "Sostenne che lo strumento funzionava solo di giorno e non permetteva di osservare il cielo notturno."
+            ], correct:0, explanation:"Horki diceva che il telescopio 'fallisce nel cielo' perché moltiplica le stelle: argomento che oggi suona ridicolo ma mostra la resistenza alle innovazioni." },
+            { id:203, title:"Il microscopio", text:"Nello stesso periodo, altri scienziati sperimentavano con le lenti potenziando la vista umana nella direzione opposta.", question:"A cosa serviva il microscopio, rispetto al telescopio?", options:[
+                "A ingrandire l'infinitamente piccolo, mentre il telescopio ingrandiva l'infinitamente lontano.",
+                "A ingrandire l'infinitamente lontano, mentre il telescopio ingrandiva l'infinitamente piccolo.",
+                "A misurare la temperatura dei corpi, mentre il telescopio misurava la loro distanza dalla Terra.",
+                "A misurare la pressione atmosferica, mentre il telescopio misurava la velocità della luce."
+            ], correct:0, explanation:"Telescopio e microscopio ampliano i sensi in direzioni opposte: il lontano e il piccolo." },
+            { id:204, title:"Hooke e la cellula", text:"Robert Hooke pubblicò nel 1665 la sua Micrographia con immagini mai viste, dalle pulci alle cellule.", question:"Quale contributo diede Hooke alla biologia?", options:[
+                "Fu il primo a illustrare una cellula, a darle il nome e a stabilire lo standard del disegno delle osservazioni.",
+                "Fu il primo a scoprire i batteri e i protozoi, osservando l'acqua con un microscopio di sua invenzione.",
+                "Fu il primo a descrivere la circolazione del sangue, osservando i capillari nei polmoni di una rana.",
+                "Fu il primo a classificare le piante, descrivendo cellule, vasi, stomi, polline e sessualità vegetale."
+            ], correct:0, explanation:"Hooke coniò il termine 'cellula' osservando le celle del sughero, e nella Micrographia stabilì lo standard del disegno scientifico." },
+            { id:205, title:"Leeuwenhoek e gli animalculi", text:"Antony van Leeuwenhoek, scrutando l'acqua, si accorse della presenza di batteri e protozoi.", question:"Che cosa scoprì Leeuwenhoek con il suo microscopio?", options:[
+                "Il mondo microbico: protozoi, batteri e spermatozoi, misurati con precisione e descritti con meraviglia.",
+                "Le cellule del sughero, a cui diede il nome 'cellula' ispirandosi alle celle del favo delle api.",
+                "I capillari polmonari, che descrisse nell'ambito dei suoi studi di anatomia microscopica.",
+                "La struttura dei tessuti vegetali, con vasi, stomi e polline, gettando le basi dell'anatomia vegetale."
+            ], correct:0, explanation:"Leeuwenhoek scoprì il mondo microbico, descrivendo con meraviglia protozoi, batteri e spermatozoi." },
+            { id:206, title:"Malpighi e i capillari", text:"Marcello Malpighi fu uno dei fondatori dello studio dei tessuti (istologia).", question:"Quale scoperta è attribuita a Marcello Malpighi?", options:[
+                "I capillari polmonari, oltre all'analisi della struttura microscopica degli organi e degli strati della pelle.",
+                "Le cellule del sughero, che egli descrisse nella sua opera Micrographia pubblicata nel 1665.",
+                "Il mondo microbico, con la scoperta di protozoi e batteri nell'acqua stagnante e nella saliva.",
+                "L'anatomia degli insetti, con dissezioni accurate e descrizioni ricche di particolari mai viste prima."
+            ], correct:0, explanation:"Malpighi scoprì i capillari polmonari e fu tra i fondatori dell'istologia, lo studio dei tessuti." },
+            { id:207, title:"Swammerdam e gli insetti", text:"Jan Swammerdam applicò il metodo di dissezione agli insetti.", question:"Quale fu il contributo di Swammerdam?", options:[
+                "Applicò il metodo della dissezione agli insetti, descrivendoli con grande dovizia di particolari, e studiò i globuli rossi.",
+                "Scoprì i capillari polmonari e descrisse gli strati della pelle, gettando le basi dell'istologia moderna.",
+                "Inventò il microscopio a due lenti e lo usò per osservare per primo i batteri nell'acqua stagnante.",
+                "Scoprì la sessualità delle piante, descrivendo polline, stomi e vasi in The anatomy of plants."
+            ], correct:0, explanation:"Swammerdam applicò la dissezione agli insetti e studiò i globuli rossi, contribuendo all'anatomia microscopica." },
+            { id:208, title:"Grew e l'anatomia vegetale", text:"Nehemiah Grew rese l'anatomia vegetale una disciplina sistematica.", question:"Quale opera e quale contributo sono attribuiti a Nehemiah Grew?", options:[
+                "The anatomy of plants (1682), in cui descrisse cellule, vasi, stomi, polline e la sessualità delle piante.",
+                "Micrographia (1665), in cui illustrò per la prima volta le cellule del sughero e una pulce.",
+                "Sidereus Nuncius (1610), in cui descrisse le montagne lunari e i satelliti di Giove.",
+                "De revolutionibus (1543), in cui espose il sistema eliocentrico e i tre moti della Terra."
+            ], correct:0, explanation:"Grew con The anatomy of plants rese l'anatomia vegetale una disciplina sistematica." }
+        ];
+
+        const ex3Pool = [
+            { id:301, title:"Qualitativo vs quantitativo", text:"Con la scienza moderna abbiamo un passaggio da un modo di pensare qualitativo a un modo di pensare quantitativo.", question:"In che cosa consiste questo passaggio?", options:[
+                "Dal cercare le qualità dei corpi (caldo/freddo, pesante/leggero) al misurare grandezze (tempo, distanza, velocità) ed esprimere leggi.",
+                "Dal misurare grandezze (tempo, distanza, velocità) al cercare le qualità dei corpi e le loro tendenze naturali.",
+                "Dal descrivere i fenomeni con parole a descriverli con immagini, senza utilizzare né numeri né formule.",
+                "Dal formulare leggi universali alla raccolta di dati empirici senza alcuna teorizzazione matematica."
+            ], correct:0, explanation:"La scienza moderna sostituisce l'approccio qualitativo aristotelico con un approccio quantitativo basato su grandezze misurabili." },
+            { id:302, title:"La quantificazione", text:"La matematica svolge diverse funzioni essenziali nella scienza moderna.", question:"Che cosa permette la funzione di 'quantificazione' della matematica?", options:[
+                "Di misurare e quantificare i fenomeni naturali, trasformando un fatto in una legge calcolabile e verificabile.",
+                "Di eliminare la necessità di esperimenti, sostituendoli con ragionamenti puramente astratti e deduttivi.",
+                "Di tradurre le opere greche in latino, garantendo la trasmissione del sapere tra gli studiosi europei.",
+                "Di dimostrare l'esistenza di Dio attraverso il calcolo infinitesimale, come nelle Meditazioni di Cartesio."
+            ], correct:0, explanation:"La quantificazione trasforma un fatto in una legge calcolabile: F=ma dice esattamente quali grandezze sono in relazione e come." },
+            { id:303, title:"La modellizzazione", text:"La matematica offre strumenti per creare modelli semplificati ma efficaci della realtà.", question:"Che cosa significa 'modellizzazione' matematica?", options:[
+                "Costruire rappresentazioni semplificate della realtà che, trascurando alcuni dettagli, permettono di spiegare e prevedere i fenomeni.",
+                "Costruire rappresentazioni complete e dettagliate della realtà, che tengano conto di ogni singolo fattore in gioco.",
+                "Riprodurre in laboratorio i fenomeni naturali in scala ridotta, senza usare alcuna formula matematica.",
+                "Imitare i fenomeni naturali con modelli fisici in legno o metallo, come facevano gli ingegneri del Rinascimento."
+            ], correct:0, explanation:"Il modello matematico semplifica la realtà ma permette di prevedere il comportamento in condizioni definite." },
+            { id:304, title:"L'astrazione", text:"La matematica consente di identificare strutture comuni in fenomeni apparentemente diversi.", question:"Quale funzione della matematica è descritta da questa definizione?", options:[
+                "L'astrazione: identificare strutture comuni in fenomeni diversi, cogliendo ciò che li accomuna al di là delle apparenze.",
+                "La quantificazione: misurare i fenomeni con strumenti di precisione e trasformarli in leggi calcolabili.",
+                "La modellizzazione: costruire rappresentazioni semplificate della realtà per spiegarla e prevederla.",
+                "La dimostrazione: derivare teoremi da assiomi, senza bisogno di osservare il mondo fisico e naturale."
+            ], correct:0, explanation:"L'astrazione coglie strutture comuni in fenomeni diversi, come la legge di gravità che unisce mela e pianeti." },
+            { id:305, title:"Le funzioni dell'esperimento mentale", text:"Gli esperimenti mentali assolvono tre funzioni fondamentali secondo il PDF.", question:"Quali sono le tre funzioni dell'esperimento mentale?", options:[
+                "Ovviare ai limiti tecnologici del periodo, isolare aspetti del fenomeno, fornire una concezione alternativa della teoria.",
+                "Sostituire gli esperimenti reali, eliminare la necessità di osservazioni, dimostrare teoremi matematici.",
+                "Riprodurre in laboratorio i fenomeni, misurare le grandezze, formulare leggi universali della natura.",
+                "Tradurre le opere antiche, commentare i testi classici, confutare le autorità filosofiche del passato."
+            ], correct:0, explanation:"Il PDF indica tre funzioni: ovviare a limiti tecnologici, isolare aspetti, fornire una concezione alternativa." },
+            { id:306, title:"Il piano inclinato", text:"Galileo immagina una sfera che rotola lungo un piano inclinato e poi prosegue su un piano orizzontale privo di attrito.", question:"Quale funzione dell'esperimento mentale illustra il piano inclinato?", options:[
+                "Isolare l'aspetto rilevante (la velocità della sfera) trascurando l'attrito, che non si poteva eliminare fisicamente.",
+                "Dimostrare che l'attrito è una forza fondamentale della natura, senza la quale nulla si muoverebbe.",
+                "Riprodurre in laboratorio le condizioni del vuoto, che Galileo era riuscito a creare con i suoi strumenti.",
+                "Misurare con precisione la velocità della luce, che Galileo aveva calcolato con un esperimento simile."
+            ], correct:0, explanation:"Galileo non poteva eliminare l'attrito fisicamente, ma l'esperimento mentale gli permise di isolare la velocità come fattore rilevante." },
+            { id:307, title:"La caduta dei gravi", text:"Galileo non dimostrò la falsità della fisica aristotelica con esperimenti reali, ma con un esperimento mentale.", question:"Perché Galileo usò un esperimento mentale per la caduta dei gravi?", options:[
+                "Perché il suo obiettivo era attaccare il nucleo teorico della fisica aristotelica, e non bastavano osservazioni per smontarla.",
+                "Perché non aveva abbastanza denaro per finanziare gli esperimenti reali con strumenti appositi e costosi.",
+                "Perché non credeva nell'utilità degli esperimenti reali, che considerava un passatempo per artigiani e tecnici.",
+                "Perché preferiva la speculazione filosofica alla verifica sperimentale, seguendo la tradizione platonica delle idee."
+            ], correct:0, explanation:"Galileo voleva attaccare gli assunti fondamentali della fisica aristotelica: per farlo, l'esperimento mentale era più efficace delle sole osservazioni." },
+            { id:308, title:"Il libro della natura", text:"Galileo, nel Saggiatore (1623), espresse il suo pensiero sul rapporto tra matematica e mondo fisico.", question:"Che cosa afferma Galileo nella celebre metafora del 'libro della natura'?", options:[
+                "Che l'universo è scritto in lingua matematica, e i suoi caratteri sono triangoli, cerchi e altre figure geometriche.",
+                "Che l'universo è scritto in lingua latina, e i suoi caratteri sono le lettere dell'alfabeto che compongono le parole.",
+                "Che l'universo è scritto in lingua volgare, e i suoi caratteri sono le immagini che vediamo con gli occhi.",
+                "Che l'universo non è scritto in alcuna lingua, perché la natura è inconoscibile e misteriosa per l'uomo."
+            ], correct:0, explanation:"Galileo sostiene che la filosofia naturale è scritta in lingua matematica, e senza di essa si vaga in un oscuro labirinto." }
+        ];
+
+        const matchingPairsPool = [
+            { id:"m1", term:"Sistematicità", text:"Caratteristica delle osservazioni condotte in modo organizzato e secondo criteri precisi, che permettono di confrontare i dati." },
+            { id:"m2", term:"Replicabilità", text:"Caratteristica di un'osservazione che può essere ripetuta da altri ricercatori, nelle stesse condizioni, con risultati coerenti." },
+            { id:"m3", term:"Accuratezza", text:"Caratteristica delle osservazioni effettuate con strumenti e procedure adeguati, per ridurre gli errori e ottenere misure precise." },
+            { id:"m4", term:"Uraniborg", text:"Osservatorio astronomico costruito da Tycho Brahe sull'isola di Hven, con laboratori e più di dieci assistenti." },
+            { id:"m5", term:"Sidereus Nuncius", text:"Opera di Galileo (1610) con le osservazioni della Luna, delle Stelle medicee e delle macchie solari." },
+            { id:"m6", term:"Micrographia", text:"Opera di Robert Hooke (1665) con immagini di pulci, cellule del sughero e altri oggetti osservati al microscopio." },
+            { id:"m7", term:"Cellula", text:"Termine coniato da Hooke osservando le celle del sughero, ispirato alle celle del favo delle api." },
+            { id:"m8", term:"Animalculi", text:"Nome dato da Leeuwenhoek ai protozoi e ai batteri osservati nell'acqua con il suo microscopio." },
+            { id:"m9", term:"Microscopisti classici", text:"Leeuwenhoek, Swammerdam, Hooke, Grew e Malpighi, che portarono il microscopio a un livello superiore." },
+            { id:"m10", term:"Esperimento mentale", text:"Ragionamento che immagina una situazione ipotetica per esaminare un'idea, verificarne le conseguenze o confutare una teoria." },
+            { id:"m11", term:"Quantificazione", text:"Funzione della matematica che permette di misurare i fenomeni e trasformare un fatto in una legge calcolabile." },
+            { id:"m12", term:"Modellizzazione", text:"Funzione della matematica che costruisce rappresentazioni semplificate ma efficaci della realtà, per spiegarla e prevederla." }
+        ];
+
+        const textualPool = [
+            { id:"t1", title:"Sidereus Nuncius — La costruzione del telescopio", source:"Galileo Galilei, Sidereus Nuncius (1610)",
+              text:"Quasi dieci mesi or sono, arrivarono alle nostre orecchie delle voci su un occhiale costruito da un Belga... Innanzi tutto, mi preparai un tubo di piombo, alle cui estremità adattai due occhiali di vetro... In seguito, mi adoperai a prepararne un altro migliore del precedente, che presentava gli oggetti oltre sessanta volte più grandi. Infine, non risparmiandomi né fatica né spese, arrivai da solo al punto di costruirmi uno strumento tanto eccellente... Mi rivolsi alle esplorazioni celesti. Prima esaminai la Luna tanto da vicino, come se distasse appena due diametri terrestri.",
+              questions:[
+                { id:"t1q1", question:"Che cosa sottolinea Galileo nella sua descrizione del telescopio?", options:[
+                    "Che egli costruì e perfezionò progressivamente lo strumento, senza risparmiare fatica e spese, fino a ottenere ingrandimenti notevoli.",
+                    "Che lo strumento gli fu donato da un artigiano belga, e che egli si limitò a usarlo senza apportare alcuna modifica.",
+                    "Che lo strumento era già diffuso e utilizzato da tutti gli astronomi del tempo, e che egli non ebbe alcun ruolo nel perfezionarlo.",
+                    "Che lo strumento fu costruito da Keplero, e che Galileo si limitò a riceverlo in dono e a usarlo per le sue osservazioni."
+                ], correct:0, explanation:"Galileo descrive il processo di costruzione e miglioramento progressivo del telescopio, dal primo modello a uno 'tanto eccellente'." },
+                { id:"t1q2", question:"Quale implicazione metodologica ha il passaggio di Galileo all'esplorazione celeste?", options:[
+                    "Che la tecnologia amplia le capacità percettive umane, aprendo alla scienza nuovi mondi di osservazione e di scoperta.",
+                    "Che l'osservazione a occhio nudo è superiore a quella strumentale, perché non introduce errori dovuti alle lenti.",
+                    "Che il cielo è meno importante della Terra, e che le scoperte celesti hanno un valore puramente ornamentale.",
+                    "Che la matematica è inutile per l'astronomia, e che l'osservazione diretta è l'unico metodo valido di indagine."
+                ], correct:0, explanation:"Il telescopio permette a Galileo di 'esplorare' il cielo e di fare scoperte impensabili a occhio nudo: la tecnologia potenzia i sensi." }
+              ]
+            },
+            { id:"t2", title:"Micrographia — Il cannocchiale e il microscopio", source:"Robert Hooke, Micrographia (1665)",
+              text:"Il cannocchiale ha rivelato un vasto numero di stelle e nuovi movimenti che erano completamente sconosciuti agli astronomi antichi. Il microscopio una varietà di creature così grande che quelle che prima avevamo potuto contare nell'intero universo. Produce mondi nuovi e terre incognite per la nostra vista.",
+              questions:[
+                { id:"t2q1", question:"Che cosa mette a confronto Hooke in questo passo?", options:[
+                    "Il cannocchiale e il microscopio, come strumenti che ampliano i sensi in direzioni diverse: il lontano e il piccolo.",
+                    "Il cannocchiale e la vista umana, sostenendo che la vista naturale è superiore a qualsiasi strumento tecnologico.",
+                    "Il microscopio e il telescopio, affermando che il primo è più importante del secondo per la conoscenza del mondo.",
+                    "Gli astronomi antichi e i microscopisti moderni, mostrando la superiorità dei primi sui secondi nella scoperta del cielo."
+                ], correct:0, explanation:"Hooke celebra entrambi gli strumenti come produttori di 'mondi nuovi': uno verso l'infinitamente grande, l'altro verso l'infinitamente piccolo." },
+                { id:"t2q2", question:"Quale idea della scienza moderna esprime Hooke con l'espressione 'mondi nuovi e terre incognite'?", options:[
+                    "Che la tecnologia di osservazione apre alla conoscenza territori prima inaccessibili, come le Americhe per i navigatori.",
+                    "Che la Terra ha ancora continenti inesplorati, e che la scienza deve concentrarsi sulla geografia piuttosto che sul cielo.",
+                    "Che il microscopio permette di vedere i batteri, che Hooke descrive come 'animali' di dimensioni microscopiche.",
+                    "Che il cannocchiale ha rivelato l'esistenza di pianeti abitati, con creature simili a quelle terrestri."
+                ], correct:0, explanation:"La metafora delle 'terre incognite' esprime l'idea che gli strumenti aprano nuovi mondi alla conoscenza, come le scoperte geografiche." }
+              ]
+            },
+            { id:"t3", title:"Il Saggiatore — Il libro della natura", source:"Galileo Galilei, Il Saggiatore (1623)",
+              text:"La filosofia è scritta in questo grandissimo libro che continuamente ci sta aperto innanzi a gli occhi (io dico l'universo), ma non si può intendere se prima non s'impara a intender la lingua, e conoscer i caratteri, ne' quali è scritto. Egli è scritto in lingua matematica, e i caratteri son triangoli, cerchi, ed altre figure geometriche, senza i quali mezì è impossibile a intenderne umanamente parola.",
+              questions:[
+                { id:"t3q1", question:"Quale metafora usa Galileo per descrivere l'universo?", options:[
+                    "Quella di un libro scritto in lingua matematica, i cui caratteri sono triangoli, cerchi e altre figure geometriche.",
+                    "Quella di un tempio costruito dagli dei, in cui la matematica è la scala che permette di salire al cielo.",
+                    "Quella di un orologio meccanico, in cui ogni ingranaggio corrisponde a una legge matematica della natura.",
+                    "Quella di un labirinto oscuro, in cui l'uomo vaga senza possibilità di trovare la via d'uscita."
+                ], correct:0, explanation:"Galileo paragona l'universo a un libro scritto in lingua matematica, i cui caratteri sono figure geometriche." },
+                { id:"t3q2", question:"Quale conseguenza metodologica deriva da questa concezione?", options:[
+                    "Che la fisica deve essere espressa in linguaggio matematico per essere compresa, altrimenti si vaga in un oscuro labirinto.",
+                    "Che la fisica deve essere espressa in linguaggio poetico, perché la matematica è troppo astratta per descrivere la natura.",
+                    "Che la matematica è una scienza astratta e separata dalla fisica, e che le due discipline non devono comunicare.",
+                    "Che l'universo è inconoscibile, e che la scienza deve rinunciare a comprendere le leggi che lo governano."
+                ], correct:0, explanation:"Se il libro della natura è scritto in lingua matematica, la fisica deve usare la matematica per comprenderlo: senza di essa si vaga nel labirinto." }
+              ]
+            }
+        ];
+
+        const argumentPool = [
+            {
+                id:"a1", title:"L'Importanza dell'Esperimento Mentale nella Rivoluzione Scientifica",
+                description:"Ricostruisci il ragionamento con cui Galileo mostra la funzione dell'esperimento mentale nella confutazione della fisica aristotelica.",
+                steps:[
+                    { id:"s1", text:"Galileo vuole confutare la fisica aristotelica della caduta dei gravi, secondo cui la velocità dipende dal peso." },
+                    { id:"s2", text:"Non può eliminare realmente l'attrito né creare il vuoto con gli strumenti del suo tempo." },
+                    { id:"s3", text:"Allora immagina una situazione ideale: due corpi legati insieme, uno pesante e uno leggero, lasciati cadere." },
+                    { id:"s4", text:"La teoria aristotelica porta a una contraddizione: il corpo dovrebbe cadere sia più lento sia più veloce." },
+                    { id:"s5", text:"Dunque la premessa è falsa, e l'esperimento mentale ha isolato l'aspetto rilevante e fornito una concezione alternativa." }
+                ]
+            },
+            {
+                id:"a2", title:"La Matematizzazione della Natura in Galileo",
+                description:"Ricostruisci il ragionamento con cui Galileo giustifica il passaggio dalla fisica qualitativa alla fisica matematica.",
+                steps:[
+                    { id:"s1", text:"Aristotele riteneva la matematica astratta e la fisica qualitativa, quindi non matematizzabile." },
+                    { id:"s2", text:"Galileo sostiene invece che il libro della natura è scritto in lingua matematica." },
+                    { id:"s3", text:"La matematica permette di quantificare i fenomeni, esprimendoli in leggi calcolabili e verificabili." },
+                    { id:"s4", text:"Permette anche di costruire modelli semplificati della realtà e di astrarre strutture comuni." },
+                    { id:"s5", text:"Dunque la scienza moderna passa da un approccio qualitativo a uno quantitativo, fondato sulla matematica." }
+                ]
+            }
+        ];
+
+        const tfPool = [
+            { id:"tf1", statement:"Gli scienziati moderni sono stati i primi nella storia a introdurre l'osservazione come componente della pratica scientifica.", correct:false, explanation:"Falso. Anche gli studiosi greco-romani e medievali osservavano la natura; ciò che cambia è la sistematicità, il rigore e la precisione delle osservazioni." },
+            { id:"tf2", statement:"Un buon insieme di osservazioni deve possedere sistematicità, replicabilità e accuratezza.", correct:true, explanation:"Vero. Sono le tre caratteristiche indicate dal PDF per un buon insieme di osservazioni scientifiche." },
+            { id:"tf3", statement:"Tycho Brahe registrava le osservazioni ogni notte serena, senza interruzioni, e ripeteva più volte ogni misura.", correct:true, explanation:"Vero. La metodicità di Brahe fu il salto di qualità dell'osservazione astronomica a occhio nudo." },
+            { id:"tf4", statement:"Gli 8 minuti d'arco di scarto nelle osservazioni di Marte erano errori di misura di Brahe, e Keplero li trascurò.", correct:false, explanation:"Falso. Data la precisione di Brahe, gli 8 minuti non potevano essere errori: Keplero comprese che l'orbita era ellittica." },
+            { id:"tf5", statement:"Galileo inventò il telescopio e lo costruì personalmente per la prima volta nella storia.", correct:false, explanation:"Falso. Il telescopio non fu inventato da Galileo, ma egli lo perfezionò e ne fece un uso innovativo, descritto nel Sidereus Nuncius." },
+            { id:"tf6", statement:"L'astronomo Martino Horki si oppose al telescopio di Galileo, sostenendo che falliva nel cielo perché le stelle fisse apparivano duplicate.", correct:true, explanation:"Vero. La sua obiezione mostra come anche gli scienziati possano opporre resistenza a nuove tecnologie con argomenti solo apparentemente sensati." },
+            { id:"tf7", statement:"Robert Hooke fu il primo a usare il termine 'cellula', osservando le celle del sughero al microscopio.", correct:true, explanation:"Vero. Hooke coniò il termine 'cellula' nella Micrographia (1665), ispirandosi alle celle del favo delle api." },
+            { id:"tf8", statement:"Antony van Leeuwenhoek scoprì i batteri e i protozoi, che chiamò 'animalculi', osservando l'acqua al microscopio.", correct:true, explanation:"Vero. Leeuwenhoek scoprì il mondo microbico, descrivendo con meraviglia protozoi, batteri e spermatozoi." },
+            { id:"tf9", statement:"L'esperimento mentale non ha alcun valore scientifico, perché non produce risultati verificabili sperimentalmente.", correct:false, explanation:"Falso. L'esperimento mentale ha un ruolo essenziale: ovvia a limiti tecnologici, isola aspetti del fenomeno e fornisce concezioni alternative." },
+            { id:"tf10", statement:"Per Aristotele la matematica era una scienza astratta, mentre la fisica studiava sostanze qualitative e finalistiche.", correct:true, explanation:"Vero. Per Aristotele la fisica non poteva essere matematizzata perché il suo oggetto era qualitativo (caldo/freddo, pesante/leggero) e finalistico." }
+        ];
+
+        const clozePool = [
+            {
+                id: "c1",
+                html: `Il nuovo ruolo dell'osservazione nella scienza moderna non consiste nell'aver introdotto l'osservazione (già praticata nell'antichità), ma nell'averne aumentato la <select id="cloze-1" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="sistematicità">sistematicità</option><option value="casualità">casualità</option><option value="rapidità">rapidità</option></select>, il rigore e la precisione. Un buon insieme di osservazioni deve possedere tre caratteristiche: la <select id="cloze-2" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="replicabilità">replicabilità</option><option value="irripetibilità">irripetibilità</option><option value="soggettività">soggettività</option></select>, cioè la possibilità di essere ripetuta da altri, e l'<select id="cloze-3" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="accuratezza">accuratezza</option><option value="approssimazione">approssimazione</option><option value="velocità">velocità</option></select>, che richiede strumenti adeguati. Tycho Brahe, nel suo osservatorio di <select id="cloze-4" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Uraniborg">Uraniborg</option><option value="Padova">Padova</option><option value="Pisa">Pisa</option></select>, registrava ogni notte serena e introduceva correzioni per la <select id="cloze-5" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="rifrazione atmosferica">rifrazione atmosferica</option><option value="parallasse stellare">parallasse stellare</option><option value="precessione degli equinozi">precessione degli equinozi</option></select>. Tra il 1580 e il 1597 osservò <select id="cloze-6" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Marte">Marte</option><option value="Giove">Giove</option><option value="Venere">Venere</option></select> con tale precisione che Keplero, notando uno scarto di <select id="cloze-7" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="8 minuti d'arco">8 minuti d'arco</option><option value="8 gradi">8 gradi</option><option value="8 secondi">8 secondi</option></select>, fu spinto a scoprire l'<select id="cloze-8" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="ellisse">ellisse</option><option value="cerchio">cerchio</option><option value="parabola">parabola</option></select>. Galileo, nel <select id="cloze-9" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Sidereus Nuncius">Sidereus Nuncius</option><option value="Dialogo">Dialogo</option><option value="Il Saggiatore">Il Saggiatore</option></select>, annotava giorno per giorno le posizioni delle <select id="cloze-10" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Stelle medicee">Stelle medicee</option><option value="macchie solari">macchie solari</option><option value="fasi lunari">fasi lunari</option></select>.`,
+                answers: { 1:"sistematicità", 2:"replicabilità", 3:"accuratezza", 4:"Uraniborg", 5:"rifrazione atmosferica", 6:"Marte", 7:"8 minuti d'arco", 8:"ellisse", 9:"Sidereus Nuncius", 10:"Stelle medicee" }
+            },
+            {
+                id: "c2",
+                html: `Con Galileo entra in gioco la <select id="cloze-1" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="tecnologia">tecnologia</option><option value="matematica">matematica</option><option value="filosofia">filosofia</option></select> di osservazione: il <select id="cloze-2" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="telescopio">telescopio</option><option value="microscopio">microscopio</option><option value="spettrografo">spettrografo</option></select>. Esso non fu inventato da Galileo, ma egli ne fece un uso innovativo, descritto nel <select id="cloze-3" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Sidereus Nuncius">Sidereus Nuncius</option><option value="Almagesto">Almagesto</option><option value="Principia">Principia</option></select>. L'astronomo <select id="cloze-4" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Martino Horki">Martino Horki</option><option value="Tycho Brahe">Tycho Brahe</option><option value="Keplero">Keplero</option></select> si oppose allo strumento, sostenendo che <select id="cloze-5" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="falliva nel cielo">falliva nel cielo</option><option value="funzionava ovunque">funzionava ovunque</option><option value="era inutile">era inutile</option></select>. Nello stesso periodo, il <select id="cloze-6" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="microscopio">microscopio</option><option value="telescopio">telescopio</option><option value="cannocchiale">cannocchiale</option></select> potenziava la vista umana nella direzione opposta. Il termine 'microscopium' fu usato per la prima volta nel <select id="cloze-7" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="1625">1625</option><option value="1610">1610</option><option value="1665">1665</option></select> da Johannes Faber. <select id="cloze-8" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Robert Hooke">Robert Hooke</option><option value="Van Leeuwenhoek">Van Leeuwenhoek</option><option value="Malpighi">Malpighi</option></select> pubblicò la <select id="cloze-9" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Micrographia">Micrographia</option><option value="Sidereus Nuncius">Sidereus Nuncius</option><option value="Almagesto">Almagesto</option></select> nel 1665, usando per primo il termine '<select id="cloze-10" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="cellula">cellula</option><option value="atomo">atomo</option><option value="tessuto">tessuto</option></select>'.`,
+                answers: { 1:"tecnologia", 2:"telescopio", 3:"Sidereus Nuncius", 4:"Martino Horki", 5:"falliva nel cielo", 6:"microscopio", 7:"1625", 8:"Robert Hooke", 9:"Micrographia", 10:"cellula" }
+            },
+            {
+                id: "c3",
+                html: `Per Aristotele la matematica era una scienza <select id="cloze-1" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="astratta">astratta</option><option value="concreta">concreta</option><option value="qualitativa">qualitativa</option></select>, mentre la fisica studiava sostanze <select id="cloze-2" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="qualitative">qualitative</option><option value="quantitative">quantitative</option><option value="matematiche">matematiche</option></select> e finalistiche. Tuttavia esistevano eccezioni: l'astronomia di <select id="cloze-3" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Tolomeo">Tolomeo</option><option value="Copernico">Copernico</option><option value="Newton">Newton</option></select>, l'armonica e la statica di <select id="cloze-4" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Archimede">Archimede</option><option value="Aristotele">Aristotele</option><option value="Galileo">Galileo</option></select>. Un limite oggettivo era la mancanza di <select id="cloze-5" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="algebra">algebra</option><option value="geometria">geometria</option><option value="trigonometria">trigonometria</option></select>, sviluppata nel mondo <select id="cloze-6" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="islamico">islamico</option><option value="greco">greco</option><option value="cinese">cinese</option></select>. Galileo, nel <select id="cloze-7" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="Il Saggiatore">Il Saggiatore</option><option value="Dialogo">Dialogo</option><option value="Sidereus Nuncius">Sidereus Nuncius</option></select>, affermò che la filosofia è scritta in <select id="cloze-8" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="lingua matematica">lingua matematica</option><option value="lingua latina">lingua latina</option><option value="lingua volgare">lingua volgare</option></select>. Le funzioni della matematica sono: <select id="cloze-9" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="quantificazione">quantificazione</option><option value="qualificazione">qualificazione</option><option value="astrazione">astrazione</option></select>, linguaggio preciso, modellizzazione e astrazione. Si passa così da un approccio <select id="cloze-10" class="bg-slate-800 text-teal-300 rounded px-2 py-1"><option value="">[?]</option><option value="qualitativo">qualitativo</option><option value="quantitativo">quantitativo</option><option value="matematico">matematico</option></select> a uno quantitativo.`,
+                answers: { 1:"astratta", 2:"qualitative", 3:"Tolomeo", 4:"Archimede", 5:"algebra", 6:"islamico", 7:"Il Saggiatore", 8:"lingua matematica", 9:"quantificazione", 10:"qualitativo" }
+            }
+        ];
+
+        // ===== RENDER =====
+        function renderEx1() {
+            const c = document.getElementById('ex1-container'); if(!c) return;
+            c.innerHTML = state.activeEx1Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800">Quesito ${idx + 1}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">${item.options.map((opt, oIdx) => `<button onclick="selectEx1(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}</div>
+                    <div id="ex1-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>`).join('');
+        }
+        function selectEx1(qId, oIdx, btn) {
+            if (state.ex1Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx1Data.find(d => d.id === qId);
+            state.ex1Answers[qId] = oIdx;
+            const qc = btn.closest('.space-y-2');
+            if (qc) qc.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`ex1-fb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderEx2() {
+            const c = document.getElementById('ex2-container'); if(!c) return;
+            c.innerHTML = state.activeEx2Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800">Quesito ${idx + 1}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">${item.options.map((opt, oIdx) => `<button onclick="selectEx2(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}</div>
+                    <div id="ex2-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>`).join('');
+        }
+        function selectEx2(qId, oIdx, btn) {
+            if (state.ex2Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx2Data.find(d => d.id === qId);
+            state.ex2Answers[qId] = oIdx;
+            const qc = btn.closest('.space-y-2');
+            if (qc) qc.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`ex2-fb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderEx3() {
+            const c = document.getElementById('ex3-container'); if(!c) return;
+            c.innerHTML = state.activeEx3Data.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800">Quesito ${idx + 1}</span>
+                    <p class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 p-3 rounded-xl border border-slate-800 italic whitespace-pre-line">${item.text}</p>
+                    <div class="font-bold text-slate-100 text-xs sm:text-sm pt-1">${item.question}</div>
+                    <div class="space-y-2">${item.options.map((opt, oIdx) => `<button onclick="selectEx3(${item.id}, ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}</div>
+                    <div id="ex3-fb-${item.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                </div>`).join('');
+        }
+        function selectEx3(qId, oIdx, btn) {
+            if (state.ex3Answers[qId] !== undefined) return;
+            playSound('click');
+            const item = state.activeEx3Data.find(d => d.id === qId);
+            state.ex3Answers[qId] = oIdx;
+            const qc = btn.closest('.space-y-2');
+            if (qc) qc.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === item.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === item.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`ex3-fb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 mt-2" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 mt-2"; fb.innerHTML = `<strong>${oIdx === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderMatching() {
+            const tc = document.getElementById('matching-terms'), dc = document.getElementById('matching-defs');
+            if(!tc || !dc) return;
+            tc.innerHTML = state.activeMatchingTerms.map(t => `<button onclick="selectMatchTerm('${t.id}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${t.term}</button>`).join('');
+            dc.innerHTML = state.activeMatchingDefs.map(d => `<button onclick="selectMatchDef('${d.matchId}', this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer">${d.text}</button>`).join('');
+        }
+        function selectMatchTerm(termId, btn) {
+            playSound('click'); state.selectedTermId = termId;
+            document.querySelectorAll('#matching-terms button').forEach(b => { if(!b.disabled) b.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all cursor-pointer"; });
+            btn.className = "w-full text-left p-3 rounded-xl border-2 border-teal-500 bg-teal-950/80 text-xs font-bold text-teal-300 transition-all shadow-lg cursor-pointer";
+            const fb = document.getElementById('matching-feedback');
+            if(fb) { fb.className = "text-xs font-semibold text-teal-400 pt-2"; fb.innerText = "Termine selezionato. Ora clicca sulla definizione corrispondente!"; }
+        }
+        function selectMatchDef(matchId, btn) {
+            const fb = document.getElementById('matching-feedback');
+            if(!state.selectedTermId) { playSound('error'); if(fb){ fb.className = "text-xs font-semibold text-rose-400 pt-2"; fb.innerText = "Prima seleziona un termine a sinistra!"; } return; }
+            if(state.selectedTermId === matchId) {
+                playSound('correct'); state.matchedPairs[matchId] = true;
+                const tb = document.querySelector(`#matching-terms button[onclick*="'${matchId}'"]`);
+                if(tb) { tb.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs font-bold text-emerald-400 opacity-60 cursor-not-allowed"; tb.disabled = true; }
+                btn.className = "w-full text-left p-3 rounded-xl border border-emerald-600 bg-emerald-950/40 text-xs text-emerald-300 opacity-60 cursor-not-allowed"; btn.disabled = true;
+                if(fb) { fb.className = "text-xs font-bold text-emerald-400 pt-2"; fb.innerText = "✓ Abbinamento corretto e bloccato!"; }
+            } else {
+                playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs text-rose-300 transition-all cursor-pointer";
+                setTimeout(() => { if(!btn.disabled) btn.className = "w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 hover:bg-slate-800 transition-all cursor-pointer"; }, 1000);
+                if(fb) { fb.className = "text-xs font-bold text-rose-400 pt-2"; fb.innerText = "✗ Abbinamento errato. Riprova!"; }
+            }
+            state.selectedTermId = null; updateGlobalScore();
+        }
+
+        function renderCloze() {
+            const c = document.getElementById('cloze-content');
+            if (!c || !state.currentCloze) return;
+            c.innerHTML = state.currentCloze.html;
+        }
+        function checkCloze() {
+            if (state.clozeLocked) return;
+            playSound('click');
+            const answers = state.currentCloze.answers; let correct = 0;
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById(`cloze-${i}`);
+                if(el) { el.disabled = true; if(el.value === answers[i]) { correct++; el.className = "bg-emerald-950 text-emerald-300 border border-emerald-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } else { el.className = "bg-rose-950 text-rose-300 border border-rose-500 rounded px-2 py-1 font-semibold cursor-not-allowed"; } }
+            }
+            state.clozeScore = Math.round((correct/10)*100); state.clozeLocked = true;
+            const sb = document.getElementById('cloze-submit-btn');
+            if(sb) { sb.disabled = true; sb.className = "bg-slate-800 text-slate-500 font-bold px-6 py-2.5 rounded-xl cursor-not-allowed"; sb.innerText = "Testo Verificato e Bloccato"; }
+            const fb = document.getElementById('cloze-feedback');
+            if(fb) { if(correct === 10) { playSound('correct'); fb.className = "text-emerald-400 font-bold mt-2"; fb.innerText = `Perfetto! Testo completato senza errori (10/10).`; } else { playSound('error'); fb.className = "text-amber-400 font-bold mt-2"; fb.innerText = `Punteggio ottenuto: ${correct}/10. Le risposte sono state bloccate.`; } }
+            updateGlobalScore();
+        }
+
+        function renderTextual() {
+            const c = document.getElementById('ex6-container'); if(!c) return;
+            c.innerHTML = state.activeTextual.map((passage, pIdx) => `
+                <div class="glass-card p-5 sm:p-6 rounded-2xl space-y-5">
+                    <div class="flex items-center gap-2"><span class="text-xs font-bold text-orange-400 bg-orange-950/60 px-2.5 py-1 rounded-md border border-orange-800"><i class="fa-solid fa-quote-right mr-1"></i> Passo ${pIdx+1}: ${passage.title}</span></div>
+                    <div class="passage p-4 sm:p-5"><p class="text-[11px] font-bold uppercase tracking-wider text-amber-400/80 mb-2">${passage.source}</p><p class="text-sm sm:text-base text-slate-200 leading-relaxed italic">«${passage.text}»</p></div>
+                    <div class="space-y-5">
+                        ${passage.questions.map((q, qIdx) => `
+                            <div class="space-y-2">
+                                <div class="font-bold text-slate-100 text-xs sm:text-sm">${pIdx+1}.${qIdx+1} — ${q.question}</div>
+                                <div class="space-y-2" id="tq-${q.id}">${q.options.map((opt, oIdx) => `<button onclick="selectTextual('${q.id}', ${oIdx}, this)" class="w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 transition-all cursor-pointer">${opt}</button>`).join('')}</div>
+                                <div id="tfb-${q.id}" class="hidden p-3 rounded-xl text-xs"></div>
+                            </div>`).join('')}
+                    </div>
+                </div>`).join('');
+        }
+        function selectTextual(qId, oIdx, btn) {
+            if (state.ex6Answers[qId] !== undefined) return;
+            playSound('click');
+            let question = null;
+            state.activeTextual.forEach(p => p.questions.forEach(q => { if(q.id === qId) question = q; }));
+            if (!question) return;
+            state.ex6Answers[qId] = oIdx;
+            const qc = btn.closest('.space-y-2');
+            if (qc) qc.querySelectorAll('button').forEach((b, idx) => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); if (idx === question.correct) b.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-xs text-emerald-200 font-bold cursor-not-allowed"; });
+            if (oIdx === question.correct) { playSound('correct'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs text-emerald-200 font-bold cursor-not-allowed shadow-lg shadow-emerald-500/20"; }
+            else { playSound('error'); btn.className = "w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs text-rose-200 font-bold cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb-${qId}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = oIdx === question.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700"; fb.innerHTML = `<strong>${oIdx === question.correct ? 'Interpretazione Corretta!' : 'Interpretazione Errata e Bloccata.'}</strong> ${question.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function renderArgument() {
+            const titleEl = document.getElementById('arg-title'), descEl = document.getElementById('arg-description');
+            const poolEl = document.getElementById('arg-pool'), seqEl = document.getElementById('arg-sequence');
+            const submitBtn = document.getElementById('arg-submit'), fbEl = document.getElementById('arg-feedback');
+            if(!poolEl || !seqEl || !state.activeArgument) return;
+            titleEl.innerText = state.activeArgument.title; descEl.innerText = state.activeArgument.description;
+            poolEl.innerHTML = state.argPool.map(s => `<button onclick="addToSequence('${s.id}')" ${state.argSubmitted ? 'disabled' : ''} class="w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900 text-xs text-slate-200 hover:bg-slate-800 hover:border-teal-600 transition-all cursor-pointer ${state.argSubmitted ? 'opacity-50 cursor-not-allowed' : ''}"><i class="fa-solid fa-grip-lines text-slate-500 mr-1.5"></i> ${s.text}</button>`).join('');
+            if (state.argOrder.length === 0) { seqEl.innerHTML = `<div class="text-xs text-slate-500 text-center py-4 italic">Clicca i passi a sinistra per inserirli qui nell'ordine corretto.</div>`; }
+            else {
+                seqEl.innerHTML = state.argOrder.map((id, idx) => {
+                    const step = state.activeArgument.steps.find(s => s.id === id);
+                    let cls = "w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer flex items-start gap-2.5";
+                    if (state.argSubmitted) { const cIds = state.activeArgument.steps.map(s => s.id); cls += (id === cIds[idx]) ? " border-emerald-600 bg-emerald-950/60 text-emerald-300" : " border-rose-600 bg-rose-950/60 text-rose-300"; }
+                    else { cls += " border-teal-700/60 bg-teal-950/40 text-teal-100 hover:bg-teal-900/40"; }
+                    return `<button onclick="removeFromSequence('${id}')" class="${cls}" ${state.argSubmitted ? 'disabled' : ''}><span class="flex-shrink-0 w-5 h-5 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-[10px]">${idx+1}</span><span>${step.text}</span></button>`;
+                }).join('');
+            }
+            if (submitBtn) { const allPlaced = state.argOrder.length === state.activeArgument.steps.length; submitBtn.disabled = !allPlaced || state.argSubmitted; submitBtn.className = allPlaced && !state.argSubmitted ? "bg-teal-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer hover:bg-teal-400 transition-all" : "bg-teal-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"; }
+            if (fbEl && !state.argSubmitted) fbEl.innerText = "";
+        }
+        function addToSequence(id) { if (state.argSubmitted) return; playSound('click'); const idx = state.argPool.findIndex(s => s.id === id); if (idx < 0) return; state.argPool.splice(idx, 1); state.argOrder.push(id); renderArgument(); }
+        function removeFromSequence(id) { if (state.argSubmitted) return; playSound('click'); const idx = state.argOrder.indexOf(id); if (idx < 0) return; state.argOrder.splice(idx, 1); const step = state.activeArgument.steps.find(s => s.id === id); state.argPool.push(step); renderArgument(); }
+        function checkArgument() {
+            if (state.argSubmitted || state.argOrder.length !== state.activeArgument.steps.length) return;
+            playSound('click');
+            const cIds = state.activeArgument.steps.map(s => s.id);
+            let correct = 0;
+            for (let i = 0; i < state.argOrder.length; i++) { if (state.argOrder[i] === cIds[i]) correct++; }
+            state.argSubmitted = true; state.argCorrectPositions = correct; renderArgument();
+            const fbEl = document.getElementById('arg-feedback');
+            if (fbEl) { if (correct === cIds.length) { playSound('correct'); fbEl.className = "text-emerald-400 font-bold"; fbEl.innerText = `✓ Sequenza perfetta! (${correct}/${cIds.length})`; } else { playSound('error'); fbEl.className = "text-amber-400 font-bold"; fbEl.innerText = `Posizioni corrette: ${correct}/${cIds.length}.`; } }
+            updateGlobalScore();
+        }
+
+        function renderTF() {
+            const c = document.getElementById('ex8-container'); if(!c) return;
+            c.innerHTML = state.activeTF.map((item, idx) => `
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <div class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-lime-500/20 text-lime-400 flex items-center justify-center font-bold text-xs">${idx+1}</span><p class="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed">${item.statement}</p></div>
+                    <div class="flex gap-3 pl-9">
+                        <button onclick="selectTF('${item.id}', true, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-emerald-300 hover:bg-emerald-950/50 hover:border-emerald-600 transition-all cursor-pointer"><i class="fa-solid fa-check mr-1"></i> Vero</button>
+                        <button onclick="selectTF('${item.id}', false, this)" class="px-5 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs font-bold text-rose-300 hover:bg-rose-950/50 hover:border-rose-600 transition-all cursor-pointer"><i class="fa-solid fa-xmark mr-1"></i> Falso</button>
+                    </div>
+                    <div id="tfb2-${item.id}" class="hidden p-3 rounded-xl text-xs ml-9"></div>
+                </div>`).join('');
+        }
+        function selectTF(id, value, btn) {
+            if (state.tfAnswers[id] !== undefined) return;
+            playSound('click');
+            const item = state.activeTF.find(d => d.id === id);
+            if (!item) return;
+            state.tfAnswers[id] = value;
+            const cont = btn.closest('.glass-card');
+            cont.querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.add('cursor-not-allowed','opacity-60'); });
+            if (value === item.correct) { playSound('correct'); btn.className = "px-5 py-2 rounded-xl border-2 border-emerald-500 bg-emerald-950/90 text-xs font-bold text-emerald-200 cursor-not-allowed"; }
+            else { playSound('error'); btn.className = "px-5 py-2 rounded-xl border-2 border-rose-500 bg-rose-950/90 text-xs font-bold text-rose-200 cursor-not-allowed"; }
+            const fb = document.getElementById(`tfb2-${id}`);
+            if (fb) { fb.classList.remove('hidden'); fb.className = value === item.correct ? "p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-300 border border-emerald-700 ml-9" : "p-3 rounded-xl text-xs bg-rose-950/90 text-rose-300 border border-rose-700 ml-9"; fb.innerHTML = `<strong>${value === item.correct ? 'Risposta Corretta!' : 'Risposta Errata e Bloccata.'}</strong> ${item.explanation}`; }
+            updateGlobalScore();
+        }
+
+        function updateGlobalScore() {
+            let ex1C = 0; state.activeEx1Data.forEach(d => { if(state.ex1Answers[d.id] === d.correct) ex1C++; });
+            let ex2C = 0; state.activeEx2Data.forEach(d => { if(state.ex2Answers[d.id] === d.correct) ex2C++; });
+            let ex3C = 0; state.activeEx3Data.forEach(d => { if(state.ex3Answers[d.id] === d.correct) ex3C++; });
+            let matchC = Object.keys(state.matchedPairs || {}).length;
+            let ex6T = 0, ex6C = 0;
+            state.activeTextual.forEach(p => p.questions.forEach(q => { ex6T++; if(state.ex6Answers[q.id] === q.correct) ex6C++; }));
+            let argS = 0;
+            if (state.argSubmitted) { const ts = state.activeArgument ? state.activeArgument.steps.length : 1; argS = (state.argCorrectPositions || 0) / ts; }
+            let tfC = 0; state.activeTF.forEach(d => { if(state.tfAnswers[d.id] === d.correct) tfC++; });
+            const total = Math.round(
+                (ex1C / (state.activeEx1Data.length || 1)) * 12 +
+                (ex2C / (state.activeEx2Data.length || 1)) * 12 +
+                (ex3C / (state.activeEx3Data.length || 1)) * 10 +
+                (matchC / (state.activeMatchingTerms.length || 1)) * 8 +
+                (state.clozeScore / 100) * 6 +
+                (ex6T > 0 ? (ex6C / ex6T) * 20 : 0) +
+                argS * 16 +
+                (tfC / (state.activeTF.length || 1)) * 16
+            );
+            const st = document.getElementById('global-score-text');
+            if(st) st.innerText = `${total} / 100`;
+            return total;
+        }
+
+        function updateReport() {
+            const score = updateGlobalScore();
+            const rs = document.getElementById('report-score'); if(rs) rs.innerText = `${score} / 100 XP`;
+            const be = document.getElementById('report-badge'); const cs = document.getElementById('cert-score'); const ct = document.getElementById('cert-title');
+            if(cs) cs.innerText = `${score} / 100 XP`;
+            let titleText = "Novizio del Metodo Scientifico";
+            if(score >= 90) titleText = "Maestro di Metodologia Scientifica";
+            else if(score >= 75) titleText = "Analista Esperto del Metodo";
+            else if(score >= 55) titleText = "Praticante di Storia della Scienza";
+            if(be) be.innerText = titleText; if(ct) ct.innerText = titleText;
+        }
+
+        function switchTab(tabId, btnElement) {
+            playSound('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+            if(btnElement) { btnElement.classList.add('active'); }
+            else { document.querySelectorAll('.tab-btn').forEach(b => { if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) b.classList.add('active'); }); }
+            if(tabId === 'tab-report') updateReport();
+        }
+
+        function setupRandomQuestions() {
+            state.ex1Answers = {}; state.ex2Answers = {}; state.ex3Answers = {};
+            state.ex6Answers = {}; state.tfAnswers = {};
+            state.matchedPairs = {}; state.clozeScore = 0; state.clozeLocked = false; state.selectedTermId = null;
+            state.argSubmitted = false; state.argCorrectPositions = 0;
+
+                        state.activeEx1Data = shuffle(ex1Pool).slice(0, 5).map(shuffleOptions);
+            state.activeEx2Data = shuffle(ex2Pool).slice(0, 5).map(shuffleOptions);
+            state.activeEx3Data = shuffle(ex3Pool).slice(0, 5).map(shuffleOptions);
+
+            const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
+            state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
+            state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
+
+            state.activeTextual = shuffle(textualPool).slice(0, 3).map(passage => ({
+                ...passage,
+                questions: passage.questions.map(shuffleOptions)
+            }));
+
+            const arg = shuffle(argumentPool)[0];
+            state.activeArgument = { ...arg, steps: arg.steps };
+            state.argPool = shuffle(arg.steps);
+            state.argOrder = [];
+
+            state.activeTF = shuffle(tfPool).slice(0, 5);
+
+            state.currentCloze = shuffle(clozePool)[0];
+            renderCloze();
+            const sb = document.getElementById('cloze-submit-btn');
+            if(sb) { sb.disabled = false; sb.className = "bg-teal-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl cursor-pointer"; sb.innerText = "Verifica e Blocca Testo"; }
+            const cf = document.getElementById('cloze-feedback');
+            if(cf) cf.innerText = "";
+
+            renderEx1(); renderEx2(); renderEx3(); renderMatching();
+            renderTextual(); renderArgument(); renderTF();
+            updateGlobalScore();
+        }
+
+        function resetAll() { setupRandomQuestions(); switchTab('tab-studio'); }
+        function initApp() { setupRandomQuestions(); }
+
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            initApp();
+        } else {
+            document.addEventListener('DOMContentLoaded', initApp);
+        }
+    </script>
+</body>
+</html>

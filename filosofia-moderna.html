@@ -3,26 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sezione in Arrivo • Filosofia Moderna</title>
+    <title>Filosofia Moderna • Laboratori Interattivi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; background-color: #080d16; color: #f1f5f9; }
-        .glass-card { background: rgba(17, 25, 39, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080d16; color: #f1f5f9; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .glass-card { background: linear-gradient(135deg, rgba(17, 25, 39, 0.85), rgba(10, 15, 26, 0.95)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-card.disabled { opacity: 0.55; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between items-center p-6 text-center">
+<body class="min-h-screen flex flex-col antialiased">
 
-    <div class="max-w-md w-full glass-card p-8 rounded-2xl space-y-6 my-auto">
-        <div class="w-16 h-16 rounded-full bg-slate-800 text-emerald-400 flex items-center justify-center text-2xl mx-auto">
-            <i class="fa-solid fa-hourglass-start"></i>
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 py-4">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2 text-xs sm:text-sm">
+                <a href="index.html" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5 font-semibold">
+                    <i class="fa-solid fa-house"></i> Home Portale
+                </a>
+                <span class="text-slate-600">/</span>
+                <span class="text-cyan-400 font-bold">Filosofia Moderna</span>
+            </div>
+            <a href="index.html" class="text-xs font-semibold text-slate-400 hover:text-cyan-400 transition-colors">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Torna al Menu
+            </a>
         </div>
-        <h2 class="text-xl font-bold text-emerald-400">Sezione in Preparazione</h2>
-        <p class="text-xs text-slate-400 leading-relaxed">I laboratori interattivi per questo periodo filosofico saranno pubblicati a breve.</p>
-        <a href="index.html" class="inline-block bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-5 py-2.5 rounded-xl text-xs border border-slate-700">
-            <i class="fa-solid fa-arrow-left mr-2"></i>Torna al Portale Principale
-        </a>
-    </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-10 space-y-8">
+
+        <div class="glass-card p-8 rounded-2xl border-cyan-500/20 relative overflow-hidden">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 mb-3">
+                <i class="fa-solid fa-atom mr-1.5"></i> Rivoluzione Scientifica & Razionalismo
+            </span>
+            <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold text-cyan-400 mb-2">Laboratori di Filosofia Moderna</h2>
+            <p class="text-slate-300 text-sm leading-relaxed max-w-2xl">
+                Esplora la rivoluzione scientifica del XVI-XVII secolo: la nuova fisica e astronomia (Copernico, Brahe, Galileo, Keplero, Newton), le innovazioni metodologiche (osservazione sistematica, tecnologia, esperimenti mentali, matematizzazione) e le grandi correnti epistemologiche della modernità.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Modulo 1: Teorie -->
+            <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-cyan-500/50 transition-all flex flex-col justify-between group border-cyan-500/30">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-cyan-400 bg-cyan-950/60 px-2.5 py-1 rounded-md border border-cyan-800">Modulo 1</span>
+                    <h3 class="font-bold text-lg text-slate-100">Rivoluzione Scientifica: le Teorie</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Fisica aristotelica vs nuova fisica (caduta dei gravi, inerzia, relatività galileiana, F=ma). Astronomia: Tolomeo, Copernico, Brahe, Galileo, Keplero, Newton.
+                    </p>
+                </div>
+                <a href="rivoluzione-scientifica-teorie.html" class="mt-4 w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-xl border border-cyan-500 text-xs transition-all flex items-center justify-center gap-2">
+                    Accedi al Laboratorio <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Modulo 2: Metodologie -->
+            <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-cyan-500/50 transition-all flex flex-col justify-between group border-cyan-500/30">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-cyan-400 bg-cyan-950/60 px-2.5 py-1 rounded-md border border-cyan-800">Modulo 2</span>
+                    <h3 class="font-bold text-lg text-slate-100">Rivoluzione Scientifica: le Metodologie</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Osservazione sistematica (Brahe, Galileo), tecnologia (telescopio, microscopio), esperimenti mentali, matematizzazione della natura e fede/ragione.
+                    </p>
+                </div>
+                <a href="rivoluzione-scientifica-metodo.html" class="mt-4 w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-xl border border-cyan-500 text-xs transition-all flex items-center justify-center gap-2">
+                    Accedi al Laboratorio <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Modulo 3: Metodo (in arrivo) -->
+            <div class="glass-card disabled p-6 rounded-2xl space-y-4 transition-all flex flex-col justify-between group border-slate-700/50 relative overflow-hidden">
+                <div class="absolute top-4 right-4 z-10">
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-slate-300 bg-slate-800/90 px-2.5 py-1 rounded-md border border-slate-600 flex items-center gap-1">
+                        <i class="fa-solid fa-clock text-[9px]"></i> In arrivo
+                    </span>
+                </div>
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-slate-700/20 text-slate-400 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-compass-drafting"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400 bg-slate-800/60 px-2.5 py-1 rounded-md border border-slate-700">Modulo 3</span>
+                    <h3 class="font-bold text-lg text-slate-300">La Riflessione sul Metodo Scientifico</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Bacone e il metodo induttivo, Galileo e la dimostrazione matematica, Cartesio e le regole del metodo: la fondazione epistemologica della scienza moderna.
+                    </p>
+                </div>
+                <button disabled class="mt-4 w-full bg-slate-800/70 text-slate-500 font-bold py-2.5 px-4 rounded-xl border border-slate-700 text-xs transition-all flex items-center justify-center gap-2 cursor-not-allowed">
+                    Prossimamente <i class="fa-solid fa-hourglass-half"></i>
+                </button>
+            </div>
+
+            <!-- Modulo 4: Cartesio (in arrivo) -->
+            <div class="glass-card disabled p-6 rounded-2xl space-y-4 transition-all flex flex-col justify-between group border-slate-700/50 relative overflow-hidden">
+                <div class="absolute top-4 right-4 z-10">
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-slate-300 bg-slate-800/90 px-2.5 py-1 rounded-md border border-slate-600 flex items-center gap-1">
+                        <i class="fa-solid fa-clock text-[9px]"></i> In arrivo
+                    </span>
+                </div>
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-slate-700/20 text-slate-400 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400 bg-slate-800/60 px-2.5 py-1 rounded-md border border-slate-700">Modulo 4</span>
+                    <h3 class="font-bold text-lg text-slate-300">Cartesio e il Cogito</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Il dubbio metodico, il cogito ergo sum, la dimostrazione dell'esistenza di Dio e il dualismo mente-corpo nelle Meditazioni metafisiche.
+                    </p>
+                </div>
+                <button disabled class="mt-4 w-full bg-slate-800/70 text-slate-500 font-bold py-2.5 px-4 rounded-xl border border-slate-700 text-xs transition-all flex items-center justify-center gap-2 cursor-not-allowed">
+                    Prossimamente <i class="fa-solid fa-hourglass-half"></i>
+                </button>
+            </div>
+
+            <!-- Modulo 5: Empirismo vs Razionalismo (in arrivo) -->
+            <div class="glass-card disabled p-6 rounded-2xl space-y-4 transition-all flex flex-col justify-between group border-slate-700/50 relative overflow-hidden md:col-span-2">
+                <div class="absolute top-4 right-4 z-10">
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-slate-300 bg-slate-800/90 px-2.5 py-1 rounded-md border border-slate-600 flex items-center gap-1">
+                        <i class="fa-solid fa-clock text-[9px]"></i> In arrivo
+                    </span>
+                </div>
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-slate-700/20 text-slate-400 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400 bg-slate-800/60 px-2.5 py-1 rounded-md border border-slate-700">Modulo 5</span>
+                    <h3 class="font-bold text-lg text-slate-300">Empirismo vs Razionalismo</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Il grande dibattito epistemologico della modernità: da una parte Cartesio, Spinoza e Leibniz (l'innatismo e la ragione); dall'altra Locke, Berkeley e Hume (l'esperienza e i sensi). Alla ricerca dell'origine della conoscenza.
+                    </p>
+                </div>
+                <button disabled class="mt-4 w-full bg-slate-800/70 text-slate-500 font-bold py-2.5 px-4 rounded-xl border border-slate-700 text-xs transition-all flex items-center justify-center gap-2 cursor-not-allowed">
+                    Prossimamente <i class="fa-solid fa-hourglass-half"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <a href="index.html" class="hover:text-cyan-400 underline">← Torna al Menu Principale del Portale</a>
+    </footer>
 
 </body>
 </html>
