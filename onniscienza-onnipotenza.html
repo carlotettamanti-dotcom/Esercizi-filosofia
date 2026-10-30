@@ -332,6 +332,14 @@
             return arr;
         }
 
+function shuffleOptions(item) {
+    const indices = item.options.map((_, i) => i);
+    const shuffledIndices = shuffle(indices);
+    const newOptions = shuffledIndices.map(i => item.options[i]);
+    const newCorrect = shuffledIndices.indexOf(item.correct);
+    return { ...item, options: newOptions, correct: newCorrect };
+}
+
         // ================= POOL QUESITI DATA (opzioni a lunghezza bilanciata) =================
         const ex1Pool = [
     { id:101, title:"Il Problema della Prescienza Divina", text:"Agostino d'Ippona e Tommaso d'Aquino si confrontano con un problema logico-teologico: se Dio è onnisciente, come può l'uomo essere libero?", question:"Qual è l'essenza del conflitto tra prescienza divina e libero arbitrio?", options:[
@@ -968,15 +976,18 @@
             state.matchedPairs = {}; state.clozeScore = 0; state.clozeLocked = false;
             state.selectedTermId = null; state.argSubmitted = false; state.argCorrectPositions = 0;
 
-            state.activeEx1Data = shuffle(ex1Pool).slice(0, 5);
-            state.activeEx2Data = shuffle(ex2Pool).slice(0, 5);
-            state.activeEx3Data = shuffle(ex3Pool).slice(0, 5);
+            state.activeEx1Data = shuffle(ex1Pool).slice(0, 5).map(shuffleOptions);
+state.activeEx2Data = shuffle(ex2Pool).slice(0, 5).map(shuffleOptions);
+state.activeEx3Data = shuffle(ex3Pool).slice(0, 5).map(shuffleOptions);
 
             const sampledMatching = shuffle(matchingPairsPool).slice(0, 8);
             state.activeMatchingTerms = sampledMatching.map(p => ({ id: p.id, term: p.term }));
             state.activeMatchingDefs = shuffle(sampledMatching.map(p => ({ id: p.id, matchId: p.id, text: p.text })));
 
-            state.activeTextual = shuffle(textualPool).slice(0, 3);
+            state.activeTextual = shuffle(textualPool).slice(0, 3).map(passage => ({
+    ...passage,
+    questions: passage.questions.map(shuffleOptions)
+}));
 
             const arg = shuffle(argumentPool)[0];
             state.activeArgument = { ...arg, steps: arg.steps };
